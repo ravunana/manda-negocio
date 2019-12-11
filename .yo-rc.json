@@ -1,0 +1,42 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.ravunana.manda",
+      "nativeLanguage": "pt-pt"
+    },
+    "jhipsterVersion": "6.5.1",
+    "applicationType": "monolith",
+    "baseName": "manda",
+    "packageName": "com.ravunana.manda",
+    "packageFolder": "com/ravunana/manda",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "Y2I5YzI3Njc5NGIzZjFkZWY5YTU2ODU1MGFiZmI2MzBjZDIyZTI1YTA5NDRkZDdlN2MyNTc0ZWJlZjNiMDFiMjJkNTI1Njk4ZTcyMjg4OGQyZTlhMzU0YzQyZGQ3ODRmZDNhNGVjZGY3OGNjMDAzNTc3MWQ1OTY3MTk0OTQwZDA=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "yeti",
+    "clientThemeVariant": "dark",
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "rv",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "pt-pt",
+    "languages": ["pt-pt"],
+    "blueprints": []
+  }
+}

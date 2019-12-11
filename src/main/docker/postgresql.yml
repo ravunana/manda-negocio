@@ -1,0 +1,11 @@
+version: '2'
+services:
+  manda-postgresql:
+    image: postgres:11.5
+    # volumes:
+    #     - ~/volumes/jhipster/manda/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=manda
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
