@@ -1,5 +1,5 @@
 
-entity Moeda {
+entity Moeda(fnc_moeda) {
     nome String required unique,
     codigo String required unique minlength(2) maxlength(10),
     pais String,
@@ -9,7 +9,7 @@ entity Moeda {
 
 // Pronto pagamento e Prestacoes (Ex, 1X, 2X, 3X, 4X, ...)
 // Forma de pagamento
-entity FormaLiquidacao {
+entity FormaLiquidacao(fnc_forma_liquidacao) {
     nome String unique required,
     juro Double required min(0) max(100), // em porcentagem
     prazoLiquidacao Integer required min(0) // em dias
@@ -18,14 +18,14 @@ entity FormaLiquidacao {
 }
 
 // Cartao Credito, Deposito BPC, Transferencia BPC, Numerario, TPA BPC,
-entity MeioLiquidacao{
+entity MeioLiquidacao(fnc_meio_liquidacao) {
     nome String unique,
     sigla String unique,
     icon String,
     mostrarPontoVenda Boolean
 }
 
-entity LancamentoFinanceiro {
+entity LancamentoFinanceiro(fnc_lancamento_financeiro) {
     tipoLancamento String required, // Entrada, Saida (Credito ou Debito), Neutro (Aviso)
     valor BigDecimal required min(0),
 
@@ -35,7 +35,7 @@ entity LancamentoFinanceiro {
     descricao TextBlob required
 }
 
-entity DetalheLancamento {
+entity DetalheLancamento(fnc_detalhe_lancamento) {
     valor BigDecimal required min(0),
     desconto BigDecimal min(0),
     juro Double min(0) max(100), // em porcentagem
@@ -46,7 +46,7 @@ entity DetalheLancamento {
     liquidado Boolean
 }
 
-entity RetencaoFonte {
+entity RetencaoFonte(fnc_retencao_fonte) {
     motivoRetencao String,
     valor String,
     porcentagem Boolean
@@ -63,9 +63,8 @@ relationship OneToMany {
     Empresa to LancamentoFinanceiro{empresa(nome)},
     DetalheLancamento to RetencaoFonte{detalhe},
     Imposto to RetencaoFonte{imposto(codigoImposto)},
-    Conta to MeioLiquidacao{conta(descricao)},
-    Conta to LancamentoFinanceiro{conta(descricao)},
-    DocumentoComercial to LancamentoFinanceiro{tipoRecibo(nome) required}
+    DocumentoComercial to LancamentoFinanceiro{tipoRecibo(nome) required},
+    CoordenadaBancaria to DetalheLancamento{coordenada(descricao) required}
 }
 
 relationship ManyToMany {
@@ -77,13 +76,14 @@ relationship ManyToMany {
  */
 relationship ManyToOne {
     LancamentoFinanceiro{utilizador(login)} to User,
-    DetalheLancamento{utilizador(login)} to User
+    DetalheLancamento{utilizador(login)} to User,
+    LancamentoFinanceiro{conta(descricao)} to Conta
+
 }
 
 dto * with mapstruct
 service * with serviceClass
 paginate * with pagination
-search * with elasticsearch
 filter LancamentoFinanceiro, DetalheLancamento, Moeda, FormaLiquidacao, MeioLiquidacao
 
 /*

@@ -1,24 +1,25 @@
 
-entity LocalArmazenamento {
+entity LocalArmazenamento(stk_local_armazenamento) {
     nome String required unique,
     descricao TextBlob
 }
 
-entity CompostoProduto {
+entity CompostoProduto(stk_composto_produto) {
     quantidade Double required min(1),
     valor BigDecimal,
     permanente Boolean // opcao se permanate nao dimui o estoque na venda do composto
 }
 
-entity FamiliaProduto {
+entity FamiliaProduto(stk_familia) {
 	nome String required unique,
     descricao TextBlob
 }
 
-entity Produto {
+entity Produto(stk_produto) {
     // essencial
     tipo String, // Produto, Servico, Outro, Imposto especial de consumo, DP
-    ean String required unique, // codigo de barra ou <Tipo> <Sequencia>
+    ean String unique, // codigo de barra ou <Tipo> <Sequencia>
+    numero String required unique,
     nome String required,
     imagem ImageBlob,
     composto Boolean required,
@@ -29,12 +30,11 @@ entity Produto {
     // extra information
     descricao TextBlob,
     mostrarPDV Boolean,
-    conta String unique,
     prazoMedioEntrega String // Ex. 1 hora, 1 dia, 1 semana, 1 mes, 1 ano ...
 
 }
 
-entity DetalheAduaneiro {
+entity DetalheAduaneiro(stk_detalhe_aduaneiro) {
     // aduaneiro - fiscal
     numeroONU String unique,
     largura Double, // unidade metro
@@ -45,16 +45,16 @@ entity DetalheAduaneiro {
     dataExpiracao LocalDate
 }
 
-entity VariacaoProduto {
+entity VariacaoProduto(stk_variacao_produto) {
     // Detalhes do produto
     genero String,
     cor String,
     modelo String,
     marca String,
-    tamanho String,
+    tamanho String
 }
 
-entity EstruturaCalculo {
+entity EstruturaCalculo(stk_estrutura_calculo) {
     custoMateriaPrima BigDecimal,
     custoMaoObra BigDecimal,
     custoEmbalagem BigDecimal,
@@ -65,7 +65,10 @@ entity EstruturaCalculo {
     data ZonedDateTime
 }
 
-entity ConversaoUnidade {
+entity EstoqueConfig(stk_estoque_config) {
+}
+
+entity ConversaoUnidade(stk_conversao_unidade) {
     valorEntrada Double required min(1),
     valorSaida Double required min(1)
 }
@@ -91,17 +94,15 @@ relationship OneToMany {
  * Many to one relationship.
  */
 relationship ManyToOne {
-    CompostoProduto{produto(nome) required} to Produto
-}
-
-/**
- * Many to one relationship.
- */
-relationship ManyToOne {
+    CompostoProduto{produto(nome) required} to Produto,
+    EstoqueConfig{contaVenda(descricao)} to Conta,
+    EstoqueConfig{contaCompra(descricao)} to Conta,
+    EstoqueConfig{contaImobilizado(descricao)} to Conta,
     Produto{utilizador(login) required } to User,
     ConversaoUnidade{entrada(nome) required} to UnidadeMedida,
     ConversaoUnidade{saida(nome) required} to UnidadeMedida,
-    EstruturaCalculo{utilizador(login) required } to User
+    EstruturaCalculo{utilizador(login) required } to User,
+    FamiliaProduto{conta(descricao)} to Conta
 }
 
 relationship ManyToMany {
@@ -111,11 +112,11 @@ relationship ManyToMany {
 
 relationship OneToOne {
     DetalheAduaneiro{produto(nome) required} to Produto,
-    VariacaoProduto{produto(nome) required} to Produto
+    VariacaoProduto{produto(nome) required} to Produto,
+    EstoqueConfig{produto(nome) required} to Produto
 }
 
 dto * with mapstruct
 service * with serviceClass
 paginate * with pagination
-search * with elasticsearch
 filter Produto, CompostoProduto

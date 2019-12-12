@@ -1,18 +1,18 @@
-entity Venda {
+entity Venda(vnd_venda) {
 	numero String,
     data ZonedDateTime,
     observacaoGeral TextBlob,
     observacaoInterna TextBlob
 }
 
-entity ItemVenda {
+entity ItemVenda(vnd_item_venda) {
 	quantidade Double min(1),
     valor BigDecimal min(0),
     desconto Double min(0) max(100) // em porcentagem
     data ZonedDateTime
 }
 
-entity DevolucaoVenda {
+entity DevolucaoVenda(vnd_devolucao_venda) {
     quantidade Double min(1),
     valor Double min(0),
     desconto Double min(0),
@@ -20,7 +20,7 @@ entity DevolucaoVenda {
     descricao TextBlob
 }
 
-entity AuditoriaVenda {
+entity AuditoriaVenda(vnd_auditoria_venda) {
     estado String, // DP
     data ZonedDateTime,
     motivoAlteracaoDocumento String, // DP
@@ -45,11 +45,11 @@ relationship OneToOne {
 
 relationship ManyToOne {
 	Venda{vendedor(login)} to User,
-    AuditoriaVenda{utilizador(login)} to User
+    AuditoriaVenda{utilizador(login)} to User,
+    DevolucaoVenda{conta(descricao)} to Conta
 }
 
 dto * with mapstruct
 service * with serviceClass
 paginate * with pagination
-search * with elasticsearch
 filter Venda, ItemVenda, DevolucaoVenda

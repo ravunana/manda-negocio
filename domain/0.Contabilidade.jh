@@ -1,9 +1,9 @@
-entity ClasseConta {
+entity ClasseConta(ctb_classe) {
     descricao String required unique,
     codigo String required unique
 }
 
-entity Conta {
+entity Conta(ctb_conta) {
     descricao String required unique,
     codigo String required unique,
     tipo String,
@@ -13,15 +13,15 @@ entity Conta {
     conteudo TextBlob
 }
 
-entity RegraMovimentacaoDebito {
+entity RegraMovimentacaoDebito(ctb_regra_movimentacao_debito) {
     descricao TextBlob
 }
 
-entity RegraMovimentacaoCredito {
+entity RegraMovimentacaoCredito(ctb_regra_movimentacao_credito) {
     descricao TextBlob
 }
 
-entity EscrituracaoContabil {
+entity EscrituracaoContabil(ctb_escrituracao_contabil) {
     numero String unique required,
     historico TextBlob required,
     valor BigDecimal required min(0),
@@ -32,12 +32,12 @@ entity EscrituracaoContabil {
     data ZonedDateTime required
 }
 
-entity ContaDebito {
+entity ContaDebito(ctb_conta_debito) {
     valor BigDecimal required min(0),
     data ZonedDateTime
 }
 
-entity ContaCredito {
+entity ContaCredito(ctb_conta_credito) {
     valor BigDecimal required min(0),
     data ZonedDateTime
 }
@@ -77,5 +77,4 @@ relationship OneToOne {
 dto * with mapstruct
 service * with serviceClass
 paginate * with pagination
-search * with elasticsearch
 filter Conta, EscrituracaoContabil, ContaDebito, ContaCredito

@@ -1,11 +1,11 @@
-entity Compra {
+entity Compra(cmp_compra) {
 	numero String required unique,
     data ZonedDateTime,
     observacaoGeral TextBlob,
     observacaoInterna TextBlob
 }
 
-entity ItemCompra {
+entity ItemCompra(cmp_item_compra) {
     quantidade Double min(1),
     desconto Double min(0) max(100), // em percentagem
     dataSolicitacao ZonedDateTime,
@@ -14,7 +14,7 @@ entity ItemCompra {
     valor BigDecimal
 }
 
-entity DevolucaoCompra {
+entity DevolucaoCompra(cmp_devolucao_compra) {
     quantidade Double min(1),
     valor Double min(0),
     desconto Double min(0),
@@ -22,7 +22,7 @@ entity DevolucaoCompra {
     descricao TextBlob
 }
 
-entity AuditoriaCompra {
+entity AuditoriaCompra(cmp_auditoria_compra) {
     estado String, // DP
     data ZonedDateTime,
     motivoAlteracaoDocumento String, // DP
@@ -44,12 +44,15 @@ relationship OneToMany {
  * One to one relationship.
  */
 relationship OneToOne {
-    DevolucaoCompra{item required} to ItemCompra
+    DevolucaoCompra{item required} to ItemCompra,
+    AuditoriaCompra{compra(numero)} to Compra
 }
 
 relationship ManyToOne {
 	ItemCompra{solicitante(login)} to User,
-    Compra{utilizador(login)} to User
+    Compra{utilizador(login)} to User,
+    AuditoriaCompra{utilizador(login)} to User,
+    DevolucaoCompra{conta(descricao)} to Conta
 }
 
 dto * with mapstruct

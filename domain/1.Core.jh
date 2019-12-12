@@ -50,7 +50,7 @@ enum EntidadeSistema {
     AUDITORIA_DOCUMENTO_COMERCIAL
 }
 
-entity SerieDocumento {
+entity SerieDocumento(core_serie_documento) {
     serie String,
     codigoLancamentoFinanceiro Integer min(1), /* <TIPO_RECIBO> <SERIE> / <SEQUENCAIA>*/
     codigoEscrituracaoContabil Integer min(1), /* <DATA_DOCUMENTO> <SEQUENCIA> <NUMERO_FACTURA> */
@@ -64,7 +64,7 @@ entity SerieDocumento {
     data LocalDate
 }
 
-entity Software {
+entity Software(rv_software) {
 	empresa String required,
     tipoSistema String required, // DP
     nif String required,
@@ -75,7 +75,7 @@ entity Software {
     hashControl String required
 }
 
-entity LicencaSoftware {
+entity LicencaSoftware(rv_licensa) {
     tipoSubscricao String required, // MENSAL, SEMESTRAL, ANUAL
     inicio ZonedDateTime required,
     fim ZonedDateTime required,
@@ -86,13 +86,13 @@ entity LicencaSoftware {
     numeroEmpresa Integer min(1)
 }
 
-entity Lookup {
+entity Lookup(core_lookup) {
     nome String required unique,
     entidade EntidadeSistema, // Pesoa, CLiente, Produto
     modificavel Boolean
 }
 
-entity LookupItem {
+entity LookupItem(core_lookup_item) {
 	valor String, // M
     nome String, // Masculino
     type LookupType,
@@ -100,7 +100,7 @@ entity LookupItem {
 }
 
 // Aprovado, Reporvado, EM analise, Pesquisa de fornecedor
-entity FluxoDocumento {
+entity FluxoDocumento(core_fluxo_documento) {
     nome String required unique,
     aumentaEstoque Boolean,
     aumentaValorCaixa Boolean,
@@ -111,7 +111,7 @@ entity FluxoDocumento {
 }
 
 // Factura, Recibo, Proforma, Ordem de servico, Ordem de compra
-entity DocumentoComercial {
+entity DocumentoComercial(core_documento_comercial) {
     nome String required unique,
     serie String required unique,
     padrao Boolean required,
@@ -124,18 +124,17 @@ entity DocumentoComercial {
     entidade EntidadeSistema // Venda, Compra, LancamentoContabil
 }
 
-entity Imposto {
+entity Imposto(tbr_imposto) {
     tipoImposto String required,
     codigoImposto String required,
     porcentagem Boolean required,
     valor BigDecimal required min(0),
     descricao TextBlob, // Ex. Imposto de rendimento de trabalho (IRT), Imposto de valor ascrecentado (IVA)
     pais String,
-    vigencia LocalDate,
-    conta String unique
+    vigencia LocalDate
 }
 
-entity GrupoTributacaoImposto {
+entity GrupoTributacaoImposto(tbr_grupo_tributacao) {
     nome String required,
     valor Double min(0) required,
     de Double, // De valor ou De dia
@@ -144,7 +143,7 @@ entity GrupoTributacaoImposto {
     // unidadeLimite String // Semana, Mes, Trimestre, Semestre ou Ano
 }
 
-entity MoradaPessoa {
+entity MoradaPessoa(core_morada_pessoa) {
 	pais String,
 	provincia String,
     municipio String,
@@ -154,28 +153,27 @@ entity MoradaPessoa {
     numeroPorta String maxlength(10)
 }
 
-entity ContactoPessoa {
+entity ContactoPessoa(core_contacto_pessoa) {
 	tipoContacto String required, // EMAIL, TELEFONE; FAX; SITE; REDE_SOCIAL
 	descricao String, // Ex. CASA, TRABALHO, PESSOAL, DEPARTAMENTO
     contacto String unique required
 }
 
-entity Pessoa {
+entity Pessoa(core_pessoa) {
 	tipoPessoa String required,
-    numero String unique required,
     nome String required,
     nif String unique,
     imagem ImageBlob
 }
 
-entity RelacionamentoPessoa {
+entity RelacionamentoPessoa(core_relacionamento_pessoa) {
 	grauParentesco String required // PAI, MAE; AVO, AMIGO
 }
 
 // fim pessoa module
 
 // inicio empresa module
-entity Empresa {
+entity Empresa(core_empresa) {
 	tipoSociedade String, // ANONIMA, LIMITADA, PUBLICA EP
 	nome String required unique,
     logotipo ImageBlob,
@@ -187,11 +185,10 @@ entity Empresa {
     despesaVariavel Double required min(0) max(100),
     aberturaExercio LocalDate,
     designacaoComercial TextBlob, // o que faz a empresa
-    sede Boolean,
-    conta String unique
+    sede Boolean
 }
 
-entity LocalizacaoEmpresa {
+entity LocalizacaoEmpresa(core_localizacao_empresa) {
 	pais String,
 	provincia String,
     municipio String,
@@ -202,24 +199,27 @@ entity LocalizacaoEmpresa {
     caixaPostal String
 }
 
-entity ContactoEmpresa {
+entity ContactoEmpresa(core_contacto_empresa) {
 	tipoContacto String required,
 	descricao String,
-    contacto String unique required
+    contacto String unique required,
+    padrao Boolean
 }
 
 
-entity CoordenadaBancaria {
+entity CoordenadaBancaria(core_coordenada_bancaria) {
 	descricao String required, // Nome do banco, Nome do caixa
     proprietario String required,
     numeroConta String unique required,
     iban String unique,
     ativo Boolean required,
     mostrarDocumento Boolean,
-    conta String unique
+    mostrarPontoVenda Boolean,
+    padraoRecebimento Boolean,
+    padraoPagamento Boolean
 }
 
-entity Arquivo {
+entity Arquivo(core_arquivo) {
 	descricao String,
     entidade EntidadeSistema, // Pessoa, Venda, Compra, LancamentoFinanceiro, EscrituracaoContabil, Produto
     anexo AnyBlob,
@@ -227,7 +227,7 @@ entity Arquivo {
     data ZonedDateTime
 }
 
-entity Fornecedor {
+entity Fornecedor(cmp_fornecedor) {
 	certificadoISO9001 Boolean,
     garantiaDefeitoFabrica Boolean,
     transporte Boolean,
@@ -237,22 +237,20 @@ entity Fornecedor {
     classificacao Double min(0) max(10) required,
     descricao TextBlob,
     ativo Boolean,
-    numero String unique required,
-    conta String unique
+    numero String unique required
 }
 
-entity Cliente {
+entity Cliente(vnd_cliente) {
 	ativo Boolean,
     perfilProfissional TextBlob,
     satisfacao Double,
     frequencia Double,
     canalUsado String,
     numero String unique required,
-    autofacturacao Boolean,
-    conta String unique
+    autofacturacao Boolean
 }
 
-entity UnidadeMedida {
+entity UnidadeMedida(core_unidade_medida) {
     nome String unique required,
     sigla String unique required,
     valor Double required min(0)
@@ -263,7 +261,12 @@ relationship ManyToOne {
     Empresa{utilizador(login)} to User,
     Pessoa{utilizador(login)} to User,
     RelacionamentoPessoa{de(nome) required} to Pessoa,
-    RelacionamentoPessoa{para(nome) required} to Pessoa
+    RelacionamentoPessoa{para(nome) required} to Pessoa,
+    Imposto{conta(descricao)} to Conta,
+    Empresa{conta(descricao)} to Conta,
+    Fornecedor{conta(descricao)} to Conta,
+    Cliente{conta(descricao)} to Conta,
+    CoordenadaBancaria{conta(descricao)} to Conta
 }
 
 relationship OneToMany {
@@ -289,12 +292,12 @@ relationship ManyToMany {
  */
 relationship OneToOne {
     Cliente{pessoa(nome) required} to Pessoa,
-    Fornecedor{pessoa(nome) required } to Pessoa
+    Fornecedor{pessoa(nome) required } to Pessoa,
+    SerieDocumento{empresa(nome)} to Empresa
 }
 
 dto * with mapstruct
 service * with serviceClass
 paginate * with pagination
-search * with elasticsearch
 filter Lookup, LookupItem, Cliente, Fornecedor, Pessoa, Empresa, Arquivo, CoordenadaBancaria
 filter Imposto, FluxoDocumento, DocumentoComercial, Arquivo
