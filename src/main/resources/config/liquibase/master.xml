@@ -110,4 +110,8 @@
     <include file="config/liquibase/changelog/20191212101108_added_entity_constraints_DevolucaoVenda.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191212101109_added_entity_constraints_AuditoriaVenda.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/20191212193509_insert_lookup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191212193709_insert_lookup _item.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191212201750_insert_classe_conta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191212201856_insert_contas.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity AuditoriaVenda.
+    -->
+    <changeSet id="20191212193509-2" author="Ramiro Cardoso">
+    <sql>
+        INSERT INTO public.core_lookup (id,nome,entidade,modificavel) VALUES
+(1151,'Genero','PRODUTO',false)
+,(1152,'Sexo','PESSOA',false)
+,(1401,'TipoImposto','IMPOSTO',false)
+,(1402,'CodigoImposto','IMPOSTO',false)
+,(1403,'TipoRecibo','LANCAMENTO_FINANCEIRO',true)
+,(1404,'TipoLancamento','LANCAMENTO_FINANCEIRO',true)
+,(1405,'BeneficiarioCategoria','LANCAMENTO_FINANCEIRO',true)
+,(1951,'MetodoLiquidacao','COORDENADA_BANCARIA',false)
+,(2951,'TipoConta','CONTA',false)
+,(2952,'NivelConta','CONTA',true)
+;
+INSERT INTO public.core_lookup (id,nome,entidade,modificavel) VALUES
+(2953,'NaturezaConta','CONTA',false)
+,(2954,'GrupoConta','CONTA',false)
+,(6801,'TipoMovimentoContabil','ESCRITURACAO_CONTABIL',false)
+,(11801,'TipoPessoa','PESSOA',false)
+,(12201,'TipoContacto','CONTACTO_PESSOA',false)
+,(12202,'DescricaoContacto','CONTACTO_PESSOA',false)
+;
+    </sql>
+     </changeSet>
+</databaseChangeLog>

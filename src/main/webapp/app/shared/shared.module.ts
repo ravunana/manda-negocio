@@ -7,6 +7,9 @@ import { RvLoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { ExportAsModule } from 'ngx-export-as';
 import { PrimengModule } from 'app/primeng/primeng.module';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 @NgModule({
   imports: [MandaSharedLibsModule],
@@ -20,7 +23,10 @@ import { PrimengModule } from 'app/primeng/primeng.module';
     RvLoginModalComponent,
     HasAnyAuthorityDirective,
     ExportAsModule,
-    PrimengModule
+    PrimengModule,
+    LoadingBarHttpClientModule,
+    LoadingBarModule,
+    LoadingBarRouterModule
   ]
 })
 export class MandaSharedModule {}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity AuditoriaVenda.
+    -->
+        <changeSet id="20191212193709-2" author="Ramiro Cardoso">
+    <sql>
+    INSERT INTO public.core_lookup_item (id,valor,nome,"type",ordem,lookup_id) VALUES
+(1201,'M','Masculino','SISTEMA',1,1151)
+,(1451,'IVA','Imposto de Valor Ascrecentado','SISTEMA',1,1401)
+,(1452,'IS','Imposto de Selo','SISTEMA',2,1401)
+,(1453,'NS','Não sujeito a IVA ou IS','SISTEMA',3,1401)
+,(1454,'NOR','Taxa Normal','SISTEMA',1,1402)
+,(1455,'ISE','Isenta','SISTEMA',2,1402)
+,(1456,'OUT','Outros, aplicavel para os regimes especiais de IVA','SISTEMA',3,1402)
+,(1457,'NA','Não há','SISTEMA',4,1402)
+,(1458,'IRT','Imposto sob Rendimento de Trabalho','SISTEMA',5,1401)
+,(1459,'II','Imposto Industrial','SISTEMA',NULL,1401)
+;
+INSERT INTO public.core_lookup_item (id,valor,nome,"type",ordem,lookup_id) VALUES
+(1460,'RC','Recibo emitido','SISTEMA',1,1403)
+,(1461,'AR','Aviso de cobrança/recibo','SISTEMA',2,1403)
+,(1462,'RG','Outros recibos emitidos','SISTEMA',3,1403)
+,(1463,'ENTRADA','RECEBIMENTO','SISTEMA',1,1404)
+,(1464,'SAIDA','PAGAMENTO','SISTEMA',2,1404)
+,(1465,'CLIENTE','Cliente','SISTEMA',1,1405)
+,(1466,'FORNECEDOR','Fornecedor','SISTEMA',2,1405)
+,(1467,'ESTADO','Estado','SISTEMA',3,1405)
+,(1468,'FUNCIONARIO','Funcionario','SISTEMA',4,1405)
+,(1469,'SOCIO','Socio','SISTEMA',5,1405)
+;
+INSERT INTO public.core_lookup_item (id,valor,nome,"type",ordem,lookup_id) VALUES
+(1751,'AVISO','AVISO','SISTEMA',3,1404)
+,(1752,'CC','Cartão crédito','SISTEMA',1,1951)
+,(1753,'CD','Cartão débito','SISTEMA',2,1951)
+,(1754,'CH','Cheque bancário','SISTEMA',3,1951)
+,(1755,'CI','Crédito documentário internacional','SISTEMA',4,1951)
+,(1756,'CO','Cheque ou cartão oferta','SISTEMA',5,1951)
+,(1757,'CS','Compensação de saldos em conta corrente','SISTEMA',6,1951)
+,(1758,'DE','Dinheiro electrónico (Cartão fidelidade ou ponto)','SISTEMA',7,1951)
+,(1759,'MB','Multicaixa','SISTEMA',8,1951)
+,(1760,'NU','Númerario','SISTEMA',9,1951)
+;
+INSERT INTO public.core_lookup_item (id,valor,nome,"type",ordem,lookup_id) VALUES
+(1761,'OU','Deposito','SISTEMA',10,1951)
+,(1762,'PR','Permuta de bens','SISTEMA',11,1951)
+,(1763,'TB','Transferência bancária','SISTEMA',12,1951)
+,(3001,'GA','Conta agregadora da contabilidade geral','SISTEMA',1,2951)
+,(3002,'GM','Conta de movimento da contabilidade geral','SISTEMA',2,2951)
+,(3003,'AR','Conta de 1º grau da contabilidade analitica','SISTEMA',3,2951)
+,(3004,'AA','Conta agregadora da contabilidade analitica','SISTEMA',5,2951)
+,(3005,'AM','Conta de movimento da contabilidade analitica','SISTEMA',6,2951)
+,(3006,'1','1','SISTEMA',1,2952)
+,(3007,'2','2','SISTEMA',2,2952)
+;
+INSERT INTO public.core_lookup_item (id,valor,nome,"type",ordem,lookup_id) VALUES
+(3008,'3','3','SISTEMA',3,2952)
+,(3009,'4','4','SISTEMA',4,2952)
+,(3010,'5','5','SISTEMA',5,2952)
+,(3011,'CREDORA','Credora','USUARIO',1,2953)
+,(3012,'DEVEDORA','Devedora','USUARIO',2,2953)
+,(3013,'Activo corrente','Activo corrente','SISTEMA',1,2954)
+,(3014,'Passivo corrente','Passivo corrente','SISTEMA',2,2954)
+,(3015,'Activo não corrente','Activo não corrente','SISTEMA',3,2954)
+,(3016,'Passivo não corrente','Passivo não corrente','SISTEMA',4,2954)
+,(3017,'Capital próprio','Capital próprio','SISTEMA',5,2954)
+;
+INSERT INTO public.core_lookup_item (id,valor,nome,"type",ordem,lookup_id) VALUES
+(6851,'N','Normal','SISTEMA',1,6801)
+,(6852,'R','Regularizações de periodo de tributação','SISTEMA',2,6801)
+,(6853,'A','Apuramento de resultados','SISTEMA',3,6801)
+,(6854,'J','Movimentos de ajustamentos','SISTEMA',4,6801)
+,(11851,'FISICA','PESSOA FISICA','SISTEMA',1,11801)
+,(11852,'JURIDICA','PESSOA JURIDICA','SISTEMA',2,11801)
+,(11853,'ESTRANGEIRA','ESTRANGEIRO(A)','SISTEMA',3,11801)
+,(12251,'Email','Email','SISTEMA',1,12201)
+,(12252,'Telefone','Telefone','SISTEMA',2,12201)
+,(12253,'Facebook','Facebook','SISTEMA',3,12201)
+;
+INSERT INTO public.core_lookup_item (id,valor,nome,"type",ordem,lookup_id) VALUES
+(12254,'Twitter','Twitter','SISTEMA',NULL,12201)
+,(12255,'Instagram','Instagram','SISTEMA',NULL,12201)
+,(12256,'Youtube','Youtube','SISTEMA',NULL,12201)
+,(12257,'Site','Site','SISTEMA',NULL,12201)
+,(12258,'Casa','Casa','SISTEMA',NULL,12202)
+,(12259,'Pessoal','Pessoal',NULL,NULL,12202)
+,(12260,'Trabalho','Trabalho',NULL,NULL,12202)
+,(12261,'RH','Recursos humanos','SISTEMA',NULL,12202)
+,(12262,'Comercial','Comercial',NULL,NULL,12202)
+,(12263,'Geral','Geral',NULL,NULL,12202)
+;
+    </sql>
+     </changeSet>
+</databaseChangeLog>

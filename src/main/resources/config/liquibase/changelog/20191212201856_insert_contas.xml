@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity AuditoriaVenda.
+    -->
+        <changeSet id="20191212201856-2" author="Ramiro Cardoso">
+    <sql>
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1101,'Imobilizações corpóreas','11',NULL,1,'Devedora','Activo não corrente',NULL,NULL,1052)
+,(1102,'Imobilizações incorporeas','12',NULL,1,'Devedora','Activo não corrente',NULL,NULL,1052)
+,(1103,'Investmentos financeiros','13',NULL,1,'Devedora','Activo não corrente',NULL,NULL,1052)
+,(1104,'Imobilizações em curso','14','',1,'Devedora','Activo não corrente',NULL,NULL,1052)
+,(1105,'Amortizações acumuladas','18',NULL,1,'Devedora','Activo não corrente',NULL,NULL,1052)
+,(1106,'Provisões para investimentos financeiros','19',NULL,1,'Devedora','Activo não corrente',NULL,NULL,1052)
+,(1107,'Compras','21',NULL,1,'Devedora','Activo corrente',NULL,NULL,1053)
+,(1109,'Produtos e trabalho em curso','23',NULL,1,'Devedora','Activo corrente',NULL,NULL,1053)
+,(1111,'Subprodutos, desperdícios, resíduos e refugos','25',NULL,1,'Devedora','Activo corrente',NULL,NULL,1053)
+,(1110,'Produtos acabados e intermédios','24',NULL,1,'Devedora','Activo corrente',NULL,NULL,1053)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1112,'Mercadorias','26',NULL,1,'Devedora','Activo corrente',NULL,NULL,1053)
+,(1113,'Matérias-prímas, mercadorias e outros materiais em transito','27',NULL,1,'Devedora','Activo corrente',NULL,NULL,1052)
+,(1108,'Matérias-prímas, subsidiarias e de consumo','22',NULL,1,'Devedora','Activo corrente',NULL,NULL,1053)
+,(1114,'Adiantamentos por conta de compras','28',NULL,1,'Devedora','Activo corrente',NULL,NULL,1053)
+,(1115,'Provisão para depreciação de existências','29',NULL,1,'Devedora','Activo corrente',NULL,NULL,1052)
+,(1116,'Clientes','31',NULL,1,'Devedora','Activo corrente',NULL,NULL,1054)
+,(1117,'Fornecedores','32',NULL,1,'Credora','Passivo corrente',NULL,NULL,1054)
+,(1118,'Emprestimos','33',NULL,1,'Credora','Passivo corrente',NULL,NULL,1054)
+,(1119,'Estado','34',NULL,1,'Credora','Passivo corrente',NULL,NULL,1054)
+,(1120,'Entidades participantes e participadas','35',NULL,1,'Devedora','Activo corrente',NULL,NULL,1054)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1121,'Pessoal','36',NULL,1,'Credora','Passivo corrente',NULL,NULL,1054)
+,(1122,'Outros valores a receber e a pagar','37',NULL,1,'Devedora ou Credora','Activo ou Passivo corrente',NULL,NULL,1054)
+,(1123,'Provisões para cobrança duvidosas','38',NULL,1,NULL,NULL,NULL,NULL,1054)
+,(1124,'Provisões para outros riscos e encargos','39',NULL,1,NULL,NULL,NULL,NULL,1054)
+,(1125,'Títulos negociáveis','41',NULL,NULL,NULL,NULL,NULL,NULL,1055)
+,(1126,'Depósito a prazo','42',NULL,NULL,NULL,NULL,NULL,NULL,1055)
+,(1127,'Depósito à ordem','43',NULL,NULL,NULL,NULL,NULL,NULL,1055)
+,(1128,'Outros depósitos','44',NULL,NULL,NULL,NULL,NULL,NULL,1055)
+,(1129,'Caixa','45',NULL,NULL,NULL,NULL,NULL,NULL,1055)
+,(1130,'Conta transitória','48',NULL,NULL,NULL,NULL,NULL,NULL,1055)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1131,'Provisões para aplicações de tesouraria','49',NULL,NULL,NULL,NULL,NULL,NULL,1055)
+,(1132,'Capital','51',NULL,NULL,NULL,NULL,NULL,NULL,1056)
+,(1133,'Acções/quotas próprias','52',NULL,NULL,NULL,NULL,NULL,NULL,1056)
+,(1134,'Prémios de emissão','53',NULL,NULL,NULL,NULL,NULL,NULL,1056)
+,(1135,'Prestações suplementares','54',NULL,NULL,NULL,NULL,NULL,NULL,1056)
+,(1136,'Reservas legais','55',NULL,NULL,NULL,NULL,NULL,NULL,1056)
+,(1137,'Reservas de reavaliação','56',NULL,NULL,NULL,NULL,NULL,NULL,1056)
+,(1138,'Reservas com fins especiais','57',NULL,NULL,NULL,NULL,NULL,NULL,1056)
+,(1139,'Reservas livres','58',NULL,NULL,NULL,NULL,NULL,NULL,1056)
+,(1140,'Vendas','61',NULL,NULL,NULL,NULL,NULL,NULL,1057)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1141,'Prestações de serviço','62',NULL,NULL,NULL,NULL,NULL,NULL,1057)
+,(1142,'Outros proveitos  operacionais','63',NULL,NULL,NULL,NULL,NULL,NULL,1057)
+,(1143,'Variação nos inventários de produtos acabados e de produção em curso','64',NULL,NULL,NULL,NULL,NULL,NULL,1057)
+,(1144,'Trabalhos para a própria empresa','65',NULL,NULL,NULL,NULL,NULL,NULL,1057)
+,(1145,'Proveitos e ganhos financeiros gerais','66',NULL,NULL,NULL,NULL,NULL,NULL,1057)
+,(1146,'Proveitos e ganhos financeiros em subsidiárias e associadas','67',NULL,NULL,NULL,NULL,NULL,NULL,1057)
+,(1147,'Outros proveitos e ganhos não operacionais','68',NULL,NULL,NULL,NULL,NULL,NULL,1057)
+,(1148,'Proveitos e ganhos extraordinários','69',NULL,NULL,NULL,NULL,NULL,NULL,1057)
+,(1149,'Custos das mercadorias vendidas e das máteria consumidas','71',NULL,NULL,NULL,NULL,NULL,NULL,1058)
+,(1150,'Custo com pessoal','72',NULL,NULL,NULL,NULL,NULL,NULL,1058)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1151,'Amortizações do exercício','73',NULL,NULL,NULL,NULL,NULL,NULL,1058)
+,(1152,'Outros custos e perdas operacionais','75',NULL,NULL,NULL,NULL,NULL,NULL,1058)
+,(1153,'Custos e perdas financeiras gerais','76',NULL,NULL,NULL,NULL,NULL,NULL,1058)
+,(1154,'Custos e perdas financeiras em filiais e associadas','77',NULL,NULL,NULL,NULL,NULL,NULL,1058)
+,(1155,'Outros custos e perdas não operacionais','78',NULL,NULL,NULL,NULL,NULL,NULL,1058)
+,(1156,'Custos e perdas extraordinários','79',NULL,NULL,NULL,NULL,NULL,NULL,1058)
+,(1157,'Resultados transitados','81',NULL,NULL,NULL,NULL,NULL,NULL,1059)
+,(1158,'Resultados operacionais','82',NULL,NULL,NULL,NULL,NULL,NULL,1059)
+,(1159,'Resultados financeiros','83',NULL,NULL,NULL,NULL,NULL,NULL,1059)
+,(1160,'Resultados em filiais e associadas','84',NULL,NULL,NULL,NULL,NULL,NULL,1059)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1161,'Resultados não operacionais','85',NULL,NULL,NULL,NULL,NULL,NULL,1059)
+,(1162,'Resultados extraordinários','86',NULL,NULL,NULL,NULL,NULL,NULL,1059)
+,(1163,'Impostos sobre os lucros','87',NULL,NULL,NULL,NULL,NULL,NULL,1059)
+,(1164,'Resultado líquido do exercícío','88',NULL,NULL,NULL,NULL,NULL,NULL,1059)
+,(1165,'Dividendos antecipados','89',NULL,NULL,NULL,NULL,NULL,NULL,1059)
+,(1166,'Terrenos e recursos naturais','11.1',NULL,NULL,NULL,NULL,NULL,1101,1052)
+,(1167,'Edificios e outras construções','11.2',NULL,NULL,NULL,NULL,NULL,1101,1052)
+,(1168,'Equipamento básico','11.3',NULL,NULL,NULL,NULL,NULL,1101,1052)
+,(1169,'Equipamento de carga e transporte','11.4',NULL,NULL,NULL,NULL,NULL,1101,1052)
+,(1173,'Trespasse','12.1',NULL,NULL,NULL,NULL,NULL,1102,1052)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1170,'Equipamento administrativo','11.5',NULL,NULL,NULL,NULL,NULL,1101,1052)
+,(1171,'Taras e vasilhame','11.6',NULL,NULL,NULL,NULL,NULL,1101,1052)
+,(1172,'Outras imobilizações corporeas','11.9',NULL,NULL,NULL,NULL,NULL,1101,1052)
+,(1174,'Desepsa de investigação e desenvolvimento','12.2',NULL,NULL,NULL,NULL,NULL,1102,1052)
+,(1175,'Propriedade industrial e outros direitos e contratos','12.3',NULL,NULL,NULL,NULL,NULL,1102,1052)
+,(1176,'Despesas de constituição','12.4',NULL,NULL,NULL,NULL,NULL,1102,1052)
+,(1177,'Outras imobilizações incorporeas','12.9',NULL,NULL,NULL,NULL,NULL,1102,1052)
+,(1178,'Materiais -primas, subsidiarias e de consumo','21.1',NULL,NULL,NULL,NULL,NULL,1107,1053)
+,(1179,'Mercadoriais','21.2',NULL,NULL,NULL,NULL,NULL,1107,1053)
+,(1180,'Devolução de compras','21.7',NULL,NULL,NULL,NULL,NULL,1107,1053)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1181,'Desconto e abatimento em compra','21.8',NULL,NULL,NULL,NULL,NULL,1107,1053)
+,(1183,'Clientes - titulos a receber','31.2',NULL,NULL,NULL,NULL,NULL,1116,1054)
+,(1182,'Clientes - correntes','31.1',NULL,NULL,NULL,NULL,NULL,1116,1054)
+,(1184,'Clientes - titulos descontados','31.3',NULL,NULL,NULL,NULL,NULL,1116,1054)
+,(1185,'Clientes de cobrança duvidosa','31.8',NULL,NULL,NULL,NULL,NULL,1116,1054)
+,(1186,'Clientes - saldos credores','31.9',NULL,NULL,NULL,NULL,NULL,1116,1054)
+,(1187,'Fornecedores - correntes','32.1',NULL,NULL,NULL,NULL,NULL,1117,1054)
+,(1188,'Fornecedores - titulos a pagar','32.2',NULL,NULL,NULL,NULL,NULL,1117,1054)
+,(1189,'Fornecedores - facturas em recepção e conferencia','32.8',NULL,NULL,NULL,NULL,NULL,1117,1054)
+,(1190,'Fornecedores - saldos devedores','32.9',NULL,NULL,NULL,NULL,NULL,1117,1054)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1191,'Emprestimos bancarios','33.1',NULL,NULL,NULL,NULL,NULL,1118,1054)
+,(1192,'Emprestimos por obrigações','33.2',NULL,NULL,NULL,NULL,NULL,1118,1054)
+,(1193,'Emprestimos por titulos de participação','33.3',NULL,NULL,NULL,NULL,NULL,1118,1054)
+,(1194,'Outros emprestimos obtidos','33.9',NULL,NULL,NULL,NULL,NULL,1118,1054)
+,(1195,'Imposto sobre os lucros','34.1',NULL,NULL,NULL,NULL,NULL,1119,1054)
+,(1196,'Imposto de produção e consumo','34.2',NULL,NULL,NULL,NULL,NULL,1119,1054)
+,(1197,'Imposto de rendimento de trabalho','34.3',NULL,NULL,NULL,NULL,NULL,1119,1054)
+,(1198,'Imposto de circulação','34.4',NULL,NULL,NULL,NULL,NULL,1119,1054)
+,(1199,'Subsidios a preços','34.8',NULL,NULL,NULL,NULL,NULL,1119,1054)
+,(1200,'Outros impostos','34.9',NULL,NULL,NULL,NULL,NULL,1119,1054)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1201,'Pessoal - remunerações','36.1',NULL,NULL,NULL,NULL,NULL,1121,1054)
+,(1202,'Pessoal - participação nos resultados','36.2',NULL,NULL,NULL,NULL,NULL,1121,1054)
+,(1203,'Pessoal - adiantamentos','36.3',NULL,NULL,NULL,NULL,NULL,1121,1054)
+,(1204,'Pessoal - outros','36.9',NULL,NULL,NULL,NULL,NULL,1121,1054)
+,(1205,'Compras de imobilizado','37.1',NULL,NULL,NULL,NULL,NULL,1122,1054)
+,(1206,'Vendas de imobilizados','37.2',NULL,NULL,NULL,NULL,NULL,1122,1054)
+,(1207,'Proveitos a facturar','37.3',NULL,NULL,NULL,NULL,NULL,1122,1054)
+,(1208,'Encargos a repartir por periodos futuros','37.4',NULL,NULL,NULL,NULL,NULL,1122,1054)
+,(1209,'Encargos a pagar','37.5',NULL,NULL,NULL,NULL,NULL,1122,1054)
+,(1210,'Proveitos a repartir por periodos futuros','37.6',NULL,NULL,NULL,NULL,NULL,1122,1054)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1211,'Contas transitoriais','37.7',NULL,NULL,NULL,NULL,NULL,1122,1054)
+,(1213,'Outros valores a receber e a pagar  ','37.9',NULL,NULL,NULL,NULL,NULL,1122,1054)
+,(1214,'Provisões para clientes','38.1',NULL,NULL,NULL,NULL,NULL,1123,1054)
+,(1215,'provisões para saldos devedores de fornecedores','38.2',NULL,NULL,NULL,NULL,NULL,1123,1054)
+,(1216,'Provisões para participantes e participadas','38.3',NULL,NULL,NULL,NULL,NULL,1123,1054)
+,(1217,'Provisões para dividas do pessoal','38.4',NULL,NULL,NULL,NULL,NULL,1123,1054)
+,(1218,'provisões para outros saldos a receber','38.9',NULL,NULL,NULL,NULL,NULL,1123,1054)
+,(1219,'Accções','41.1',NULL,NULL,NULL,NULL,NULL,1125,1055)
+,(1220,'Obrigações','41.2',NULL,NULL,NULL,NULL,NULL,1125,1055)
+,(1221,'Titulos da divida publica','41.3',NULL,NULL,NULL,NULL,NULL,1125,1055)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1222,'Moeda nacional','42.1',NULL,NULL,NULL,NULL,NULL,1126,1055)
+,(1223,'Moeda estrangeira','42.2',NULL,NULL,NULL,NULL,NULL,1126,1055)
+,(1225,'Moeda nacional ','43.1',NULL,NULL,NULL,NULL,NULL,1127,1055)
+,(1226,'Moeda estrangeira ','43.2',NULL,NULL,NULL,NULL,NULL,1127,1055)
+,(1227,'Moeda nacional  ','44.1',NULL,NULL,NULL,NULL,NULL,1128,1055)
+,(1228,'Moeda estrangeira  ','44.2',NULL,NULL,NULL,NULL,NULL,1128,1055)
+,(1229,'Fundos fixos','45.1',NULL,NULL,NULL,NULL,NULL,1129,1055)
+,(1230,'Valores a depositar','45.2',NULL,NULL,NULL,NULL,NULL,1129,1055)
+,(1231,'Valor destinado a pagamento especifico','45.3',NULL,NULL,NULL,NULL,NULL,1129,1055)
+,(1232,'Banco','48.1',NULL,NULL,NULL,NULL,NULL,1211,1055)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1233,'Banco ','48.2',NULL,NULL,NULL,NULL,NULL,1130,1055)
+,(1234,'Titulos negociaveis','49.1',NULL,NULL,NULL,NULL,NULL,1131,1055)
+,(1235,'Outras aplicações de tesouraria','49.2',NULL,NULL,NULL,NULL,NULL,1131,1055)
+,(1236,'Produtos acabados e intermedios','61.1',NULL,NULL,NULL,NULL,NULL,1140,1057)
+,(1237,'Subsprodutos, desperdicios, residuos e refugos','61.2',NULL,NULL,NULL,NULL,NULL,1140,1057)
+,(1239,'Mercadorias ','61.3',NULL,NULL,NULL,NULL,NULL,1140,1057)
+,(1240,'Embalagens de consumo','61.4',NULL,NULL,NULL,NULL,NULL,1140,1057)
+,(1242,'Subsidios a preços ','61.5',NULL,NULL,NULL,NULL,NULL,1140,1057)
+,(1243,'Devoluções','61.7',NULL,NULL,NULL,NULL,NULL,1140,1057)
+,(1244,'Descontos e abatimentos','61.8',NULL,NULL,NULL,NULL,NULL,1140,1057)
+;
+INSERT INTO public.ctb_conta (id,descricao,codigo,tipo,grau,natureza,grupo,conteudo,conta_agregadora_id,classe_conta_id) VALUES
+(1245,'Transferencias para resultados operacionais','61.9',NULL,NULL,NULL,NULL,NULL,1140,1057)
+,(1246,'Serviços principais','62.1',NULL,NULL,NULL,NULL,NULL,1141,1057)
+,(1247,'Serviços Secundarios','62.2',NULL,NULL,NULL,NULL,NULL,1141,1057)
+,(1249,'Descontos e abatimentos ','62.8',NULL,NULL,NULL,NULL,NULL,1141,1058)
+,(1250,'Trnasferencia para resultados operacionais ','62.9',NULL,NULL,NULL,NULL,NULL,1141,1057)
+;
+    </sql>
+     </changeSet>
+</databaseChangeLog>

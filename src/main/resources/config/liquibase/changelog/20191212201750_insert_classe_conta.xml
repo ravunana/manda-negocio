@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity AuditoriaVenda.
+    -->
+        <changeSet id="20191212201750-2" author="Ramiro Cardoso">
+    <sql>
+INSERT INTO public.ctb_classe (id,descricao,codigo) VALUES
+(1052,'MEIOS FIXOS E INVESTIMENTOS','1')
+,(1053,'EXISTÊNCIAS','2')
+,(1054,'TERCEIROS','3')
+,(1055,'MEIOS MONETÁRIOS','4')
+,(1056,'CAPITAL E RESERVAS','5')
+,(1057,'PROVEITOS E GANHOS POR NATUREZA','6')
+,(1058,'CUSTOS E PERDAS POR NATUREZA','7')
+,(1059,'RESULTADOS','8')
+,(1060,'CONTABILIDADE ANALÍTICA OU DE CUSTOS','9')
+,(1051,'LIVRE','0')
+;
+    </sql>
+     </changeSet>
+</databaseChangeLog>

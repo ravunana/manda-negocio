@@ -1,101 +1,26 @@
 <div class="row">
-    <div class="col-md-3">
-        <span class="hipster img-fluid rounded"></span>
-    </div>
-    <div class="col-md-9">
-        <h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>
-        <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
+    <div class="col-md-12">
 
-        <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
-                    [translateValues]="{username: account.login}"> You are logged in as user "{{account.login}}". </span>
-            </div>
+      <div [ngSwitch]="isAuthenticated()">
+          <!-- autenticado -->
+          <div *ngSwitchCase="true">
+          </div>
+        <!-- autenticado -->
 
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-                <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">sign in</a><span jhiTranslate="global.messages.info.authenticated.suffix">, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
-            </div>
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
-            </div>
+        <div *ngSwitchCase="false">
+          <div class="jumbotron">
+            <h1 class="display-4">MANDA - Software de gestão empresarial</h1>
+            <p class="lead">
+              Tudo que você precisa para alavancar o seu negocio com segurança, facilidade e integridade.
+              <br>
+             Onde você <em>MANDA</em> e o sistema faz: Inventario, Compra, Venda, Escrituração Contabil, Contas a pagar/receber e muinto mais...
+          </p>
+            <hr class="my-4" />
+            <p>Entre em contacto para mais informações! Nós <em>"desenvolvemos para solucionar"</em> seus desafios!</p>
+            <a class="btn btn-primary btn-lg"  href="https://ravunana.netlify.com/" role="button">RAVUNANA, LDA</a>
+            <br>
+          </div>
         </div>
-
-        <p jhiTranslate="home.question">
-            If you have any question on JHipster:
-        </p>
-
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.homepage">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.stackoverflow">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.bugtracker">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.chat">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.follow">follow @jhipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.github">GitHub</a>!
-        </p>
+      </div>
     </div>
-</div>
-
-
-<!-- <table id="mytable">
-    <thead>
-      <tr>
-        <th>Country</th>
-        <th>Population</th>
-        <th>Date</th>
-        <th>Age</th>
-        <th>REMARKS</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>مصر</td>
-        <td>1363480000</td>
-        <td>March 24 2014</td>
-        <td>19.1</td>
-        <td>₹</td>
-      </tr>
-      <tr>
-        <td>India</td>
-        <td>1241900000</td>
-        <td>March 24 2014</td>
-        <td>17.4</td>
-        <td>Remarks 2</td>
-      </tr>
-      <tr>
-        <td>United States</td>
-        <td>317746000</td>
-        <td>March 24 2014</td>
-        <td>4.44</td>
-        <td>Remarks 3</td>
-      </tr>
-      <tr>
-        <td>Indonesia</td>
-        <td>249866000</td>
-        <td>July 1 2013</td>
-        <td>3.49</td>
-        <td>Remarks 4</td>
-      </tr>
-      <tr>
-        <td>Brazil</td>
-        <td>201032714</td>
-        <td>July 1 2013</td>
-        <td>2.81</td>
-        <td>Remarks 5</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <button (click)="exportAs('pdf', 'portrait')">export as pdf</button>
-  <button (click)="exportAs('pdf', 'landscape')">export as pdf landscape</button>
-  <button (click)="exportAs('png')">export as png</button>
-  <button (click)="exportAs('csv')">export as csv</button>
-  <button (click)="exportAs('txt')">export as txt</button>
-  <button (click)="exportAs('xlsx')">export as Ms-Excel</button>
-  <button (click)="exportAs('docx')">export as MS-Word</button>
-  <button (click)="exportAs('json')">export as json</button>
-  <button (click)="exportAs('xml')">export as xml</button> -->
+  </div>

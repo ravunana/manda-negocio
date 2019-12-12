@@ -4,6 +4,12 @@
     "browsehappy": "Está a usar um navegador <strong>desatualizado</strong>. Por favor <a href=\"http://browsehappy.com/?locale=pt_PT\">atualize o seu navegador</a> para ter uma experiência melhor.",
     "menu": {
       "home": "Início",
+      "compra": "Compra",
+      "venda": "Facturação",
+      "contabilidade": "Contabilidade",
+      "tesouraria": "Tesouraria",
+      "inventario": "Estoque",
+      "core": "Core",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
