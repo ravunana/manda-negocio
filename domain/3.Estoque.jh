@@ -1,0 +1,121 @@
+
+entity LocalArmazenamento {
+    nome String required unique,
+    descricao TextBlob
+}
+
+entity CompostoProduto {
+    quantidade Double required min(1),
+    valor BigDecimal,
+    permanente Boolean // opcao se permanate nao dimui o estoque na venda do composto
+}
+
+entity FamiliaProduto {
+	nome String required unique,
+    descricao TextBlob
+}
+
+entity Produto {
+    // essencial
+    tipo String, // Produto, Servico, Outro, Imposto especial de consumo, DP
+    ean String required unique, // codigo de barra ou <Tipo> <Sequencia>
+    nome String required,
+    imagem ImageBlob,
+    composto Boolean required,
+    // Inventario
+    estoqueMinimo Double min(0),
+    estoqueMaximo Double min(0),
+    estoqueAtual Double required min(0),
+    // extra information
+    descricao TextBlob,
+    mostrarPDV Boolean,
+    conta String unique,
+    prazoMedioEntrega String // Ex. 1 hora, 1 dia, 1 semana, 1 mes, 1 ano ...
+
+}
+
+entity DetalheAduaneiro {
+    // aduaneiro - fiscal
+    numeroONU String unique,
+    largura Double, // unidade metro
+    altura Double,
+    pesoLiquido Double,
+    pesoBruto Double, // unidade kilograma
+    dataFabrico LocalDate,
+    dataExpiracao LocalDate
+}
+
+entity VariacaoProduto {
+    // Detalhes do produto
+    genero String,
+    cor String,
+    modelo String,
+    marca String,
+    tamanho String,
+}
+
+entity EstruturaCalculo {
+    custoMateriaPrima BigDecimal,
+    custoMaoObra BigDecimal,
+    custoEmbalagem BigDecimal,
+    custoAquisicao BigDecimal,
+    comissao Double min(0) max(100),
+    margemLucro Double min(0) max(100),
+    precoVenda BigDecimal,
+    data ZonedDateTime
+}
+
+entity ConversaoUnidade {
+    valorEntrada Double required min(1),
+    valorSaida Double required min(1)
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    LocalArmazenamento to Produto{localArmazenamento(nome)},
+    LocalArmazenamento to LocalArmazenamento{hierarquia(nome)},
+    FamiliaProduto to FamiliaProduto{hierarquia(nome)},
+    FamiliaProduto to Produto{familia(nome) required},
+    UnidadeMedida to CompostoProduto{unidade(nome) required},
+    Produto to CompostoProduto{composto(nome) required },
+    Produto to ConversaoUnidade{produto(nome) required},
+    Empresa to Produto{empresa(nome)},
+    Empresa to LocalArmazenamento{empresa(nome)},
+    FluxoDocumento to Produto{estado(nome) required },
+    Produto to EstruturaCalculo{produto(nome) required}
+}
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+    CompostoProduto{produto(nome) required} to Produto
+}
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+    Produto{utilizador(login) required } to User,
+    ConversaoUnidade{entrada(nome) required} to UnidadeMedida,
+    ConversaoUnidade{saida(nome) required} to UnidadeMedida,
+    EstruturaCalculo{utilizador(login) required } to User
+}
+
+relationship ManyToMany {
+    Produto{imposto(nome)} to Imposto{produto},
+    Produto{fornecedor(nome)} to Fornecedor{produto}
+}
+
+relationship OneToOne {
+    DetalheAduaneiro{produto(nome) required} to Produto,
+    VariacaoProduto{produto(nome) required} to Produto
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination
+search * with elasticsearch
+filter Produto, CompostoProduto

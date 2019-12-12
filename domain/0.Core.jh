@@ -1,0 +1,298 @@
+
+enum LookupType {
+	USUARIO,
+    SISTEMA
+}
+
+enum EntidadeSistema {
+    SOFTWARE,
+    LICENCA_SOFTWARE,
+    LOOKUP,
+    LOOKUP_ITEM,
+    FLUXO_DOCUMENTO,
+    DOCUMENTO_COMERCIAL,
+    IMPOSTO,
+    MORADA_PESSOA,
+    CONTACTO_PESSOA,
+    LOCALIZACAO_EMPRESA,
+    CONTACTO_EMPRESA,
+    EMPRESA,
+    PESSOA,
+    CLIENTE,
+    FORNECEDOR,
+    RELACIONAMENTO_PESSOA,
+    COORDENADA_BANCARIA,
+    ARQUIVO,
+    UNIDADE_MEDIDA,
+    CLASSE_CONTA,
+    CONTA,
+    ESCRITURACAO_CONTABIL,
+    REGRA_MOVIMENTACAO_CREDITO,
+    REGRA_MOVIMENTACAO_DEBITO,
+    CONTA_DEBITO,
+    CONTA_CREDITO,
+    MOEDA,
+    FORMA_LIQUIDACAO,
+    LANCAMENTO_FINANCEIRO,
+    DETALHE_LANCAMENTO,
+    RETENCAO_FONTE,
+    LOCAL_ARMAZENAMENTO,
+    COMPOSTO_PRODUTO,
+    FAMILIA_PRODUTO,
+    PRODUTO,
+    CONVERSAO_UNIDADE,
+    COMPRA,
+    ITEM_COMPRA,
+    DEVOLUCAO_COMPRA,
+    VENDA,
+    ITEM_VENDA,
+    DEVOLUCAO_VENDA,
+    AUDITORIA_DOCUMENTO_COMERCIAL
+}
+
+entity SerieDocumento {
+    serie String,
+    codigoLancamentoFinanceiro Integer min(1), /* <TIPO_RECIBO> <SERIE> / <SEQUENCAIA>*/
+    codigoEscrituracaoContabil Integer min(1), /* <DATA_DOCUMENTO> <SEQUENCIA> <NUMERO_FACTURA> */
+    codigoVenda Integer min(1), // <TIPO_DOCUMENTO> <SERIE> SEQUENCIA_VENDA
+    codigoCompra Integer min(1), // <TIPO_DOCUMENTO> <SERIE> SEQUENCIA_COMPRA
+    codigoCliente Integer min(1), // <TIPO_PESSOA> <SEQUENCIA_CLIENTE>
+    codigoFornecedor Integer min(1), // <TIPO_PESSOA> <SEQUENCIA_FORNECEDOR>
+    codigoDevolucaoVenda Integer min(1), // <TIPO_DOCUMENTO> <SERIE> <SEQUENCIA_DEVOLUCAO>
+    codigoDevolucaoCompra Integer min(1), // <TIPO_DOCUMENTO> <SERIE> <SEQUENCIA_DEVOLUCAO>
+    codigoProduto Integer min(1), // <Tipo> <Serie> <Sequencia>
+    data LocalDate
+}
+
+entity Software {
+	empresa String required,
+    tipoSistema String required, // DP
+    nif String required,
+    numeroValidacaoAGT Integer required, // DP
+    nome String maxlength(255) required,
+    versao String maxlength(30) required,
+    hashCode String required,
+    hashControl String required
+}
+
+entity LicencaSoftware {
+    tipoSubscricao String required, // MENSAL, SEMESTRAL, ANUAL
+    inicio ZonedDateTime required,
+    fim ZonedDateTime required,
+    data ZonedDateTime,
+    valor BigDecimal min(0) required,
+    codigo String unique required,
+    numeroUsuario Integer min(1),
+    numeroEmpresa Integer min(1)
+}
+
+entity Lookup {
+    nome String required unique,
+    entidade EntidadeSistema, // Pesoa, CLiente, Produto
+    modificavel Boolean
+}
+
+entity LookupItem {
+	valor String, // M
+    nome String, // Masculino
+    type LookupType,
+    ordem Integer
+}
+
+// Aprovado, Reporvado, EM analise, Pesquisa de fornecedor
+entity FluxoDocumento {
+    nome String required unique,
+    aumentaEstoque Boolean,
+    aumentaValorCaixa Boolean,
+    cor String,
+    padrao Boolean required,
+    descricao TextBlob,
+    entidade EntidadeSistema required // Compra, Venda, Ambos
+}
+
+// Factura, Recibo, Proforma, Ordem de servico, Ordem de compra
+entity DocumentoComercial {
+    nome String required unique,
+    serie String required unique,
+    padrao Boolean required,
+    movimentaEstoque Boolean required,
+    movimentaCaixa Boolean required,
+    cor String,
+    descricao TextBlob,
+    entidade EntidadeSistema // Venda, Compra, LancamentoContabil
+}
+
+entity Imposto {
+    tipoImposto String required,
+    codigoImposto String required,
+    porcentagem Boolean required,
+    valor BigDecimal required min(0),
+    descricao TextBlob, // Ex. Imposto de rendimento de trabalho (IRT), Imposto de valor ascrecentado (IVA)
+    vigenciaDe LocalDate,
+    vigenciaAte LocalDate,
+    pais String,
+    conta String unique
+}
+
+entity GrupoTributacaoImposto {
+    nome String required,
+    valor Double min(0) required,
+    de Double, // De valor ou De dia
+    ate Double,
+    limiteLiquidacao Integer min(1) max(31)
+    // unidadeLimite String // Semana, Mes, Trimestre, Semestre ou Ano
+}
+
+entity MoradaPessoa {
+	pais String,
+	provincia String,
+    municipio String,
+    bairro String required,
+    rua String maxlength(200) required,
+    quarteirao String maxlength(10),
+    numeroPorta String maxlength(10)
+}
+
+entity ContactoPessoa {
+	tipoContacto String required, // EMAIL, TELEFONE; FAX; SITE; REDE_SOCIAL
+	descricao String, // Ex. CASA, TRABALHO, PESSOAL, DEPARTAMENTO
+    contacto String unique required
+}
+
+entity Pessoa {
+	tipoPessoa String required,
+    numero String unique required,
+    nome String required,
+    nif String unique,
+    imagem ImageBlob
+}
+
+entity RelacionamentoPessoa {
+	grauParentesco String required // PAI, MAE; AVO, AMIGO
+}
+
+// fim pessoa module
+
+// inicio empresa module
+entity Empresa {
+	tipoSociedade String, // ANONIMA, LIMITADA, PUBLICA EP
+	nome String required unique,
+    logotipo ImageBlob,
+    capitalSocial BigDecimal min(0),
+    fundacao LocalDate,
+    nif String required maxlength(20) unique,
+    numeroRegistroComercial String unique required,
+    despesaFixa Double required min(0) max(100),
+    despesaVariavel Double required min(0) max(100),
+    aberturaExercio LocalDate,
+    designacaoComercial TextBlob, // o que faz a empresa
+    sede Boolean,
+    conta String unique
+}
+
+entity LocalizacaoEmpresa {
+	pais String,
+	provincia String,
+    municipio String,
+    bairro String required,
+    rua String maxlength(200) required,
+    quarteirao String maxlength(10),
+    numeroPorta String maxlength(10)
+}
+
+entity ContactoEmpresa {
+	tipoContacto String required,
+	descricao String,
+    contacto String unique required
+}
+
+
+entity CoordenadaBancaria {
+	descricao String required, // Nome do banco, Nome do caixa
+    proprietario String required,
+    numeroConta String unique required,
+    iban String unique,
+    ativo Boolean required,
+    mostrarDocumento Boolean,
+    conta String unique
+}
+
+entity Arquivo {
+	descricao String,
+    entidade EntidadeSistema, // Pessoa, Venda, Compra, LancamentoFinanceiro, EscrituracaoContabil, Produto
+    anexo AnyBlob,
+    codigoEntidade String,
+    data ZonedDateTime
+}
+
+entity Fornecedor {
+	certificadoISO9001 Boolean,
+    garantiaDefeitoFabrica Boolean,
+    transporte Boolean,
+    qualidade Double min(0) max(10),
+    pagamentoPrazo Boolean,
+    metodosPagamento TextBlob,
+    classificacao Double min(0) max(10) required,
+    descricao TextBlob,
+    ativo Boolean,
+    numero String unique required,
+    conta String unique
+}
+
+entity Cliente {
+	ativo Boolean,
+    perfilProfissional TextBlob,
+    satisfacao Double,
+    frequencia Double,
+    canalUsado String,
+    numero String unique required,
+    autofacturacao Boolean,
+    conta String unique
+}
+
+entity UnidadeMedida {
+    nome String unique required,
+    sigla String unique required,
+    valor Double required min(0)
+}
+
+relationship ManyToOne {
+	Arquivo{utilizador(login)} to User,
+    Empresa{utilizador(login)} to User,
+    Pessoa{utilizador(login)} to User,
+    RelacionamentoPessoa{de(nome) required} to Pessoa,
+    RelacionamentoPessoa{para(nome) required} to Pessoa
+}
+
+relationship OneToMany {
+	Empresa to Empresa{hierarquia(nome)},
+    Empresa to LocalizacaoEmpresa{empresa(nome) required},
+    Empresa to ContactoEmpresa{empresa(nome) required},
+    Software to LicencaSoftware{software(nome)},
+    Empresa to LicencaSoftware{empresa(nome) required},
+    Lookup to LookupItem{lookup(nome)},
+    Pessoa to MoradaPessoa{pessoa(nome) required},
+    Pessoa to ContactoPessoa{pessoa(nome) required},
+    UnidadeMedida to UnidadeMedida{unidadeConversao(nome)},
+    Imposto to GrupoTributacaoImposto {imposto(codigoImposto) required},
+    UnidadeMedida to GrupoTributacaoImposto{unidadeLimite(nome)}
+}
+
+relationship ManyToMany {
+	CoordenadaBancaria{empresa(nome) required} to Empresa{coordenadaBancaria}
+}
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    Cliente{pessoa(nome) required} to Pessoa,
+    Fornecedor{pessoa(nome) required } to Pessoa
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination
+search * with elasticsearch
+filter Lookup, LookupItem, Cliente, Fornecedor, Pessoa, Empresa, Arquivo, CoordenadaBancaria
+filter Imposto, FluxoDocumento, DocumentoComercial, Arquivo

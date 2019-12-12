@@ -1,0 +1,108 @@
+
+entity Moeda {
+    nome String required unique,
+    codigo String required unique minlength(2) maxlength(10),
+    pais String,
+    nacional Boolean,
+    icon String
+}
+
+// Pronto pagamento e Prestacoes (Ex, 1X, 2X, 3X, 4X, ...)
+// Forma de pagamento
+entity FormaLiquidacao {
+    nome String unique required,
+    juro Double required min(0) max(100), // em porcentagem
+    prazoLiquidacao Integer required min(0) // em dias
+    quantidade Integer required min(1), // Numero de prestacoe 1,2,3,...N
+    icon String
+}
+
+// Cartao Credito, Deposito BPC, Transferencia BPC, Numerario, TPA BPC,
+entity MeioLiquidacao{
+    nome String unique,
+    sigla String unique,
+    icon String,
+    mostrarPontoVenda Boolean
+}
+
+entity LancamentoFinanceiro {
+    tipoLancamento String required, // Entrada, Saida (Credito ou Debito), Neutro (Aviso)
+    valor BigDecimal required min(0),
+
+    externo Boolean, // Se ficheiro externo deve ter referencia ao arquivo da factura. O numero do lancamento sera a referencia do id da tabela Arquivo
+    //
+    numero String unique required, // Numero da factura se houver ou gerar automaticamente
+    descricao TextBlob required
+}
+
+entity DetalheLancamento {
+    valor BigDecimal required min(0),
+    desconto BigDecimal min(0),
+    juro Double min(0) max(100), // em porcentagem
+    descricao TextBlob,
+    data ZonedDateTime required,
+    retencaoFonte Boolean,
+    dataVencimento LocalDate required,
+    liquidado Boolean
+}
+
+entity RetencaoFonte {
+    motivoRetencao String,
+    valor String,
+    porcentagem Boolean
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    FormaLiquidacao to LancamentoFinanceiro{formaLiquidacao(nome) required},
+    LancamentoFinanceiro to DetalheLancamento{lancamentoFinanceiro(numero) required},
+    MeioLiquidacao to DetalheLancamento{metodoLiquidacao(nome) required},
+    Moeda to DetalheLancamento{moeda(codigo) required},
+    Empresa to LancamentoFinanceiro{empresa(nome)},
+    DetalheLancamento to RetencaoFonte{detalhe},
+    Imposto to RetencaoFonte{imposto(codigoImposto)},
+    Conta to MeioLiquidacao{conta(descricao)},
+    Conta to LancamentoFinanceiro{conta(descricao)},
+    DocumentoComercial to LancamentoFinanceiro{tipoRecibo(nome) required}
+}
+
+relationship ManyToMany {
+    LancamentoFinanceiro{imposto(codigoImposto) required} to Imposto{lancamento}
+}
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+    LancamentoFinanceiro{utilizador(login)} to User,
+    DetalheLancamento{utilizador(login)} to User
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination
+search * with elasticsearch
+filter LancamentoFinanceiro, DetalheLancamento, Moeda, FormaLiquidacao, MeioLiquidacao
+
+/*
+FIltrar lancamentos financeiros por:
+Tipo de recibo, Tipo de lancamento,
+Valor maior que
+Valor menor que
+Valor igual à
+Valor entre x à y
+Pela categoria: Cliente, Fornecedor, Estado, Interno(Empresa)
+Data da operacao especifica
+Data da operacao de x até y
+Data de vencimento especifica
+Data de vencimento de x até y
+Forma de liquidacao
+
+--- Detalhe de lançamento
+meio de pagamento
+desconto maior que zero
+taxa de juro maior que zero
+
+*/

@@ -1,0 +1,55 @@
+entity Venda {
+	numero String,
+    data ZonedDateTime,
+    observacaoGeral TextBlob,
+    observacaoInterna TextBlob
+}
+
+entity ItemVenda {
+	quantidade Double min(1),
+    valor BigDecimal min(0),
+    desconto Double min(0) max(100) // em porcentagem
+    data ZonedDateTime
+}
+
+entity DevolucaoVenda {
+    quantidade Double min(1),
+    valor Double min(0),
+    desconto Double min(0),
+    data ZonedDateTime,
+    descricao TextBlob
+}
+
+entity AuditoriaVenda {
+    estado String, // DP
+    data ZonedDateTime,
+    motivoAlteracaoDocumento String, // DP
+    origemDocumento String, // DP
+    hash String,
+    hashControl String
+}
+
+relationship OneToMany {
+	Venda to ItemVenda{venda(numero) required},
+    Produto to ItemVenda{produto(nome)},
+    Cliente to Venda{cliente(numero) required},
+    FluxoDocumento to ItemVenda{status(nome)},
+    DocumentoComercial to Venda{tipoDocumento(nome) required},
+    Empresa to Venda{empresa(nome)}
+}
+
+relationship OneToOne {
+    DevolucaoVenda{item required} to ItemVenda,
+    AuditoriaVenda{venda(numero) required} to Venda
+}
+
+relationship ManyToOne {
+	Venda{vendedor(login)} to User,
+    AuditoriaVenda{utilizador(login)} to User
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination
+search * with elasticsearch
+filter Venda, ItemVenda, DevolucaoVenda

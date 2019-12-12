@@ -1,0 +1,81 @@
+entity ClasseConta {
+    descricao String required unique,
+    codigo String required unique
+}
+
+entity Conta {
+    descricao String required unique,
+    codigo String required unique,
+    tipo String,
+    grau Integer min(1) max(5),
+    natureza String, // Credora (C+), Devedora(D-)
+    grupo String, // Activo, Passivo {Circulante e nao circulante}, Patrimonio liquido
+    conteudo TextBlob
+}
+
+entity RegraMovimentacaoDebito {
+    descricao TextBlob
+}
+
+entity RegraMovimentacaoCredito {
+    descricao TextBlob
+}
+
+entity EscrituracaoContabil {
+    numero String unique required,
+    historico TextBlob required,
+    valor BigDecimal required min(0),
+    referencia String unique,
+    entidadeReferencia EntidadeSistema, // Compra, Venda, Recibo, Nota debito, Nota credito
+    tipo String required, // N, R, I go to Diario Republica
+    dataDocumento LocalDate required,
+    data ZonedDateTime required
+}
+
+entity ContaDebito {
+    valor BigDecimal required min(0),
+    data ZonedDateTime
+}
+
+entity ContaCredito {
+    valor BigDecimal required min(0),
+    data ZonedDateTime
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    Conta to Conta{contaAgregadora(descricao)},
+    ClasseConta to Conta{classeConta(descricao) required},
+    Conta to ContaDebito{contaDebitar(descricao) required},
+    Conta to ContaCredito{contaCreditar(descricao) required},
+    EscrituracaoContabil to ContaDebito{lancamentoDebito(historico) required},
+    EscrituracaoContabil to ContaCredito{lancamentoCredito(historico) required},
+    Empresa to EscrituracaoContabil{empresa(nome) required }
+}
+
+relationship ManyToMany {
+	Conta{empresa(nome)} to Empresa{conta}
+}
+
+/**
+ * One to many relationship.
+ */
+relationship ManyToOne {
+    EscrituracaoContabil{utilizador(login)} to User
+}
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    RegraMovimentacaoCredito{conta(descricao)} to Conta,
+    RegraMovimentacaoDebito{conta(descricao)} to Conta
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination
+search * with elasticsearch
+filter Conta, EscrituracaoContabil, ContaDebito, ContaCredito

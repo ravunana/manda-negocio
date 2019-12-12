@@ -1,0 +1,58 @@
+entity Compra {
+	numero String required unique,
+    data ZonedDateTime,
+    observacaoGeral TextBlob,
+    observacaoInterna TextBlob
+}
+
+entity ItemCompra {
+    quantidade Double min(1),
+    desconto Double min(0) max(100), // em percentagem
+    dataSolicitacao ZonedDateTime,
+    dataEntrega ZonedDateTime,
+    descricao TextBlob,
+    valor BigDecimal
+}
+
+entity DevolucaoCompra {
+    quantidade Double min(1),
+    valor Double min(0),
+    desconto Double min(0),
+    data ZonedDateTime,
+    descricao TextBlob
+}
+
+entity AuditoriaCompra {
+    estado String, // DP
+    data ZonedDateTime,
+    motivoAlteracaoDocumento String, // DP
+    origemDocumento String, // DP
+    hash String,
+    hashControl String
+}
+
+relationship OneToMany {
+	Compra to ItemCompra{compra(numero) required},
+    Produto to ItemCompra{produto(nome) required},
+    Fornecedor to ItemCompra{fornecedor(numero)},
+    FluxoDocumento to ItemCompra{status(nome) required },
+    DocumentoComercial to Compra{tipoDocumento(nome) required},
+    Empresa to Compra{empresa(nome)}
+}
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    DevolucaoCompra{item required} to ItemCompra
+}
+
+relationship ManyToOne {
+	ItemCompra{solicitante(login)} to User,
+    Compra{utilizador(login)} to User
+}
+
+dto * with mapstruct
+service * with serviceClass
+paginate * with pagination
+filter Compra, ItemCompra, DevolucaoCompra
