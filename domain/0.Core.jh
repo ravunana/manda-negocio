@@ -117,8 +117,10 @@ entity DocumentoComercial {
     padrao Boolean required,
     movimentaEstoque Boolean required,
     movimentaCaixa Boolean required,
+    movimentaContabilidade Boolean required,
     cor String,
     descricao TextBlob,
+    mostraPontoVenda Boolean,
     entidade EntidadeSistema // Venda, Compra, LancamentoContabil
 }
 
@@ -128,9 +130,8 @@ entity Imposto {
     porcentagem Boolean required,
     valor BigDecimal required min(0),
     descricao TextBlob, // Ex. Imposto de rendimento de trabalho (IRT), Imposto de valor ascrecentado (IVA)
-    vigenciaDe LocalDate,
-    vigenciaAte LocalDate,
     pais String,
+    vigencia LocalDate,
     conta String unique
 }
 
@@ -197,7 +198,8 @@ entity LocalizacaoEmpresa {
     bairro String required,
     rua String maxlength(200) required,
     quarteirao String maxlength(10),
-    numeroPorta String maxlength(10)
+    numeroPorta String maxlength(10),
+    caixaPostal String
 }
 
 entity ContactoEmpresa {

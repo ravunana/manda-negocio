@@ -72,7 +72,7 @@ relationship ManyToMany {
     LancamentoFinanceiro{imposto(codigoImposto) required} to Imposto{lancamento}
 }
 
-/**
+/**LancamentoFinanceiro
  * Many to one relationship.
  */
 relationship ManyToOne {
