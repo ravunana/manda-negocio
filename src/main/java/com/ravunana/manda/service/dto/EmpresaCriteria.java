@@ -70,8 +70,6 @@ public class EmpresaCriteria implements Serializable, Criteria {
 
     private LongFilter utilizadorId;
 
-    private LongFilter contaId;
-
     private LongFilter hierarquiaId;
 
     private LongFilter contaId;
@@ -289,14 +287,6 @@ public class EmpresaCriteria implements Serializable, Criteria {
 
     public void setUtilizadorId(LongFilter utilizadorId) {
         this.utilizadorId = utilizadorId;
-    }
-
-    public LongFilter getContaId() {
-        return contaId;
-    }
-
-    public void setContaId(LongFilter contaId) {
-        this.contaId = contaId;
     }
 
     public LongFilter getHierarquiaId() {
