@@ -370,7 +370,7 @@ public class DetalheLancamentoResourceIT {
             .andExpect(jsonPath("$.[*].dataVencimento").value(hasItem(DEFAULT_DATA_VENCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].liquidado").value(hasItem(DEFAULT_LIQUIDADO.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getDetalheLancamento() throws Exception {
@@ -829,20 +829,6 @@ public class DetalheLancamentoResourceIT {
 
         // Get all the detalheLancamentoList where data is greater than SMALLER_DATA
         defaultDetalheLancamentoShouldBeFound("data.greaterThan=" + SMALLER_DATA);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllDetalheLancamentosByRetencaoFonteIsEqualToSomething() throws Exception {
-        // Initialize the database
-        detalheLancamentoRepository.saveAndFlush(detalheLancamento);
-
-        // Get all the detalheLancamentoList where retencaoFonte equals to DEFAULT_RETENCAO_FONTE
-        defaultDetalheLancamentoShouldBeFound("retencaoFonte.equals=" + DEFAULT_RETENCAO_FONTE);
-
-        // Get all the detalheLancamentoList where retencaoFonte equals to UPDATED_RETENCAO_FONTE
-        defaultDetalheLancamentoShouldNotBeFound("retencaoFonte.equals=" + UPDATED_RETENCAO_FONTE);
     }
 
     @Test

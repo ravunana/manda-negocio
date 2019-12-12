@@ -365,7 +365,7 @@ public class EmpresaResourceIT {
             .andExpect(jsonPath("$.[*].designacaoComercial").value(hasItem(DEFAULT_DESIGNACAO_COMERCIAL.toString())))
             .andExpect(jsonPath("$.[*].sede").value(hasItem(DEFAULT_SEDE.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getEmpresa() throws Exception {
@@ -1518,26 +1518,6 @@ public class EmpresaResourceIT {
 
         // Get all the empresaList where utilizador equals to utilizadorId + 1
         defaultEmpresaShouldNotBeFound("utilizadorId.equals=" + (utilizadorId + 1));
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllEmpresasByContaIsEqualToSomething() throws Exception {
-        // Initialize the database
-        empresaRepository.saveAndFlush(empresa);
-        Conta conta = ContaResourceIT.createEntity(em);
-        em.persist(conta);
-        em.flush();
-        empresa.setConta(conta);
-        empresaRepository.saveAndFlush(empresa);
-        Long contaId = conta.getId();
-
-        // Get all the empresaList where conta equals to contaId
-        defaultEmpresaShouldBeFound("contaId.equals=" + contaId);
-
-        // Get all the empresaList where conta equals to contaId + 1
-        defaultEmpresaShouldNotBeFound("contaId.equals=" + (contaId + 1));
     }
 
 

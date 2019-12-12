@@ -331,7 +331,7 @@ public class CoordenadaBancariaResourceIT {
             .andExpect(jsonPath("$.[*].padraoRecebimento").value(hasItem(DEFAULT_PADRAO_RECEBIMENTO.booleanValue())))
             .andExpect(jsonPath("$.[*].padraoPagamento").value(hasItem(DEFAULT_PADRAO_PAGAMENTO.booleanValue())));
     }
-    
+
     @SuppressWarnings({"unchecked"})
     public void getAllCoordenadaBancariasWithEagerRelationshipsIsEnabled() throws Exception {
         CoordenadaBancariaResource coordenadaBancariaResource = new CoordenadaBancariaResource(coordenadaBancariaServiceMock, coordenadaBancariaQueryService);
@@ -1016,22 +1016,6 @@ public class CoordenadaBancariaResourceIT {
 
         // Get all the coordenadaBancariaList where conta equals to contaId + 1
         defaultCoordenadaBancariaShouldNotBeFound("contaId.equals=" + (contaId + 1));
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllCoordenadaBancariasByEmpresaIsEqualToSomething() throws Exception {
-        // Get already existing entity
-        Empresa empresa = coordenadaBancaria.getEmpresa();
-        coordenadaBancariaRepository.saveAndFlush(coordenadaBancaria);
-        Long empresaId = empresa.getId();
-
-        // Get all the coordenadaBancariaList where empresa equals to empresaId
-        defaultCoordenadaBancariaShouldBeFound("empresaId.equals=" + empresaId);
-
-        // Get all the coordenadaBancariaList where empresa equals to empresaId + 1
-        defaultCoordenadaBancariaShouldNotBeFound("empresaId.equals=" + (empresaId + 1));
     }
 
     /**

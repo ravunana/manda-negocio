@@ -331,7 +331,7 @@ public class LancamentoFinanceiroResourceIT {
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())));
     }
-    
+
     @SuppressWarnings({"unchecked"})
     public void getAllLancamentoFinanceirosWithEagerRelationshipsIsEnabled() throws Exception {
         LancamentoFinanceiroResource lancamentoFinanceiroResource = new LancamentoFinanceiroResource(lancamentoFinanceiroServiceMock, lancamentoFinanceiroQueryService);
@@ -774,23 +774,6 @@ public class LancamentoFinanceiroResourceIT {
         // Get all the lancamentoFinanceiroList where conta equals to contaId + 1
         defaultLancamentoFinanceiroShouldNotBeFound("contaId.equals=" + (contaId + 1));
     }
-
-
-    @Test
-    @Transactional
-    public void getAllLancamentoFinanceirosByImpostoIsEqualToSomething() throws Exception {
-        // Get already existing entity
-        Imposto imposto = lancamentoFinanceiro.getImposto();
-        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
-        Long impostoId = imposto.getId();
-
-        // Get all the lancamentoFinanceiroList where imposto equals to impostoId
-        defaultLancamentoFinanceiroShouldBeFound("impostoId.equals=" + impostoId);
-
-        // Get all the lancamentoFinanceiroList where imposto equals to impostoId + 1
-        defaultLancamentoFinanceiroShouldNotBeFound("impostoId.equals=" + (impostoId + 1));
-    }
-
 
     @Test
     @Transactional
