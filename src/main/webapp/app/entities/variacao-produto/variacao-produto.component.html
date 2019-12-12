@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.variacaoProduto.home.title">Variacao Produtos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-variacao-produto" [routerLink]="['/variacao-produto/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.variacaoProduto.home.createLabel">
+            Create a new Variacao Produto
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="variacaoProdutos?.length === 0">
+        <span jhiTranslate="mandaApp.variacaoProduto.home.notFound">No variacaoProdutos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="variacaoProdutos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="genero"><span jhiTranslate="mandaApp.variacaoProduto.genero">Genero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="cor"><span jhiTranslate="mandaApp.variacaoProduto.cor">Cor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="modelo"><span jhiTranslate="mandaApp.variacaoProduto.modelo">Modelo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="marca"><span jhiTranslate="mandaApp.variacaoProduto.marca">Marca</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tamanho"><span jhiTranslate="mandaApp.variacaoProduto.tamanho">Tamanho</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="produtoNome"><span jhiTranslate="mandaApp.variacaoProduto.produto">Produto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let variacaoProduto of variacaoProdutos ;trackBy: trackId">
+                <td><a [routerLink]="['/variacao-produto', variacaoProduto.id, 'view' ]">{{variacaoProduto.id}}</a></td>
+                <td>{{variacaoProduto.genero}}</td>
+                <td>{{variacaoProduto.cor}}</td>
+                <td>{{variacaoProduto.modelo}}</td>
+                <td>{{variacaoProduto.marca}}</td>
+                <td>{{variacaoProduto.tamanho}}</td>
+                <td>
+                    <div *ngIf="variacaoProduto.produtoId">
+                        <a [routerLink]="['/produto', variacaoProduto.produtoId , 'view' ]" >{{variacaoProduto.produtoNome}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/variacao-produto', variacaoProduto.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/variacao-produto', variacaoProduto.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(variacaoProduto)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="variacaoProdutos?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

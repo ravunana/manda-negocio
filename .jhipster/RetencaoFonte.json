@@ -1,0 +1,43 @@
+{
+    "name": "RetencaoFonte",
+    "fields": [
+        {
+            "fieldName": "motivoRetencao",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "porcentagem",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "detalheLancamento",
+            "otherEntityRelationshipName": "retencaoFonte",
+            "relationshipName": "detalhe",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "imposto",
+            "otherEntityRelationshipName": "retencaoFonte",
+            "relationshipName": "imposto",
+            "otherEntityField": "codigoImposto"
+        }
+    ],
+    "changelogDate": "20191212101051",
+    "entityTableName": "fnc_retencao_fonte",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

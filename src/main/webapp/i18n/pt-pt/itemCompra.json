@@ -1,0 +1,32 @@
+{
+  "mandaApp": {
+    "itemCompra": {
+      "home": {
+        "title": "Item Compras",
+        "createLabel": "Criar novo(a) Item Compra",
+        "createOrEditLabel": "Criar ou editar Item Compra",
+        "notFound": "Nenhum Item Compras encontrado"
+      },
+      "created": "Um novo Item Compra foi criado com o identificador {{ param }}",
+      "updated": "Item Compra com identificador {{ param }} foi actualizado",
+      "deleted": "Item Compra com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Item Compra {{ id }}?"
+      },
+      "detail": {
+        "title": "Item Compra"
+      },
+      "quantidade": "Quantidade",
+      "desconto": "Desconto",
+      "dataSolicitacao": "Data Solicitacao",
+      "dataEntrega": "Data Entrega",
+      "descricao": "Descricao",
+      "valor": "Valor",
+      "solicitante": "Solicitante",
+      "compra": "Compra",
+      "produto": "Produto",
+      "fornecedor": "Fornecedor",
+      "status": "Status"
+    }
+  }
+}

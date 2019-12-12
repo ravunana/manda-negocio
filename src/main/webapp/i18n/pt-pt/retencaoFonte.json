@@ -1,0 +1,26 @@
+{
+  "mandaApp": {
+    "retencaoFonte": {
+      "home": {
+        "title": "Retencao Fontes",
+        "createLabel": "Criar novo(a) Retencao Fonte",
+        "createOrEditLabel": "Criar ou editar Retencao Fonte",
+        "notFound": "Nenhum Retencao Fontes encontrado"
+      },
+      "created": "Um novo Retencao Fonte foi criado com o identificador {{ param }}",
+      "updated": "Retencao Fonte com identificador {{ param }} foi actualizado",
+      "deleted": "Retencao Fonte com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Retencao Fonte {{ id }}?"
+      },
+      "detail": {
+        "title": "Retencao Fonte"
+      },
+      "motivoRetencao": "Motivo Retencao",
+      "valor": "Valor",
+      "porcentagem": "Porcentagem",
+      "detalhe": "Detalhe",
+      "imposto": "Imposto"
+    }
+  }
+}

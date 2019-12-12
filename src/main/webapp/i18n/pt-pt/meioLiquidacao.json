@@ -1,0 +1,26 @@
+{
+  "mandaApp": {
+    "meioLiquidacao": {
+      "home": {
+        "title": "Meio Liquidacaos",
+        "createLabel": "Criar novo(a) Meio Liquidacao",
+        "createOrEditLabel": "Criar ou editar Meio Liquidacao",
+        "notFound": "Nenhum Meio Liquidacaos encontrado"
+      },
+      "created": "Um novo Meio Liquidacao foi criado com o identificador {{ param }}",
+      "updated": "Meio Liquidacao com identificador {{ param }} foi actualizado",
+      "deleted": "Meio Liquidacao com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Meio Liquidacao {{ id }}?"
+      },
+      "detail": {
+        "title": "Meio Liquidacao"
+      },
+      "nome": "Nome",
+      "sigla": "Sigla",
+      "icon": "Icon",
+      "mostrarPontoVenda": "Mostrar Ponto Venda",
+      "detalheLancamento": "Detalhe Lancamento"
+    }
+  }
+}

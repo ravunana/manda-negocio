@@ -1,0 +1,29 @@
+{
+  "mandaApp": {
+    "auditoriaCompra": {
+      "home": {
+        "title": "Auditoria Compras",
+        "createLabel": "Criar novo(a) Auditoria Compra",
+        "createOrEditLabel": "Criar ou editar Auditoria Compra",
+        "notFound": "Nenhum Auditoria Compras encontrado"
+      },
+      "created": "Um novo Auditoria Compra foi criado com o identificador {{ param }}",
+      "updated": "Auditoria Compra com identificador {{ param }} foi actualizado",
+      "deleted": "Auditoria Compra com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Auditoria Compra {{ id }}?"
+      },
+      "detail": {
+        "title": "Auditoria Compra"
+      },
+      "estado": "Estado",
+      "data": "Data",
+      "motivoAlteracaoDocumento": "Motivo Alteracao Documento",
+      "origemDocumento": "Origem Documento",
+      "hash": "Hash",
+      "hashControl": "Hash Control",
+      "compra": "Compra",
+      "utilizador": "Utilizador"
+    }
+  }
+}

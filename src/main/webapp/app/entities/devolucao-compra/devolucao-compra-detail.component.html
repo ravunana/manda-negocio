@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="devolucaoCompra">
+            <h2><span jhiTranslate="mandaApp.devolucaoCompra.detail.title">Devolucao Compra</span> {{devolucaoCompra.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.devolucaoCompra.quantidade">Quantidade</span></dt>
+                <dd>
+                    <span>{{devolucaoCompra.quantidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.devolucaoCompra.valor">Valor</span></dt>
+                <dd>
+                    <span>{{devolucaoCompra.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.devolucaoCompra.desconto">Desconto</span></dt>
+                <dd>
+                    <span>{{devolucaoCompra.desconto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.devolucaoCompra.data">Data</span></dt>
+                <dd>
+                    <span>{{devolucaoCompra.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.devolucaoCompra.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{devolucaoCompra.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.devolucaoCompra.item">Item</span></dt>
+                <dd>
+                    <div *ngIf="devolucaoCompra.itemId">
+                        <a [routerLink]="['/item-compra', devolucaoCompra.itemId, 'view']">{{devolucaoCompra.itemId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/devolucao-compra', devolucaoCompra.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

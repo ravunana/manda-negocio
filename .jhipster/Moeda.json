@@ -1,0 +1,55 @@
+{
+    "name": "Moeda",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "codigo",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 10
+        },
+        {
+            "fieldName": "pais",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nacional",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "icon",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "detalheLancamento",
+            "otherEntityRelationshipName": "moeda",
+            "relationshipName": "detalheLancamento"
+        }
+    ],
+    "changelogDate": "20191212101046",
+    "entityTableName": "fnc_moeda",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

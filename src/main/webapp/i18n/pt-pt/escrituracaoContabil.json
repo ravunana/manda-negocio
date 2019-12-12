@@ -1,0 +1,33 @@
+{
+  "mandaApp": {
+    "escrituracaoContabil": {
+      "home": {
+        "title": "Escrituracao Contabils",
+        "createLabel": "Criar novo(a) Escrituracao Contabil",
+        "createOrEditLabel": "Criar ou editar Escrituracao Contabil",
+        "notFound": "Nenhum Escrituracao Contabils encontrado"
+      },
+      "created": "Um novo Escrituracao Contabil foi criado com o identificador {{ param }}",
+      "updated": "Escrituracao Contabil com identificador {{ param }} foi actualizado",
+      "deleted": "Escrituracao Contabil com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Escrituracao Contabil {{ id }}?"
+      },
+      "detail": {
+        "title": "Escrituracao Contabil"
+      },
+      "numero": "Numero",
+      "historico": "Historico",
+      "valor": "Valor",
+      "referencia": "Referencia",
+      "entidadeReferencia": "Entidade Referencia",
+      "tipo": "Tipo",
+      "dataDocumento": "Data Documento",
+      "data": "Data",
+      "contaDebito": "Conta Debito",
+      "contaCredito": "Conta Credito",
+      "utilizador": "Utilizador",
+      "empresa": "Empresa"
+    }
+  }
+}

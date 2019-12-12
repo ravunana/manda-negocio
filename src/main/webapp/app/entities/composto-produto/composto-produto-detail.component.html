@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="compostoProduto">
+            <h2><span jhiTranslate="mandaApp.compostoProduto.detail.title">Composto Produto</span> {{compostoProduto.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.compostoProduto.quantidade">Quantidade</span></dt>
+                <dd>
+                    <span>{{compostoProduto.quantidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compostoProduto.valor">Valor</span></dt>
+                <dd>
+                    <span>{{compostoProduto.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compostoProduto.permanente">Permanente</span></dt>
+                <dd>
+                    <span>{{compostoProduto.permanente}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compostoProduto.produto">Produto</span></dt>
+                <dd>
+                    <div *ngIf="compostoProduto.produtoId">
+                        <a [routerLink]="['/produto', compostoProduto.produtoId, 'view']">{{compostoProduto.produtoNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compostoProduto.unidade">Unidade</span></dt>
+                <dd>
+                    <div *ngIf="compostoProduto.unidadeId">
+                        <a [routerLink]="['/unidade-medida', compostoProduto.unidadeId, 'view']">{{compostoProduto.unidadeNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compostoProduto.composto">Composto</span></dt>
+                <dd>
+                    <div *ngIf="compostoProduto.compostoId">
+                        <a [routerLink]="['/produto', compostoProduto.compostoId, 'view']">{{compostoProduto.compostoNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/composto-produto', compostoProduto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

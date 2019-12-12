@@ -1,0 +1,101 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-conversao-unidade-heading" jhiTranslate="mandaApp.conversaoUnidade.home.createOrEditLabel">Create or edit a Conversao Unidade</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conversaoUnidade.valorEntrada" for="field_valorEntrada">Valor Entrada</label>
+                    <input type="number" class="form-control" name="valorEntrada" id="field_valorEntrada"
+                           formControlName="valorEntrada"/>
+                    <div *ngIf="editForm.get('valorEntrada').invalid && (editForm.get('valorEntrada').dirty || editForm.get('valorEntrada').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valorEntrada').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valorEntrada').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('valorEntrada')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conversaoUnidade.valorSaida" for="field_valorSaida">Valor Saida</label>
+                    <input type="number" class="form-control" name="valorSaida" id="field_valorSaida"
+                           formControlName="valorSaida"/>
+                    <div *ngIf="editForm.get('valorSaida').invalid && (editForm.get('valorSaida').dirty || editForm.get('valorSaida').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valorSaida').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valorSaida').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('valorSaida')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conversaoUnidade.entrada" for="field_entrada">Entrada</label>
+                    <select class="form-control" id="field_entrada" name="entrada" formControlName="entradaId">
+                        <option *ngIf="!editForm.get('entradaId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="unidadeMedidaOption.id" *ngFor="let unidadeMedidaOption of unidademedidas; trackBy: trackUnidadeMedidaById">{{unidadeMedidaOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('entradaId').invalid && (editForm.get('entradaId').dirty || editForm.get('entradaId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('entradaId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conversaoUnidade.saida" for="field_saida">Saida</label>
+                    <select class="form-control" id="field_saida" name="saida" formControlName="saidaId">
+                        <option *ngIf="!editForm.get('saidaId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="unidadeMedidaOption.id" *ngFor="let unidadeMedidaOption of unidademedidas; trackBy: trackUnidadeMedidaById">{{unidadeMedidaOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('saidaId').invalid && (editForm.get('saidaId').dirty || editForm.get('saidaId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('saidaId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conversaoUnidade.produto" for="field_produto">Produto</label>
+                    <select class="form-control" id="field_produto" name="produto" formControlName="produtoId">
+                        <option *ngIf="!editForm.get('produtoId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="produtoOption.id" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('produtoId').invalid && (editForm.get('produtoId').dirty || editForm.get('produtoId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('produtoId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

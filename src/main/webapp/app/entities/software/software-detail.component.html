@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="software">
+            <h2><span jhiTranslate="mandaApp.software.detail.title">Software</span> {{software.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.software.empresa">Empresa</span></dt>
+                <dd>
+                    <span>{{software.empresa}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.software.tipoSistema">Tipo Sistema</span></dt>
+                <dd>
+                    <span>{{software.tipoSistema}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.software.nif">Nif</span></dt>
+                <dd>
+                    <span>{{software.nif}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.software.numeroValidacaoAGT">Numero Validacao AGT</span></dt>
+                <dd>
+                    <span>{{software.numeroValidacaoAGT}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.software.nome">Nome</span></dt>
+                <dd>
+                    <span>{{software.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.software.versao">Versao</span></dt>
+                <dd>
+                    <span>{{software.versao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.software.hashCode">Hash Code</span></dt>
+                <dd>
+                    <span>{{software.hashCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.software.hashControl">Hash Control</span></dt>
+                <dd>
+                    <span>{{software.hashControl}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/software', software.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

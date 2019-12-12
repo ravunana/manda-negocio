@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="auditoriaCompra">
+            <h2><span jhiTranslate="mandaApp.auditoriaCompra.detail.title">Auditoria Compra</span> {{auditoriaCompra.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.auditoriaCompra.estado">Estado</span></dt>
+                <dd>
+                    <span>{{auditoriaCompra.estado}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaCompra.data">Data</span></dt>
+                <dd>
+                    <span>{{auditoriaCompra.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaCompra.motivoAlteracaoDocumento">Motivo Alteracao Documento</span></dt>
+                <dd>
+                    <span>{{auditoriaCompra.motivoAlteracaoDocumento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaCompra.origemDocumento">Origem Documento</span></dt>
+                <dd>
+                    <span>{{auditoriaCompra.origemDocumento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaCompra.hash">Hash</span></dt>
+                <dd>
+                    <span>{{auditoriaCompra.hash}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaCompra.hashControl">Hash Control</span></dt>
+                <dd>
+                    <span>{{auditoriaCompra.hashControl}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaCompra.compra">Compra</span></dt>
+                <dd>
+                    <div *ngIf="auditoriaCompra.compraId">
+                        <a [routerLink]="['/compra', auditoriaCompra.compraId, 'view']">{{auditoriaCompra.compraNumero}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaCompra.utilizador">Utilizador</span></dt>
+                <dd>
+                    {{auditoriaCompra.utilizadorLogin}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/auditoria-compra', auditoriaCompra.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

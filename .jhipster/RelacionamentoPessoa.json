@@ -1,0 +1,40 @@
+{
+    "name": "RelacionamentoPessoa",
+    "fields": [
+        {
+            "fieldName": "grauParentesco",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "pessoa",
+            "otherEntityRelationshipName": "relacionamentoPessoa",
+            "relationshipValidateRules": "required",
+            "relationshipName": "de",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "pessoa",
+            "otherEntityRelationshipName": "relacionamentoPessoa",
+            "relationshipValidateRules": "required",
+            "relationshipName": "para",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101037",
+    "entityTableName": "core_relacionamento_pessoa",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

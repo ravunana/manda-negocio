@@ -1,0 +1,56 @@
+{
+    "name": "LocalArmazenamento",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "localArmazenamento",
+            "relationshipName": "produto"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "localArmazenamento",
+            "otherEntityRelationshipName": "hierarquia",
+            "relationshipName": "localArmazenamento"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "localArmazenamento",
+            "otherEntityRelationshipName": "localArmazenamento",
+            "relationshipName": "hierarquia",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "localArmazenamento",
+            "relationshipName": "empresa",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101052",
+    "entityTableName": "stk_local_armazenamento",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

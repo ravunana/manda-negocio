@@ -1,0 +1,153 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-licenca-software-heading" jhiTranslate="mandaApp.licencaSoftware.home.createOrEditLabel">Create or edit a Licenca Software</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.tipoSubscricao" for="field_tipoSubscricao">Tipo Subscricao</label>
+                    <input type="text" class="form-control" name="tipoSubscricao" id="field_tipoSubscricao"
+                           formControlName="tipoSubscricao"/>
+                    <div *ngIf="editForm.get('tipoSubscricao').invalid && (editForm.get('tipoSubscricao').dirty || editForm.get('tipoSubscricao').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tipoSubscricao').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.inicio" for="field_inicio">Inicio</label>
+                    <div class="d-flex">
+                        <input id="field_inicio" type="datetime-local" class="form-control" name="inicio" formControlName="inicio" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('inicio').invalid && (editForm.get('inicio').dirty || editForm.get('inicio').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('inicio').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('inicio').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.fim" for="field_fim">Fim</label>
+                    <div class="d-flex">
+                        <input id="field_fim" type="datetime-local" class="form-control" name="fim" formControlName="fim" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('fim').invalid && (editForm.get('fim').dirty || editForm.get('fim').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('fim').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('fim').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.data" for="field_data">Data</label>
+                    <div class="d-flex">
+                        <input id="field_data" type="datetime-local" class="form-control" name="data" formControlName="data" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.valor" for="field_valor">Valor</label>
+                    <input type="number" class="form-control" name="valor" id="field_valor"
+                           formControlName="valor"/>
+                    <div *ngIf="editForm.get('valor').invalid && (editForm.get('valor').dirty || editForm.get('valor').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valor').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valor').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('valor')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.codigo" for="field_codigo">Codigo</label>
+                    <input type="text" class="form-control" name="codigo" id="field_codigo"
+                           formControlName="codigo"/>
+                    <div *ngIf="editForm.get('codigo').invalid && (editForm.get('codigo').dirty || editForm.get('codigo').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigo').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.numeroUsuario" for="field_numeroUsuario">Numero Usuario</label>
+                    <input type="number" class="form-control" name="numeroUsuario" id="field_numeroUsuario"
+                           formControlName="numeroUsuario"/>
+                    <div *ngIf="editForm.get('numeroUsuario').invalid && (editForm.get('numeroUsuario').dirty || editForm.get('numeroUsuario').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('numeroUsuario').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('numeroUsuario')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.numeroEmpresa" for="field_numeroEmpresa">Numero Empresa</label>
+                    <input type="number" class="form-control" name="numeroEmpresa" id="field_numeroEmpresa"
+                           formControlName="numeroEmpresa"/>
+                    <div *ngIf="editForm.get('numeroEmpresa').invalid && (editForm.get('numeroEmpresa').dirty || editForm.get('numeroEmpresa').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('numeroEmpresa').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('numeroEmpresa')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.software" for="field_software">Software</label>
+                    <select class="form-control" id="field_software" name="software" formControlName="softwareId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="softwareOption.id" *ngFor="let softwareOption of softwares; trackBy: trackSoftwareById">{{softwareOption.nome}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.licencaSoftware.empresa" for="field_empresa">Empresa</label>
+                    <select class="form-control" id="field_empresa" name="empresa" formControlName="empresaId">
+                        <option *ngIf="!editForm.get('empresaId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="empresaOption.id" *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('empresaId').invalid && (editForm.get('empresaId').dirty || editForm.get('empresaId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('empresaId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

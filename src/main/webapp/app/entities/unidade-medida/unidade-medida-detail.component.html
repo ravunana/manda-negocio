@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="unidadeMedida">
+            <h2><span jhiTranslate="mandaApp.unidadeMedida.detail.title">Unidade Medida</span> {{unidadeMedida.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.unidadeMedida.nome">Nome</span></dt>
+                <dd>
+                    <span>{{unidadeMedida.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.unidadeMedida.sigla">Sigla</span></dt>
+                <dd>
+                    <span>{{unidadeMedida.sigla}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.unidadeMedida.valor">Valor</span></dt>
+                <dd>
+                    <span>{{unidadeMedida.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.unidadeMedida.unidadeConversao">Unidade Conversao</span></dt>
+                <dd>
+                    <div *ngIf="unidadeMedida.unidadeConversaoId">
+                        <a [routerLink]="['/unidade-medida', unidadeMedida.unidadeConversaoId, 'view']">{{unidadeMedida.unidadeConversaoNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/unidade-medida', unidadeMedida.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

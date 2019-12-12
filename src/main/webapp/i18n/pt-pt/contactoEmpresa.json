@@ -1,0 +1,26 @@
+{
+  "mandaApp": {
+    "contactoEmpresa": {
+      "home": {
+        "title": "Contacto Empresas",
+        "createLabel": "Criar novo(a) Contacto Empresa",
+        "createOrEditLabel": "Criar ou editar Contacto Empresa",
+        "notFound": "Nenhum Contacto Empresas encontrado"
+      },
+      "created": "Um novo Contacto Empresa foi criado com o identificador {{ param }}",
+      "updated": "Contacto Empresa com identificador {{ param }} foi actualizado",
+      "deleted": "Contacto Empresa com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Contacto Empresa {{ id }}?"
+      },
+      "detail": {
+        "title": "Contacto Empresa"
+      },
+      "tipoContacto": "Tipo Contacto",
+      "descricao": "Descricao",
+      "contacto": "Contacto",
+      "padrao": "Padrao",
+      "empresa": "Empresa"
+    }
+  }
+}

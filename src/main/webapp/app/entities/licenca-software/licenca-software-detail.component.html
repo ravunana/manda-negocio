@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="licencaSoftware">
+            <h2><span jhiTranslate="mandaApp.licencaSoftware.detail.title">Licenca Software</span> {{licencaSoftware.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.tipoSubscricao">Tipo Subscricao</span></dt>
+                <dd>
+                    <span>{{licencaSoftware.tipoSubscricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.inicio">Inicio</span></dt>
+                <dd>
+                    <span>{{licencaSoftware.inicio}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.fim">Fim</span></dt>
+                <dd>
+                    <span>{{licencaSoftware.fim}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.data">Data</span></dt>
+                <dd>
+                    <span>{{licencaSoftware.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.valor">Valor</span></dt>
+                <dd>
+                    <span>{{licencaSoftware.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.codigo">Codigo</span></dt>
+                <dd>
+                    <span>{{licencaSoftware.codigo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.numeroUsuario">Numero Usuario</span></dt>
+                <dd>
+                    <span>{{licencaSoftware.numeroUsuario}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.numeroEmpresa">Numero Empresa</span></dt>
+                <dd>
+                    <span>{{licencaSoftware.numeroEmpresa}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.software">Software</span></dt>
+                <dd>
+                    <div *ngIf="licencaSoftware.softwareId">
+                        <a [routerLink]="['/software', licencaSoftware.softwareId, 'view']">{{licencaSoftware.softwareNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.licencaSoftware.empresa">Empresa</span></dt>
+                <dd>
+                    <div *ngIf="licencaSoftware.empresaId">
+                        <a [routerLink]="['/empresa', licencaSoftware.empresaId, 'view']">{{licencaSoftware.empresaNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/licenca-software', licencaSoftware.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="serieDocumento">
+            <h2><span jhiTranslate="mandaApp.serieDocumento.detail.title">Serie Documento</span> {{serieDocumento.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.serieDocumento.serie">Serie</span></dt>
+                <dd>
+                    <span>{{serieDocumento.serie}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.codigoLancamentoFinanceiro">Codigo Lancamento Financeiro</span></dt>
+                <dd>
+                    <span>{{serieDocumento.codigoLancamentoFinanceiro}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.codigoEscrituracaoContabil">Codigo Escrituracao Contabil</span></dt>
+                <dd>
+                    <span>{{serieDocumento.codigoEscrituracaoContabil}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.codigoVenda">Codigo Venda</span></dt>
+                <dd>
+                    <span>{{serieDocumento.codigoVenda}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.codigoCompra">Codigo Compra</span></dt>
+                <dd>
+                    <span>{{serieDocumento.codigoCompra}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.codigoCliente">Codigo Cliente</span></dt>
+                <dd>
+                    <span>{{serieDocumento.codigoCliente}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.codigoFornecedor">Codigo Fornecedor</span></dt>
+                <dd>
+                    <span>{{serieDocumento.codigoFornecedor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.codigoDevolucaoVenda">Codigo Devolucao Venda</span></dt>
+                <dd>
+                    <span>{{serieDocumento.codigoDevolucaoVenda}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.codigoDevolucaoCompra">Codigo Devolucao Compra</span></dt>
+                <dd>
+                    <span>{{serieDocumento.codigoDevolucaoCompra}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.codigoProduto">Codigo Produto</span></dt>
+                <dd>
+                    <span>{{serieDocumento.codigoProduto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.data">Data</span></dt>
+                <dd>
+                    <span>{{serieDocumento.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.serieDocumento.empresa">Empresa</span></dt>
+                <dd>
+                    <div *ngIf="serieDocumento.empresaId">
+                        <a [routerLink]="['/empresa', serieDocumento.empresaId, 'view']">{{serieDocumento.empresaNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/serie-documento', serieDocumento.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

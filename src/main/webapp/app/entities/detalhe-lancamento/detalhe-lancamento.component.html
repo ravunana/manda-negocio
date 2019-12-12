@@ -1,0 +1,105 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.detalheLancamento.home.title">Detalhe Lancamentos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-detalhe-lancamento" [routerLink]="['/detalhe-lancamento/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.detalheLancamento.home.createLabel">
+            Create a new Detalhe Lancamento
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="detalheLancamentos?.length === 0">
+        <span jhiTranslate="mandaApp.detalheLancamento.home.notFound">No detalheLancamentos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="detalheLancamentos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="valor"><span jhiTranslate="mandaApp.detalheLancamento.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="desconto"><span jhiTranslate="mandaApp.detalheLancamento.desconto">Desconto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="juro"><span jhiTranslate="mandaApp.detalheLancamento.juro">Juro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.detalheLancamento.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="data"><span jhiTranslate="mandaApp.detalheLancamento.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="retencaoFonte"><span jhiTranslate="mandaApp.detalheLancamento.retencaoFonte">Retencao Fonte</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="dataVencimento"><span jhiTranslate="mandaApp.detalheLancamento.dataVencimento">Data Vencimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="liquidado"><span jhiTranslate="mandaApp.detalheLancamento.liquidado">Liquidado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.detalheLancamento.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="lancamentoFinanceiroNumero"><span jhiTranslate="mandaApp.detalheLancamento.lancamentoFinanceiro">Lancamento Financeiro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="metodoLiquidacaoNome"><span jhiTranslate="mandaApp.detalheLancamento.metodoLiquidacao">Metodo Liquidacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="moedaCodigo"><span jhiTranslate="mandaApp.detalheLancamento.moeda">Moeda</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="coordenadaDescricao"><span jhiTranslate="mandaApp.detalheLancamento.coordenada">Coordenada</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let detalheLancamento of detalheLancamentos ;trackBy: trackId">
+                <td><a [routerLink]="['/detalhe-lancamento', detalheLancamento.id, 'view' ]">{{detalheLancamento.id}}</a></td>
+                <td>{{detalheLancamento.valor}}</td>
+                <td>{{detalheLancamento.desconto}}</td>
+                <td>{{detalheLancamento.juro}}</td>
+                <td>{{detalheLancamento.descricao}}</td>
+                <td>{{detalheLancamento.data | date:'medium'}}</td>
+                <td>{{detalheLancamento.retencaoFonte}}</td>
+                <td>{{detalheLancamento.dataVencimento | date:'mediumDate'}}</td>
+                <td>{{detalheLancamento.liquidado}}</td>
+                <td>
+                    {{detalheLancamento.utilizadorLogin}}
+                </td>
+                <td>
+                    <div *ngIf="detalheLancamento.lancamentoFinanceiroId">
+                        <a [routerLink]="['/lancamento-financeiro', detalheLancamento.lancamentoFinanceiroId , 'view' ]" >{{detalheLancamento.lancamentoFinanceiroNumero}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="detalheLancamento.metodoLiquidacaoId">
+                        <a [routerLink]="['/meio-liquidacao', detalheLancamento.metodoLiquidacaoId , 'view' ]" >{{detalheLancamento.metodoLiquidacaoNome}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="detalheLancamento.moedaId">
+                        <a [routerLink]="['/moeda', detalheLancamento.moedaId , 'view' ]" >{{detalheLancamento.moedaCodigo}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="detalheLancamento.coordenadaId">
+                        <a [routerLink]="['/coordenada-bancaria', detalheLancamento.coordenadaId , 'view' ]" >{{detalheLancamento.coordenadaDescricao}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/detalhe-lancamento', detalheLancamento.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/detalhe-lancamento', detalheLancamento.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(detalheLancamento)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="detalheLancamentos?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

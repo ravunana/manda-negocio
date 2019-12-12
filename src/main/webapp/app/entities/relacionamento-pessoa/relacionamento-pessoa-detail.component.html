@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="relacionamentoPessoa">
+            <h2><span jhiTranslate="mandaApp.relacionamentoPessoa.detail.title">Relacionamento Pessoa</span> {{relacionamentoPessoa.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.relacionamentoPessoa.grauParentesco">Grau Parentesco</span></dt>
+                <dd>
+                    <span>{{relacionamentoPessoa.grauParentesco}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.relacionamentoPessoa.de">De</span></dt>
+                <dd>
+                    <div *ngIf="relacionamentoPessoa.deId">
+                        <a [routerLink]="['/pessoa', relacionamentoPessoa.deId, 'view']">{{relacionamentoPessoa.deNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.relacionamentoPessoa.para">Para</span></dt>
+                <dd>
+                    <div *ngIf="relacionamentoPessoa.paraId">
+                        <a [routerLink]="['/pessoa', relacionamentoPessoa.paraId, 'view']">{{relacionamentoPessoa.paraNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/relacionamento-pessoa', relacionamentoPessoa.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

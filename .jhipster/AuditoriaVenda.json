@@ -1,0 +1,57 @@
+{
+    "name": "AuditoriaVenda",
+    "fields": [
+        {
+            "fieldName": "estado",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "motivoAlteracaoDocumento",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "origemDocumento",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hash",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hashControl",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "venda",
+            "otherEntityRelationshipName": "auditoriaVenda",
+            "relationshipValidateRules": "required",
+            "relationshipName": "venda",
+            "otherEntityField": "numero",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "auditoriaVenda",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        }
+    ],
+    "changelogDate": "20191212101109",
+    "entityTableName": "vnd_auditoria_venda",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,27 @@
+{
+  "mandaApp": {
+    "devolucaoCompra": {
+      "home": {
+        "title": "Devolucao Compras",
+        "createLabel": "Criar novo(a) Devolucao Compra",
+        "createOrEditLabel": "Criar ou editar Devolucao Compra",
+        "notFound": "Nenhum Devolucao Compras encontrado"
+      },
+      "created": "Um novo Devolucao Compra foi criado com o identificador {{ param }}",
+      "updated": "Devolucao Compra com identificador {{ param }} foi actualizado",
+      "deleted": "Devolucao Compra com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Devolucao Compra {{ id }}?"
+      },
+      "detail": {
+        "title": "Devolucao Compra"
+      },
+      "quantidade": "Quantidade",
+      "valor": "Valor",
+      "desconto": "Desconto",
+      "data": "Data",
+      "descricao": "Descricao",
+      "item": "Item"
+    }
+  }
+}

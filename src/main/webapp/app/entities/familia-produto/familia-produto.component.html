@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.familiaProduto.home.title">Familia Produtos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-familia-produto" [routerLink]="['/familia-produto/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.familiaProduto.home.createLabel">
+            Create a new Familia Produto
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="familiaProdutos?.length === 0">
+        <span jhiTranslate="mandaApp.familiaProduto.home.notFound">No familiaProdutos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="familiaProdutos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="nome"><span jhiTranslate="mandaApp.familiaProduto.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.familiaProduto.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="contaDescricao"><span jhiTranslate="mandaApp.familiaProduto.conta">Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="hierarquiaNome"><span jhiTranslate="mandaApp.familiaProduto.hierarquia">Hierarquia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let familiaProduto of familiaProdutos ;trackBy: trackId">
+                <td><a [routerLink]="['/familia-produto', familiaProduto.id, 'view' ]">{{familiaProduto.id}}</a></td>
+                <td>{{familiaProduto.nome}}</td>
+                <td>{{familiaProduto.descricao}}</td>
+                <td>
+                    <div *ngIf="familiaProduto.contaId">
+                        <a [routerLink]="['/conta', familiaProduto.contaId , 'view' ]" >{{familiaProduto.contaDescricao}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="familiaProduto.hierarquiaId">
+                        <a [routerLink]="['/familia-produto', familiaProduto.hierarquiaId , 'view' ]" >{{familiaProduto.hierarquiaNome}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/familia-produto', familiaProduto.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/familia-produto', familiaProduto.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(familiaProduto)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="familiaProdutos?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

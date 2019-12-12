@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity DetalheLancamento.
+    -->
+    <changeSet id="20191212101050-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="utilizador_id"
+                                 baseTableName="fnc_detalhe_lancamento"
+                                 constraintName="fk_fnc_detalhe_lancamento_utilizador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rv_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="lancamento_financeiro_id"
+                                 baseTableName="fnc_detalhe_lancamento"
+                                 constraintName="fk_fnc_detalhe_lancamento_lancamento_financeiro_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fnc_lancamento_financeiro"/>
+
+        <addForeignKeyConstraint baseColumnNames="metodo_liquidacao_id"
+                                 baseTableName="fnc_detalhe_lancamento"
+                                 constraintName="fk_fnc_detalhe_lancamento_metodo_liquidacao_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fnc_meio_liquidacao"/>
+
+        <addForeignKeyConstraint baseColumnNames="moeda_id"
+                                 baseTableName="fnc_detalhe_lancamento"
+                                 constraintName="fk_fnc_detalhe_lancamento_moeda_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fnc_moeda"/>
+
+        <addForeignKeyConstraint baseColumnNames="coordenada_id"
+                                 baseTableName="fnc_detalhe_lancamento"
+                                 constraintName="fk_fnc_detalhe_lancamento_coordenada_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_coordenada_bancaria"/>
+
+    </changeSet>
+</databaseChangeLog>

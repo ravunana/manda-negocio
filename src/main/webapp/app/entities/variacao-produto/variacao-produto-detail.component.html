@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="variacaoProduto">
+            <h2><span jhiTranslate="mandaApp.variacaoProduto.detail.title">Variacao Produto</span> {{variacaoProduto.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.variacaoProduto.genero">Genero</span></dt>
+                <dd>
+                    <span>{{variacaoProduto.genero}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.variacaoProduto.cor">Cor</span></dt>
+                <dd>
+                    <span>{{variacaoProduto.cor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.variacaoProduto.modelo">Modelo</span></dt>
+                <dd>
+                    <span>{{variacaoProduto.modelo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.variacaoProduto.marca">Marca</span></dt>
+                <dd>
+                    <span>{{variacaoProduto.marca}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.variacaoProduto.tamanho">Tamanho</span></dt>
+                <dd>
+                    <span>{{variacaoProduto.tamanho}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.variacaoProduto.produto">Produto</span></dt>
+                <dd>
+                    <div *ngIf="variacaoProduto.produtoId">
+                        <a [routerLink]="['/produto', variacaoProduto.produtoId, 'view']">{{variacaoProduto.produtoNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/variacao-produto', variacaoProduto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

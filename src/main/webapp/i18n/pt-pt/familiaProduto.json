@@ -1,0 +1,27 @@
+{
+  "mandaApp": {
+    "familiaProduto": {
+      "home": {
+        "title": "Familia Produtos",
+        "createLabel": "Criar novo(a) Familia Produto",
+        "createOrEditLabel": "Criar ou editar Familia Produto",
+        "notFound": "Nenhum Familia Produtos encontrado"
+      },
+      "created": "Um novo Familia Produto foi criado com o identificador {{ param }}",
+      "updated": "Familia Produto com identificador {{ param }} foi actualizado",
+      "deleted": "Familia Produto com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Familia Produto {{ id }}?"
+      },
+      "detail": {
+        "title": "Familia Produto"
+      },
+      "nome": "Nome",
+      "descricao": "Descricao",
+      "familiaProduto": "Familia Produto",
+      "produto": "Produto",
+      "conta": "Conta",
+      "hierarquia": "Hierarquia"
+    }
+  }
+}

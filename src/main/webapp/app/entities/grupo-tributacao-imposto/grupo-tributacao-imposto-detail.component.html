@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="grupoTributacaoImposto">
+            <h2><span jhiTranslate="mandaApp.grupoTributacaoImposto.detail.title">Grupo Tributacao Imposto</span> {{grupoTributacaoImposto.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.grupoTributacaoImposto.nome">Nome</span></dt>
+                <dd>
+                    <span>{{grupoTributacaoImposto.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.grupoTributacaoImposto.valor">Valor</span></dt>
+                <dd>
+                    <span>{{grupoTributacaoImposto.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.grupoTributacaoImposto.de">De</span></dt>
+                <dd>
+                    <span>{{grupoTributacaoImposto.de}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.grupoTributacaoImposto.ate">Ate</span></dt>
+                <dd>
+                    <span>{{grupoTributacaoImposto.ate}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.grupoTributacaoImposto.limiteLiquidacao">Limite Liquidacao</span></dt>
+                <dd>
+                    <span>{{grupoTributacaoImposto.limiteLiquidacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.grupoTributacaoImposto.imposto">Imposto</span></dt>
+                <dd>
+                    <div *ngIf="grupoTributacaoImposto.impostoId">
+                        <a [routerLink]="['/imposto', grupoTributacaoImposto.impostoId, 'view']">{{grupoTributacaoImposto.impostoCodigoImposto}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.grupoTributacaoImposto.unidadeLimite">Unidade Limite</span></dt>
+                <dd>
+                    <div *ngIf="grupoTributacaoImposto.unidadeLimiteId">
+                        <a [routerLink]="['/unidade-medida', grupoTributacaoImposto.unidadeLimiteId, 'view']">{{grupoTributacaoImposto.unidadeLimiteNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/grupo-tributacao-imposto', grupoTributacaoImposto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

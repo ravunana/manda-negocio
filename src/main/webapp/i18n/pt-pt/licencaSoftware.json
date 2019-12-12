@@ -1,0 +1,31 @@
+{
+  "mandaApp": {
+    "licencaSoftware": {
+      "home": {
+        "title": "Licenca Softwares",
+        "createLabel": "Criar novo(a) Licenca Software",
+        "createOrEditLabel": "Criar ou editar Licenca Software",
+        "notFound": "Nenhum Licenca Softwares encontrado"
+      },
+      "created": "Um novo Licenca Software foi criado com o identificador {{ param }}",
+      "updated": "Licenca Software com identificador {{ param }} foi actualizado",
+      "deleted": "Licenca Software com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Licenca Software {{ id }}?"
+      },
+      "detail": {
+        "title": "Licenca Software"
+      },
+      "tipoSubscricao": "Tipo Subscricao",
+      "inicio": "Inicio",
+      "fim": "Fim",
+      "data": "Data",
+      "valor": "Valor",
+      "codigo": "Codigo",
+      "numeroUsuario": "Numero Usuario",
+      "numeroEmpresa": "Numero Empresa",
+      "software": "Software",
+      "empresa": "Empresa"
+    }
+  }
+}

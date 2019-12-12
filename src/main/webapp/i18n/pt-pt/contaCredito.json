@@ -1,0 +1,25 @@
+{
+  "mandaApp": {
+    "contaCredito": {
+      "home": {
+        "title": "Conta Creditos",
+        "createLabel": "Criar novo(a) Conta Credito",
+        "createOrEditLabel": "Criar ou editar Conta Credito",
+        "notFound": "Nenhum Conta Creditos encontrado"
+      },
+      "created": "Um novo Conta Credito foi criado com o identificador {{ param }}",
+      "updated": "Conta Credito com identificador {{ param }} foi actualizado",
+      "deleted": "Conta Credito com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Conta Credito {{ id }}?"
+      },
+      "detail": {
+        "title": "Conta Credito"
+      },
+      "valor": "Valor",
+      "data": "Data",
+      "contaCreditar": "Conta Creditar",
+      "lancamentoCredito": "Lancamento Credito"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "mandaApp": {
+    "lancamentoFinanceiro": {
+      "home": {
+        "title": "Lancamento Financeiros",
+        "createLabel": "Criar novo(a) Lancamento Financeiro",
+        "createOrEditLabel": "Criar ou editar Lancamento Financeiro",
+        "notFound": "Nenhum Lancamento Financeiros encontrado"
+      },
+      "created": "Um novo Lancamento Financeiro foi criado com o identificador {{ param }}",
+      "updated": "Lancamento Financeiro com identificador {{ param }} foi actualizado",
+      "deleted": "Lancamento Financeiro com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Lancamento Financeiro {{ id }}?"
+      },
+      "detail": {
+        "title": "Lancamento Financeiro"
+      },
+      "tipoLancamento": "Tipo Lancamento",
+      "valor": "Valor",
+      "externo": "Externo",
+      "numero": "Numero",
+      "descricao": "Descricao",
+      "detalheLancamento": "Detalhe Lancamento",
+      "utilizador": "Utilizador",
+      "conta": "Conta",
+      "imposto": "Imposto",
+      "formaLiquidacao": "Forma Liquidacao",
+      "empresa": "Empresa",
+      "tipoRecibo": "Tipo Recibo"
+    }
+  }
+}

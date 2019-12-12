@@ -98,6 +98,8 @@ relationship ManyToOne {
     EstoqueConfig{contaVenda(descricao)} to Conta,
     EstoqueConfig{contaCompra(descricao)} to Conta,
     EstoqueConfig{contaImobilizado(descricao)} to Conta,
+    EstoqueConfig{devolucaoCompra(descricao)} to Conta,
+    EstoqueConfig{devolucaoVenda(descricao)} to Conta,
     Produto{utilizador(login) required } to User,
     ConversaoUnidade{entrada(nome) required} to UnidadeMedida,
     ConversaoUnidade{saida(nome) required} to UnidadeMedida,

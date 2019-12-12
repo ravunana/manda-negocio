@@ -1,0 +1,101 @@
+{
+    "name": "Conta",
+    "fields": [
+        {
+            "fieldName": "descricao",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "codigo",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "tipo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "grau",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 1,
+            "fieldValidateRulesMax": 5
+        },
+        {
+            "fieldName": "natureza",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "grupo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "conteudo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "contaAgregadora",
+            "relationshipName": "conta"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contaDebito",
+            "otherEntityRelationshipName": "contaDebitar",
+            "relationshipName": "contaDebito"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contaCredito",
+            "otherEntityRelationshipName": "contaCreditar",
+            "relationshipName": "contaCredito"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "conta",
+            "relationshipName": "empresa",
+            "otherEntityField": "nome",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "conta",
+            "relationshipName": "contaAgregadora",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "classeConta",
+            "otherEntityRelationshipName": "conta",
+            "relationshipValidateRules": "required",
+            "relationshipName": "classeConta",
+            "otherEntityField": "descricao"
+        }
+    ],
+    "changelogDate": "20191212101019",
+    "entityTableName": "ctb_conta",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

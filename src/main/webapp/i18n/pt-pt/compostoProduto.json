@@ -1,0 +1,27 @@
+{
+  "mandaApp": {
+    "compostoProduto": {
+      "home": {
+        "title": "Composto Produtos",
+        "createLabel": "Criar novo(a) Composto Produto",
+        "createOrEditLabel": "Criar ou editar Composto Produto",
+        "notFound": "Nenhum Composto Produtos encontrado"
+      },
+      "created": "Um novo Composto Produto foi criado com o identificador {{ param }}",
+      "updated": "Composto Produto com identificador {{ param }} foi actualizado",
+      "deleted": "Composto Produto com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Composto Produto {{ id }}?"
+      },
+      "detail": {
+        "title": "Composto Produto"
+      },
+      "quantidade": "Quantidade",
+      "valor": "Valor",
+      "permanente": "Permanente",
+      "produto": "Produto",
+      "unidade": "Unidade",
+      "composto": "Composto"
+    }
+  }
+}

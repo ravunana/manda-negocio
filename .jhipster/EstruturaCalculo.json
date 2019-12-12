@@ -1,0 +1,77 @@
+{
+    "name": "EstruturaCalculo",
+    "fields": [
+        {
+            "fieldName": "custoMateriaPrima",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "custoMaoObra",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "custoEmbalagem",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "custoAquisicao",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "comissao",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 100
+        },
+        {
+            "fieldName": "margemLucro",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 100
+        },
+        {
+            "fieldName": "precoVenda",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "estruturaCalculo",
+            "relationshipValidateRules": "required",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "estruturaCalculo",
+            "relationshipValidateRules": "required",
+            "relationshipName": "produto",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101059",
+    "entityTableName": "stk_estrutura_calculo",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

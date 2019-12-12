@@ -1,0 +1,33 @@
+{
+  "mandaApp": {
+    "serieDocumento": {
+      "home": {
+        "title": "Serie Documentos",
+        "createLabel": "Criar novo(a) Serie Documento",
+        "createOrEditLabel": "Criar ou editar Serie Documento",
+        "notFound": "Nenhum Serie Documentos encontrado"
+      },
+      "created": "Um novo Serie Documento foi criado com o identificador {{ param }}",
+      "updated": "Serie Documento com identificador {{ param }} foi actualizado",
+      "deleted": "Serie Documento com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Serie Documento {{ id }}?"
+      },
+      "detail": {
+        "title": "Serie Documento"
+      },
+      "serie": "Serie",
+      "codigoLancamentoFinanceiro": "Codigo Lancamento Financeiro",
+      "codigoEscrituracaoContabil": "Codigo Escrituracao Contabil",
+      "codigoVenda": "Codigo Venda",
+      "codigoCompra": "Codigo Compra",
+      "codigoCliente": "Codigo Cliente",
+      "codigoFornecedor": "Codigo Fornecedor",
+      "codigoDevolucaoVenda": "Codigo Devolucao Venda",
+      "codigoDevolucaoCompra": "Codigo Devolucao Compra",
+      "codigoProduto": "Codigo Produto",
+      "data": "Data",
+      "empresa": "Empresa"
+    }
+  }
+}

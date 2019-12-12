@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="contactoPessoa">
+            <h2><span jhiTranslate="mandaApp.contactoPessoa.detail.title">Contacto Pessoa</span> {{contactoPessoa.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.contactoPessoa.tipoContacto">Tipo Contacto</span></dt>
+                <dd>
+                    <span>{{contactoPessoa.tipoContacto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.contactoPessoa.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{contactoPessoa.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.contactoPessoa.contacto">Contacto</span></dt>
+                <dd>
+                    <span>{{contactoPessoa.contacto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.contactoPessoa.pessoa">Pessoa</span></dt>
+                <dd>
+                    <div *ngIf="contactoPessoa.pessoaId">
+                        <a [routerLink]="['/pessoa', contactoPessoa.pessoaId, 'view']">{{contactoPessoa.pessoaNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/contacto-pessoa', contactoPessoa.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

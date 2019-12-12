@@ -1,0 +1,27 @@
+{
+  "mandaApp": {
+    "moeda": {
+      "home": {
+        "title": "Moedas",
+        "createLabel": "Criar novo(a) Moeda",
+        "createOrEditLabel": "Criar ou editar Moeda",
+        "notFound": "Nenhum Moedas encontrado"
+      },
+      "created": "Um novo Moeda foi criado com o identificador {{ param }}",
+      "updated": "Moeda com identificador {{ param }} foi actualizado",
+      "deleted": "Moeda com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Moeda {{ id }}?"
+      },
+      "detail": {
+        "title": "Moeda"
+      },
+      "nome": "Nome",
+      "codigo": "Codigo",
+      "pais": "Pais",
+      "nacional": "Nacional",
+      "icon": "Icon",
+      "detalheLancamento": "Detalhe Lancamento"
+    }
+  }
+}

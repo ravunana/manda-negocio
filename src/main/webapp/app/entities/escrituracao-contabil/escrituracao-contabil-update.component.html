@@ -1,0 +1,182 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-escrituracao-contabil-heading" jhiTranslate="mandaApp.escrituracaoContabil.home.createOrEditLabel">Create or edit a Escrituracao Contabil</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.numero" for="field_numero">Numero</label>
+                    <input type="text" class="form-control" name="numero" id="field_numero"
+                           formControlName="numero"/>
+                    <div *ngIf="editForm.get('numero').invalid && (editForm.get('numero').dirty || editForm.get('numero').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('numero').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.historico" for="field_historico">Historico</label>
+                    <textarea class="form-control" name="historico" id="field_historico"
+                              formControlName="historico"></textarea>
+                    <div *ngIf="editForm.get('historico').invalid && (editForm.get('historico').dirty || editForm.get('historico').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('historico').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.valor" for="field_valor">Valor</label>
+                    <input type="number" class="form-control" name="valor" id="field_valor"
+                           formControlName="valor"/>
+                    <div *ngIf="editForm.get('valor').invalid && (editForm.get('valor').dirty || editForm.get('valor').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valor').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valor').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('valor')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.referencia" for="field_referencia">Referencia</label>
+                    <input type="text" class="form-control" name="referencia" id="field_referencia"
+                           formControlName="referencia"/>
+                    <div *ngIf="editForm.get('referencia').invalid && (editForm.get('referencia').dirty || editForm.get('referencia').touched)">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.entidadeReferencia" for="field_entidadeReferencia">Entidade Referencia</label>
+                    <select class="form-control" name="entidadeReferencia" formControlName="entidadeReferencia" id="field_entidadeReferencia">
+                        <option value="SOFTWARE">{{'mandaApp.EntidadeSistema.SOFTWARE' | translate}}</option>
+                        <option value="LICENCA_SOFTWARE">{{'mandaApp.EntidadeSistema.LICENCA_SOFTWARE' | translate}}</option>
+                        <option value="LOOKUP">{{'mandaApp.EntidadeSistema.LOOKUP' | translate}}</option>
+                        <option value="LOOKUP_ITEM">{{'mandaApp.EntidadeSistema.LOOKUP_ITEM' | translate}}</option>
+                        <option value="FLUXO_DOCUMENTO">{{'mandaApp.EntidadeSistema.FLUXO_DOCUMENTO' | translate}}</option>
+                        <option value="DOCUMENTO_COMERCIAL">{{'mandaApp.EntidadeSistema.DOCUMENTO_COMERCIAL' | translate}}</option>
+                        <option value="IMPOSTO">{{'mandaApp.EntidadeSistema.IMPOSTO' | translate}}</option>
+                        <option value="MORADA_PESSOA">{{'mandaApp.EntidadeSistema.MORADA_PESSOA' | translate}}</option>
+                        <option value="CONTACTO_PESSOA">{{'mandaApp.EntidadeSistema.CONTACTO_PESSOA' | translate}}</option>
+                        <option value="LOCALIZACAO_EMPRESA">{{'mandaApp.EntidadeSistema.LOCALIZACAO_EMPRESA' | translate}}</option>
+                        <option value="CONTACTO_EMPRESA">{{'mandaApp.EntidadeSistema.CONTACTO_EMPRESA' | translate}}</option>
+                        <option value="EMPRESA">{{'mandaApp.EntidadeSistema.EMPRESA' | translate}}</option>
+                        <option value="PESSOA">{{'mandaApp.EntidadeSistema.PESSOA' | translate}}</option>
+                        <option value="CLIENTE">{{'mandaApp.EntidadeSistema.CLIENTE' | translate}}</option>
+                        <option value="FORNECEDOR">{{'mandaApp.EntidadeSistema.FORNECEDOR' | translate}}</option>
+                        <option value="RELACIONAMENTO_PESSOA">{{'mandaApp.EntidadeSistema.RELACIONAMENTO_PESSOA' | translate}}</option>
+                        <option value="COORDENADA_BANCARIA">{{'mandaApp.EntidadeSistema.COORDENADA_BANCARIA' | translate}}</option>
+                        <option value="ARQUIVO">{{'mandaApp.EntidadeSistema.ARQUIVO' | translate}}</option>
+                        <option value="UNIDADE_MEDIDA">{{'mandaApp.EntidadeSistema.UNIDADE_MEDIDA' | translate}}</option>
+                        <option value="CLASSE_CONTA">{{'mandaApp.EntidadeSistema.CLASSE_CONTA' | translate}}</option>
+                        <option value="CONTA">{{'mandaApp.EntidadeSistema.CONTA' | translate}}</option>
+                        <option value="ESCRITURACAO_CONTABIL">{{'mandaApp.EntidadeSistema.ESCRITURACAO_CONTABIL' | translate}}</option>
+                        <option value="REGRA_MOVIMENTACAO_CREDITO">{{'mandaApp.EntidadeSistema.REGRA_MOVIMENTACAO_CREDITO' | translate}}</option>
+                        <option value="REGRA_MOVIMENTACAO_DEBITO">{{'mandaApp.EntidadeSistema.REGRA_MOVIMENTACAO_DEBITO' | translate}}</option>
+                        <option value="CONTA_DEBITO">{{'mandaApp.EntidadeSistema.CONTA_DEBITO' | translate}}</option>
+                        <option value="CONTA_CREDITO">{{'mandaApp.EntidadeSistema.CONTA_CREDITO' | translate}}</option>
+                        <option value="MOEDA">{{'mandaApp.EntidadeSistema.MOEDA' | translate}}</option>
+                        <option value="FORMA_LIQUIDACAO">{{'mandaApp.EntidadeSistema.FORMA_LIQUIDACAO' | translate}}</option>
+                        <option value="LANCAMENTO_FINANCEIRO">{{'mandaApp.EntidadeSistema.LANCAMENTO_FINANCEIRO' | translate}}</option>
+                        <option value="DETALHE_LANCAMENTO">{{'mandaApp.EntidadeSistema.DETALHE_LANCAMENTO' | translate}}</option>
+                        <option value="RETENCAO_FONTE">{{'mandaApp.EntidadeSistema.RETENCAO_FONTE' | translate}}</option>
+                        <option value="LOCAL_ARMAZENAMENTO">{{'mandaApp.EntidadeSistema.LOCAL_ARMAZENAMENTO' | translate}}</option>
+                        <option value="COMPOSTO_PRODUTO">{{'mandaApp.EntidadeSistema.COMPOSTO_PRODUTO' | translate}}</option>
+                        <option value="FAMILIA_PRODUTO">{{'mandaApp.EntidadeSistema.FAMILIA_PRODUTO' | translate}}</option>
+                        <option value="PRODUTO">{{'mandaApp.EntidadeSistema.PRODUTO' | translate}}</option>
+                        <option value="CONVERSAO_UNIDADE">{{'mandaApp.EntidadeSistema.CONVERSAO_UNIDADE' | translate}}</option>
+                        <option value="COMPRA">{{'mandaApp.EntidadeSistema.COMPRA' | translate}}</option>
+                        <option value="ITEM_COMPRA">{{'mandaApp.EntidadeSistema.ITEM_COMPRA' | translate}}</option>
+                        <option value="DEVOLUCAO_COMPRA">{{'mandaApp.EntidadeSistema.DEVOLUCAO_COMPRA' | translate}}</option>
+                        <option value="VENDA">{{'mandaApp.EntidadeSistema.VENDA' | translate}}</option>
+                        <option value="ITEM_VENDA">{{'mandaApp.EntidadeSistema.ITEM_VENDA' | translate}}</option>
+                        <option value="DEVOLUCAO_VENDA">{{'mandaApp.EntidadeSistema.DEVOLUCAO_VENDA' | translate}}</option>
+                        <option value="AUDITORIA_DOCUMENTO_COMERCIAL">{{'mandaApp.EntidadeSistema.AUDITORIA_DOCUMENTO_COMERCIAL' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.tipo" for="field_tipo">Tipo</label>
+                    <input type="text" class="form-control" name="tipo" id="field_tipo"
+                           formControlName="tipo"/>
+                    <div *ngIf="editForm.get('tipo').invalid && (editForm.get('tipo').dirty || editForm.get('tipo').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tipo').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.dataDocumento" for="field_dataDocumento">Data Documento</label>
+                    <div class="input-group">
+                        <input id="field_dataDocumento" type="text" class="form-control" name="dataDocumento" ngbDatepicker  #dataDocumentoDp="ngbDatepicker" formControlName="dataDocumento"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataDocumentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('dataDocumento').invalid && (editForm.get('dataDocumento').dirty || editForm.get('dataDocumento').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dataDocumento').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.data" for="field_data">Data</label>
+                    <div class="d-flex">
+                        <input id="field_data" type="datetime-local" class="form-control" name="data" formControlName="data" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('data').invalid && (editForm.get('data').dirty || editForm.get('data').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('data').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('data').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.utilizador" for="field_utilizador">Utilizador</label>
+                    <select class="form-control" id="field_utilizador" name="utilizador" formControlName="utilizadorId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.escrituracaoContabil.empresa" for="field_empresa">Empresa</label>
+                    <select class="form-control" id="field_empresa" name="empresa" formControlName="empresaId">
+                        <option *ngIf="!editForm.get('empresaId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="empresaOption.id" *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('empresaId').invalid && (editForm.get('empresaId').dirty || editForm.get('empresaId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('empresaId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

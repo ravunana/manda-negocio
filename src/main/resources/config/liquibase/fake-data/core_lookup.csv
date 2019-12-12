@@ -1,0 +1,11 @@
+id;nome;entidade;modificavel
+1;programming hard drive Mexico;CONTACTO_PESSOA;true
+2;system;CONTACTO_EMPRESA;true
+3;pixel;CONTA;false
+4;Checking Account frictionless;CLIENTE;true
+5;Gorgeous Metal Shoes;CONTA;true
+6;cross-platform Unbranded;LOCAL_ARMAZENAMENTO;true
+7;mint green streamline Mobility;PRODUTO;true
+8;back-end;REGRA_MOVIMENTACAO_CREDITO;true
+9;structure Maryland;CLASSE_CONTA;true
+10;Saint Helena;DEVOLUCAO_COMPRA;false

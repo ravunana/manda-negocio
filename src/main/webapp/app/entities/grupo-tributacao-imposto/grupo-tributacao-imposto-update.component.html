@@ -1,0 +1,103 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-grupo-tributacao-imposto-heading" jhiTranslate="mandaApp.grupoTributacaoImposto.home.createOrEditLabel">Create or edit a Grupo Tributacao Imposto</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.grupoTributacaoImposto.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                           formControlName="nome"/>
+                    <div *ngIf="editForm.get('nome').invalid && (editForm.get('nome').dirty || editForm.get('nome').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nome').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.grupoTributacaoImposto.valor" for="field_valor">Valor</label>
+                    <input type="number" class="form-control" name="valor" id="field_valor"
+                           formControlName="valor"/>
+                    <div *ngIf="editForm.get('valor').invalid && (editForm.get('valor').dirty || editForm.get('valor').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valor').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valor').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('valor')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.grupoTributacaoImposto.de" for="field_de">De</label>
+                    <input type="number" class="form-control" name="de" id="field_de"
+                           formControlName="de"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.grupoTributacaoImposto.ate" for="field_ate">Ate</label>
+                    <input type="number" class="form-control" name="ate" id="field_ate"
+                           formControlName="ate"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.grupoTributacaoImposto.limiteLiquidacao" for="field_limiteLiquidacao">Limite Liquidacao</label>
+                    <input type="number" class="form-control" name="limiteLiquidacao" id="field_limiteLiquidacao"
+                           formControlName="limiteLiquidacao"/>
+                    <div *ngIf="editForm.get('limiteLiquidacao').invalid && (editForm.get('limiteLiquidacao').dirty || editForm.get('limiteLiquidacao').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('limiteLiquidacao').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('limiteLiquidacao').errors.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: 31 }">
+                            This field cannot be more than 31.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('limiteLiquidacao')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.grupoTributacaoImposto.imposto" for="field_imposto">Imposto</label>
+                    <select class="form-control" id="field_imposto" name="imposto" formControlName="impostoId">
+                        <option *ngIf="!editForm.get('impostoId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="impostoOption.id" *ngFor="let impostoOption of impostos; trackBy: trackImpostoById">{{impostoOption.codigoImposto}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('impostoId').invalid && (editForm.get('impostoId').dirty || editForm.get('impostoId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('impostoId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.grupoTributacaoImposto.unidadeLimite" for="field_unidadeLimite">Unidade Limite</label>
+                    <select class="form-control" id="field_unidadeLimite" name="unidadeLimite" formControlName="unidadeLimiteId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="unidadeMedidaOption.id" *ngFor="let unidadeMedidaOption of unidademedidas; trackBy: trackUnidadeMedidaById">{{unidadeMedidaOption.nome}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

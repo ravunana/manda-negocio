@@ -1,0 +1,9 @@
+{
+  "mandaApp": {
+    "LookupType": {
+      "null": "",
+      "USUARIO": "USUARIO",
+      "SISTEMA": "SISTEMA"
+    }
+  }
+}

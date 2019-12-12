@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fluxoDocumento">
+            <h2><span jhiTranslate="mandaApp.fluxoDocumento.detail.title">Fluxo Documento</span> {{fluxoDocumento.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.fluxoDocumento.nome">Nome</span></dt>
+                <dd>
+                    <span>{{fluxoDocumento.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fluxoDocumento.aumentaEstoque">Aumenta Estoque</span></dt>
+                <dd>
+                    <span>{{fluxoDocumento.aumentaEstoque}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fluxoDocumento.aumentaValorCaixa">Aumenta Valor Caixa</span></dt>
+                <dd>
+                    <span>{{fluxoDocumento.aumentaValorCaixa}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fluxoDocumento.cor">Cor</span></dt>
+                <dd>
+                    <span>{{fluxoDocumento.cor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fluxoDocumento.padrao">Padrao</span></dt>
+                <dd>
+                    <span>{{fluxoDocumento.padrao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fluxoDocumento.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{fluxoDocumento.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fluxoDocumento.entidade">Entidade</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'mandaApp.EntidadeSistema.' + fluxoDocumento.entidade}}">{{fluxoDocumento.entidade}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fluxo-documento', fluxoDocumento.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

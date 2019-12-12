@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.estruturaCalculo.home.title">Estrutura Calculos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-estrutura-calculo" [routerLink]="['/estrutura-calculo/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.estruturaCalculo.home.createLabel">
+            Create a new Estrutura Calculo
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="estruturaCalculos?.length === 0">
+        <span jhiTranslate="mandaApp.estruturaCalculo.home.notFound">No estruturaCalculos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="estruturaCalculos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="custoMateriaPrima"><span jhiTranslate="mandaApp.estruturaCalculo.custoMateriaPrima">Custo Materia Prima</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="custoMaoObra"><span jhiTranslate="mandaApp.estruturaCalculo.custoMaoObra">Custo Mao Obra</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="custoEmbalagem"><span jhiTranslate="mandaApp.estruturaCalculo.custoEmbalagem">Custo Embalagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="custoAquisicao"><span jhiTranslate="mandaApp.estruturaCalculo.custoAquisicao">Custo Aquisicao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="comissao"><span jhiTranslate="mandaApp.estruturaCalculo.comissao">Comissao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="margemLucro"><span jhiTranslate="mandaApp.estruturaCalculo.margemLucro">Margem Lucro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="precoVenda"><span jhiTranslate="mandaApp.estruturaCalculo.precoVenda">Preco Venda</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="data"><span jhiTranslate="mandaApp.estruturaCalculo.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.estruturaCalculo.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="produtoNome"><span jhiTranslate="mandaApp.estruturaCalculo.produto">Produto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let estruturaCalculo of estruturaCalculos ;trackBy: trackId">
+                <td><a [routerLink]="['/estrutura-calculo', estruturaCalculo.id, 'view' ]">{{estruturaCalculo.id}}</a></td>
+                <td>{{estruturaCalculo.custoMateriaPrima}}</td>
+                <td>{{estruturaCalculo.custoMaoObra}}</td>
+                <td>{{estruturaCalculo.custoEmbalagem}}</td>
+                <td>{{estruturaCalculo.custoAquisicao}}</td>
+                <td>{{estruturaCalculo.comissao}}</td>
+                <td>{{estruturaCalculo.margemLucro}}</td>
+                <td>{{estruturaCalculo.precoVenda}}</td>
+                <td>{{estruturaCalculo.data | date:'medium'}}</td>
+                <td>
+                    {{estruturaCalculo.utilizadorLogin}}
+                </td>
+                <td>
+                    <div *ngIf="estruturaCalculo.produtoId">
+                        <a [routerLink]="['/produto', estruturaCalculo.produtoId , 'view' ]" >{{estruturaCalculo.produtoNome}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/estrutura-calculo', estruturaCalculo.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/estrutura-calculo', estruturaCalculo.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(estruturaCalculo)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="estruturaCalculos?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

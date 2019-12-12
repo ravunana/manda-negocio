@@ -1,0 +1,46 @@
+{
+    "name": "Arquivo",
+    "fields": [
+        {
+            "fieldName": "descricao",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "entidade",
+            "fieldType": "EntidadeSistema",
+            "fieldValues": "SOFTWARE,LICENCA_SOFTWARE,LOOKUP,LOOKUP_ITEM,FLUXO_DOCUMENTO,DOCUMENTO_COMERCIAL,IMPOSTO,MORADA_PESSOA,CONTACTO_PESSOA,LOCALIZACAO_EMPRESA,CONTACTO_EMPRESA,EMPRESA,PESSOA,CLIENTE,FORNECEDOR,RELACIONAMENTO_PESSOA,COORDENADA_BANCARIA,ARQUIVO,UNIDADE_MEDIDA,CLASSE_CONTA,CONTA,ESCRITURACAO_CONTABIL,REGRA_MOVIMENTACAO_CREDITO,REGRA_MOVIMENTACAO_DEBITO,CONTA_DEBITO,CONTA_CREDITO,MOEDA,FORMA_LIQUIDACAO,LANCAMENTO_FINANCEIRO,DETALHE_LANCAMENTO,RETENCAO_FONTE,LOCAL_ARMAZENAMENTO,COMPOSTO_PRODUTO,FAMILIA_PRODUTO,PRODUTO,CONVERSAO_UNIDADE,COMPRA,ITEM_COMPRA,DEVOLUCAO_COMPRA,VENDA,ITEM_VENDA,DEVOLUCAO_VENDA,AUDITORIA_DOCUMENTO_COMERCIAL"
+        },
+        {
+            "fieldName": "anexo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "codigoEntidade",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "arquivo",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        }
+    ],
+    "changelogDate": "20191212101042",
+    "entityTableName": "core_arquivo",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

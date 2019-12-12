@@ -1,0 +1,28 @@
+{
+  "mandaApp": {
+    "unidadeMedida": {
+      "home": {
+        "title": "Unidade Medidas",
+        "createLabel": "Criar novo(a) Unidade Medida",
+        "createOrEditLabel": "Criar ou editar Unidade Medida",
+        "notFound": "Nenhum Unidade Medidas encontrado"
+      },
+      "created": "Um novo Unidade Medida foi criado com o identificador {{ param }}",
+      "updated": "Unidade Medida com identificador {{ param }} foi actualizado",
+      "deleted": "Unidade Medida com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Unidade Medida {{ id }}?"
+      },
+      "detail": {
+        "title": "Unidade Medida"
+      },
+      "nome": "Nome",
+      "sigla": "Sigla",
+      "valor": "Valor",
+      "unidadeMedida": "Unidade Medida",
+      "grupoTributacaoImposto": "Grupo Tributacao Imposto",
+      "compostoProduto": "Composto Produto",
+      "unidadeConversao": "Unidade Conversao"
+    }
+  }
+}

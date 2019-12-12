@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-detalhe-aduaneiro-heading" jhiTranslate="mandaApp.detalheAduaneiro.home.createOrEditLabel">Create or edit a Detalhe Aduaneiro</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheAduaneiro.numeroONU" for="field_numeroONU">Numero ONU</label>
+                    <input type="text" class="form-control" name="numeroONU" id="field_numeroONU"
+                           formControlName="numeroONU"/>
+                    <div *ngIf="editForm.get('numeroONU').invalid && (editForm.get('numeroONU').dirty || editForm.get('numeroONU').touched)">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheAduaneiro.largura" for="field_largura">Largura</label>
+                    <input type="number" class="form-control" name="largura" id="field_largura"
+                           formControlName="largura"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheAduaneiro.altura" for="field_altura">Altura</label>
+                    <input type="number" class="form-control" name="altura" id="field_altura"
+                           formControlName="altura"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheAduaneiro.pesoLiquido" for="field_pesoLiquido">Peso Liquido</label>
+                    <input type="number" class="form-control" name="pesoLiquido" id="field_pesoLiquido"
+                           formControlName="pesoLiquido"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheAduaneiro.pesoBruto" for="field_pesoBruto">Peso Bruto</label>
+                    <input type="number" class="form-control" name="pesoBruto" id="field_pesoBruto"
+                           formControlName="pesoBruto"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheAduaneiro.dataFabrico" for="field_dataFabrico">Data Fabrico</label>
+                    <div class="input-group">
+                        <input id="field_dataFabrico" type="text" class="form-control" name="dataFabrico" ngbDatepicker  #dataFabricoDp="ngbDatepicker" formControlName="dataFabrico"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataFabricoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheAduaneiro.dataExpiracao" for="field_dataExpiracao">Data Expiracao</label>
+                    <div class="input-group">
+                        <input id="field_dataExpiracao" type="text" class="form-control" name="dataExpiracao" ngbDatepicker  #dataExpiracaoDp="ngbDatepicker" formControlName="dataExpiracao"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataExpiracaoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheAduaneiro.produto" for="field_produto">Produto</label>
+                    <select class="form-control" id="field_produto" name="produto" formControlName="produtoId">
+                        <option *ngIf="!editForm.get('produtoId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="produtoOption.id" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('produtoId').invalid && (editForm.get('produtoId').dirty || editForm.get('produtoId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('produtoId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

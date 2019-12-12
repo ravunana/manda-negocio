@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="estruturaCalculo">
+            <h2><span jhiTranslate="mandaApp.estruturaCalculo.detail.title">Estrutura Calculo</span> {{estruturaCalculo.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.custoMateriaPrima">Custo Materia Prima</span></dt>
+                <dd>
+                    <span>{{estruturaCalculo.custoMateriaPrima}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.custoMaoObra">Custo Mao Obra</span></dt>
+                <dd>
+                    <span>{{estruturaCalculo.custoMaoObra}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.custoEmbalagem">Custo Embalagem</span></dt>
+                <dd>
+                    <span>{{estruturaCalculo.custoEmbalagem}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.custoAquisicao">Custo Aquisicao</span></dt>
+                <dd>
+                    <span>{{estruturaCalculo.custoAquisicao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.comissao">Comissao</span></dt>
+                <dd>
+                    <span>{{estruturaCalculo.comissao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.margemLucro">Margem Lucro</span></dt>
+                <dd>
+                    <span>{{estruturaCalculo.margemLucro}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.precoVenda">Preco Venda</span></dt>
+                <dd>
+                    <span>{{estruturaCalculo.precoVenda}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.data">Data</span></dt>
+                <dd>
+                    <span>{{estruturaCalculo.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.utilizador">Utilizador</span></dt>
+                <dd>
+                    {{estruturaCalculo.utilizadorLogin}}
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estruturaCalculo.produto">Produto</span></dt>
+                <dd>
+                    <div *ngIf="estruturaCalculo.produtoId">
+                        <a [routerLink]="['/produto', estruturaCalculo.produtoId, 'view']">{{estruturaCalculo.produtoNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/estrutura-calculo', estruturaCalculo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

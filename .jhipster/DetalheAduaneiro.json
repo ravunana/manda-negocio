@@ -1,0 +1,57 @@
+{
+    "name": "DetalheAduaneiro",
+    "fields": [
+        {
+            "fieldName": "numeroONU",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "largura",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "altura",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "pesoLiquido",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "pesoBruto",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dataFabrico",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dataExpiracao",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "detalheAduaneiro",
+            "relationshipValidateRules": "required",
+            "relationshipName": "produto",
+            "otherEntityField": "nome",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191212101056",
+    "entityTableName": "stk_detalhe_aduaneiro",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,27 @@
+{
+  "mandaApp": {
+    "devolucaoVenda": {
+      "home": {
+        "title": "Devolucao Vendas",
+        "createLabel": "Criar novo(a) Devolucao Venda",
+        "createOrEditLabel": "Criar ou editar Devolucao Venda",
+        "notFound": "Nenhum Devolucao Vendas encontrado"
+      },
+      "created": "Um novo Devolucao Venda foi criado com o identificador {{ param }}",
+      "updated": "Devolucao Venda com identificador {{ param }} foi actualizado",
+      "deleted": "Devolucao Venda com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Devolucao Venda {{ id }}?"
+      },
+      "detail": {
+        "title": "Devolucao Venda"
+      },
+      "quantidade": "Quantidade",
+      "valor": "Valor",
+      "desconto": "Desconto",
+      "data": "Data",
+      "descricao": "Descricao",
+      "item": "Item"
+    }
+  }
+}

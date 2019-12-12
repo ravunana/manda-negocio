@@ -1,0 +1,60 @@
+{
+    "name": "EstoqueConfig",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "estoqueConfig",
+            "relationshipValidateRules": "required",
+            "relationshipName": "produto",
+            "otherEntityField": "nome",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "estoqueConfig",
+            "relationshipName": "contaVenda",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "estoqueConfig",
+            "relationshipName": "contaCompra",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "estoqueConfig",
+            "relationshipName": "contaImobilizado",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "estoqueConfig",
+            "relationshipName": "devolucaoCompra",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "estoqueConfig",
+            "relationshipName": "devolucaoVenda",
+            "otherEntityField": "descricao"
+        }
+    ],
+    "changelogDate": "20191212101100",
+    "entityTableName": "stk_estoque_config",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

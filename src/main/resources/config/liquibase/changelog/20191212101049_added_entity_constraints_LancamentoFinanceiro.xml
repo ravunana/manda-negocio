@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity LancamentoFinanceiro.
+    -->
+    <changeSet id="20191212101049-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="utilizador_id"
+                                 baseTableName="fnc_lancamento_financeiro"
+                                 constraintName="fk_fnc_lancamento_financeiro_utilizador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rv_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="conta_id"
+                                 baseTableName="fnc_lancamento_financeiro"
+                                 constraintName="fk_fnc_lancamento_financeiro_conta_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="lancamento_financeiro_id"
+                                 baseTableName="fnc_lancamento_financeiro_imposto"
+                                 constraintName="fnc_lancamento_financeiro_impo_fnc_lancamento_financeiro_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fnc_lancamento_financeiro"/>
+
+        <addForeignKeyConstraint baseColumnNames="imposto_id"
+                                 baseTableName="fnc_lancamento_financeiro_imposto"
+                                 constraintName="fk_fnc_lancamento_financeiro_imposto_imposto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tbr_imposto"/>
+        
+        <addForeignKeyConstraint baseColumnNames="forma_liquidacao_id"
+                                 baseTableName="fnc_lancamento_financeiro"
+                                 constraintName="fk_fnc_lancamento_financeiro_forma_liquidacao_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fnc_forma_liquidacao"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id"
+                                 baseTableName="fnc_lancamento_financeiro"
+                                 constraintName="fk_fnc_lancamento_financeiro_empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_empresa"/>
+
+        <addForeignKeyConstraint baseColumnNames="tipo_recibo_id"
+                                 baseTableName="fnc_lancamento_financeiro"
+                                 constraintName="fk_fnc_lancamento_financeiro_tipo_recibo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_documento_comercial"/>
+
+    </changeSet>
+</databaseChangeLog>

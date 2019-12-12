@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.compra.home.title">Compras</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-compra" [routerLink]="['/compra/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.compra.home.createLabel">
+            Create a new Compra
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="compras?.length === 0">
+        <span jhiTranslate="mandaApp.compra.home.notFound">No compras found</span>
+    </div>
+    <div class="table-responsive" *ngIf="compras?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.compra.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="data"><span jhiTranslate="mandaApp.compra.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="observacaoGeral"><span jhiTranslate="mandaApp.compra.observacaoGeral">Observacao Geral</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="observacaoInterna"><span jhiTranslate="mandaApp.compra.observacaoInterna">Observacao Interna</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.compra.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tipoDocumentoNome"><span jhiTranslate="mandaApp.compra.tipoDocumento">Tipo Documento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.compra.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let compra of compras ;trackBy: trackId">
+                <td><a [routerLink]="['/compra', compra.id, 'view' ]">{{compra.id}}</a></td>
+                <td>{{compra.numero}}</td>
+                <td>{{compra.data | date:'medium'}}</td>
+                <td>{{compra.observacaoGeral}}</td>
+                <td>{{compra.observacaoInterna}}</td>
+                <td>
+                    {{compra.utilizadorLogin}}
+                </td>
+                <td>
+                    <div *ngIf="compra.tipoDocumentoId">
+                        <a [routerLink]="['/documento-comercial', compra.tipoDocumentoId , 'view' ]" >{{compra.tipoDocumentoNome}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="compra.empresaId">
+                        <a [routerLink]="['/empresa', compra.empresaId , 'view' ]" >{{compra.empresaNome}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/compra', compra.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/compra', compra.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(compra)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="compras?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+{
+    "name": "LocalizacaoEmpresa",
+    "fields": [
+        {
+            "fieldName": "pais",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "provincia",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "municipio",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bairro",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "rua",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 200
+        },
+        {
+            "fieldName": "quarteirao",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 10
+        },
+        {
+            "fieldName": "numeroPorta",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 10
+        },
+        {
+            "fieldName": "caixaPostal",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "localizacaoEmpresa",
+            "relationshipValidateRules": "required",
+            "relationshipName": "empresa",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101039",
+    "entityTableName": "core_localizacao_empresa",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity EstoqueConfig.
+    -->
+    <changeSet id="20191212101100-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="produto_id"
+                                 baseTableName="stk_estoque_config"
+                                 constraintName="fk_stk_estoque_config_produto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stk_produto"/>
+
+        <addForeignKeyConstraint baseColumnNames="conta_venda_id"
+                                 baseTableName="stk_estoque_config"
+                                 constraintName="fk_stk_estoque_config_conta_venda_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="conta_compra_id"
+                                 baseTableName="stk_estoque_config"
+                                 constraintName="fk_stk_estoque_config_conta_compra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="conta_imobilizado_id"
+                                 baseTableName="stk_estoque_config"
+                                 constraintName="fk_stk_estoque_config_conta_imobilizado_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="devolucao_compra_id"
+                                 baseTableName="stk_estoque_config"
+                                 constraintName="fk_stk_estoque_config_devolucao_compra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="devolucao_venda_id"
+                                 baseTableName="stk_estoque_config"
+                                 constraintName="fk_stk_estoque_config_devolucao_venda_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+    </changeSet>
+</databaseChangeLog>

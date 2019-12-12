@@ -1,0 +1,27 @@
+{
+  "mandaApp": {
+    "variacaoProduto": {
+      "home": {
+        "title": "Variacao Produtos",
+        "createLabel": "Criar novo(a) Variacao Produto",
+        "createOrEditLabel": "Criar ou editar Variacao Produto",
+        "notFound": "Nenhum Variacao Produtos encontrado"
+      },
+      "created": "Um novo Variacao Produto foi criado com o identificador {{ param }}",
+      "updated": "Variacao Produto com identificador {{ param }} foi actualizado",
+      "deleted": "Variacao Produto com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Variacao Produto {{ id }}?"
+      },
+      "detail": {
+        "title": "Variacao Produto"
+      },
+      "genero": "Genero",
+      "cor": "Cor",
+      "modelo": "Modelo",
+      "marca": "Marca",
+      "tamanho": "Tamanho",
+      "produto": "Produto"
+    }
+  }
+}

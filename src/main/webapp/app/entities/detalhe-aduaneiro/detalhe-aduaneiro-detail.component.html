@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="detalheAduaneiro">
+            <h2><span jhiTranslate="mandaApp.detalheAduaneiro.detail.title">Detalhe Aduaneiro</span> {{detalheAduaneiro.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.detalheAduaneiro.numeroONU">Numero ONU</span></dt>
+                <dd>
+                    <span>{{detalheAduaneiro.numeroONU}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.detalheAduaneiro.largura">Largura</span></dt>
+                <dd>
+                    <span>{{detalheAduaneiro.largura}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.detalheAduaneiro.altura">Altura</span></dt>
+                <dd>
+                    <span>{{detalheAduaneiro.altura}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.detalheAduaneiro.pesoLiquido">Peso Liquido</span></dt>
+                <dd>
+                    <span>{{detalheAduaneiro.pesoLiquido}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.detalheAduaneiro.pesoBruto">Peso Bruto</span></dt>
+                <dd>
+                    <span>{{detalheAduaneiro.pesoBruto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.detalheAduaneiro.dataFabrico">Data Fabrico</span></dt>
+                <dd>
+                    <span>{{detalheAduaneiro.dataFabrico}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.detalheAduaneiro.dataExpiracao">Data Expiracao</span></dt>
+                <dd>
+                    <span>{{detalheAduaneiro.dataExpiracao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.detalheAduaneiro.produto">Produto</span></dt>
+                <dd>
+                    <div *ngIf="detalheAduaneiro.produtoId">
+                        <a [routerLink]="['/produto', detalheAduaneiro.produtoId, 'view']">{{detalheAduaneiro.produtoNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/detalhe-aduaneiro', detalheAduaneiro.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

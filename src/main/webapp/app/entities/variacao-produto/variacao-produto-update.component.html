@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-variacao-produto-heading" jhiTranslate="mandaApp.variacaoProduto.home.createOrEditLabel">Create or edit a Variacao Produto</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.variacaoProduto.genero" for="field_genero">Genero</label>
+                    <input type="text" class="form-control" name="genero" id="field_genero"
+                           formControlName="genero"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.variacaoProduto.cor" for="field_cor">Cor</label>
+                    <input type="text" class="form-control" name="cor" id="field_cor"
+                           formControlName="cor"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.variacaoProduto.modelo" for="field_modelo">Modelo</label>
+                    <input type="text" class="form-control" name="modelo" id="field_modelo"
+                           formControlName="modelo"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.variacaoProduto.marca" for="field_marca">Marca</label>
+                    <input type="text" class="form-control" name="marca" id="field_marca"
+                           formControlName="marca"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.variacaoProduto.tamanho" for="field_tamanho">Tamanho</label>
+                    <input type="text" class="form-control" name="tamanho" id="field_tamanho"
+                           formControlName="tamanho"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.variacaoProduto.produto" for="field_produto">Produto</label>
+                    <select class="form-control" id="field_produto" name="produto" formControlName="produtoId">
+                        <option *ngIf="!editForm.get('produtoId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="produtoOption.id" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('produtoId').invalid && (editForm.get('produtoId').dirty || editForm.get('produtoId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('produtoId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

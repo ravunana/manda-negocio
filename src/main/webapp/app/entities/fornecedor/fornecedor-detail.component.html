@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fornecedor">
+            <h2><span jhiTranslate="mandaApp.fornecedor.detail.title">Fornecedor</span> {{fornecedor.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.fornecedor.certificadoISO9001">Certificado ISO 9001</span></dt>
+                <dd>
+                    <span>{{fornecedor.certificadoISO9001}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.garantiaDefeitoFabrica">Garantia Defeito Fabrica</span></dt>
+                <dd>
+                    <span>{{fornecedor.garantiaDefeitoFabrica}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.transporte">Transporte</span></dt>
+                <dd>
+                    <span>{{fornecedor.transporte}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.qualidade">Qualidade</span></dt>
+                <dd>
+                    <span>{{fornecedor.qualidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.pagamentoPrazo">Pagamento Prazo</span></dt>
+                <dd>
+                    <span>{{fornecedor.pagamentoPrazo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.metodosPagamento">Metodos Pagamento</span></dt>
+                <dd>
+                    <span>{{fornecedor.metodosPagamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.classificacao">Classificacao</span></dt>
+                <dd>
+                    <span>{{fornecedor.classificacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{fornecedor.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.ativo">Ativo</span></dt>
+                <dd>
+                    <span>{{fornecedor.ativo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.numero">Numero</span></dt>
+                <dd>
+                    <span>{{fornecedor.numero}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.pessoa">Pessoa</span></dt>
+                <dd>
+                    <div *ngIf="fornecedor.pessoaId">
+                        <a [routerLink]="['/pessoa', fornecedor.pessoaId, 'view']">{{fornecedor.pessoaNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.fornecedor.conta">Conta</span></dt>
+                <dd>
+                    <div *ngIf="fornecedor.contaId">
+                        <a [routerLink]="['/conta', fornecedor.contaId, 'view']">{{fornecedor.contaDescricao}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fornecedor', fornecedor.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

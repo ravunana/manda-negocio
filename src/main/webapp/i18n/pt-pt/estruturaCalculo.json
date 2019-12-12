@@ -1,0 +1,31 @@
+{
+  "mandaApp": {
+    "estruturaCalculo": {
+      "home": {
+        "title": "Estrutura Calculos",
+        "createLabel": "Criar novo(a) Estrutura Calculo",
+        "createOrEditLabel": "Criar ou editar Estrutura Calculo",
+        "notFound": "Nenhum Estrutura Calculos encontrado"
+      },
+      "created": "Um novo Estrutura Calculo foi criado com o identificador {{ param }}",
+      "updated": "Estrutura Calculo com identificador {{ param }} foi actualizado",
+      "deleted": "Estrutura Calculo com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Estrutura Calculo {{ id }}?"
+      },
+      "detail": {
+        "title": "Estrutura Calculo"
+      },
+      "custoMateriaPrima": "Custo Materia Prima",
+      "custoMaoObra": "Custo Mao Obra",
+      "custoEmbalagem": "Custo Embalagem",
+      "custoAquisicao": "Custo Aquisicao",
+      "comissao": "Comissao",
+      "margemLucro": "Margem Lucro",
+      "precoVenda": "Preco Venda",
+      "data": "Data",
+      "utilizador": "Utilizador",
+      "produto": "Produto"
+    }
+  }
+}

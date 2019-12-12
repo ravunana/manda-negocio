@@ -1,0 +1,30 @@
+{
+  "mandaApp": {
+    "localizacaoEmpresa": {
+      "home": {
+        "title": "Localizacao Empresas",
+        "createLabel": "Criar novo(a) Localizacao Empresa",
+        "createOrEditLabel": "Criar ou editar Localizacao Empresa",
+        "notFound": "Nenhum Localizacao Empresas encontrado"
+      },
+      "created": "Um novo Localizacao Empresa foi criado com o identificador {{ param }}",
+      "updated": "Localizacao Empresa com identificador {{ param }} foi actualizado",
+      "deleted": "Localizacao Empresa com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Localizacao Empresa {{ id }}?"
+      },
+      "detail": {
+        "title": "Localizacao Empresa"
+      },
+      "pais": "Pais",
+      "provincia": "Provincia",
+      "municipio": "Municipio",
+      "bairro": "Bairro",
+      "rua": "Rua",
+      "quarteirao": "Quarteirao",
+      "numeroPorta": "Numero Porta",
+      "caixaPostal": "Caixa Postal",
+      "empresa": "Empresa"
+    }
+  }
+}

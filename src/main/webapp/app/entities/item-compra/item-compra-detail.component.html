@@ -1,0 +1,75 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="itemCompra">
+            <h2><span jhiTranslate="mandaApp.itemCompra.detail.title">Item Compra</span> {{itemCompra.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.itemCompra.quantidade">Quantidade</span></dt>
+                <dd>
+                    <span>{{itemCompra.quantidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.desconto">Desconto</span></dt>
+                <dd>
+                    <span>{{itemCompra.desconto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.dataSolicitacao">Data Solicitacao</span></dt>
+                <dd>
+                    <span>{{itemCompra.dataSolicitacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.dataEntrega">Data Entrega</span></dt>
+                <dd>
+                    <span>{{itemCompra.dataEntrega}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{itemCompra.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.valor">Valor</span></dt>
+                <dd>
+                    <span>{{itemCompra.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.solicitante">Solicitante</span></dt>
+                <dd>
+                    {{itemCompra.solicitanteLogin}}
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.compra">Compra</span></dt>
+                <dd>
+                    <div *ngIf="itemCompra.compraId">
+                        <a [routerLink]="['/compra', itemCompra.compraId, 'view']">{{itemCompra.compraNumero}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.produto">Produto</span></dt>
+                <dd>
+                    <div *ngIf="itemCompra.produtoId">
+                        <a [routerLink]="['/produto', itemCompra.produtoId, 'view']">{{itemCompra.produtoNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.fornecedor">Fornecedor</span></dt>
+                <dd>
+                    <div *ngIf="itemCompra.fornecedorId">
+                        <a [routerLink]="['/fornecedor', itemCompra.fornecedorId, 'view']">{{itemCompra.fornecedorNumero}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemCompra.status">Status</span></dt>
+                <dd>
+                    <div *ngIf="itemCompra.statusId">
+                        <a [routerLink]="['/fluxo-documento', itemCompra.statusId, 'view']">{{itemCompra.statusNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/item-compra', itemCompra.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

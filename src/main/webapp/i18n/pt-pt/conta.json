@@ -1,0 +1,34 @@
+{
+  "mandaApp": {
+    "conta": {
+      "home": {
+        "title": "Contas",
+        "createLabel": "Criar novo(a) Conta",
+        "createOrEditLabel": "Criar ou editar Conta",
+        "notFound": "Nenhum Contas encontrado"
+      },
+      "created": "Um novo Conta foi criado com o identificador {{ param }}",
+      "updated": "Conta com identificador {{ param }} foi actualizado",
+      "deleted": "Conta com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Conta {{ id }}?"
+      },
+      "detail": {
+        "title": "Conta"
+      },
+      "descricao": "Descricao",
+      "codigo": "Codigo",
+      "tipo": "Tipo",
+      "grau": "Grau",
+      "natureza": "Natureza",
+      "grupo": "Grupo",
+      "conteudo": "Conteudo",
+      "conta": "Conta",
+      "contaDebito": "Conta Debito",
+      "contaCredito": "Conta Credito",
+      "empresa": "Empresa",
+      "contaAgregadora": "Conta Agregadora",
+      "classeConta": "Classe Conta"
+    }
+  }
+}

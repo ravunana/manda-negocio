@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="regraMovimentacaoCredito">
+            <h2><span jhiTranslate="mandaApp.regraMovimentacaoCredito.detail.title">Regra Movimentacao Credito</span> {{regraMovimentacaoCredito.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.regraMovimentacaoCredito.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{regraMovimentacaoCredito.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.regraMovimentacaoCredito.conta">Conta</span></dt>
+                <dd>
+                    <div *ngIf="regraMovimentacaoCredito.contaId">
+                        <a [routerLink]="['/conta', regraMovimentacaoCredito.contaId, 'view']">{{regraMovimentacaoCredito.contaDescricao}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/regra-movimentacao-credito', regraMovimentacaoCredito.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

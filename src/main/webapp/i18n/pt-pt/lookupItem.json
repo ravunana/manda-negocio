@@ -1,0 +1,26 @@
+{
+  "mandaApp": {
+    "lookupItem": {
+      "home": {
+        "title": "Lookup Items",
+        "createLabel": "Criar novo(a) Lookup Item",
+        "createOrEditLabel": "Criar ou editar Lookup Item",
+        "notFound": "Nenhum Lookup Items encontrado"
+      },
+      "created": "Um novo Lookup Item foi criado com o identificador {{ param }}",
+      "updated": "Lookup Item com identificador {{ param }} foi actualizado",
+      "deleted": "Lookup Item com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Lookup Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Lookup Item"
+      },
+      "valor": "Valor",
+      "nome": "Nome",
+      "type": "Type",
+      "ordem": "Ordem",
+      "lookup": "Lookup"
+    }
+  }
+}

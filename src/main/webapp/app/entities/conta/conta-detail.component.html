@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="conta">
+            <h2><span jhiTranslate="mandaApp.conta.detail.title">Conta</span> {{conta.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.conta.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{conta.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conta.codigo">Codigo</span></dt>
+                <dd>
+                    <span>{{conta.codigo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conta.tipo">Tipo</span></dt>
+                <dd>
+                    <span>{{conta.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conta.grau">Grau</span></dt>
+                <dd>
+                    <span>{{conta.grau}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conta.natureza">Natureza</span></dt>
+                <dd>
+                    <span>{{conta.natureza}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conta.grupo">Grupo</span></dt>
+                <dd>
+                    <span>{{conta.grupo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conta.conteudo">Conteudo</span></dt>
+                <dd>
+                    <span>{{conta.conteudo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conta.empresa">Empresa</span></dt>
+                <dd>
+                    <span *ngFor="let empresa of conta.empresas; let last = last">
+                        <a [routerLink]="['/empresa', empresa?.id, 'view' ]">{{empresa.nome}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conta.contaAgregadora">Conta Agregadora</span></dt>
+                <dd>
+                    <div *ngIf="conta.contaAgregadoraId">
+                        <a [routerLink]="['/conta', conta.contaAgregadoraId, 'view']">{{conta.contaAgregadoraDescricao}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conta.classeConta">Classe Conta</span></dt>
+                <dd>
+                    <div *ngIf="conta.classeContaId">
+                        <a [routerLink]="['/classe-conta', conta.classeContaId, 'view']">{{conta.classeContaDescricao}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/conta', conta.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

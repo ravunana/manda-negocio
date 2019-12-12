@@ -1,0 +1,30 @@
+{
+  "mandaApp": {
+    "software": {
+      "home": {
+        "title": "Softwares",
+        "createLabel": "Criar novo(a) Software",
+        "createOrEditLabel": "Criar ou editar Software",
+        "notFound": "Nenhum Softwares encontrado"
+      },
+      "created": "Um novo Software foi criado com o identificador {{ param }}",
+      "updated": "Software com identificador {{ param }} foi actualizado",
+      "deleted": "Software com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Software {{ id }}?"
+      },
+      "detail": {
+        "title": "Software"
+      },
+      "empresa": "Empresa",
+      "tipoSistema": "Tipo Sistema",
+      "nif": "Nif",
+      "numeroValidacaoAGT": "Numero Validacao AGT",
+      "nome": "Nome",
+      "versao": "Versao",
+      "hashCode": "Hash Code",
+      "hashControl": "Hash Control",
+      "licencaSoftware": "Licenca Software"
+    }
+  }
+}

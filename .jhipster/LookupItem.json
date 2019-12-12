@@ -1,0 +1,41 @@
+{
+    "name": "LookupItem",
+    "fields": [
+        {
+            "fieldName": "valor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "LookupType",
+            "fieldValues": "USUARIO,SISTEMA"
+        },
+        {
+            "fieldName": "ordem",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "lookup",
+            "otherEntityRelationshipName": "lookupItem",
+            "relationshipName": "lookup",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101029",
+    "entityTableName": "core_lookup_item",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

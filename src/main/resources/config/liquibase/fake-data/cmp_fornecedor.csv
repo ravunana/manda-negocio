@@ -1,0 +1,11 @@
+id;certificado_iso_9001;garantia_defeito_fabrica;transporte;qualidade;pagamento_prazo;metodos_pagamento;classificacao;descricao;ativo;numero;pessoa_id
+1;false;true;true;9;false;../fake-data/blob/hipster.txt;4;../fake-data/blob/hipster.txt;false;out-of-the-box;1
+2;true;false;true;7;true;../fake-data/blob/hipster.txt;7;../fake-data/blob/hipster.txt;false;Home Loan Account Beauty deposit;2
+3;true;false;true;1;true;../fake-data/blob/hipster.txt;1;../fake-data/blob/hipster.txt;true;Soft Global;3
+4;false;true;true;10;false;../fake-data/blob/hipster.txt;9;../fake-data/blob/hipster.txt;false;relationships heuristic Avon;4
+5;true;false;false;10;false;../fake-data/blob/hipster.txt;8;../fake-data/blob/hipster.txt;true;web-enabled;5
+6;true;true;true;0;true;../fake-data/blob/hipster.txt;4;../fake-data/blob/hipster.txt;true;niches Bulgarian Lev interactive;6
+7;false;true;true;6;false;../fake-data/blob/hipster.txt;2;../fake-data/blob/hipster.txt;true;indexing COM;7
+8;true;true;false;1;false;../fake-data/blob/hipster.txt;9;../fake-data/blob/hipster.txt;true;seize;8
+9;true;false;true;4;true;../fake-data/blob/hipster.txt;5;../fake-data/blob/hipster.txt;false;Keyboard systems;9
+10;false;false;true;8;false;../fake-data/blob/hipster.txt;10;../fake-data/blob/hipster.txt;false;Beauty withdrawal;10

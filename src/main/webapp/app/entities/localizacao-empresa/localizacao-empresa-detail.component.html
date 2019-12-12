@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="localizacaoEmpresa">
+            <h2><span jhiTranslate="mandaApp.localizacaoEmpresa.detail.title">Localizacao Empresa</span> {{localizacaoEmpresa.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.localizacaoEmpresa.pais">Pais</span></dt>
+                <dd>
+                    <span>{{localizacaoEmpresa.pais}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.localizacaoEmpresa.provincia">Provincia</span></dt>
+                <dd>
+                    <span>{{localizacaoEmpresa.provincia}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.localizacaoEmpresa.municipio">Municipio</span></dt>
+                <dd>
+                    <span>{{localizacaoEmpresa.municipio}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.localizacaoEmpresa.bairro">Bairro</span></dt>
+                <dd>
+                    <span>{{localizacaoEmpresa.bairro}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.localizacaoEmpresa.rua">Rua</span></dt>
+                <dd>
+                    <span>{{localizacaoEmpresa.rua}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.localizacaoEmpresa.quarteirao">Quarteirao</span></dt>
+                <dd>
+                    <span>{{localizacaoEmpresa.quarteirao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.localizacaoEmpresa.numeroPorta">Numero Porta</span></dt>
+                <dd>
+                    <span>{{localizacaoEmpresa.numeroPorta}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.localizacaoEmpresa.caixaPostal">Caixa Postal</span></dt>
+                <dd>
+                    <span>{{localizacaoEmpresa.caixaPostal}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.localizacaoEmpresa.empresa">Empresa</span></dt>
+                <dd>
+                    <div *ngIf="localizacaoEmpresa.empresaId">
+                        <a [routerLink]="['/empresa', localizacaoEmpresa.empresaId, 'view']">{{localizacaoEmpresa.empresaNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/localizacao-empresa', localizacaoEmpresa.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

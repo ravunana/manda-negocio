@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="compra">
+            <h2><span jhiTranslate="mandaApp.compra.detail.title">Compra</span> {{compra.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.compra.numero">Numero</span></dt>
+                <dd>
+                    <span>{{compra.numero}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compra.data">Data</span></dt>
+                <dd>
+                    <span>{{compra.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compra.observacaoGeral">Observacao Geral</span></dt>
+                <dd>
+                    <span>{{compra.observacaoGeral}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compra.observacaoInterna">Observacao Interna</span></dt>
+                <dd>
+                    <span>{{compra.observacaoInterna}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compra.utilizador">Utilizador</span></dt>
+                <dd>
+                    {{compra.utilizadorLogin}}
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compra.tipoDocumento">Tipo Documento</span></dt>
+                <dd>
+                    <div *ngIf="compra.tipoDocumentoId">
+                        <a [routerLink]="['/documento-comercial', compra.tipoDocumentoId, 'view']">{{compra.tipoDocumentoNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.compra.empresa">Empresa</span></dt>
+                <dd>
+                    <div *ngIf="compra.empresaId">
+                        <a [routerLink]="['/empresa', compra.empresaId, 'view']">{{compra.empresaNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/compra', compra.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

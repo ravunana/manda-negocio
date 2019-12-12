@@ -1,0 +1,24 @@
+{
+  "mandaApp": {
+    "classeConta": {
+      "home": {
+        "title": "Classe Contas",
+        "createLabel": "Criar novo(a) Classe Conta",
+        "createOrEditLabel": "Criar ou editar Classe Conta",
+        "notFound": "Nenhum Classe Contas encontrado"
+      },
+      "created": "Um novo Classe Conta foi criado com o identificador {{ param }}",
+      "updated": "Classe Conta com identificador {{ param }} foi actualizado",
+      "deleted": "Classe Conta com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Classe Conta {{ id }}?"
+      },
+      "detail": {
+        "title": "Classe Conta"
+      },
+      "descricao": "Descricao",
+      "codigo": "Codigo",
+      "conta": "Conta"
+    }
+  }
+}

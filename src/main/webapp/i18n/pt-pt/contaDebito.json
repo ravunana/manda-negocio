@@ -1,0 +1,25 @@
+{
+  "mandaApp": {
+    "contaDebito": {
+      "home": {
+        "title": "Conta Debitos",
+        "createLabel": "Criar novo(a) Conta Debito",
+        "createOrEditLabel": "Criar ou editar Conta Debito",
+        "notFound": "Nenhum Conta Debitos encontrado"
+      },
+      "created": "Um novo Conta Debito foi criado com o identificador {{ param }}",
+      "updated": "Conta Debito com identificador {{ param }} foi actualizado",
+      "deleted": "Conta Debito com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Conta Debito {{ id }}?"
+      },
+      "detail": {
+        "title": "Conta Debito"
+      },
+      "valor": "Valor",
+      "data": "Data",
+      "contaDebitar": "Conta Debitar",
+      "lancamentoDebito": "Lancamento Debito"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity AuditoriaVenda.
+    -->
+    <changeSet id="20191212101109-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="venda_id"
+                                 baseTableName="vnd_auditoria_venda"
+                                 constraintName="fk_vnd_auditoria_venda_venda_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vnd_venda"/>
+
+        <addForeignKeyConstraint baseColumnNames="utilizador_id"
+                                 baseTableName="vnd_auditoria_venda"
+                                 constraintName="fk_vnd_auditoria_venda_utilizador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rv_user"/>
+
+    </changeSet>
+</databaseChangeLog>

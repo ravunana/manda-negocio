@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="auditoriaVenda">
+            <h2><span jhiTranslate="mandaApp.auditoriaVenda.detail.title">Auditoria Venda</span> {{auditoriaVenda.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.auditoriaVenda.estado">Estado</span></dt>
+                <dd>
+                    <span>{{auditoriaVenda.estado}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaVenda.data">Data</span></dt>
+                <dd>
+                    <span>{{auditoriaVenda.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaVenda.motivoAlteracaoDocumento">Motivo Alteracao Documento</span></dt>
+                <dd>
+                    <span>{{auditoriaVenda.motivoAlteracaoDocumento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaVenda.origemDocumento">Origem Documento</span></dt>
+                <dd>
+                    <span>{{auditoriaVenda.origemDocumento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaVenda.hash">Hash</span></dt>
+                <dd>
+                    <span>{{auditoriaVenda.hash}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaVenda.hashControl">Hash Control</span></dt>
+                <dd>
+                    <span>{{auditoriaVenda.hashControl}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaVenda.venda">Venda</span></dt>
+                <dd>
+                    <div *ngIf="auditoriaVenda.vendaId">
+                        <a [routerLink]="['/venda', auditoriaVenda.vendaId, 'view']">{{auditoriaVenda.vendaNumero}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.auditoriaVenda.utilizador">Utilizador</span></dt>
+                <dd>
+                    {{auditoriaVenda.utilizadorLogin}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/auditoria-venda', auditoriaVenda.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

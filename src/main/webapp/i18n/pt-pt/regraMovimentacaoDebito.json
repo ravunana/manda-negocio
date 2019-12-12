@@ -1,0 +1,23 @@
+{
+  "mandaApp": {
+    "regraMovimentacaoDebito": {
+      "home": {
+        "title": "Regra Movimentacao Debitos",
+        "createLabel": "Criar novo(a) Regra Movimentacao Debito",
+        "createOrEditLabel": "Criar ou editar Regra Movimentacao Debito",
+        "notFound": "Nenhum Regra Movimentacao Debitos encontrado"
+      },
+      "created": "Um novo Regra Movimentacao Debito foi criado com o identificador {{ param }}",
+      "updated": "Regra Movimentacao Debito com identificador {{ param }} foi actualizado",
+      "deleted": "Regra Movimentacao Debito com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Regra Movimentacao Debito {{ id }}?"
+      },
+      "detail": {
+        "title": "Regra Movimentacao Debito"
+      },
+      "descricao": "Descricao",
+      "conta": "Conta"
+    }
+  }
+}

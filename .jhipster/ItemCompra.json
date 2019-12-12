@@ -1,0 +1,90 @@
+{
+    "name": "ItemCompra",
+    "fields": [
+        {
+            "fieldName": "quantidade",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 1
+        },
+        {
+            "fieldName": "desconto",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 100
+        },
+        {
+            "fieldName": "dataSolicitacao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "dataEntrega",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "itemCompra",
+            "relationshipName": "solicitante",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "compra",
+            "otherEntityRelationshipName": "itemCompra",
+            "relationshipValidateRules": "required",
+            "relationshipName": "compra",
+            "otherEntityField": "numero"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "itemCompra",
+            "relationshipValidateRules": "required",
+            "relationshipName": "produto",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "fornecedor",
+            "otherEntityRelationshipName": "itemCompra",
+            "relationshipName": "fornecedor",
+            "otherEntityField": "numero"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "fluxoDocumento",
+            "otherEntityRelationshipName": "itemCompra",
+            "relationshipValidateRules": "required",
+            "relationshipName": "status",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101103",
+    "entityTableName": "cmp_item_compra",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

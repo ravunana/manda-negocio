@@ -1,0 +1,92 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="empresa">
+            <h2><span jhiTranslate="mandaApp.empresa.detail.title">Empresa</span> {{empresa.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.empresa.tipoSociedade">Tipo Sociedade</span></dt>
+                <dd>
+                    <span>{{empresa.tipoSociedade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.nome">Nome</span></dt>
+                <dd>
+                    <span>{{empresa.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.logotipo">Logotipo</span></dt>
+                <dd>
+                    <div *ngIf="empresa.logotipo">
+                        <a (click)="openFile(empresa.logotipoContentType, empresa.logotipo)">
+                            <img [src]="'data:' + empresa.logotipoContentType + ';base64,' + empresa.logotipo" style="max-width: 100%;" alt="empresa image"/>
+                        </a>
+                        {{empresa.logotipoContentType}}, {{byteSize(empresa.logotipo)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.capitalSocial">Capital Social</span></dt>
+                <dd>
+                    <span>{{empresa.capitalSocial}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.fundacao">Fundacao</span></dt>
+                <dd>
+                    <span>{{empresa.fundacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.nif">Nif</span></dt>
+                <dd>
+                    <span>{{empresa.nif}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.numeroRegistroComercial">Numero Registro Comercial</span></dt>
+                <dd>
+                    <span>{{empresa.numeroRegistroComercial}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.despesaFixa">Despesa Fixa</span></dt>
+                <dd>
+                    <span>{{empresa.despesaFixa}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.despesaVariavel">Despesa Variavel</span></dt>
+                <dd>
+                    <span>{{empresa.despesaVariavel}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.aberturaExercio">Abertura Exercio</span></dt>
+                <dd>
+                    <span>{{empresa.aberturaExercio}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.designacaoComercial">Designacao Comercial</span></dt>
+                <dd>
+                    <span>{{empresa.designacaoComercial}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.sede">Sede</span></dt>
+                <dd>
+                    <span>{{empresa.sede}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.utilizador">Utilizador</span></dt>
+                <dd>
+                    {{empresa.utilizadorLogin}}
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.conta">Conta</span></dt>
+                <dd>
+                    <div *ngIf="empresa.contaId">
+                        <a [routerLink]="['/conta', empresa.contaId, 'view']">{{empresa.contaDescricao}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.empresa.hierarquia">Hierarquia</span></dt>
+                <dd>
+                    <div *ngIf="empresa.hierarquiaId">
+                        <a [routerLink]="['/empresa', empresa.hierarquiaId, 'view']">{{empresa.hierarquiaNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/empresa', empresa.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

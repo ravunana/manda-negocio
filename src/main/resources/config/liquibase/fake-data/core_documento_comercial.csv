@@ -1,0 +1,11 @@
+id;nome;serie;padrao;movimenta_estoque;movimenta_caixa;movimenta_contabilidade;cor;descricao;mostra_ponto_venda;entidade
+1;Philippine Peso incentivize;Metal;true;false;true;false;Corporate Lari;../fake-data/blob/hipster.txt;true;REGRA_MOVIMENTACAO_CREDITO
+2;generating;actuating India;true;false;true;true;Small;../fake-data/blob/hipster.txt;false;EMPRESA
+3;pixel Phased payment;Towels Internal;false;false;false;true;paradigms strategic;../fake-data/blob/hipster.txt;true;LOOKUP
+4;compressing action-items;monitor methodology West Virginia;false;false;true;true;Soft Bedfordshire 4th generation;../fake-data/blob/hipster.txt;true;COMPRA
+5;indexing;Savings Account extensible connect;false;false;false;false;supply-chains feed Investment Account;../fake-data/blob/hipster.txt;false;LOOKUP_ITEM
+6;Clothing Engineer Toys;granular;false;true;true;true;mobile;../fake-data/blob/hipster.txt;true;DEVOLUCAO_VENDA
+7;input invoice calculate;Philippine Peso parsing Triple-buffered;false;true;false;true;Tasty Metal Chair Handcrafted Rubber Sausages Officer;../fake-data/blob/hipster.txt;true;DOCUMENTO_COMERCIAL
+8;card azure Frozen;Data Shoal;true;false;true;false;South Georgia and the South Sandwich Islands;../fake-data/blob/hipster.txt;true;RELACIONAMENTO_PESSOA
+9;Connecticut;Unbranded Tugrik;false;false;true;false;Kansas;../fake-data/blob/hipster.txt;true;LOCAL_ARMAZENAMENTO
+10;Timor-Leste e-commerce;Inverse Health JBOD;false;false;true;false;matrix Data;../fake-data/blob/hipster.txt;false;CONTA_DEBITO

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity LocalArmazenamento.
+    -->
+    <changeSet id="20191212101052-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="hierarquia_id"
+                                 baseTableName="stk_local_armazenamento"
+                                 constraintName="fk_stk_local_armazenamento_hierarquia_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stk_local_armazenamento"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id"
+                                 baseTableName="stk_local_armazenamento"
+                                 constraintName="fk_stk_local_armazenamento_empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_empresa"/>
+
+    </changeSet>
+</databaseChangeLog>

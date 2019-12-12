@@ -1,0 +1,218 @@
+import { Component, OnInit } from '@angular/core';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { IItemCompra, ItemCompra } from 'app/shared/model/item-compra.model';
+import { ItemCompraService } from './item-compra.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { ICompra } from 'app/shared/model/compra.model';
+import { CompraService } from 'app/entities/compra/compra.service';
+import { IProduto } from 'app/shared/model/produto.model';
+import { ProdutoService } from 'app/entities/produto/produto.service';
+import { IFornecedor } from 'app/shared/model/fornecedor.model';
+import { FornecedorService } from 'app/entities/fornecedor/fornecedor.service';
+import { IFluxoDocumento } from 'app/shared/model/fluxo-documento.model';
+import { FluxoDocumentoService } from 'app/entities/fluxo-documento/fluxo-documento.service';
+
+@Component({
+  selector: 'rv-item-compra-update',
+  templateUrl: './item-compra-update.component.html'
+})
+export class ItemCompraUpdateComponent implements OnInit {
+  isSaving: boolean;
+
+  users: IUser[];
+
+  compras: ICompra[];
+
+  produtos: IProduto[];
+
+  fornecedors: IFornecedor[];
+
+  fluxodocumentos: IFluxoDocumento[];
+
+  editForm = this.fb.group({
+    id: [],
+    quantidade: [null, [Validators.min(1)]],
+    desconto: [null, [Validators.min(0), Validators.max(100)]],
+    dataSolicitacao: [],
+    dataEntrega: [],
+    descricao: [],
+    valor: [],
+    solicitanteId: [],
+    compraId: [null, Validators.required],
+    produtoId: [null, Validators.required],
+    fornecedorId: [],
+    statusId: [null, Validators.required]
+  });
+
+  constructor(
+    protected dataUtils: JhiDataUtils,
+    protected jhiAlertService: JhiAlertService,
+    protected itemCompraService: ItemCompraService,
+    protected userService: UserService,
+    protected compraService: CompraService,
+    protected produtoService: ProdutoService,
+    protected fornecedorService: FornecedorService,
+    protected fluxoDocumentoService: FluxoDocumentoService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit() {
+    this.isSaving = false;
+    this.activatedRoute.data.subscribe(({ itemCompra }) => {
+      this.updateForm(itemCompra);
+    });
+    this.userService
+      .query()
+      .subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+    this.compraService
+      .query()
+      .subscribe((res: HttpResponse<ICompra[]>) => (this.compras = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+    this.produtoService
+      .query()
+      .subscribe((res: HttpResponse<IProduto[]>) => (this.produtos = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+    this.fornecedorService
+      .query()
+      .subscribe(
+        (res: HttpResponse<IFornecedor[]>) => (this.fornecedors = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+    this.fluxoDocumentoService
+      .query()
+      .subscribe(
+        (res: HttpResponse<IFluxoDocumento[]>) => (this.fluxodocumentos = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+  }
+
+  updateForm(itemCompra: IItemCompra) {
+    this.editForm.patchValue({
+      id: itemCompra.id,
+      quantidade: itemCompra.quantidade,
+      desconto: itemCompra.desconto,
+      dataSolicitacao: itemCompra.dataSolicitacao != null ? itemCompra.dataSolicitacao.format(DATE_TIME_FORMAT) : null,
+      dataEntrega: itemCompra.dataEntrega != null ? itemCompra.dataEntrega.format(DATE_TIME_FORMAT) : null,
+      descricao: itemCompra.descricao,
+      valor: itemCompra.valor,
+      solicitanteId: itemCompra.solicitanteId,
+      compraId: itemCompra.compraId,
+      produtoId: itemCompra.produtoId,
+      fornecedorId: itemCompra.fornecedorId,
+      statusId: itemCompra.statusId
+    });
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
+
+  setFileData(event, field: string, isImage) {
+    return new Promise((resolve, reject) => {
+      if (event && event.target && event.target.files && event.target.files[0]) {
+        const file: File = event.target.files[0];
+        if (isImage && !file.type.startsWith('image/')) {
+          reject(`File was expected to be an image but was found to be ${file.type}`);
+        } else {
+          const filedContentType: string = field + 'ContentType';
+          this.dataUtils.toBase64(file, base64Data => {
+            this.editForm.patchValue({
+              [field]: base64Data,
+              [filedContentType]: file.type
+            });
+          });
+        }
+      } else {
+        reject(`Base64 data was not set as file could not be extracted from passed parameter: ${event}`);
+      }
+    }).then(
+      // eslint-disable-next-line no-console
+      () => console.log('blob added'), // success
+      this.onError
+    );
+  }
+
+  previousState() {
+    window.history.back();
+  }
+
+  save() {
+    this.isSaving = true;
+    const itemCompra = this.createFromForm();
+    if (itemCompra.id !== undefined) {
+      this.subscribeToSaveResponse(this.itemCompraService.update(itemCompra));
+    } else {
+      this.subscribeToSaveResponse(this.itemCompraService.create(itemCompra));
+    }
+  }
+
+  private createFromForm(): IItemCompra {
+    return {
+      ...new ItemCompra(),
+      id: this.editForm.get(['id']).value,
+      quantidade: this.editForm.get(['quantidade']).value,
+      desconto: this.editForm.get(['desconto']).value,
+      dataSolicitacao:
+        this.editForm.get(['dataSolicitacao']).value != null
+          ? moment(this.editForm.get(['dataSolicitacao']).value, DATE_TIME_FORMAT)
+          : undefined,
+      dataEntrega:
+        this.editForm.get(['dataEntrega']).value != null ? moment(this.editForm.get(['dataEntrega']).value, DATE_TIME_FORMAT) : undefined,
+      descricao: this.editForm.get(['descricao']).value,
+      valor: this.editForm.get(['valor']).value,
+      solicitanteId: this.editForm.get(['solicitanteId']).value,
+      compraId: this.editForm.get(['compraId']).value,
+      produtoId: this.editForm.get(['produtoId']).value,
+      fornecedorId: this.editForm.get(['fornecedorId']).value,
+      statusId: this.editForm.get(['statusId']).value
+    };
+  }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IItemCompra>>) {
+    result.subscribe(() => this.onSaveSuccess(), () => this.onSaveError());
+  }
+
+  protected onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
+
+  protected onSaveError() {
+    this.isSaving = false;
+  }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackUserById(index: number, item: IUser) {
+    return item.id;
+  }
+
+  trackCompraById(index: number, item: ICompra) {
+    return item.id;
+  }
+
+  trackProdutoById(index: number, item: IProduto) {
+    return item.id;
+  }
+
+  trackFornecedorById(index: number, item: IFornecedor) {
+    return item.id;
+  }
+
+  trackFluxoDocumentoById(index: number, item: IFluxoDocumento) {
+    return item.id;
+  }
+}

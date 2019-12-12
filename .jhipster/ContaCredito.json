@@ -1,0 +1,46 @@
+{
+    "name": "ContaCredito",
+    "fields": [
+        {
+            "fieldName": "valor",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "contaCredito",
+            "relationshipValidateRules": "required",
+            "relationshipName": "contaCreditar",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "escrituracaoContabil",
+            "otherEntityRelationshipName": "contaCredito",
+            "relationshipValidateRules": "required",
+            "relationshipName": "lancamentoCredito",
+            "otherEntityField": "historico"
+        }
+    ],
+    "changelogDate": "20191212101024",
+    "entityTableName": "ctb_conta_credito",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

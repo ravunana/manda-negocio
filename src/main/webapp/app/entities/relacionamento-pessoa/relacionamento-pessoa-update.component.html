@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-relacionamento-pessoa-heading" jhiTranslate="mandaApp.relacionamentoPessoa.home.createOrEditLabel">Create or edit a Relacionamento Pessoa</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.relacionamentoPessoa.grauParentesco" for="field_grauParentesco">Grau Parentesco</label>
+                    <input type="text" class="form-control" name="grauParentesco" id="field_grauParentesco"
+                           formControlName="grauParentesco"/>
+                    <div *ngIf="editForm.get('grauParentesco').invalid && (editForm.get('grauParentesco').dirty || editForm.get('grauParentesco').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('grauParentesco').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.relacionamentoPessoa.de" for="field_de">De</label>
+                    <select class="form-control" id="field_de" name="de" formControlName="deId">
+                        <option *ngIf="!editForm.get('deId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="pessoaOption.id" *ngFor="let pessoaOption of pessoas; trackBy: trackPessoaById">{{pessoaOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('deId').invalid && (editForm.get('deId').dirty || editForm.get('deId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('deId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.relacionamentoPessoa.para" for="field_para">Para</label>
+                    <select class="form-control" id="field_para" name="para" formControlName="paraId">
+                        <option *ngIf="!editForm.get('paraId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="pessoaOption.id" *ngFor="let pessoaOption of pessoas; trackBy: trackPessoaById">{{pessoaOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('paraId').invalid && (editForm.get('paraId').dirty || editForm.get('paraId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('paraId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

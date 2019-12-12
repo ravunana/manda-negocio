@@ -1,0 +1,45 @@
+{
+  "mandaApp": {
+    "produto": {
+      "home": {
+        "title": "Produtos",
+        "createLabel": "Criar novo(a) Produto",
+        "createOrEditLabel": "Criar ou editar Produto",
+        "notFound": "Nenhum Produtos encontrado"
+      },
+      "created": "Um novo Produto foi criado com o identificador {{ param }}",
+      "updated": "Produto com identificador {{ param }} foi actualizado",
+      "deleted": "Produto com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Produto {{ id }}?"
+      },
+      "detail": {
+        "title": "Produto"
+      },
+      "tipo": "Tipo",
+      "ean": "Ean",
+      "numero": "Numero",
+      "nome": "Nome",
+      "imagem": "Imagem",
+      "composto": "Composto",
+      "estoqueMinimo": "Estoque Minimo",
+      "estoqueMaximo": "Estoque Maximo",
+      "estoqueAtual": "Estoque Atual",
+      "descricao": "Descricao",
+      "mostrarPDV": "Mostrar PDV",
+      "prazoMedioEntrega": "Prazo Medio Entrega",
+      "compostoProduto": "Composto Produto",
+      "conversaoUnidade": "Conversao Unidade",
+      "estruturaCalculo": "Estrutura Calculo",
+      "itemCompra": "Item Compra",
+      "itemVenda": "Item Venda",
+      "utilizador": "Utilizador",
+      "imposto": "Imposto",
+      "fornecedor": "Fornecedor",
+      "localArmazenamento": "Local Armazenamento",
+      "familia": "Familia",
+      "empresa": "Empresa",
+      "estado": "Estado"
+    }
+  }
+}

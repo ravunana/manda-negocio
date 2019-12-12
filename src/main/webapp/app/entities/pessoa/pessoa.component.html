@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.pessoa.home.title">Pessoas</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pessoa" [routerLink]="['/pessoa/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.pessoa.home.createLabel">
+            Create a new Pessoa
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="pessoas?.length === 0">
+        <span jhiTranslate="mandaApp.pessoa.home.notFound">No pessoas found</span>
+    </div>
+    <div class="table-responsive" *ngIf="pessoas?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tipoPessoa"><span jhiTranslate="mandaApp.pessoa.tipoPessoa">Tipo Pessoa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="nome"><span jhiTranslate="mandaApp.pessoa.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="nif"><span jhiTranslate="mandaApp.pessoa.nif">Nif</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="imagem"><span jhiTranslate="mandaApp.pessoa.imagem">Imagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.pessoa.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let pessoa of pessoas ;trackBy: trackId">
+                <td><a [routerLink]="['/pessoa', pessoa.id, 'view' ]">{{pessoa.id}}</a></td>
+                <td>{{pessoa.tipoPessoa}}</td>
+                <td>{{pessoa.nome}}</td>
+                <td>{{pessoa.nif}}</td>
+                <td>
+                    <a *ngIf="pessoa.imagem" (click)="openFile(pessoa.imagemContentType, pessoa.imagem)">
+                        <img [src]="'data:' + pessoa.imagemContentType + ';base64,' + pessoa.imagem" style="max-height: 30px;" alt="pessoa image"/>
+                    </a>
+                    <span *ngIf="pessoa.imagem">{{pessoa.imagemContentType}}, {{byteSize(pessoa.imagem)}}</span>
+                </td>
+                <td>
+                    {{pessoa.utilizadorLogin}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/pessoa', pessoa.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/pessoa', pessoa.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(pessoa)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="pessoas?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

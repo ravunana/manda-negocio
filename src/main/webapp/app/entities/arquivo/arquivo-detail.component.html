@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="arquivo">
+            <h2><span jhiTranslate="mandaApp.arquivo.detail.title">Arquivo</span> {{arquivo.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.arquivo.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{arquivo.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.arquivo.entidade">Entidade</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'mandaApp.EntidadeSistema.' + arquivo.entidade}}">{{arquivo.entidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.arquivo.anexo">Anexo</span></dt>
+                <dd>
+                    <div *ngIf="arquivo.anexo">
+                        <a (click)="openFile(arquivo.anexoContentType, arquivo.anexo)" jhiTranslate="entity.action.open">open</a>
+                        {{arquivo.anexoContentType}}, {{byteSize(arquivo.anexo)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.arquivo.codigoEntidade">Codigo Entidade</span></dt>
+                <dd>
+                    <span>{{arquivo.codigoEntidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.arquivo.data">Data</span></dt>
+                <dd>
+                    <span>{{arquivo.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.arquivo.utilizador">Utilizador</span></dt>
+                <dd>
+                    {{arquivo.utilizadorLogin}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/arquivo', arquivo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

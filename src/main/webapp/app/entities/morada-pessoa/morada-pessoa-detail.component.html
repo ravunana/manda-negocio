@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="moradaPessoa">
+            <h2><span jhiTranslate="mandaApp.moradaPessoa.detail.title">Morada Pessoa</span> {{moradaPessoa.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.moradaPessoa.pais">Pais</span></dt>
+                <dd>
+                    <span>{{moradaPessoa.pais}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.moradaPessoa.provincia">Provincia</span></dt>
+                <dd>
+                    <span>{{moradaPessoa.provincia}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.moradaPessoa.municipio">Municipio</span></dt>
+                <dd>
+                    <span>{{moradaPessoa.municipio}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.moradaPessoa.bairro">Bairro</span></dt>
+                <dd>
+                    <span>{{moradaPessoa.bairro}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.moradaPessoa.rua">Rua</span></dt>
+                <dd>
+                    <span>{{moradaPessoa.rua}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.moradaPessoa.quarteirao">Quarteirao</span></dt>
+                <dd>
+                    <span>{{moradaPessoa.quarteirao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.moradaPessoa.numeroPorta">Numero Porta</span></dt>
+                <dd>
+                    <span>{{moradaPessoa.numeroPorta}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.moradaPessoa.pessoa">Pessoa</span></dt>
+                <dd>
+                    <div *ngIf="moradaPessoa.pessoaId">
+                        <a [routerLink]="['/pessoa', moradaPessoa.pessoaId, 'view']">{{moradaPessoa.pessoaNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/morada-pessoa', moradaPessoa.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+id;quantidade;valor;desconto;data;descricao;item_id
+1;96149;29377;66786;2019-12-12T09:10:36;../fake-data/blob/hipster.txt;1
+2;93320;63709;26549;2019-12-11T19:50:16;../fake-data/blob/hipster.txt;2
+3;61146;65338;67849;2019-12-12T05:33:26;../fake-data/blob/hipster.txt;3
+4;31755;29565;84810;2019-12-11T19:18:07;../fake-data/blob/hipster.txt;4
+5;94716;59962;88485;2019-12-11T22:01:15;../fake-data/blob/hipster.txt;5
+6;73906;35041;27746;2019-12-11T12:15:45;../fake-data/blob/hipster.txt;6
+7;28162;33977;96336;2019-12-11T23:14:17;../fake-data/blob/hipster.txt;7
+8;1029;67811;71604;2019-12-11T21:08:25;../fake-data/blob/hipster.txt;8
+9;70624;34688;62268;2019-12-11T23:43:02;../fake-data/blob/hipster.txt;9
+10;99010;79448;31187;2019-12-12T03:29:52;../fake-data/blob/hipster.txt;10

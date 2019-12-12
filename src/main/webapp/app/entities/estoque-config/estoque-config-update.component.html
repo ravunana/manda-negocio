@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-estoque-config-heading" jhiTranslate="mandaApp.estoqueConfig.home.createOrEditLabel">Create or edit a Estoque Config</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.estoqueConfig.produto" for="field_produto">Produto</label>
+                    <select class="form-control" id="field_produto" name="produto" formControlName="produtoId">
+                        <option *ngIf="!editForm.get('produtoId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="produtoOption.id" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('produtoId').invalid && (editForm.get('produtoId').dirty || editForm.get('produtoId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('produtoId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.estoqueConfig.contaVenda" for="field_contaVenda">Conta Venda</label>
+                    <select class="form-control" id="field_contaVenda" name="contaVenda" formControlName="contaVendaId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.estoqueConfig.contaCompra" for="field_contaCompra">Conta Compra</label>
+                    <select class="form-control" id="field_contaCompra" name="contaCompra" formControlName="contaCompraId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.estoqueConfig.contaImobilizado" for="field_contaImobilizado">Conta Imobilizado</label>
+                    <select class="form-control" id="field_contaImobilizado" name="contaImobilizado" formControlName="contaImobilizadoId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.estoqueConfig.devolucaoCompra" for="field_devolucaoCompra">Devolucao Compra</label>
+                    <select class="form-control" id="field_devolucaoCompra" name="devolucaoCompra" formControlName="devolucaoCompraId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.estoqueConfig.devolucaoVenda" for="field_devolucaoVenda">Devolucao Venda</label>
+                    <select class="form-control" id="field_devolucaoVenda" name="devolucaoVenda" formControlName="devolucaoVendaId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

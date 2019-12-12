@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="estoqueConfig">
+            <h2><span jhiTranslate="mandaApp.estoqueConfig.detail.title">Estoque Config</span> {{estoqueConfig.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.estoqueConfig.produto">Produto</span></dt>
+                <dd>
+                    <div *ngIf="estoqueConfig.produtoId">
+                        <a [routerLink]="['/produto', estoqueConfig.produtoId, 'view']">{{estoqueConfig.produtoNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estoqueConfig.contaVenda">Conta Venda</span></dt>
+                <dd>
+                    <div *ngIf="estoqueConfig.contaVendaId">
+                        <a [routerLink]="['/conta', estoqueConfig.contaVendaId, 'view']">{{estoqueConfig.contaVendaDescricao}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estoqueConfig.contaCompra">Conta Compra</span></dt>
+                <dd>
+                    <div *ngIf="estoqueConfig.contaCompraId">
+                        <a [routerLink]="['/conta', estoqueConfig.contaCompraId, 'view']">{{estoqueConfig.contaCompraDescricao}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estoqueConfig.contaImobilizado">Conta Imobilizado</span></dt>
+                <dd>
+                    <div *ngIf="estoqueConfig.contaImobilizadoId">
+                        <a [routerLink]="['/conta', estoqueConfig.contaImobilizadoId, 'view']">{{estoqueConfig.contaImobilizadoDescricao}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estoqueConfig.devolucaoCompra">Devolucao Compra</span></dt>
+                <dd>
+                    <div *ngIf="estoqueConfig.devolucaoCompraId">
+                        <a [routerLink]="['/conta', estoqueConfig.devolucaoCompraId, 'view']">{{estoqueConfig.devolucaoCompraDescricao}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.estoqueConfig.devolucaoVenda">Devolucao Venda</span></dt>
+                <dd>
+                    <div *ngIf="estoqueConfig.devolucaoVendaId">
+                        <a [routerLink]="['/conta', estoqueConfig.devolucaoVendaId, 'view']">{{estoqueConfig.devolucaoVendaDescricao}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/estoque-config', estoqueConfig.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

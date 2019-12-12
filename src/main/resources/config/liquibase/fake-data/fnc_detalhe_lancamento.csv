@@ -1,0 +1,11 @@
+id;valor;desconto;juro;descricao;data;retencao_fonte;data_vencimento;liquidado;lancamento_financeiro_id;metodo_liquidacao_id;moeda_id;coordenada_id
+1;28247;22489;95;../fake-data/blob/hipster.txt;2019-12-11T23:49:10;true;2019-12-11;false;1;1;1;1
+2;56332;58008;43;../fake-data/blob/hipster.txt;2019-12-11T21:46:18;false;2019-12-11;true;2;2;2;2
+3;28249;14381;35;../fake-data/blob/hipster.txt;2019-12-11T23:51:00;true;2019-12-11;true;3;3;3;3
+4;84584;89255;40;../fake-data/blob/hipster.txt;2019-12-12T00:06:21;true;2019-12-11;true;4;4;4;4
+5;47633;88888;50;../fake-data/blob/hipster.txt;2019-12-11T21:06:16;false;2019-12-12;true;5;5;5;5
+6;25530;18613;29;../fake-data/blob/hipster.txt;2019-12-12T02:12:54;true;2019-12-11;false;6;6;6;6
+7;20707;63604;7;../fake-data/blob/hipster.txt;2019-12-12T01:25:41;false;2019-12-12;true;7;7;7;7
+8;87949;50692;46;../fake-data/blob/hipster.txt;2019-12-12T00:20:48;false;2019-12-11;true;8;8;8;8
+9;83582;4764;33;../fake-data/blob/hipster.txt;2019-12-11T16:43:50;true;2019-12-11;true;9;9;9;9
+10;35260;65465;83;../fake-data/blob/hipster.txt;2019-12-12T06:32:03;true;2019-12-11;false;10;10;10;10

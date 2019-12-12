@@ -1,0 +1,48 @@
+{
+  "mandaApp": {
+    "empresa": {
+      "home": {
+        "title": "Empresas",
+        "createLabel": "Criar novo(a) Empresa",
+        "createOrEditLabel": "Criar ou editar Empresa",
+        "notFound": "Nenhum Empresas encontrado"
+      },
+      "created": "Um novo Empresa foi criado com o identificador {{ param }}",
+      "updated": "Empresa com identificador {{ param }} foi actualizado",
+      "deleted": "Empresa com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Empresa {{ id }}?"
+      },
+      "detail": {
+        "title": "Empresa"
+      },
+      "tipoSociedade": "Tipo Sociedade",
+      "nome": "Nome",
+      "logotipo": "Logotipo",
+      "capitalSocial": "Capital Social",
+      "fundacao": "Fundacao",
+      "nif": "Nif",
+      "numeroRegistroComercial": "Numero Registro Comercial",
+      "despesaFixa": "Despesa Fixa",
+      "despesaVariavel": "Despesa Variavel",
+      "aberturaExercio": "Abertura Exercio",
+      "designacaoComercial": "Designacao Comercial",
+      "sede": "Sede",
+      "escrituracaoContabil": "Escrituracao Contabil",
+      "empresa": "Empresa",
+      "localizacaoEmpresa": "Localizacao Empresa",
+      "contactoEmpresa": "Contacto Empresa",
+      "licencaSoftware": "Licenca Software",
+      "lancamentoFinanceiro": "Lancamento Financeiro",
+      "produto": "Produto",
+      "localArmazenamento": "Local Armazenamento",
+      "compra": "Compra",
+      "venda": "Venda",
+      "utilizador": "Utilizador",
+      "conta": "Conta",
+      "hierarquia": "Hierarquia",
+      "conta": "Conta",
+      "coordenadaBancaria": "Coordenada Bancaria"
+    }
+  }
+}

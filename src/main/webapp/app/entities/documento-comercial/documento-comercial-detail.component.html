@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="documentoComercial">
+            <h2><span jhiTranslate="mandaApp.documentoComercial.detail.title">Documento Comercial</span> {{documentoComercial.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.documentoComercial.nome">Nome</span></dt>
+                <dd>
+                    <span>{{documentoComercial.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.documentoComercial.serie">Serie</span></dt>
+                <dd>
+                    <span>{{documentoComercial.serie}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.documentoComercial.padrao">Padrao</span></dt>
+                <dd>
+                    <span>{{documentoComercial.padrao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.documentoComercial.movimentaEstoque">Movimenta Estoque</span></dt>
+                <dd>
+                    <span>{{documentoComercial.movimentaEstoque}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.documentoComercial.movimentaCaixa">Movimenta Caixa</span></dt>
+                <dd>
+                    <span>{{documentoComercial.movimentaCaixa}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.documentoComercial.movimentaContabilidade">Movimenta Contabilidade</span></dt>
+                <dd>
+                    <span>{{documentoComercial.movimentaContabilidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.documentoComercial.cor">Cor</span></dt>
+                <dd>
+                    <span>{{documentoComercial.cor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.documentoComercial.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{documentoComercial.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.documentoComercial.mostraPontoVenda">Mostra Ponto Venda</span></dt>
+                <dd>
+                    <span>{{documentoComercial.mostraPontoVenda}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.documentoComercial.entidade">Entidade</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'mandaApp.EntidadeSistema.' + documentoComercial.entidade}}">{{documentoComercial.entidade}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/documento-comercial', documentoComercial.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

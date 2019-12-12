@@ -1,0 +1,27 @@
+{
+  "mandaApp": {
+    "arquivo": {
+      "home": {
+        "title": "Arquivos",
+        "createLabel": "Criar novo(a) Arquivo",
+        "createOrEditLabel": "Criar ou editar Arquivo",
+        "notFound": "Nenhum Arquivos encontrado"
+      },
+      "created": "Um novo Arquivo foi criado com o identificador {{ param }}",
+      "updated": "Arquivo com identificador {{ param }} foi actualizado",
+      "deleted": "Arquivo com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Arquivo {{ id }}?"
+      },
+      "detail": {
+        "title": "Arquivo"
+      },
+      "descricao": "Descricao",
+      "entidade": "Entidade",
+      "anexo": "Anexo",
+      "codigoEntidade": "Codigo Entidade",
+      "data": "Data",
+      "utilizador": "Utilizador"
+    }
+  }
+}

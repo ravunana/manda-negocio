@@ -1,0 +1,102 @@
+{
+    "name": "EscrituracaoContabil",
+    "fields": [
+        {
+            "fieldName": "numero",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "required"
+            ]
+        },
+        {
+            "fieldName": "historico",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "referencia",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "entidadeReferencia",
+            "fieldType": "EntidadeSistema",
+            "fieldValues": "SOFTWARE,LICENCA_SOFTWARE,LOOKUP,LOOKUP_ITEM,FLUXO_DOCUMENTO,DOCUMENTO_COMERCIAL,IMPOSTO,MORADA_PESSOA,CONTACTO_PESSOA,LOCALIZACAO_EMPRESA,CONTACTO_EMPRESA,EMPRESA,PESSOA,CLIENTE,FORNECEDOR,RELACIONAMENTO_PESSOA,COORDENADA_BANCARIA,ARQUIVO,UNIDADE_MEDIDA,CLASSE_CONTA,CONTA,ESCRITURACAO_CONTABIL,REGRA_MOVIMENTACAO_CREDITO,REGRA_MOVIMENTACAO_DEBITO,CONTA_DEBITO,CONTA_CREDITO,MOEDA,FORMA_LIQUIDACAO,LANCAMENTO_FINANCEIRO,DETALHE_LANCAMENTO,RETENCAO_FONTE,LOCAL_ARMAZENAMENTO,COMPOSTO_PRODUTO,FAMILIA_PRODUTO,PRODUTO,CONVERSAO_UNIDADE,COMPRA,ITEM_COMPRA,DEVOLUCAO_COMPRA,VENDA,ITEM_VENDA,DEVOLUCAO_VENDA,AUDITORIA_DOCUMENTO_COMERCIAL"
+        },
+        {
+            "fieldName": "tipo",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dataDocumento",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contaDebito",
+            "otherEntityRelationshipName": "lancamentoDebito",
+            "relationshipName": "contaDebito"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contaCredito",
+            "otherEntityRelationshipName": "lancamentoCredito",
+            "relationshipName": "contaCredito"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "escrituracaoContabil",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "escrituracaoContabil",
+            "relationshipValidateRules": "required",
+            "relationshipName": "empresa",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101022",
+    "entityTableName": "ctb_escrituracao_contabil",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

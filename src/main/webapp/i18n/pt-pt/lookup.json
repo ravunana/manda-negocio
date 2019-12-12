@@ -1,0 +1,25 @@
+{
+  "mandaApp": {
+    "lookup": {
+      "home": {
+        "title": "Lookups",
+        "createLabel": "Criar novo(a) Lookup",
+        "createOrEditLabel": "Criar ou editar Lookup",
+        "notFound": "Nenhum Lookups encontrado"
+      },
+      "created": "Um novo Lookup foi criado com o identificador {{ param }}",
+      "updated": "Lookup com identificador {{ param }} foi actualizado",
+      "deleted": "Lookup com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Lookup {{ id }}?"
+      },
+      "detail": {
+        "title": "Lookup"
+      },
+      "nome": "Nome",
+      "entidade": "Entidade",
+      "modificavel": "Modificavel",
+      "lookupItem": "Lookup Item"
+    }
+  }
+}

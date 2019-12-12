@@ -1,0 +1,67 @@
+{
+    "name": "UnidadeMedida",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sigla",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "required"
+            ]
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "unidadeMedida",
+            "otherEntityRelationshipName": "unidadeConversao",
+            "relationshipName": "unidadeMedida"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "grupoTributacaoImposto",
+            "otherEntityRelationshipName": "unidadeLimite",
+            "relationshipName": "grupoTributacaoImposto"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "compostoProduto",
+            "otherEntityRelationshipName": "unidade",
+            "relationshipName": "compostoProduto"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unidadeMedida",
+            "otherEntityRelationshipName": "unidadeMedida",
+            "relationshipName": "unidadeConversao",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101045",
+    "entityTableName": "core_unidade_medida",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

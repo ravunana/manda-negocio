@@ -1,0 +1,106 @@
+{
+    "name": "Fornecedor",
+    "fields": [
+        {
+            "fieldName": "certificadoISO9001",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "garantiaDefeitoFabrica",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "transporte",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "qualidade",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 10
+        },
+        {
+            "fieldName": "pagamentoPrazo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "metodosPagamento",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "classificacao",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min",
+                "max",
+                "required"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 10
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "ativo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "pessoa",
+            "otherEntityRelationshipName": "fornecedor",
+            "relationshipValidateRules": "required",
+            "relationshipName": "pessoa",
+            "otherEntityField": "nome",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "itemCompra",
+            "otherEntityRelationshipName": "fornecedor",
+            "relationshipName": "itemCompra"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "fornecedor",
+            "relationshipName": "conta",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "fornecedor",
+            "relationshipName": "produto",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191212101043",
+    "entityTableName": "cmp_fornecedor",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

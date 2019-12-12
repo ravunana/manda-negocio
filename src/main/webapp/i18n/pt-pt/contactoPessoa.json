@@ -1,0 +1,25 @@
+{
+  "mandaApp": {
+    "contactoPessoa": {
+      "home": {
+        "title": "Contacto Pessoas",
+        "createLabel": "Criar novo(a) Contacto Pessoa",
+        "createOrEditLabel": "Criar ou editar Contacto Pessoa",
+        "notFound": "Nenhum Contacto Pessoas encontrado"
+      },
+      "created": "Um novo Contacto Pessoa foi criado com o identificador {{ param }}",
+      "updated": "Contacto Pessoa com identificador {{ param }} foi actualizado",
+      "deleted": "Contacto Pessoa com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Contacto Pessoa {{ id }}?"
+      },
+      "detail": {
+        "title": "Contacto Pessoa"
+      },
+      "tipoContacto": "Tipo Contacto",
+      "descricao": "Descricao",
+      "contacto": "Contacto",
+      "pessoa": "Pessoa"
+    }
+  }
+}

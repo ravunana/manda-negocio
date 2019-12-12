@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="meioLiquidacao">
+            <h2><span jhiTranslate="mandaApp.meioLiquidacao.detail.title">Meio Liquidacao</span> {{meioLiquidacao.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.meioLiquidacao.nome">Nome</span></dt>
+                <dd>
+                    <span>{{meioLiquidacao.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.meioLiquidacao.sigla">Sigla</span></dt>
+                <dd>
+                    <span>{{meioLiquidacao.sigla}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.meioLiquidacao.icon">Icon</span></dt>
+                <dd>
+                    <span>{{meioLiquidacao.icon}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.meioLiquidacao.mostrarPontoVenda">Mostrar Ponto Venda</span></dt>
+                <dd>
+                    <span>{{meioLiquidacao.mostrarPontoVenda}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/meio-liquidacao', meioLiquidacao.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

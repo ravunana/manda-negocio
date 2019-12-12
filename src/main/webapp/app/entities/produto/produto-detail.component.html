@@ -1,0 +1,116 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="produto">
+            <h2><span jhiTranslate="mandaApp.produto.detail.title">Produto</span> {{produto.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.produto.tipo">Tipo</span></dt>
+                <dd>
+                    <span>{{produto.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.ean">Ean</span></dt>
+                <dd>
+                    <span>{{produto.ean}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.numero">Numero</span></dt>
+                <dd>
+                    <span>{{produto.numero}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.nome">Nome</span></dt>
+                <dd>
+                    <span>{{produto.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.imagem">Imagem</span></dt>
+                <dd>
+                    <div *ngIf="produto.imagem">
+                        <a (click)="openFile(produto.imagemContentType, produto.imagem)">
+                            <img [src]="'data:' + produto.imagemContentType + ';base64,' + produto.imagem" style="max-width: 100%;" alt="produto image"/>
+                        </a>
+                        {{produto.imagemContentType}}, {{byteSize(produto.imagem)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.composto">Composto</span></dt>
+                <dd>
+                    <span>{{produto.composto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.estoqueMinimo">Estoque Minimo</span></dt>
+                <dd>
+                    <span>{{produto.estoqueMinimo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.estoqueMaximo">Estoque Maximo</span></dt>
+                <dd>
+                    <span>{{produto.estoqueMaximo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.estoqueAtual">Estoque Atual</span></dt>
+                <dd>
+                    <span>{{produto.estoqueAtual}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{produto.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.mostrarPDV">Mostrar PDV</span></dt>
+                <dd>
+                    <span>{{produto.mostrarPDV}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.prazoMedioEntrega">Prazo Medio Entrega</span></dt>
+                <dd>
+                    <span>{{produto.prazoMedioEntrega}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.utilizador">Utilizador</span></dt>
+                <dd>
+                    {{produto.utilizadorLogin}}
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.imposto">Imposto</span></dt>
+                <dd>
+                    <span *ngFor="let imposto of produto.impostos; let last = last">
+                        <a [routerLink]="['/imposto', imposto?.id, 'view' ]">{{imposto.nome}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.fornecedor">Fornecedor</span></dt>
+                <dd>
+                    <span *ngFor="let fornecedor of produto.fornecedors; let last = last">
+                        <a [routerLink]="['/fornecedor', fornecedor?.id, 'view' ]">{{fornecedor.nome}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.localArmazenamento">Local Armazenamento</span></dt>
+                <dd>
+                    <div *ngIf="produto.localArmazenamentoId">
+                        <a [routerLink]="['/local-armazenamento', produto.localArmazenamentoId, 'view']">{{produto.localArmazenamentoNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.familia">Familia</span></dt>
+                <dd>
+                    <div *ngIf="produto.familiaId">
+                        <a [routerLink]="['/familia-produto', produto.familiaId, 'view']">{{produto.familiaNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.empresa">Empresa</span></dt>
+                <dd>
+                    <div *ngIf="produto.empresaId">
+                        <a [routerLink]="['/empresa', produto.empresaId, 'view']">{{produto.empresaNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.produto.estado">Estado</span></dt>
+                <dd>
+                    <div *ngIf="produto.estadoId">
+                        <a [routerLink]="['/fluxo-documento', produto.estadoId, 'view']">{{produto.estadoNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/produto', produto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "mandaApp": {
+    "itemVenda": {
+      "home": {
+        "title": "Item Vendas",
+        "createLabel": "Criar novo(a) Item Venda",
+        "createOrEditLabel": "Criar ou editar Item Venda",
+        "notFound": "Nenhum Item Vendas encontrado"
+      },
+      "created": "Um novo Item Venda foi criado com o identificador {{ param }}",
+      "updated": "Item Venda com identificador {{ param }} foi actualizado",
+      "deleted": "Item Venda com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Item Venda {{ id }}?"
+      },
+      "detail": {
+        "title": "Item Venda"
+      },
+      "quantidade": "Quantidade",
+      "valor": "Valor",
+      "desconto": "Desconto",
+      "data": "Data",
+      "venda": "Venda",
+      "produto": "Produto",
+      "status": "Status"
+    }
+  }
+}

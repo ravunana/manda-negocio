@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity FamiliaProduto.
+    -->
+    <changeSet id="20191212101054-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="conta_id"
+                                 baseTableName="stk_familia"
+                                 constraintName="fk_stk_familia_conta_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="hierarquia_id"
+                                 baseTableName="stk_familia"
+                                 constraintName="fk_stk_familia_hierarquia_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stk_familia"/>
+
+    </changeSet>
+</databaseChangeLog>

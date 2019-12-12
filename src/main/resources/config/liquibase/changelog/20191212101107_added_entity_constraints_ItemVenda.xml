@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ItemVenda.
+    -->
+    <changeSet id="20191212101107-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="venda_id"
+                                 baseTableName="vnd_item_venda"
+                                 constraintName="fk_vnd_item_venda_venda_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vnd_venda"/>
+
+        <addForeignKeyConstraint baseColumnNames="produto_id"
+                                 baseTableName="vnd_item_venda"
+                                 constraintName="fk_vnd_item_venda_produto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stk_produto"/>
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="vnd_item_venda"
+                                 constraintName="fk_vnd_item_venda_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_fluxo_documento"/>
+
+    </changeSet>
+</databaseChangeLog>

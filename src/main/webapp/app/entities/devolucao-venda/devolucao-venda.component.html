@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.devolucaoVenda.home.title">Devolucao Vendas</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-devolucao-venda" [routerLink]="['/devolucao-venda/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.devolucaoVenda.home.createLabel">
+            Create a new Devolucao Venda
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="devolucaoVendas?.length === 0">
+        <span jhiTranslate="mandaApp.devolucaoVenda.home.notFound">No devolucaoVendas found</span>
+    </div>
+    <div class="table-responsive" *ngIf="devolucaoVendas?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="quantidade"><span jhiTranslate="mandaApp.devolucaoVenda.quantidade">Quantidade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="valor"><span jhiTranslate="mandaApp.devolucaoVenda.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="desconto"><span jhiTranslate="mandaApp.devolucaoVenda.desconto">Desconto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="data"><span jhiTranslate="mandaApp.devolucaoVenda.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.devolucaoVenda.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="itemId"><span jhiTranslate="mandaApp.devolucaoVenda.item">Item</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let devolucaoVenda of devolucaoVendas ;trackBy: trackId">
+                <td><a [routerLink]="['/devolucao-venda', devolucaoVenda.id, 'view' ]">{{devolucaoVenda.id}}</a></td>
+                <td>{{devolucaoVenda.quantidade}}</td>
+                <td>{{devolucaoVenda.valor}}</td>
+                <td>{{devolucaoVenda.desconto}}</td>
+                <td>{{devolucaoVenda.data | date:'medium'}}</td>
+                <td>{{devolucaoVenda.descricao}}</td>
+                <td>
+                    <div *ngIf="devolucaoVenda.itemId">
+                        <a [routerLink]="['/item-venda', devolucaoVenda.itemId , 'view' ]" >{{devolucaoVenda.itemId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/devolucao-venda', devolucaoVenda.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/devolucao-venda', devolucaoVenda.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(devolucaoVenda)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="devolucaoVendas?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

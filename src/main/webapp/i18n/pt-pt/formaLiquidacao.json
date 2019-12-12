@@ -1,0 +1,27 @@
+{
+  "mandaApp": {
+    "formaLiquidacao": {
+      "home": {
+        "title": "Forma Liquidacaos",
+        "createLabel": "Criar novo(a) Forma Liquidacao",
+        "createOrEditLabel": "Criar ou editar Forma Liquidacao",
+        "notFound": "Nenhum Forma Liquidacaos encontrado"
+      },
+      "created": "Um novo Forma Liquidacao foi criado com o identificador {{ param }}",
+      "updated": "Forma Liquidacao com identificador {{ param }} foi actualizado",
+      "deleted": "Forma Liquidacao com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Forma Liquidacao {{ id }}?"
+      },
+      "detail": {
+        "title": "Forma Liquidacao"
+      },
+      "nome": "Nome",
+      "juro": "Juro",
+      "prazoLiquidacao": "Prazo Liquidacao",
+      "quantidade": "Quantidade",
+      "icon": "Icon",
+      "lancamentoFinanceiro": "Lancamento Financeiro"
+    }
+  }
+}

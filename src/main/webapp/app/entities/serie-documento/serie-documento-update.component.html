@@ -1,0 +1,180 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-serie-documento-heading" jhiTranslate="mandaApp.serieDocumento.home.createOrEditLabel">Create or edit a Serie Documento</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.serie" for="field_serie">Serie</label>
+                    <input type="text" class="form-control" name="serie" id="field_serie"
+                           formControlName="serie"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.codigoLancamentoFinanceiro" for="field_codigoLancamentoFinanceiro">Codigo Lancamento Financeiro</label>
+                    <input type="number" class="form-control" name="codigoLancamentoFinanceiro" id="field_codigoLancamentoFinanceiro"
+                           formControlName="codigoLancamentoFinanceiro"/>
+                    <div *ngIf="editForm.get('codigoLancamentoFinanceiro').invalid && (editForm.get('codigoLancamentoFinanceiro').dirty || editForm.get('codigoLancamentoFinanceiro').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigoLancamentoFinanceiro').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('codigoLancamentoFinanceiro')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.codigoEscrituracaoContabil" for="field_codigoEscrituracaoContabil">Codigo Escrituracao Contabil</label>
+                    <input type="number" class="form-control" name="codigoEscrituracaoContabil" id="field_codigoEscrituracaoContabil"
+                           formControlName="codigoEscrituracaoContabil"/>
+                    <div *ngIf="editForm.get('codigoEscrituracaoContabil').invalid && (editForm.get('codigoEscrituracaoContabil').dirty || editForm.get('codigoEscrituracaoContabil').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigoEscrituracaoContabil').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('codigoEscrituracaoContabil')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.codigoVenda" for="field_codigoVenda">Codigo Venda</label>
+                    <input type="number" class="form-control" name="codigoVenda" id="field_codigoVenda"
+                           formControlName="codigoVenda"/>
+                    <div *ngIf="editForm.get('codigoVenda').invalid && (editForm.get('codigoVenda').dirty || editForm.get('codigoVenda').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigoVenda').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('codigoVenda')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.codigoCompra" for="field_codigoCompra">Codigo Compra</label>
+                    <input type="number" class="form-control" name="codigoCompra" id="field_codigoCompra"
+                           formControlName="codigoCompra"/>
+                    <div *ngIf="editForm.get('codigoCompra').invalid && (editForm.get('codigoCompra').dirty || editForm.get('codigoCompra').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigoCompra').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('codigoCompra')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.codigoCliente" for="field_codigoCliente">Codigo Cliente</label>
+                    <input type="number" class="form-control" name="codigoCliente" id="field_codigoCliente"
+                           formControlName="codigoCliente"/>
+                    <div *ngIf="editForm.get('codigoCliente').invalid && (editForm.get('codigoCliente').dirty || editForm.get('codigoCliente').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigoCliente').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('codigoCliente')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.codigoFornecedor" for="field_codigoFornecedor">Codigo Fornecedor</label>
+                    <input type="number" class="form-control" name="codigoFornecedor" id="field_codigoFornecedor"
+                           formControlName="codigoFornecedor"/>
+                    <div *ngIf="editForm.get('codigoFornecedor').invalid && (editForm.get('codigoFornecedor').dirty || editForm.get('codigoFornecedor').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigoFornecedor').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('codigoFornecedor')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.codigoDevolucaoVenda" for="field_codigoDevolucaoVenda">Codigo Devolucao Venda</label>
+                    <input type="number" class="form-control" name="codigoDevolucaoVenda" id="field_codigoDevolucaoVenda"
+                           formControlName="codigoDevolucaoVenda"/>
+                    <div *ngIf="editForm.get('codigoDevolucaoVenda').invalid && (editForm.get('codigoDevolucaoVenda').dirty || editForm.get('codigoDevolucaoVenda').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigoDevolucaoVenda').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('codigoDevolucaoVenda')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.codigoDevolucaoCompra" for="field_codigoDevolucaoCompra">Codigo Devolucao Compra</label>
+                    <input type="number" class="form-control" name="codigoDevolucaoCompra" id="field_codigoDevolucaoCompra"
+                           formControlName="codigoDevolucaoCompra"/>
+                    <div *ngIf="editForm.get('codigoDevolucaoCompra').invalid && (editForm.get('codigoDevolucaoCompra').dirty || editForm.get('codigoDevolucaoCompra').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigoDevolucaoCompra').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('codigoDevolucaoCompra')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.codigoProduto" for="field_codigoProduto">Codigo Produto</label>
+                    <input type="number" class="form-control" name="codigoProduto" id="field_codigoProduto"
+                           formControlName="codigoProduto"/>
+                    <div *ngIf="editForm.get('codigoProduto').invalid && (editForm.get('codigoProduto').dirty || editForm.get('codigoProduto').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codigoProduto').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('codigoProduto')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.data" for="field_data">Data</label>
+                    <div class="input-group">
+                        <input id="field_data" type="text" class="form-control" name="data" ngbDatepicker  #dataDp="ngbDatepicker" formControlName="data"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.serieDocumento.empresa" for="field_empresa">Empresa</label>
+                    <select class="form-control" id="field_empresa" name="empresa" formControlName="empresaId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="empresaOption.id" *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.coordenadaBancaria.home.title">Coordenada Bancarias</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-coordenada-bancaria" [routerLink]="['/coordenada-bancaria/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.coordenadaBancaria.home.createLabel">
+            Create a new Coordenada Bancaria
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="coordenadaBancarias?.length === 0">
+        <span jhiTranslate="mandaApp.coordenadaBancaria.home.notFound">No coordenadaBancarias found</span>
+    </div>
+    <div class="table-responsive" *ngIf="coordenadaBancarias?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.coordenadaBancaria.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="proprietario"><span jhiTranslate="mandaApp.coordenadaBancaria.proprietario">Proprietario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="numeroConta"><span jhiTranslate="mandaApp.coordenadaBancaria.numeroConta">Numero Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="iban"><span jhiTranslate="mandaApp.coordenadaBancaria.iban">Iban</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="ativo"><span jhiTranslate="mandaApp.coordenadaBancaria.ativo">Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="mostrarDocumento"><span jhiTranslate="mandaApp.coordenadaBancaria.mostrarDocumento">Mostrar Documento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="mostrarPontoVenda"><span jhiTranslate="mandaApp.coordenadaBancaria.mostrarPontoVenda">Mostrar Ponto Venda</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="padraoRecebimento"><span jhiTranslate="mandaApp.coordenadaBancaria.padraoRecebimento">Padrao Recebimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="padraoPagamento"><span jhiTranslate="mandaApp.coordenadaBancaria.padraoPagamento">Padrao Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="contaDescricao"><span jhiTranslate="mandaApp.coordenadaBancaria.conta">Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let coordenadaBancaria of coordenadaBancarias ;trackBy: trackId">
+                <td><a [routerLink]="['/coordenada-bancaria', coordenadaBancaria.id, 'view' ]">{{coordenadaBancaria.id}}</a></td>
+                <td>{{coordenadaBancaria.descricao}}</td>
+                <td>{{coordenadaBancaria.proprietario}}</td>
+                <td>{{coordenadaBancaria.numeroConta}}</td>
+                <td>{{coordenadaBancaria.iban}}</td>
+                <td>{{coordenadaBancaria.ativo}}</td>
+                <td>{{coordenadaBancaria.mostrarDocumento}}</td>
+                <td>{{coordenadaBancaria.mostrarPontoVenda}}</td>
+                <td>{{coordenadaBancaria.padraoRecebimento}}</td>
+                <td>{{coordenadaBancaria.padraoPagamento}}</td>
+                <td>
+                    <div *ngIf="coordenadaBancaria.contaId">
+                        <a [routerLink]="['/conta', coordenadaBancaria.contaId , 'view' ]" >{{coordenadaBancaria.contaDescricao}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/coordenada-bancaria', coordenadaBancaria.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/coordenada-bancaria', coordenadaBancaria.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(coordenadaBancaria)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="coordenadaBancarias?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

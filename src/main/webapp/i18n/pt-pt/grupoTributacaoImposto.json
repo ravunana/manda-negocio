@@ -1,0 +1,28 @@
+{
+  "mandaApp": {
+    "grupoTributacaoImposto": {
+      "home": {
+        "title": "Grupo Tributacao Impostos",
+        "createLabel": "Criar novo(a) Grupo Tributacao Imposto",
+        "createOrEditLabel": "Criar ou editar Grupo Tributacao Imposto",
+        "notFound": "Nenhum Grupo Tributacao Impostos encontrado"
+      },
+      "created": "Um novo Grupo Tributacao Imposto foi criado com o identificador {{ param }}",
+      "updated": "Grupo Tributacao Imposto com identificador {{ param }} foi actualizado",
+      "deleted": "Grupo Tributacao Imposto com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Grupo Tributacao Imposto {{ id }}?"
+      },
+      "detail": {
+        "title": "Grupo Tributacao Imposto"
+      },
+      "nome": "Nome",
+      "valor": "Valor",
+      "de": "De",
+      "ate": "Ate",
+      "limiteLiquidacao": "Limite Liquidacao",
+      "imposto": "Imposto",
+      "unidadeLimite": "Unidade Limite"
+    }
+  }
+}

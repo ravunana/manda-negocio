@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-retencao-fonte-heading" jhiTranslate="mandaApp.retencaoFonte.home.createOrEditLabel">Create or edit a Retencao Fonte</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.retencaoFonte.motivoRetencao" for="field_motivoRetencao">Motivo Retencao</label>
+                    <input type="text" class="form-control" name="motivoRetencao" id="field_motivoRetencao"
+                           formControlName="motivoRetencao"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.retencaoFonte.valor" for="field_valor">Valor</label>
+                    <input type="text" class="form-control" name="valor" id="field_valor"
+                           formControlName="valor"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.retencaoFonte.porcentagem" for="field_porcentagem">Porcentagem</label>
+                    <input type="checkbox" class="form-control" name="porcentagem" id="field_porcentagem"
+                           formControlName="porcentagem"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.retencaoFonte.detalhe" for="field_detalhe">Detalhe</label>
+                    <select class="form-control" id="field_detalhe" name="detalhe" formControlName="detalheId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="detalheLancamentoOption.id" *ngFor="let detalheLancamentoOption of detalhelancamentos; trackBy: trackDetalheLancamentoById">{{detalheLancamentoOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.retencaoFonte.imposto" for="field_imposto">Imposto</label>
+                    <select class="form-control" id="field_imposto" name="imposto" formControlName="impostoId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="impostoOption.id" *ngFor="let impostoOption of impostos; trackBy: trackImpostoById">{{impostoOption.codigoImposto}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

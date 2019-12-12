@@ -1,0 +1,33 @@
+{
+  "mandaApp": {
+    "imposto": {
+      "home": {
+        "title": "Impostos",
+        "createLabel": "Criar novo(a) Imposto",
+        "createOrEditLabel": "Criar ou editar Imposto",
+        "notFound": "Nenhum Impostos encontrado"
+      },
+      "created": "Um novo Imposto foi criado com o identificador {{ param }}",
+      "updated": "Imposto com identificador {{ param }} foi actualizado",
+      "deleted": "Imposto com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Imposto {{ id }}?"
+      },
+      "detail": {
+        "title": "Imposto"
+      },
+      "tipoImposto": "Tipo Imposto",
+      "codigoImposto": "Codigo Imposto",
+      "porcentagem": "Porcentagem",
+      "valor": "Valor",
+      "descricao": "Descricao",
+      "pais": "Pais",
+      "vigencia": "Vigencia",
+      "grupoTributacaoImposto": "Grupo Tributacao Imposto",
+      "retencaoFonte": "Retencao Fonte",
+      "conta": "Conta",
+      "lancamento": "Lancamento",
+      "produto": "Produto"
+    }
+  }
+}

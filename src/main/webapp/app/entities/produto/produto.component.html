@@ -1,0 +1,118 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.produto.home.title">Produtos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-produto" [routerLink]="['/produto/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.produto.home.createLabel">
+            Create a new Produto
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="produtos?.length === 0">
+        <span jhiTranslate="mandaApp.produto.home.notFound">No produtos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="produtos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="mandaApp.produto.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="ean"><span jhiTranslate="mandaApp.produto.ean">Ean</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.produto.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="nome"><span jhiTranslate="mandaApp.produto.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="imagem"><span jhiTranslate="mandaApp.produto.imagem">Imagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="composto"><span jhiTranslate="mandaApp.produto.composto">Composto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="estoqueMinimo"><span jhiTranslate="mandaApp.produto.estoqueMinimo">Estoque Minimo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="estoqueMaximo"><span jhiTranslate="mandaApp.produto.estoqueMaximo">Estoque Maximo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="estoqueAtual"><span jhiTranslate="mandaApp.produto.estoqueAtual">Estoque Atual</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.produto.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="mostrarPDV"><span jhiTranslate="mandaApp.produto.mostrarPDV">Mostrar PDV</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="prazoMedioEntrega"><span jhiTranslate="mandaApp.produto.prazoMedioEntrega">Prazo Medio Entrega</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.produto.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="localArmazenamentoNome"><span jhiTranslate="mandaApp.produto.localArmazenamento">Local Armazenamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="familiaNome"><span jhiTranslate="mandaApp.produto.familia">Familia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.produto.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="estadoNome"><span jhiTranslate="mandaApp.produto.estado">Estado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let produto of produtos ;trackBy: trackId">
+                <td><a [routerLink]="['/produto', produto.id, 'view' ]">{{produto.id}}</a></td>
+                <td>{{produto.tipo}}</td>
+                <td>{{produto.ean}}</td>
+                <td>{{produto.numero}}</td>
+                <td>{{produto.nome}}</td>
+                <td>
+                    <a *ngIf="produto.imagem" (click)="openFile(produto.imagemContentType, produto.imagem)">
+                        <img [src]="'data:' + produto.imagemContentType + ';base64,' + produto.imagem" style="max-height: 30px;" alt="produto image"/>
+                    </a>
+                    <span *ngIf="produto.imagem">{{produto.imagemContentType}}, {{byteSize(produto.imagem)}}</span>
+                </td>
+                <td>{{produto.composto}}</td>
+                <td>{{produto.estoqueMinimo}}</td>
+                <td>{{produto.estoqueMaximo}}</td>
+                <td>{{produto.estoqueAtual}}</td>
+                <td>{{produto.descricao}}</td>
+                <td>{{produto.mostrarPDV}}</td>
+                <td>{{produto.prazoMedioEntrega}}</td>
+                <td>
+                    {{produto.utilizadorLogin}}
+                </td>
+                <td>
+                    <div *ngIf="produto.localArmazenamentoId">
+                        <a [routerLink]="['/local-armazenamento', produto.localArmazenamentoId , 'view' ]" >{{produto.localArmazenamentoNome}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="produto.familiaId">
+                        <a [routerLink]="['/familia-produto', produto.familiaId , 'view' ]" >{{produto.familiaNome}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="produto.empresaId">
+                        <a [routerLink]="['/empresa', produto.empresaId , 'view' ]" >{{produto.empresaNome}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="produto.estadoId">
+                        <a [routerLink]="['/fluxo-documento', produto.estadoId , 'view' ]" >{{produto.estadoNome}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/produto', produto.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/produto', produto.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(produto)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="produtos?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

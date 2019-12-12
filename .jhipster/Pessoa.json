@@ -1,0 +1,62 @@
+{
+    "name": "Pessoa",
+    "fields": [
+        {
+            "fieldName": "tipoPessoa",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nif",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "imagem",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "moradaPessoa",
+            "otherEntityRelationshipName": "pessoa",
+            "relationshipName": "moradaPessoa"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contactoPessoa",
+            "otherEntityRelationshipName": "pessoa",
+            "relationshipName": "contactoPessoa"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "pessoa",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        }
+    ],
+    "changelogDate": "20191212101036",
+    "entityTableName": "core_pessoa",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

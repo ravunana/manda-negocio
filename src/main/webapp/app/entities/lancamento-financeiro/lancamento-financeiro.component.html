@@ -1,0 +1,99 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.lancamentoFinanceiro.home.title">Lancamento Financeiros</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-lancamento-financeiro" [routerLink]="['/lancamento-financeiro/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.lancamentoFinanceiro.home.createLabel">
+            Create a new Lancamento Financeiro
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="lancamentoFinanceiros?.length === 0">
+        <span jhiTranslate="mandaApp.lancamentoFinanceiro.home.notFound">No lancamentoFinanceiros found</span>
+    </div>
+    <div class="table-responsive" *ngIf="lancamentoFinanceiros?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tipoLancamento"><span jhiTranslate="mandaApp.lancamentoFinanceiro.tipoLancamento">Tipo Lancamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="valor"><span jhiTranslate="mandaApp.lancamentoFinanceiro.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="externo"><span jhiTranslate="mandaApp.lancamentoFinanceiro.externo">Externo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.lancamentoFinanceiro.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.lancamentoFinanceiro.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.lancamentoFinanceiro.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="contaDescricao"><span jhiTranslate="mandaApp.lancamentoFinanceiro.conta">Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="formaLiquidacaoNome"><span jhiTranslate="mandaApp.lancamentoFinanceiro.formaLiquidacao">Forma Liquidacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.lancamentoFinanceiro.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tipoReciboNome"><span jhiTranslate="mandaApp.lancamentoFinanceiro.tipoRecibo">Tipo Recibo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let lancamentoFinanceiro of lancamentoFinanceiros ;trackBy: trackId">
+                <td><a [routerLink]="['/lancamento-financeiro', lancamentoFinanceiro.id, 'view' ]">{{lancamentoFinanceiro.id}}</a></td>
+                <td>{{lancamentoFinanceiro.tipoLancamento}}</td>
+                <td>{{lancamentoFinanceiro.valor}}</td>
+                <td>{{lancamentoFinanceiro.externo}}</td>
+                <td>{{lancamentoFinanceiro.numero}}</td>
+                <td>{{lancamentoFinanceiro.descricao}}</td>
+                <td>
+                    {{lancamentoFinanceiro.utilizadorLogin}}
+                </td>
+                <td>
+                    <div *ngIf="lancamentoFinanceiro.contaId">
+                        <a [routerLink]="['/conta', lancamentoFinanceiro.contaId , 'view' ]" >{{lancamentoFinanceiro.contaDescricao}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="lancamentoFinanceiro.formaLiquidacaoId">
+                        <a [routerLink]="['/forma-liquidacao', lancamentoFinanceiro.formaLiquidacaoId , 'view' ]" >{{lancamentoFinanceiro.formaLiquidacaoNome}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="lancamentoFinanceiro.empresaId">
+                        <a [routerLink]="['/empresa', lancamentoFinanceiro.empresaId , 'view' ]" >{{lancamentoFinanceiro.empresaNome}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="lancamentoFinanceiro.tipoReciboId">
+                        <a [routerLink]="['/documento-comercial', lancamentoFinanceiro.tipoReciboId , 'view' ]" >{{lancamentoFinanceiro.tipoReciboNome}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/lancamento-financeiro', lancamentoFinanceiro.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/lancamento-financeiro', lancamentoFinanceiro.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(lancamentoFinanceiro)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="lancamentoFinanceiros?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

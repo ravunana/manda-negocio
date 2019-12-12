@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="imposto">
+            <h2><span jhiTranslate="mandaApp.imposto.detail.title">Imposto</span> {{imposto.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.imposto.tipoImposto">Tipo Imposto</span></dt>
+                <dd>
+                    <span>{{imposto.tipoImposto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.imposto.codigoImposto">Codigo Imposto</span></dt>
+                <dd>
+                    <span>{{imposto.codigoImposto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.imposto.porcentagem">Porcentagem</span></dt>
+                <dd>
+                    <span>{{imposto.porcentagem}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.imposto.valor">Valor</span></dt>
+                <dd>
+                    <span>{{imposto.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.imposto.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{imposto.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.imposto.pais">Pais</span></dt>
+                <dd>
+                    <span>{{imposto.pais}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.imposto.vigencia">Vigencia</span></dt>
+                <dd>
+                    <span>{{imposto.vigencia}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.imposto.conta">Conta</span></dt>
+                <dd>
+                    <div *ngIf="imposto.contaId">
+                        <a [routerLink]="['/conta', imposto.contaId, 'view']">{{imposto.contaDescricao}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/imposto', imposto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

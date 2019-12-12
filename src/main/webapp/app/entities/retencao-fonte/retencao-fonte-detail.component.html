@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="retencaoFonte">
+            <h2><span jhiTranslate="mandaApp.retencaoFonte.detail.title">Retencao Fonte</span> {{retencaoFonte.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.retencaoFonte.motivoRetencao">Motivo Retencao</span></dt>
+                <dd>
+                    <span>{{retencaoFonte.motivoRetencao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.retencaoFonte.valor">Valor</span></dt>
+                <dd>
+                    <span>{{retencaoFonte.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.retencaoFonte.porcentagem">Porcentagem</span></dt>
+                <dd>
+                    <span>{{retencaoFonte.porcentagem}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.retencaoFonte.detalhe">Detalhe</span></dt>
+                <dd>
+                    <div *ngIf="retencaoFonte.detalheId">
+                        <a [routerLink]="['/detalhe-lancamento', retencaoFonte.detalheId, 'view']">{{retencaoFonte.detalheId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.retencaoFonte.imposto">Imposto</span></dt>
+                <dd>
+                    <div *ngIf="retencaoFonte.impostoId">
+                        <a [routerLink]="['/imposto', retencaoFonte.impostoId, 'view']">{{retencaoFonte.impostoCodigoImposto}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/retencao-fonte', retencaoFonte.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

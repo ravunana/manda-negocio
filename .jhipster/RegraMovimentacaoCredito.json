@@ -1,0 +1,30 @@
+{
+    "name": "RegraMovimentacaoCredito",
+    "fields": [
+        {
+            "fieldName": "descricao",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "regraMovimentacaoCredito",
+            "relationshipName": "conta",
+            "otherEntityField": "descricao",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191212101021",
+    "entityTableName": "ctb_regra_movimentacao_credito",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

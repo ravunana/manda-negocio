@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="lancamentoFinanceiro">
+            <h2><span jhiTranslate="mandaApp.lancamentoFinanceiro.detail.title">Lancamento Financeiro</span> {{lancamentoFinanceiro.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.tipoLancamento">Tipo Lancamento</span></dt>
+                <dd>
+                    <span>{{lancamentoFinanceiro.tipoLancamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.valor">Valor</span></dt>
+                <dd>
+                    <span>{{lancamentoFinanceiro.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.externo">Externo</span></dt>
+                <dd>
+                    <span>{{lancamentoFinanceiro.externo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.numero">Numero</span></dt>
+                <dd>
+                    <span>{{lancamentoFinanceiro.numero}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{lancamentoFinanceiro.descricao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.utilizador">Utilizador</span></dt>
+                <dd>
+                    {{lancamentoFinanceiro.utilizadorLogin}}
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.conta">Conta</span></dt>
+                <dd>
+                    <div *ngIf="lancamentoFinanceiro.contaId">
+                        <a [routerLink]="['/conta', lancamentoFinanceiro.contaId, 'view']">{{lancamentoFinanceiro.contaDescricao}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.imposto">Imposto</span></dt>
+                <dd>
+                    <span *ngFor="let imposto of lancamentoFinanceiro.impostos; let last = last">
+                        <a [routerLink]="['/imposto', imposto?.id, 'view' ]">{{imposto.codigoImposto}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.formaLiquidacao">Forma Liquidacao</span></dt>
+                <dd>
+                    <div *ngIf="lancamentoFinanceiro.formaLiquidacaoId">
+                        <a [routerLink]="['/forma-liquidacao', lancamentoFinanceiro.formaLiquidacaoId, 'view']">{{lancamentoFinanceiro.formaLiquidacaoNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.empresa">Empresa</span></dt>
+                <dd>
+                    <div *ngIf="lancamentoFinanceiro.empresaId">
+                        <a [routerLink]="['/empresa', lancamentoFinanceiro.empresaId, 'view']">{{lancamentoFinanceiro.empresaNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.tipoRecibo">Tipo Recibo</span></dt>
+                <dd>
+                    <div *ngIf="lancamentoFinanceiro.tipoReciboId">
+                        <a [routerLink]="['/documento-comercial', lancamentoFinanceiro.tipoReciboId, 'view']">{{lancamentoFinanceiro.tipoReciboNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/lancamento-financeiro', lancamentoFinanceiro.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

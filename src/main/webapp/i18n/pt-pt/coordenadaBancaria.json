@@ -1,0 +1,33 @@
+{
+  "mandaApp": {
+    "coordenadaBancaria": {
+      "home": {
+        "title": "Coordenada Bancarias",
+        "createLabel": "Criar novo(a) Coordenada Bancaria",
+        "createOrEditLabel": "Criar ou editar Coordenada Bancaria",
+        "notFound": "Nenhum Coordenada Bancarias encontrado"
+      },
+      "created": "Um novo Coordenada Bancaria foi criado com o identificador {{ param }}",
+      "updated": "Coordenada Bancaria com identificador {{ param }} foi actualizado",
+      "deleted": "Coordenada Bancaria com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Coordenada Bancaria {{ id }}?"
+      },
+      "detail": {
+        "title": "Coordenada Bancaria"
+      },
+      "descricao": "Descricao",
+      "proprietario": "Proprietario",
+      "numeroConta": "Numero Conta",
+      "iban": "Iban",
+      "ativo": "Ativo",
+      "mostrarDocumento": "Mostrar Documento",
+      "mostrarPontoVenda": "Mostrar Ponto Venda",
+      "padraoRecebimento": "Padrao Recebimento",
+      "padraoPagamento": "Padrao Pagamento",
+      "detalheLancamento": "Detalhe Lancamento",
+      "conta": "Conta",
+      "empresa": "Empresa"
+    }
+  }
+}

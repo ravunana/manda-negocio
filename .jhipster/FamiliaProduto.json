@@ -1,0 +1,56 @@
+{
+    "name": "FamiliaProduto",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "familiaProduto",
+            "otherEntityRelationshipName": "hierarquia",
+            "relationshipName": "familiaProduto"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "familia",
+            "relationshipName": "produto"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "familiaProduto",
+            "relationshipName": "conta",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "familiaProduto",
+            "otherEntityRelationshipName": "familiaProduto",
+            "relationshipName": "hierarquia",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101054",
+    "entityTableName": "stk_familia",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

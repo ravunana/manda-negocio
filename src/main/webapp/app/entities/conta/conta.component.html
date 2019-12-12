@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.conta.home.title">Contas</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-conta" [routerLink]="['/conta/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.conta.home.createLabel">
+            Create a new Conta
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="contas?.length === 0">
+        <span jhiTranslate="mandaApp.conta.home.notFound">No contas found</span>
+    </div>
+    <div class="table-responsive" *ngIf="contas?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.conta.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="codigo"><span jhiTranslate="mandaApp.conta.codigo">Codigo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="mandaApp.conta.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="grau"><span jhiTranslate="mandaApp.conta.grau">Grau</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="natureza"><span jhiTranslate="mandaApp.conta.natureza">Natureza</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="grupo"><span jhiTranslate="mandaApp.conta.grupo">Grupo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="conteudo"><span jhiTranslate="mandaApp.conta.conteudo">Conteudo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="contaAgregadoraDescricao"><span jhiTranslate="mandaApp.conta.contaAgregadora">Conta Agregadora</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="classeContaDescricao"><span jhiTranslate="mandaApp.conta.classeConta">Classe Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let conta of contas ;trackBy: trackId">
+                <td><a [routerLink]="['/conta', conta.id, 'view' ]">{{conta.id}}</a></td>
+                <td>{{conta.descricao}}</td>
+                <td>{{conta.codigo}}</td>
+                <td>{{conta.tipo}}</td>
+                <td>{{conta.grau}}</td>
+                <td>{{conta.natureza}}</td>
+                <td>{{conta.grupo}}</td>
+                <td>{{conta.conteudo}}</td>
+                <td>
+                    <div *ngIf="conta.contaAgregadoraId">
+                        <a [routerLink]="['/conta', conta.contaAgregadoraId , 'view' ]" >{{conta.contaAgregadoraDescricao}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="conta.classeContaId">
+                        <a [routerLink]="['/classe-conta', conta.classeContaId , 'view' ]" >{{conta.classeContaDescricao}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/conta', conta.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/conta', conta.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(conta)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="contas?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

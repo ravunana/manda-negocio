@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity CoordenadaBancaria.
+    -->
+    <changeSet id="20191212101041-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="conta_id"
+                                 baseTableName="core_coordenada_bancaria"
+                                 constraintName="fk_core_coordenada_bancaria_conta_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="coordenada_bancaria_id"
+                                 baseTableName="core_coordenada_bancaria_empresa"
+                                 constraintName="core_coordenada_bancaria_empre_core_coordenada_bancaria_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_coordenada_bancaria"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id"
+                                 baseTableName="core_coordenada_bancaria_empresa"
+                                 constraintName="fk_core_coordenada_bancaria_empresa_empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_empresa"/>
+        
+    </changeSet>
+</databaseChangeLog>

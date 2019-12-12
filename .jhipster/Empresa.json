@@ -1,0 +1,196 @@
+{
+    "name": "Empresa",
+    "fields": [
+        {
+            "fieldName": "tipoSociedade",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "logotipo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "capitalSocial",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "fundacao",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "nif",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength",
+                "unique"
+            ],
+            "fieldValidateRulesMaxlength": 20
+        },
+        {
+            "fieldName": "numeroRegistroComercial",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "required"
+            ]
+        },
+        {
+            "fieldName": "despesaFixa",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 100
+        },
+        {
+            "fieldName": "despesaVariavel",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 100
+        },
+        {
+            "fieldName": "aberturaExercio",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "designacaoComercial",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "sede",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "escrituracaoContabil",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "escrituracaoContabil"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "hierarquia",
+            "relationshipName": "empresa"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "localizacaoEmpresa",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "localizacaoEmpresa"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "contactoEmpresa",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "contactoEmpresa"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "licencaSoftware",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "licencaSoftware"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "lancamentoFinanceiro",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "lancamentoFinanceiro"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "produto"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "localArmazenamento",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "localArmazenamento"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "compra",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "compra"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "venda",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "venda"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "conta",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "hierarquia",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "conta",
+            "otherEntityField": "id",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "coordenadaBancaria",
+            "otherEntityRelationshipName": "empresa",
+            "relationshipName": "coordenadaBancaria",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191212101038",
+    "entityTableName": "core_empresa",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-venda-heading" jhiTranslate="mandaApp.venda.home.createOrEditLabel">Create or edit a Venda</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.venda.numero" for="field_numero">Numero</label>
+                    <input type="text" class="form-control" name="numero" id="field_numero"
+                           formControlName="numero"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.venda.data" for="field_data">Data</label>
+                    <div class="d-flex">
+                        <input id="field_data" type="datetime-local" class="form-control" name="data" formControlName="data" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.venda.observacaoGeral" for="field_observacaoGeral">Observacao Geral</label>
+                    <textarea class="form-control" name="observacaoGeral" id="field_observacaoGeral"
+                              formControlName="observacaoGeral"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.venda.observacaoInterna" for="field_observacaoInterna">Observacao Interna</label>
+                    <textarea class="form-control" name="observacaoInterna" id="field_observacaoInterna"
+                              formControlName="observacaoInterna"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.venda.vendedor" for="field_vendedor">Vendedor</label>
+                    <select class="form-control" id="field_vendedor" name="vendedor" formControlName="vendedorId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.venda.cliente" for="field_cliente">Cliente</label>
+                    <select class="form-control" id="field_cliente" name="cliente" formControlName="clienteId">
+                        <option *ngIf="!editForm.get('clienteId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="clienteOption.id" *ngFor="let clienteOption of clientes; trackBy: trackClienteById">{{clienteOption.numero}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('clienteId').invalid && (editForm.get('clienteId').dirty || editForm.get('clienteId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('clienteId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.venda.tipoDocumento" for="field_tipoDocumento">Tipo Documento</label>
+                    <select class="form-control" id="field_tipoDocumento" name="tipoDocumento" formControlName="tipoDocumentoId">
+                        <option *ngIf="!editForm.get('tipoDocumentoId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="documentoComercialOption.id" *ngFor="let documentoComercialOption of documentocomercials; trackBy: trackDocumentoComercialById">{{documentoComercialOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('tipoDocumentoId').invalid && (editForm.get('tipoDocumentoId').dirty || editForm.get('tipoDocumentoId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('tipoDocumentoId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.venda.empresa" for="field_empresa">Empresa</label>
+                    <select class="form-control" id="field_empresa" name="empresa" formControlName="empresaId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="empresaOption.id" *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+{
+  "mandaApp": {
+    "relacionamentoPessoa": {
+      "home": {
+        "title": "Relacionamento Pessoas",
+        "createLabel": "Criar novo(a) Relacionamento Pessoa",
+        "createOrEditLabel": "Criar ou editar Relacionamento Pessoa",
+        "notFound": "Nenhum Relacionamento Pessoas encontrado"
+      },
+      "created": "Um novo Relacionamento Pessoa foi criado com o identificador {{ param }}",
+      "updated": "Relacionamento Pessoa com identificador {{ param }} foi actualizado",
+      "deleted": "Relacionamento Pessoa com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Relacionamento Pessoa {{ id }}?"
+      },
+      "detail": {
+        "title": "Relacionamento Pessoa"
+      },
+      "grauParentesco": "Grau Parentesco",
+      "de": "De",
+      "para": "Para"
+    }
+  }
+}

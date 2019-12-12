@@ -1,0 +1,56 @@
+{
+    "name": "AuditoriaCompra",
+    "fields": [
+        {
+            "fieldName": "estado",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "motivoAlteracaoDocumento",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "origemDocumento",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hash",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hashControl",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "compra",
+            "otherEntityRelationshipName": "auditoriaCompra",
+            "relationshipName": "compra",
+            "otherEntityField": "numero",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "auditoriaCompra",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        }
+    ],
+    "changelogDate": "20191212101105",
+    "entityTableName": "cmp_auditoria_compra",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

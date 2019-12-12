@@ -1,0 +1,91 @@
+{
+    "name": "CoordenadaBancaria",
+    "fields": [
+        {
+            "fieldName": "descricao",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "proprietario",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "numeroConta",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "required"
+            ]
+        },
+        {
+            "fieldName": "iban",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "ativo",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "mostrarDocumento",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "mostrarPontoVenda",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "padraoRecebimento",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "padraoPagamento",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "detalheLancamento",
+            "otherEntityRelationshipName": "coordenada",
+            "relationshipName": "detalheLancamento"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "coordenadaBancaria",
+            "relationshipName": "conta",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "coordenadaBancaria",
+            "relationshipValidateRules": "required",
+            "relationshipName": "empresa",
+            "otherEntityField": "nome",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191212101041",
+    "entityTableName": "core_coordenada_bancaria",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

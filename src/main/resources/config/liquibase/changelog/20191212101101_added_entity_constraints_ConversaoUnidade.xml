@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ConversaoUnidade.
+    -->
+    <changeSet id="20191212101101-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="entrada_id"
+                                 baseTableName="stk_conversao_unidade"
+                                 constraintName="fk_stk_conversao_unidade_entrada_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_unidade_medida"/>
+
+        <addForeignKeyConstraint baseColumnNames="saida_id"
+                                 baseTableName="stk_conversao_unidade"
+                                 constraintName="fk_stk_conversao_unidade_saida_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_unidade_medida"/>
+
+        <addForeignKeyConstraint baseColumnNames="produto_id"
+                                 baseTableName="stk_conversao_unidade"
+                                 constraintName="fk_stk_conversao_unidade_produto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stk_produto"/>
+
+    </changeSet>
+</databaseChangeLog>

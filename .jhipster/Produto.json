@@ -1,0 +1,177 @@
+{
+    "name": "Produto",
+    "fields": [
+        {
+            "fieldName": "tipo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ean",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "imagem",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "composto",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "estoqueMinimo",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "estoqueMaximo",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "estoqueAtual",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "mostrarPDV",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "prazoMedioEntrega",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "compostoProduto",
+            "otherEntityRelationshipName": "composto",
+            "relationshipName": "compostoProduto"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "conversaoUnidade",
+            "otherEntityRelationshipName": "produto",
+            "relationshipName": "conversaoUnidade"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "estruturaCalculo",
+            "otherEntityRelationshipName": "produto",
+            "relationshipName": "estruturaCalculo"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "itemCompra",
+            "otherEntityRelationshipName": "produto",
+            "relationshipName": "itemCompra"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "itemVenda",
+            "otherEntityRelationshipName": "produto",
+            "relationshipName": "itemVenda"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "produto",
+            "relationshipValidateRules": "required",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "imposto",
+            "otherEntityRelationshipName": "produto",
+            "relationshipName": "imposto",
+            "otherEntityField": "nome",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "fornecedor",
+            "otherEntityRelationshipName": "produto",
+            "relationshipName": "fornecedor",
+            "otherEntityField": "nome",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "localArmazenamento",
+            "otherEntityRelationshipName": "produto",
+            "relationshipName": "localArmazenamento",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "familiaProduto",
+            "otherEntityRelationshipName": "produto",
+            "relationshipValidateRules": "required",
+            "relationshipName": "familia",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "produto",
+            "relationshipName": "empresa",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "fluxoDocumento",
+            "otherEntityRelationshipName": "produto",
+            "relationshipValidateRules": "required",
+            "relationshipName": "estado",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101055",
+    "entityTableName": "stk_produto",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

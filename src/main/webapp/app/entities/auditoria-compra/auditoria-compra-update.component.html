@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-auditoria-compra-heading" jhiTranslate="mandaApp.auditoriaCompra.home.createOrEditLabel">Create or edit a Auditoria Compra</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.auditoriaCompra.estado" for="field_estado">Estado</label>
+                    <input type="text" class="form-control" name="estado" id="field_estado"
+                           formControlName="estado"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.auditoriaCompra.data" for="field_data">Data</label>
+                    <div class="d-flex">
+                        <input id="field_data" type="datetime-local" class="form-control" name="data" formControlName="data" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.auditoriaCompra.motivoAlteracaoDocumento" for="field_motivoAlteracaoDocumento">Motivo Alteracao Documento</label>
+                    <input type="text" class="form-control" name="motivoAlteracaoDocumento" id="field_motivoAlteracaoDocumento"
+                           formControlName="motivoAlteracaoDocumento"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.auditoriaCompra.origemDocumento" for="field_origemDocumento">Origem Documento</label>
+                    <input type="text" class="form-control" name="origemDocumento" id="field_origemDocumento"
+                           formControlName="origemDocumento"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.auditoriaCompra.hash" for="field_hash">Hash</label>
+                    <input type="text" class="form-control" name="hash" id="field_hash"
+                           formControlName="hash"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.auditoriaCompra.hashControl" for="field_hashControl">Hash Control</label>
+                    <input type="text" class="form-control" name="hashControl" id="field_hashControl"
+                           formControlName="hashControl"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.auditoriaCompra.compra" for="field_compra">Compra</label>
+                    <select class="form-control" id="field_compra" name="compra" formControlName="compraId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="compraOption.id" *ngFor="let compraOption of compras; trackBy: trackCompraById">{{compraOption.numero}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.auditoriaCompra.utilizador" for="field_utilizador">Utilizador</label>
+                    <select class="form-control" id="field_utilizador" name="utilizador" formControlName="utilizadorId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

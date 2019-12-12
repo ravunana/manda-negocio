@@ -1,0 +1,27 @@
+{
+  "mandaApp": {
+    "estoqueConfig": {
+      "home": {
+        "title": "Estoque Configs",
+        "createLabel": "Criar novo(a) Estoque Config",
+        "createOrEditLabel": "Criar ou editar Estoque Config",
+        "notFound": "Nenhum Estoque Configs encontrado"
+      },
+      "created": "Um novo Estoque Config foi criado com o identificador {{ param }}",
+      "updated": "Estoque Config com identificador {{ param }} foi actualizado",
+      "deleted": "Estoque Config com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Estoque Config {{ id }}?"
+      },
+      "detail": {
+        "title": "Estoque Config"
+      },
+      "produto": "Produto",
+      "contaVenda": "Conta Venda",
+      "contaCompra": "Conta Compra",
+      "contaImobilizado": "Conta Imobilizado",
+      "devolucaoCompra": "Devolucao Compra",
+      "devolucaoVenda": "Devolucao Venda"
+    }
+  }
+}

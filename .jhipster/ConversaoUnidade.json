@@ -1,0 +1,59 @@
+{
+    "name": "ConversaoUnidade",
+    "fields": [
+        {
+            "fieldName": "valorEntrada",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 1
+        },
+        {
+            "fieldName": "valorSaida",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 1
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unidadeMedida",
+            "otherEntityRelationshipName": "conversaoUnidade",
+            "relationshipValidateRules": "required",
+            "relationshipName": "entrada",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unidadeMedida",
+            "otherEntityRelationshipName": "conversaoUnidade",
+            "relationshipValidateRules": "required",
+            "relationshipName": "saida",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "conversaoUnidade",
+            "relationshipValidateRules": "required",
+            "relationshipName": "produto",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101101",
+    "entityTableName": "stk_conversao_unidade",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,29 @@
+{
+  "mandaApp": {
+    "detalheAduaneiro": {
+      "home": {
+        "title": "Detalhe Aduaneiros",
+        "createLabel": "Criar novo(a) Detalhe Aduaneiro",
+        "createOrEditLabel": "Criar ou editar Detalhe Aduaneiro",
+        "notFound": "Nenhum Detalhe Aduaneiros encontrado"
+      },
+      "created": "Um novo Detalhe Aduaneiro foi criado com o identificador {{ param }}",
+      "updated": "Detalhe Aduaneiro com identificador {{ param }} foi actualizado",
+      "deleted": "Detalhe Aduaneiro com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Detalhe Aduaneiro {{ id }}?"
+      },
+      "detail": {
+        "title": "Detalhe Aduaneiro"
+      },
+      "numeroONU": "Numero ONU",
+      "largura": "Largura",
+      "altura": "Altura",
+      "pesoLiquido": "Peso Liquido",
+      "pesoBruto": "Peso Bruto",
+      "dataFabrico": "Data Fabrico",
+      "dataExpiracao": "Data Expiracao",
+      "produto": "Produto"
+    }
+  }
+}

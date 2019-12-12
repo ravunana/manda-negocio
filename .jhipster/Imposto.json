@@ -1,0 +1,95 @@
+{
+    "name": "Imposto",
+    "fields": [
+        {
+            "fieldName": "tipoImposto",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "codigoImposto",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "porcentagem",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "pais",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "vigencia",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "grupoTributacaoImposto",
+            "otherEntityRelationshipName": "imposto",
+            "relationshipName": "grupoTributacaoImposto"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "retencaoFonte",
+            "otherEntityRelationshipName": "imposto",
+            "relationshipName": "retencaoFonte"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "imposto",
+            "relationshipName": "conta",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "lancamentoFinanceiro",
+            "otherEntityRelationshipName": "imposto",
+            "relationshipName": "lancamento",
+            "otherEntityField": "id",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "imposto",
+            "relationshipName": "produto",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191212101032",
+    "entityTableName": "tbr_imposto",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

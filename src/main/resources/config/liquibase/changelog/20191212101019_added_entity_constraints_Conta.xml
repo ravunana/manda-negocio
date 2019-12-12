@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Conta.
+    -->
+    <changeSet id="20191212101019-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="conta_id"
+                                 baseTableName="ctb_conta_empresa"
+                                 constraintName="fk_ctb_conta_empresa_ctb_conta_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id"
+                                 baseTableName="ctb_conta_empresa"
+                                 constraintName="fk_ctb_conta_empresa_empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_empresa"/>
+        
+        <addForeignKeyConstraint baseColumnNames="conta_agregadora_id"
+                                 baseTableName="ctb_conta"
+                                 constraintName="fk_ctb_conta_conta_agregadora_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="classe_conta_id"
+                                 baseTableName="ctb_conta"
+                                 constraintName="fk_ctb_conta_classe_conta_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_classe"/>
+
+    </changeSet>
+</databaseChangeLog>

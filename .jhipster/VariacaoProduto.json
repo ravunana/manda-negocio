@@ -1,0 +1,46 @@
+{
+    "name": "VariacaoProduto",
+    "fields": [
+        {
+            "fieldName": "genero",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "modelo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "marca",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tamanho",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "variacaoProduto",
+            "relationshipValidateRules": "required",
+            "relationshipName": "produto",
+            "otherEntityField": "nome",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20191212101058",
+    "entityTableName": "stk_variacao_produto",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

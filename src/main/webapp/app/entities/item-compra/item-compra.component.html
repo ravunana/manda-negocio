@@ -1,0 +1,101 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.itemCompra.home.title">Item Compras</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-item-compra" [routerLink]="['/item-compra/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.itemCompra.home.createLabel">
+            Create a new Item Compra
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="itemCompras?.length === 0">
+        <span jhiTranslate="mandaApp.itemCompra.home.notFound">No itemCompras found</span>
+    </div>
+    <div class="table-responsive" *ngIf="itemCompras?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="quantidade"><span jhiTranslate="mandaApp.itemCompra.quantidade">Quantidade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="desconto"><span jhiTranslate="mandaApp.itemCompra.desconto">Desconto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="dataSolicitacao"><span jhiTranslate="mandaApp.itemCompra.dataSolicitacao">Data Solicitacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="dataEntrega"><span jhiTranslate="mandaApp.itemCompra.dataEntrega">Data Entrega</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.itemCompra.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="valor"><span jhiTranslate="mandaApp.itemCompra.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="solicitanteLogin"><span jhiTranslate="mandaApp.itemCompra.solicitante">Solicitante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="compraNumero"><span jhiTranslate="mandaApp.itemCompra.compra">Compra</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="produtoNome"><span jhiTranslate="mandaApp.itemCompra.produto">Produto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="fornecedorNumero"><span jhiTranslate="mandaApp.itemCompra.fornecedor">Fornecedor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="statusNome"><span jhiTranslate="mandaApp.itemCompra.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let itemCompra of itemCompras ;trackBy: trackId">
+                <td><a [routerLink]="['/item-compra', itemCompra.id, 'view' ]">{{itemCompra.id}}</a></td>
+                <td>{{itemCompra.quantidade}}</td>
+                <td>{{itemCompra.desconto}}</td>
+                <td>{{itemCompra.dataSolicitacao | date:'medium'}}</td>
+                <td>{{itemCompra.dataEntrega | date:'medium'}}</td>
+                <td>{{itemCompra.descricao}}</td>
+                <td>{{itemCompra.valor}}</td>
+                <td>
+                    {{itemCompra.solicitanteLogin}}
+                </td>
+                <td>
+                    <div *ngIf="itemCompra.compraId">
+                        <a [routerLink]="['/compra', itemCompra.compraId , 'view' ]" >{{itemCompra.compraNumero}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="itemCompra.produtoId">
+                        <a [routerLink]="['/produto', itemCompra.produtoId , 'view' ]" >{{itemCompra.produtoNome}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="itemCompra.fornecedorId">
+                        <a [routerLink]="['/fornecedor', itemCompra.fornecedorId , 'view' ]" >{{itemCompra.fornecedorNumero}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="itemCompra.statusId">
+                        <a [routerLink]="['/fluxo-documento', itemCompra.statusId , 'view' ]" >{{itemCompra.statusNome}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/item-compra', itemCompra.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/item-compra', itemCompra.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(itemCompra)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="itemCompras?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

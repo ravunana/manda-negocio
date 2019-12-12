@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="itemVenda">
+            <h2><span jhiTranslate="mandaApp.itemVenda.detail.title">Item Venda</span> {{itemVenda.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.itemVenda.quantidade">Quantidade</span></dt>
+                <dd>
+                    <span>{{itemVenda.quantidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemVenda.valor">Valor</span></dt>
+                <dd>
+                    <span>{{itemVenda.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemVenda.desconto">Desconto</span></dt>
+                <dd>
+                    <span>{{itemVenda.desconto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemVenda.data">Data</span></dt>
+                <dd>
+                    <span>{{itemVenda.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemVenda.venda">Venda</span></dt>
+                <dd>
+                    <div *ngIf="itemVenda.vendaId">
+                        <a [routerLink]="['/venda', itemVenda.vendaId, 'view']">{{itemVenda.vendaNumero}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemVenda.produto">Produto</span></dt>
+                <dd>
+                    <div *ngIf="itemVenda.produtoId">
+                        <a [routerLink]="['/produto', itemVenda.produtoId, 'view']">{{itemVenda.produtoNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.itemVenda.status">Status</span></dt>
+                <dd>
+                    <div *ngIf="itemVenda.statusId">
+                        <a [routerLink]="['/fluxo-documento', itemVenda.statusId, 'view']">{{itemVenda.statusNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/item-venda', itemVenda.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{
+  "mandaApp": {
+    "regraMovimentacaoCredito": {
+      "home": {
+        "title": "Regra Movimentacao Creditos",
+        "createLabel": "Criar novo(a) Regra Movimentacao Credito",
+        "createOrEditLabel": "Criar ou editar Regra Movimentacao Credito",
+        "notFound": "Nenhum Regra Movimentacao Creditos encontrado"
+      },
+      "created": "Um novo Regra Movimentacao Credito foi criado com o identificador {{ param }}",
+      "updated": "Regra Movimentacao Credito com identificador {{ param }} foi actualizado",
+      "deleted": "Regra Movimentacao Credito com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Regra Movimentacao Credito {{ id }}?"
+      },
+      "detail": {
+        "title": "Regra Movimentacao Credito"
+      },
+      "descricao": "Descricao",
+      "conta": "Conta"
+    }
+  }
+}

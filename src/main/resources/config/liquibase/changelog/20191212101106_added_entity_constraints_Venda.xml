@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Venda.
+    -->
+    <changeSet id="20191212101106-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="vendedor_id"
+                                 baseTableName="vnd_venda"
+                                 constraintName="fk_vnd_venda_vendedor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rv_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="cliente_id"
+                                 baseTableName="vnd_venda"
+                                 constraintName="fk_vnd_venda_cliente_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vnd_cliente"/>
+
+        <addForeignKeyConstraint baseColumnNames="tipo_documento_id"
+                                 baseTableName="vnd_venda"
+                                 constraintName="fk_vnd_venda_tipo_documento_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_documento_comercial"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id"
+                                 baseTableName="vnd_venda"
+                                 constraintName="fk_vnd_venda_empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_empresa"/>
+
+    </changeSet>
+</databaseChangeLog>

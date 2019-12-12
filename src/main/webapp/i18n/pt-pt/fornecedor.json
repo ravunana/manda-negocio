@@ -1,0 +1,35 @@
+{
+  "mandaApp": {
+    "fornecedor": {
+      "home": {
+        "title": "Fornecedors",
+        "createLabel": "Criar novo(a) Fornecedor",
+        "createOrEditLabel": "Criar ou editar Fornecedor",
+        "notFound": "Nenhum Fornecedors encontrado"
+      },
+      "created": "Um novo Fornecedor foi criado com o identificador {{ param }}",
+      "updated": "Fornecedor com identificador {{ param }} foi actualizado",
+      "deleted": "Fornecedor com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Fornecedor {{ id }}?"
+      },
+      "detail": {
+        "title": "Fornecedor"
+      },
+      "certificadoISO9001": "Certificado ISO 9001",
+      "garantiaDefeitoFabrica": "Garantia Defeito Fabrica",
+      "transporte": "Transporte",
+      "qualidade": "Qualidade",
+      "pagamentoPrazo": "Pagamento Prazo",
+      "metodosPagamento": "Metodos Pagamento",
+      "classificacao": "Classificacao",
+      "descricao": "Descricao",
+      "ativo": "Ativo",
+      "numero": "Numero",
+      "pessoa": "Pessoa",
+      "itemCompra": "Item Compra",
+      "conta": "Conta",
+      "produto": "Produto"
+    }
+  }
+}

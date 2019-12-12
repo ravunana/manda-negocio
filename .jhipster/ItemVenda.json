@@ -1,0 +1,69 @@
+{
+    "name": "ItemVenda",
+    "fields": [
+        {
+            "fieldName": "quantidade",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 1
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "desconto",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 100
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "venda",
+            "otherEntityRelationshipName": "itemVenda",
+            "relationshipValidateRules": "required",
+            "relationshipName": "venda",
+            "otherEntityField": "numero"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "itemVenda",
+            "relationshipName": "produto",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "fluxoDocumento",
+            "otherEntityRelationshipName": "itemVenda",
+            "relationshipName": "status",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101107",
+    "entityTableName": "vnd_item_venda",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

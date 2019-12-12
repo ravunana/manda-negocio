@@ -1,0 +1,31 @@
+{
+  "mandaApp": {
+    "fluxoDocumento": {
+      "home": {
+        "title": "Fluxo Documentos",
+        "createLabel": "Criar novo(a) Fluxo Documento",
+        "createOrEditLabel": "Criar ou editar Fluxo Documento",
+        "notFound": "Nenhum Fluxo Documentos encontrado"
+      },
+      "created": "Um novo Fluxo Documento foi criado com o identificador {{ param }}",
+      "updated": "Fluxo Documento com identificador {{ param }} foi actualizado",
+      "deleted": "Fluxo Documento com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Fluxo Documento {{ id }}?"
+      },
+      "detail": {
+        "title": "Fluxo Documento"
+      },
+      "nome": "Nome",
+      "aumentaEstoque": "Aumenta Estoque",
+      "aumentaValorCaixa": "Aumenta Valor Caixa",
+      "cor": "Cor",
+      "padrao": "Padrao",
+      "descricao": "Descricao",
+      "entidade": "Entidade",
+      "produto": "Produto",
+      "itemCompra": "Item Compra",
+      "itemVenda": "Item Venda"
+    }
+  }
+}

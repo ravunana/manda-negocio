@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mandaApp.grupoTributacaoImposto.home.title">Grupo Tributacao Impostos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-grupo-tributacao-imposto" [routerLink]="['/grupo-tributacao-imposto/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mandaApp.grupoTributacaoImposto.home.createLabel">
+            Create a new Grupo Tributacao Imposto
+            </span>
+        </button>
+    </h2>
+    <rv-alert-error></rv-alert-error>
+    <rv-alert></rv-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="grupoTributacaoImpostos?.length === 0">
+        <span jhiTranslate="mandaApp.grupoTributacaoImposto.home.notFound">No grupoTributacaoImpostos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="grupoTributacaoImpostos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="nome"><span jhiTranslate="mandaApp.grupoTributacaoImposto.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="valor"><span jhiTranslate="mandaApp.grupoTributacaoImposto.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="de"><span jhiTranslate="mandaApp.grupoTributacaoImposto.de">De</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="ate"><span jhiTranslate="mandaApp.grupoTributacaoImposto.ate">Ate</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="limiteLiquidacao"><span jhiTranslate="mandaApp.grupoTributacaoImposto.limiteLiquidacao">Limite Liquidacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="impostoCodigoImposto"><span jhiTranslate="mandaApp.grupoTributacaoImposto.imposto">Imposto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="unidadeLimiteNome"><span jhiTranslate="mandaApp.grupoTributacaoImposto.unidadeLimite">Unidade Limite</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let grupoTributacaoImposto of grupoTributacaoImpostos ;trackBy: trackId">
+                <td><a [routerLink]="['/grupo-tributacao-imposto', grupoTributacaoImposto.id, 'view' ]">{{grupoTributacaoImposto.id}}</a></td>
+                <td>{{grupoTributacaoImposto.nome}}</td>
+                <td>{{grupoTributacaoImposto.valor}}</td>
+                <td>{{grupoTributacaoImposto.de}}</td>
+                <td>{{grupoTributacaoImposto.ate}}</td>
+                <td>{{grupoTributacaoImposto.limiteLiquidacao}}</td>
+                <td>
+                    <div *ngIf="grupoTributacaoImposto.impostoId">
+                        <a [routerLink]="['/imposto', grupoTributacaoImposto.impostoId , 'view' ]" >{{grupoTributacaoImposto.impostoCodigoImposto}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="grupoTributacaoImposto.unidadeLimiteId">
+                        <a [routerLink]="['/unidade-medida', grupoTributacaoImposto.unidadeLimiteId , 'view' ]" >{{grupoTributacaoImposto.unidadeLimiteNome}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/grupo-tributacao-imposto', grupoTributacaoImposto.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/grupo-tributacao-imposto', grupoTributacaoImposto.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(grupoTributacaoImposto)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="grupoTributacaoImpostos?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

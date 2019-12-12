@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Empresa.
+    -->
+    <changeSet id="20191212101038-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="utilizador_id"
+                                 baseTableName="core_empresa"
+                                 constraintName="fk_core_empresa_utilizador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rv_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="conta_id"
+                                 baseTableName="core_empresa"
+                                 constraintName="fk_core_empresa_conta_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
+        <addForeignKeyConstraint baseColumnNames="hierarquia_id"
+                                 baseTableName="core_empresa"
+                                 constraintName="fk_core_empresa_hierarquia_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_empresa"/>
+
+    </changeSet>
+</databaseChangeLog>

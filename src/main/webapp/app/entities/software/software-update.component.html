@@ -1,0 +1,124 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-software-heading" jhiTranslate="mandaApp.software.home.createOrEditLabel">Create or edit a Software</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.software.empresa" for="field_empresa">Empresa</label>
+                    <input type="text" class="form-control" name="empresa" id="field_empresa"
+                           formControlName="empresa"/>
+                    <div *ngIf="editForm.get('empresa').invalid && (editForm.get('empresa').dirty || editForm.get('empresa').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('empresa').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.software.tipoSistema" for="field_tipoSistema">Tipo Sistema</label>
+                    <input type="text" class="form-control" name="tipoSistema" id="field_tipoSistema"
+                           formControlName="tipoSistema"/>
+                    <div *ngIf="editForm.get('tipoSistema').invalid && (editForm.get('tipoSistema').dirty || editForm.get('tipoSistema').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tipoSistema').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.software.nif" for="field_nif">Nif</label>
+                    <input type="text" class="form-control" name="nif" id="field_nif"
+                           formControlName="nif"/>
+                    <div *ngIf="editForm.get('nif').invalid && (editForm.get('nif').dirty || editForm.get('nif').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nif').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.software.numeroValidacaoAGT" for="field_numeroValidacaoAGT">Numero Validacao AGT</label>
+                    <input type="number" class="form-control" name="numeroValidacaoAGT" id="field_numeroValidacaoAGT"
+                           formControlName="numeroValidacaoAGT"/>
+                    <div *ngIf="editForm.get('numeroValidacaoAGT').invalid && (editForm.get('numeroValidacaoAGT').dirty || editForm.get('numeroValidacaoAGT').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('numeroValidacaoAGT').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('numeroValidacaoAGT')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.software.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                           formControlName="nome"/>
+                    <div *ngIf="editForm.get('nome').invalid && (editForm.get('nome').dirty || editForm.get('nome').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nome').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nome').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                        This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.software.versao" for="field_versao">Versao</label>
+                    <input type="text" class="form-control" name="versao" id="field_versao"
+                           formControlName="versao"/>
+                    <div *ngIf="editForm.get('versao').invalid && (editForm.get('versao').dirty || editForm.get('versao').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('versao').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('versao').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 30 }">
+                        This field cannot be longer than 30 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.software.hashCode" for="field_hashCode">Hash Code</label>
+                    <input type="text" class="form-control" name="hashCode" id="field_hashCode"
+                           formControlName="hashCode"/>
+                    <div *ngIf="editForm.get('hashCode').invalid && (editForm.get('hashCode').dirty || editForm.get('hashCode').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('hashCode').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.software.hashControl" for="field_hashControl">Hash Control</label>
+                    <input type="text" class="form-control" name="hashControl" id="field_hashControl"
+                           formControlName="hashControl"/>
+                    <div *ngIf="editForm.get('hashControl').invalid && (editForm.get('hashControl').dirty || editForm.get('hashControl').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('hashControl').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

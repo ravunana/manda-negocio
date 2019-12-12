@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="formaLiquidacao">
+            <h2><span jhiTranslate="mandaApp.formaLiquidacao.detail.title">Forma Liquidacao</span> {{formaLiquidacao.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.formaLiquidacao.nome">Nome</span></dt>
+                <dd>
+                    <span>{{formaLiquidacao.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.formaLiquidacao.juro">Juro</span></dt>
+                <dd>
+                    <span>{{formaLiquidacao.juro}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.formaLiquidacao.prazoLiquidacao">Prazo Liquidacao</span></dt>
+                <dd>
+                    <span>{{formaLiquidacao.prazoLiquidacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.formaLiquidacao.quantidade">Quantidade</span></dt>
+                <dd>
+                    <span>{{formaLiquidacao.quantidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.formaLiquidacao.icon">Icon</span></dt>
+                <dd>
+                    <span>{{formaLiquidacao.icon}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/forma-liquidacao', formaLiquidacao.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

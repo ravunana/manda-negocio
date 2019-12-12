@@ -1,0 +1,182 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="rv-detalhe-lancamento-heading" jhiTranslate="mandaApp.detalheLancamento.home.createOrEditLabel">Create or edit a Detalhe Lancamento</h2>
+            <div>
+                <rv-alert-error></rv-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.valor" for="field_valor">Valor</label>
+                    <input type="number" class="form-control" name="valor" id="field_valor"
+                           formControlName="valor"/>
+                    <div *ngIf="editForm.get('valor').invalid && (editForm.get('valor').dirty || editForm.get('valor').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valor').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('valor').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('valor')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.desconto" for="field_desconto">Desconto</label>
+                    <input type="number" class="form-control" name="desconto" id="field_desconto"
+                           formControlName="desconto"/>
+                    <div *ngIf="editForm.get('desconto').invalid && (editForm.get('desconto').dirty || editForm.get('desconto').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('desconto').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('desconto')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.juro" for="field_juro">Juro</label>
+                    <input type="number" class="form-control" name="juro" id="field_juro"
+                           formControlName="juro"/>
+                    <div *ngIf="editForm.get('juro').invalid && (editForm.get('juro').dirty || editForm.get('juro').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('juro').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('juro').errors.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: 100 }">
+                            This field cannot be more than 100.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('juro')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.descricao" for="field_descricao">Descricao</label>
+                    <textarea class="form-control" name="descricao" id="field_descricao"
+                              formControlName="descricao"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.data" for="field_data">Data</label>
+                    <div class="d-flex">
+                        <input id="field_data" type="datetime-local" class="form-control" name="data" formControlName="data" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('data').invalid && (editForm.get('data').dirty || editForm.get('data').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('data').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('data').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.retencaoFonte" for="field_retencaoFonte">Retencao Fonte</label>
+                    <input type="checkbox" class="form-control" name="retencaoFonte" id="field_retencaoFonte"
+                           formControlName="retencaoFonte"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.dataVencimento" for="field_dataVencimento">Data Vencimento</label>
+                    <div class="input-group">
+                        <input id="field_dataVencimento" type="text" class="form-control" name="dataVencimento" ngbDatepicker  #dataVencimentoDp="ngbDatepicker" formControlName="dataVencimento"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dataVencimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('dataVencimento').invalid && (editForm.get('dataVencimento').dirty || editForm.get('dataVencimento').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dataVencimento').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.liquidado" for="field_liquidado">Liquidado</label>
+                    <input type="checkbox" class="form-control" name="liquidado" id="field_liquidado"
+                           formControlName="liquidado"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.utilizador" for="field_utilizador">Utilizador</label>
+                    <select class="form-control" id="field_utilizador" name="utilizador" formControlName="utilizadorId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.lancamentoFinanceiro" for="field_lancamentoFinanceiro">Lancamento Financeiro</label>
+                    <select class="form-control" id="field_lancamentoFinanceiro" name="lancamentoFinanceiro" formControlName="lancamentoFinanceiroId">
+                        <option *ngIf="!editForm.get('lancamentoFinanceiroId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="lancamentoFinanceiroOption.id" *ngFor="let lancamentoFinanceiroOption of lancamentofinanceiros; trackBy: trackLancamentoFinanceiroById">{{lancamentoFinanceiroOption.numero}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('lancamentoFinanceiroId').invalid && (editForm.get('lancamentoFinanceiroId').dirty || editForm.get('lancamentoFinanceiroId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('lancamentoFinanceiroId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.metodoLiquidacao" for="field_metodoLiquidacao">Metodo Liquidacao</label>
+                    <select class="form-control" id="field_metodoLiquidacao" name="metodoLiquidacao" formControlName="metodoLiquidacaoId">
+                        <option *ngIf="!editForm.get('metodoLiquidacaoId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="meioLiquidacaoOption.id" *ngFor="let meioLiquidacaoOption of meioliquidacaos; trackBy: trackMeioLiquidacaoById">{{meioLiquidacaoOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('metodoLiquidacaoId').invalid && (editForm.get('metodoLiquidacaoId').dirty || editForm.get('metodoLiquidacaoId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('metodoLiquidacaoId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.moeda" for="field_moeda">Moeda</label>
+                    <select class="form-control" id="field_moeda" name="moeda" formControlName="moedaId">
+                        <option *ngIf="!editForm.get('moedaId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="moedaOption.id" *ngFor="let moedaOption of moedas; trackBy: trackMoedaById">{{moedaOption.codigo}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('moedaId').invalid && (editForm.get('moedaId').dirty || editForm.get('moedaId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('moedaId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.detalheLancamento.coordenada" for="field_coordenada">Coordenada</label>
+                    <select class="form-control" id="field_coordenada" name="coordenada" formControlName="coordenadaId">
+                        <option *ngIf="!editForm.get('coordenadaId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="coordenadaBancariaOption.id" *ngFor="let coordenadaBancariaOption of coordenadabancarias; trackBy: trackCoordenadaBancariaById">{{coordenadaBancariaOption.descricao}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('coordenadaId').invalid && (editForm.get('coordenadaId').dirty || editForm.get('coordenadaId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('coordenadaId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

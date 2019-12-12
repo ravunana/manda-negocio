@@ -1,0 +1,11 @@
+id;nome;aumenta_estoque;aumenta_valor_caixa;cor;padrao;descricao;entidade
+1;Missouri;false;false;Product;false;../fake-data/blob/hipster.txt;LANCAMENTO_FINANCEIRO
+2;Chips Division;false;true;SDD Zimbabwe;false;../fake-data/blob/hipster.txt;ARQUIVO
+3;eyeballs solid state sticky;false;false;Tools Street;true;../fake-data/blob/hipster.txt;REGRA_MOVIMENTACAO_CREDITO
+4;supply-chains target;true;true;Intelligent;false;../fake-data/blob/hipster.txt;DEVOLUCAO_COMPRA
+5;Indonesia auxiliary;true;false;bus withdrawal Toys;false;../fake-data/blob/hipster.txt;LANCAMENTO_FINANCEIRO
+6;Kids Incredible;true;true;THX;true;../fake-data/blob/hipster.txt;PRODUTO
+7;Producer;true;true;parsing matrix Belize Dollar;false;../fake-data/blob/hipster.txt;SOFTWARE
+8;Handmade fuchsia;false;false;COM;true;../fake-data/blob/hipster.txt;MOEDA
+9;end-to-end navigating;false;true;solution-oriented;true;../fake-data/blob/hipster.txt;UNIDADE_MEDIDA
+10;context-sensitive Metrics transmit;false;false;Missouri Agent Squares;false;../fake-data/blob/hipster.txt;LOCAL_ARMAZENAMENTO

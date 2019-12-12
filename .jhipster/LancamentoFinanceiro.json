@@ -1,0 +1,105 @@
+{
+    "name": "LancamentoFinanceiro",
+    "fields": [
+        {
+            "fieldName": "tipoLancamento",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "externo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "detalheLancamento",
+            "otherEntityRelationshipName": "lancamentoFinanceiro",
+            "relationshipName": "detalheLancamento"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "lancamentoFinanceiro",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "lancamentoFinanceiro",
+            "relationshipName": "conta",
+            "otherEntityField": "descricao"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "imposto",
+            "otherEntityRelationshipName": "lancamento",
+            "relationshipValidateRules": "required",
+            "relationshipName": "imposto",
+            "otherEntityField": "codigoImposto",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "formaLiquidacao",
+            "otherEntityRelationshipName": "lancamentoFinanceiro",
+            "relationshipValidateRules": "required",
+            "relationshipName": "formaLiquidacao",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "empresa",
+            "otherEntityRelationshipName": "lancamentoFinanceiro",
+            "relationshipName": "empresa",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "documentoComercial",
+            "otherEntityRelationshipName": "lancamentoFinanceiro",
+            "relationshipValidateRules": "required",
+            "relationshipName": "tipoRecibo",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101049",
+    "entityTableName": "fnc_lancamento_financeiro",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

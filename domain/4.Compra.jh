@@ -51,8 +51,7 @@ relationship OneToOne {
 relationship ManyToOne {
 	ItemCompra{solicitante(login)} to User,
     Compra{utilizador(login)} to User,
-    AuditoriaCompra{utilizador(login)} to User,
-    DevolucaoCompra{conta(descricao)} to Conta
+    AuditoriaCompra{utilizador(login)} to User
 }
 
 dto * with mapstruct

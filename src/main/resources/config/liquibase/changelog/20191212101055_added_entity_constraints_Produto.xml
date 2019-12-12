@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Produto.
+    -->
+    <changeSet id="20191212101055-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="utilizador_id"
+                                 baseTableName="stk_produto"
+                                 constraintName="fk_stk_produto_utilizador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rv_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="produto_id"
+                                 baseTableName="stk_produto_imposto"
+                                 constraintName="fk_stk_produto_imposto_stk_produto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stk_produto"/>
+
+        <addForeignKeyConstraint baseColumnNames="imposto_id"
+                                 baseTableName="stk_produto_imposto"
+                                 constraintName="fk_stk_produto_imposto_imposto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tbr_imposto"/>
+        
+        <addForeignKeyConstraint baseColumnNames="produto_id"
+                                 baseTableName="stk_produto_fornecedor"
+                                 constraintName="fk_stk_produto_fornecedor_stk_produto_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stk_produto"/>
+
+        <addForeignKeyConstraint baseColumnNames="fornecedor_id"
+                                 baseTableName="stk_produto_fornecedor"
+                                 constraintName="fk_stk_produto_fornecedor_fornecedor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cmp_fornecedor"/>
+        
+        <addForeignKeyConstraint baseColumnNames="local_armazenamento_id"
+                                 baseTableName="stk_produto"
+                                 constraintName="fk_stk_produto_local_armazenamento_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stk_local_armazenamento"/>
+
+        <addForeignKeyConstraint baseColumnNames="familia_id"
+                                 baseTableName="stk_produto"
+                                 constraintName="fk_stk_produto_familia_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="stk_familia"/>
+
+        <addForeignKeyConstraint baseColumnNames="empresa_id"
+                                 baseTableName="stk_produto"
+                                 constraintName="fk_stk_produto_empresa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_empresa"/>
+
+        <addForeignKeyConstraint baseColumnNames="estado_id"
+                                 baseTableName="stk_produto"
+                                 constraintName="fk_stk_produto_estado_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="core_fluxo_documento"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="escrituracaoContabil">
+            <h2><span jhiTranslate="mandaApp.escrituracaoContabil.detail.title">Escrituracao Contabil</span> {{escrituracaoContabil.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.numero">Numero</span></dt>
+                <dd>
+                    <span>{{escrituracaoContabil.numero}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.historico">Historico</span></dt>
+                <dd>
+                    <span>{{escrituracaoContabil.historico}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.valor">Valor</span></dt>
+                <dd>
+                    <span>{{escrituracaoContabil.valor}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.referencia">Referencia</span></dt>
+                <dd>
+                    <span>{{escrituracaoContabil.referencia}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.entidadeReferencia">Entidade Referencia</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'mandaApp.EntidadeSistema.' + escrituracaoContabil.entidadeReferencia}}">{{escrituracaoContabil.entidadeReferencia}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.tipo">Tipo</span></dt>
+                <dd>
+                    <span>{{escrituracaoContabil.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.dataDocumento">Data Documento</span></dt>
+                <dd>
+                    <span>{{escrituracaoContabil.dataDocumento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.data">Data</span></dt>
+                <dd>
+                    <span>{{escrituracaoContabil.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.utilizador">Utilizador</span></dt>
+                <dd>
+                    {{escrituracaoContabil.utilizadorLogin}}
+                </dd>
+                <dt><span jhiTranslate="mandaApp.escrituracaoContabil.empresa">Empresa</span></dt>
+                <dd>
+                    <div *ngIf="escrituracaoContabil.empresaId">
+                        <a [routerLink]="['/empresa', escrituracaoContabil.empresaId, 'view']">{{escrituracaoContabil.empresaNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/escrituracao-contabil', escrituracaoContabil.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

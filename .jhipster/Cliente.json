@@ -1,0 +1,72 @@
+{
+    "name": "Cliente",
+    "fields": [
+        {
+            "fieldName": "ativo",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "perfilProfissional",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "satisfacao",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "frequencia",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "canalUsado",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "required"
+            ]
+        },
+        {
+            "fieldName": "autofacturacao",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "pessoa",
+            "otherEntityRelationshipName": "cliente",
+            "relationshipValidateRules": "required",
+            "relationshipName": "pessoa",
+            "otherEntityField": "nome",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "venda",
+            "otherEntityRelationshipName": "cliente",
+            "relationshipName": "venda"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "cliente",
+            "relationshipName": "conta",
+            "otherEntityField": "descricao"
+        }
+    ],
+    "changelogDate": "20191212101044",
+    "entityTableName": "vnd_cliente",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,26 @@
+{
+  "mandaApp": {
+    "conversaoUnidade": {
+      "home": {
+        "title": "Conversao Unidades",
+        "createLabel": "Criar novo(a) Conversao Unidade",
+        "createOrEditLabel": "Criar ou editar Conversao Unidade",
+        "notFound": "Nenhum Conversao Unidades encontrado"
+      },
+      "created": "Um novo Conversao Unidade foi criado com o identificador {{ param }}",
+      "updated": "Conversao Unidade com identificador {{ param }} foi actualizado",
+      "deleted": "Conversao Unidade com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Conversao Unidade {{ id }}?"
+      },
+      "detail": {
+        "title": "Conversao Unidade"
+      },
+      "valorEntrada": "Valor Entrada",
+      "valorSaida": "Valor Saida",
+      "entrada": "Entrada",
+      "saida": "Saida",
+      "produto": "Produto"
+    }
+  }
+}

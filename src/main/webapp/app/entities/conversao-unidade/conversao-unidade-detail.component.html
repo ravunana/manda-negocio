@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="conversaoUnidade">
+            <h2><span jhiTranslate="mandaApp.conversaoUnidade.detail.title">Conversao Unidade</span> {{conversaoUnidade.id}}</h2>
+            <hr>
+            <rv-alert-error></rv-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.conversaoUnidade.valorEntrada">Valor Entrada</span></dt>
+                <dd>
+                    <span>{{conversaoUnidade.valorEntrada}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conversaoUnidade.valorSaida">Valor Saida</span></dt>
+                <dd>
+                    <span>{{conversaoUnidade.valorSaida}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conversaoUnidade.entrada">Entrada</span></dt>
+                <dd>
+                    <div *ngIf="conversaoUnidade.entradaId">
+                        <a [routerLink]="['/unidade-medida', conversaoUnidade.entradaId, 'view']">{{conversaoUnidade.entradaNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conversaoUnidade.saida">Saida</span></dt>
+                <dd>
+                    <div *ngIf="conversaoUnidade.saidaId">
+                        <a [routerLink]="['/unidade-medida', conversaoUnidade.saidaId, 'view']">{{conversaoUnidade.saidaNome}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.conversaoUnidade.produto">Produto</span></dt>
+                <dd>
+                    <div *ngIf="conversaoUnidade.produtoId">
+                        <a [routerLink]="['/produto', conversaoUnidade.produtoId, 'view']">{{conversaoUnidade.produtoNome}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/conversao-unidade', conversaoUnidade.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

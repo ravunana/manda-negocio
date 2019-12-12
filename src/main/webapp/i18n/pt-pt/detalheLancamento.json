@@ -1,0 +1,35 @@
+{
+  "mandaApp": {
+    "detalheLancamento": {
+      "home": {
+        "title": "Detalhe Lancamentos",
+        "createLabel": "Criar novo(a) Detalhe Lancamento",
+        "createOrEditLabel": "Criar ou editar Detalhe Lancamento",
+        "notFound": "Nenhum Detalhe Lancamentos encontrado"
+      },
+      "created": "Um novo Detalhe Lancamento foi criado com o identificador {{ param }}",
+      "updated": "Detalhe Lancamento com identificador {{ param }} foi actualizado",
+      "deleted": "Detalhe Lancamento com identificador {{ param }} foi eliminado",
+      "delete": {
+        "question": "Tem a certeza que pretende eliminar o(a) Detalhe Lancamento {{ id }}?"
+      },
+      "detail": {
+        "title": "Detalhe Lancamento"
+      },
+      "valor": "Valor",
+      "desconto": "Desconto",
+      "juro": "Juro",
+      "descricao": "Descricao",
+      "data": "Data",
+      "retencaoFonte": "Retencao Fonte",
+      "dataVencimento": "Data Vencimento",
+      "liquidado": "Liquidado",
+      "retencaoFonte": "Retencao Fonte",
+      "utilizador": "Utilizador",
+      "lancamentoFinanceiro": "Lancamento Financeiro",
+      "metodoLiquidacao": "Metodo Liquidacao",
+      "moeda": "Moeda",
+      "coordenada": "Coordenada"
+    }
+  }
+}

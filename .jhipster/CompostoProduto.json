@@ -1,0 +1,58 @@
+{
+    "name": "CompostoProduto",
+    "fields": [
+        {
+            "fieldName": "quantidade",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 1
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "permanente",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "compostoProduto",
+            "relationshipValidateRules": "required",
+            "relationshipName": "produto",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "unidadeMedida",
+            "otherEntityRelationshipName": "compostoProduto",
+            "relationshipValidateRules": "required",
+            "relationshipName": "unidade",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "produto",
+            "otherEntityRelationshipName": "compostoProduto",
+            "relationshipValidateRules": "required",
+            "relationshipName": "composto",
+            "otherEntityField": "nome"
+        }
+    ],
+    "changelogDate": "20191212101053",
+    "entityTableName": "stk_composto_produto",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,116 @@
+{
+    "name": "DetalheLancamento",
+    "fields": [
+        {
+            "fieldName": "valor",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "desconto",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "min"
+            ],
+            "fieldValidateRulesMin": 0
+        },
+        {
+            "fieldName": "juro",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 100
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "data",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "retencaoFonte",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "dataVencimento",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "liquidado",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "retencaoFonte",
+            "otherEntityRelationshipName": "detalhe",
+            "relationshipName": "retencaoFonte"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "detalheLancamento",
+            "relationshipName": "utilizador",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "lancamentoFinanceiro",
+            "otherEntityRelationshipName": "detalheLancamento",
+            "relationshipValidateRules": "required",
+            "relationshipName": "lancamentoFinanceiro",
+            "otherEntityField": "numero"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "meioLiquidacao",
+            "otherEntityRelationshipName": "detalheLancamento",
+            "relationshipValidateRules": "required",
+            "relationshipName": "metodoLiquidacao",
+            "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "moeda",
+            "otherEntityRelationshipName": "detalheLancamento",
+            "relationshipValidateRules": "required",
+            "relationshipName": "moeda",
+            "otherEntityField": "codigo"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "coordenadaBancaria",
+            "otherEntityRelationshipName": "detalheLancamento",
+            "relationshipValidateRules": "required",
+            "relationshipName": "coordenada",
+            "otherEntityField": "descricao"
+        }
+    ],
+    "changelogDate": "20191212101050",
+    "entityTableName": "fnc_detalhe_lancamento",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
