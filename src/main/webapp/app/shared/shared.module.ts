@@ -5,6 +5,7 @@ import { RvAlertComponent } from './alert/alert.component';
 import { RvAlertErrorComponent } from './alert/alert-error.component';
 import { RvLoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
+import { ExportAsModule } from 'ngx-export-as';
 
 @NgModule({
   imports: [MandaSharedLibsModule],
@@ -16,7 +17,8 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
     RvAlertComponent,
     RvAlertErrorComponent,
     RvLoginModalComponent,
-    HasAnyAuthorityDirective
+    HasAnyAuthorityDirective,
+    ExportAsModule
   ]
 })
 export class MandaSharedModule {}
