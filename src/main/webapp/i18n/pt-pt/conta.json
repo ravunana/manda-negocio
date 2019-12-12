@@ -2,33 +2,33 @@
   "mandaApp": {
     "conta": {
       "home": {
-        "title": "Contas",
-        "createLabel": "Criar novo(a) Conta",
-        "createOrEditLabel": "Criar ou editar Conta",
-        "notFound": "Nenhum Contas encontrado"
+        "title": "Quadro de contas",
+        "createLabel": "Nova conta",
+        "createOrEditLabel": "Conta",
+        "notFound": "Nenhuma conta encontrada"
       },
-      "created": "Um novo Conta foi criado com o identificador {{ param }}",
-      "updated": "Conta com identificador {{ param }} foi actualizado",
-      "deleted": "Conta com identificador {{ param }} foi eliminado",
+      "created": "Uma nova conta foi criada com o identificador {{ param }}",
+      "updated": "Conta com identificador {{ param }} foi actualizada",
+      "deleted": "Conta com identificador {{ param }} foi eliminada",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Conta {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar a conta {{ id }}?"
       },
       "detail": {
         "title": "Conta"
       },
-      "descricao": "Descricao",
-      "codigo": "Codigo",
+      "descricao": "Descrição",
+      "codigo": "Código da conta",
       "tipo": "Tipo",
       "grau": "Grau",
       "natureza": "Natureza",
       "grupo": "Grupo",
-      "conteudo": "Conteudo",
+      "conteudo": "Conteúdo",
       "conta": "Conta",
       "contaDebito": "Conta Debito",
       "contaCredito": "Conta Credito",
       "empresa": "Empresa",
-      "contaAgregadora": "Conta Agregadora",
-      "classeConta": "Classe Conta"
+      "contaAgregadora": "Conta agregadora",
+      "classeConta": "Classe da conta"
     }
   }
 }

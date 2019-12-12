@@ -58,9 +58,11 @@ export class ContaUpdateComponent implements OnInit {
     this.empresaService
       .query()
       .subscribe((res: HttpResponse<IEmpresa[]>) => (this.empresas = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+
     this.contaService
       .query()
       .subscribe((res: HttpResponse<IConta[]>) => (this.contas = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+
     this.classeContaService
       .query()
       .subscribe(
@@ -186,5 +188,15 @@ export class ContaUpdateComponent implements OnInit {
       }
     }
     return option;
+  }
+
+  onSelectConta(conta) {
+    this.editForm.get('contaAgregadoraId').patchValue(conta.id, { emitEvent: false });
+  }
+
+  searchConta(conta) {
+    this.contaService.query({ 'descricao.contains': conta.query }).subscribe(data => {
+      this.contas = data.body;
+    });
   }
 }

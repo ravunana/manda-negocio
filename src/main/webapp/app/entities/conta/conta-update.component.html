@@ -1,108 +1,158 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" autocomplete="off">
             <h2 id="rv-conta-heading" jhiTranslate="mandaApp.conta.home.createOrEditLabel">Create or edit a Conta</h2>
+            <hr>
             <div>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.conta.descricao" for="field_descricao">Descricao</label>
-                    <input type="text" class="form-control" name="descricao" id="field_descricao"
-                           formControlName="descricao"/>
-                    <div *ngIf="editForm.get('descricao').invalid && (editForm.get('descricao').dirty || editForm.get('descricao').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('descricao').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.conta.codigo" for="field_codigo">Codigo</label>
-                    <input type="text" class="form-control" name="codigo" id="field_codigo"
-                           formControlName="codigo"/>
-                    <div *ngIf="editForm.get('codigo').invalid && (editForm.get('codigo').dirty || editForm.get('codigo').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('codigo').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.conta.tipo" for="field_tipo">Tipo</label>
-                    <input type="text" class="form-control" name="tipo" id="field_tipo"
-                           formControlName="tipo"/>
-                </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.conta.grau" for="field_grau">Grau</label>
-                    <input type="number" class="form-control" name="grau" id="field_grau"
-                           formControlName="grau"/>
-                    <div *ngIf="editForm.get('grau').invalid && (editForm.get('grau').dirty || editForm.get('grau').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('grau').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                    <fa-icon pTooltip="Número de digitos do código da conta Ex: a conta 11 é do 1º grau o seu código possui dois digitos" tooltipPosition="top" icon="info-circle"
+                    fixedWidth="true"></fa-icon>
+                <label class="text-muted font-italic">(Obrigatório)</label>
+                    <input type="number" class="form-control" name="grau" id="field_grau" formControlName="grau" />
+                    <div
+                        *ngIf="editForm.get('grau').invalid && (editForm.get('grau').dirty || editForm.get('grau').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('grau').errors.min"
+                            jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
                             This field should be at least 1.
                         </small>
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('grau').errors.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: 5 }">
+                        <small class="form-text text-danger" *ngIf="editForm.get('grau').errors.max"
+                            jhiTranslate="entity.validation.max" [translateValues]="{ max: 5 }">
                             This field cannot be more than 5.
                         </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('grau')?.errors?.number" jhiTranslate="entity.validation.number">
+                        <small class="form-text text-danger" [hidden]="!editForm.get('grau')?.errors?.number"
+                            jhiTranslate="entity.validation.number">
                             This field should be a number.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.conta.natureza" for="field_natureza">Natureza</label>
+                    <label class="form-control-label" jhiTranslate="mandaApp.conta.classeConta"
+                        for="field_classeConta">Classe Conta</label>
+                        <label class="text-muted font-italic">(Obrigatório)</label>
+
+                    <select class="form-control" id="field_classeConta" name="classeConta"
+                        formControlName="classeContaId">
+                        <option *ngIf="!editForm.get('classeContaId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="classeContaOption.id"
+                            *ngFor="let classeContaOption of classecontas; trackBy: trackClasseContaById">
+                            {{classeContaOption.descricao}}</option>
+                    </select>
+                    <div
+                        *ngIf="editForm.get('classeContaId').invalid && (editForm.get('classeContaId').dirty || editForm.get('classeContaId').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('classeContaId').errors.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conta.contaAgregadora"
+                        for="field_contaAgregadora">Conta Agregadora</label>
+
+                    <fa-icon pTooltip="Conta principal da conta que pretende criar" tooltipPosition="top" icon="info-circle"
+                    fixedWidth="true"></fa-icon>
+                <label class="text-muted font-italic">(Opcional)</label>
+                    <div class="form-group">
+                        <p-autoComplete placeholder="Escreva o nome da conta" id="field_contaAgregadora" name="contaAgregadora" field="descricao"
+                            [suggestions]="contas" (completeMethod)="searchConta($event)"
+                            (onSelect)="onSelectConta($event)" required>
+                        </p-autoComplete>
+                        <!-- <select class="form-control" id="field_contaAgregadora" name="contaAgregadora" formControlName="contaAgregadoraId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
+                    </select> -->
+                    </div>
+                </div>
+
+                <div class="row">
+
+                <div class="form-group col">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conta.codigo"
+                        for="field_codigo">Codigo</label>
+                        <fa-icon pTooltip="Código da conta Ex: 11.1" tooltipPosition="top" icon="info-circle"
+                        fixedWidth="true"></fa-icon>
+                    <label class="text-muted font-italic">(Obrigatório)</label>
+                    <input type="text" class="form-control" name="codigo" id="field_codigo" formControlName="codigo" />
+                    <div
+                        *ngIf="editForm.get('codigo').invalid && (editForm.get('codigo').dirty || editForm.get('codigo').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('codigo').errors.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conta.descricao"
+                        for="field_descricao">Descricao</label>
+                        <fa-icon pTooltip="Nome da conta que pretente criar Ex: Caixa A" tooltipPosition="top" icon="info-circle"
+                        fixedWidth="true"></fa-icon>
+                    <label class="text-muted font-italic">(Obrigatório)</label>
+                    <input type="text" class="form-control" name="descricao" id="field_descricao"
+                        formControlName="descricao" />
+                    <div
+                        *ngIf="editForm.get('descricao').invalid && (editForm.get('descricao').dirty || editForm.get('descricao').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('descricao').errors.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+
+                <div class="form-group col">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conta.natureza"
+                        for="field_natureza">Natureza</label>
+                    <label class="text-muted font-italic">(Opcional)</label>
                     <input type="text" class="form-control" name="natureza" id="field_natureza"
-                           formControlName="natureza"/>
+                        formControlName="natureza" />
+                </div>
+                <div class="form-group col">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conta.grupo"
+                        for="field_grupo">Grupo</label>
+                        <label class="text-muted font-italic">(Opcional)</label>
+                    <input type="text" class="form-control" name="grupo" id="field_grupo" formControlName="grupo" />
+                </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mandaApp.conta.tipo" for="field_tipo">Tipo</label>
+                    <input type="text" class="form-control" name="tipo" id="field_tipo" formControlName="tipo" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.conta.grupo" for="field_grupo">Grupo</label>
-                    <input type="text" class="form-control" name="grupo" id="field_grupo"
-                           formControlName="grupo"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.conta.conteudo" for="field_conteudo">Conteudo</label>
+                    <label class="form-control-label" jhiTranslate="mandaApp.conta.conteudo"
+                        for="field_conteudo">Conteudo</label>
+                        <fa-icon pTooltip="Nota descritiva da conta, como é movimentada e sua finalidade" tooltipPosition="top" icon="info-circle"
+                        fixedWidth="true"></fa-icon>
+                    <label class="text-muted font-italic">(Opcional)</label>
                     <textarea class="form-control" name="conteudo" id="field_conteudo"
-                              formControlName="conteudo"></textarea>
+                        formControlName="conteudo"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label jhiTranslate="mandaApp.conta.empresa" for="field_empresas">Empresa</label>
-                    <select class="form-control" id="field_empresas" multiple name="empresas" formControlName="empresas">
-                        <option [ngValue]="getSelected(editForm.get('empresas').value, empresaOption)" *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}</option>
+                    <select class="form-control" id="field_empresas" multiple name="empresas"
+                        formControlName="empresas">
+                        <option [ngValue]="getSelected(editForm.get('empresas').value, empresaOption)"
+                            *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}
+                        </option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.conta.contaAgregadora" for="field_contaAgregadora">Conta Agregadora</label>
-                    <select class="form-control" id="field_contaAgregadora" name="contaAgregadora" formControlName="contaAgregadoraId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.conta.classeConta" for="field_classeConta">Classe Conta</label>
-                    <select class="form-control" id="field_classeConta" name="classeConta" formControlName="classeContaId">
-                        <option *ngIf="!editForm.get('classeContaId').value" [ngValue]="null" selected></option>
-                        <option [ngValue]="classeContaOption.id" *ngFor="let classeContaOption of classecontas; trackBy: trackClasseContaById">{{classeContaOption.descricao}}</option>
-                    </select>
-                </div>
-                <div *ngIf="editForm.get('classeContaId').invalid && (editForm.get('classeContaId').dirty || editForm.get('classeContaId').touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('classeContaId').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
                 </div>
             </div>
+            <hr>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>

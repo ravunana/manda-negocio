@@ -164,3 +164,54 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+.btn {
+  cursor: pointer;
+}
+
+.verticalLine {
+  border-left: thick solid grey;
+}
+
+.ui-autocomplete {
+  width: 100%;
+}
+.ui-autocomplete-input {
+  width: 100%;
+}
+
+.tooltip .ui-tooltip-text {
+  width: 100em;
+}
+
+::ng-deep .tooltip .ui-tooltip-text {
+  width: 100em;
+}
+// style for statistic
+.statistic {
+  margin: 1em;
+  min-width: 200px;
+  color: white;
+  text-align: center;
+  font-family: 'Roboto';
+}
+
+.icon {
+  font-size: 70px;
+  margin: 0px;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.data {
+  padding: 1em;
+  vertical-align: middle;
+}
+
+.value {
+  font-size: 40px;
+}
+
+.label {
+  text-transform: uppercase;
+}

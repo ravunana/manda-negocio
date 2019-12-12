@@ -6,6 +6,7 @@ import { RvAlertErrorComponent } from './alert/alert-error.component';
 import { RvLoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { ExportAsModule } from 'ngx-export-as';
+import { PrimengModule } from 'app/primeng/primeng.module';
 
 @NgModule({
   imports: [MandaSharedLibsModule],
@@ -18,7 +19,8 @@ import { ExportAsModule } from 'ngx-export-as';
     RvAlertErrorComponent,
     RvLoginModalComponent,
     HasAnyAuthorityDirective,
-    ExportAsModule
+    ExportAsModule,
+    PrimengModule
   ]
 })
 export class MandaSharedModule {}
