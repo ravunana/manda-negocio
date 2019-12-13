@@ -2,31 +2,31 @@
   "mandaApp": {
     "coordenadaBancaria": {
       "home": {
-        "title": "Coordenada Bancarias",
-        "createLabel": "Criar novo(a) Coordenada Bancaria",
-        "createOrEditLabel": "Criar ou editar Coordenada Bancaria",
-        "notFound": "Nenhum Coordenada Bancarias encontrado"
+        "title": "Coordenadas bancarias",
+        "createLabel": "Nova coordenada bancaria",
+        "createOrEditLabel": "Coordenda bancaria",
+        "notFound": "Nenhuma coordenada bancaria encontrada"
       },
-      "created": "Um novo Coordenada Bancaria foi criado com o identificador {{ param }}",
+      "created": "Uma nova coordenada bancaria foi criada com o identificador {{ param }}",
       "updated": "Coordenada Bancaria com identificador {{ param }} foi actualizado",
       "deleted": "Coordenada Bancaria com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Coordenada Bancaria {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar a Coordenada Bancaria {{ id }}?"
       },
       "detail": {
         "title": "Coordenada Bancaria"
       },
-      "descricao": "Descricao",
+      "descricao": "Descrição",
       "proprietario": "Proprietario",
-      "numeroConta": "Numero Conta",
-      "iban": "Iban",
+      "numeroConta": "Número da conta ou caixa",
+      "iban": "IBAN",
       "ativo": "Ativo",
       "mostrarDocumento": "Mostrar Documento",
       "mostrarPontoVenda": "Mostrar Ponto Venda",
       "padraoRecebimento": "Padrao Recebimento",
       "padraoPagamento": "Padrao Pagamento",
       "detalheLancamento": "Detalhe Lancamento",
-      "conta": "Conta",
+      "conta": "Conta contabil",
       "empresa": "Empresa"
     }
   }

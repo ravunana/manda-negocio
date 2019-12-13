@@ -2,6 +2,7 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="rv-coordenada-bancaria-heading" jhiTranslate="mandaApp.coordenadaBancaria.home.createOrEditLabel">Create or edit a Coordenada Bancaria</h2>
+            <hr>
             <div>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
@@ -11,6 +12,10 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.descricao" for="field_descricao">Descricao</label>
+
+                    <fa-icon pTooltip="Nome do banco ou caixa usado na empresa" tooltipPosition="top" icon="info-circle"
+                    fixedWidth="true"></fa-icon>
+                <label class="text-muted font-italic">(Obrigatório)</label>
                     <input type="text" class="form-control" name="descricao" id="field_descricao"
                            formControlName="descricao"/>
                     <div *ngIf="editForm.get('descricao').invalid && (editForm.get('descricao').dirty || editForm.get('descricao').touched)">
@@ -50,9 +55,20 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.ativo" for="field_ativo">Ativo</label>
-                    <input type="checkbox" class="form-control" name="ativo" id="field_ativo"
-                           formControlName="ativo"/>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.ativo" for="field_ativo">Ativo</label> -->
+                    <!-- <input type="checkbox" class="form-control" name="ativo" id="field_ativo"
+                           formControlName="ativo"/> -->
+
+                <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="ativo">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="true"> Activo
+                    </label>
+
+                    <label ngbButtonLabel class="btn-primary">
+                        <input class="bg-danger" ngbButton type="radio" [value]="false"> Inactivo
+                    </label>
+                </div>
+                <br>
                     <div *ngIf="editForm.get('ativo').invalid && (editForm.get('ativo').dirty || editForm.get('ativo').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('ativo').errors.required" jhiTranslate="entity.validation.required">
@@ -61,32 +77,79 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.mostrarDocumento" for="field_mostrarDocumento">Mostrar Documento</label>
-                    <input type="checkbox" class="form-control" name="mostrarDocumento" id="field_mostrarDocumento"
-                           formControlName="mostrarDocumento"/>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.mostrarDocumento" for="field_mostrarDocumento">Mostrar Documento</label> -->
+                    <!-- <input type="checkbox" class="form-control" name="mostrarDocumento" id="field_mostrarDocumento"
+                           formControlName="mostrarDocumento"/> -->
+
+                <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="mostrarDocumento">
+                    <label ngbButtonLabel class="btn-primary">
+                        <input ngbButton type="radio" [value]="true"> Mostra no documento
+                    </label>
+
+                    <label ngbButtonLabel class="btn-primary">
+                        <input class="bg-danger" ngbButton type="radio" [value]="false"> Não mostra no documento
+                    </label>
+                </div>
+                <br>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.mostrarPontoVenda" for="field_mostrarPontoVenda">Mostrar Ponto Venda</label>
-                    <input type="checkbox" class="form-control" name="mostrarPontoVenda" id="field_mostrarPontoVenda"
-                           formControlName="mostrarPontoVenda"/>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.mostrarPontoVenda" for="field_mostrarPontoVenda">Mostrar Ponto Venda</label> -->
+                    <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="mostrarPontoVenda">
+                        <label ngbButtonLabel class="btn-primary">
+                            <input ngbButton type="radio" [value]="true"> Mostra no ponto de venda
+                        </label>
+
+                        <label ngbButtonLabel class="btn-primary">
+                            <input class="bg-danger" ngbButton type="radio" [value]="false"> Não mostra no ponto de venda
+                        </label>
+                    </div>
+                    <!-- <input type="checkbox" class="form-control" name="mostrarPontoVenda" id="field_mostrarPontoVenda"
+                           formControlName="mostrarPontoVenda"/> -->
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.padraoRecebimento" for="field_padraoRecebimento">Padrao Recebimento</label>
-                    <input type="checkbox" class="form-control" name="padraoRecebimento" id="field_padraoRecebimento"
-                           formControlName="padraoRecebimento"/>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.padraoRecebimento" for="field_padraoRecebimento">Padrao Recebimento</label> -->
+                    <!-- <input type="checkbox" class="form-control" name="padraoRecebimento" id="field_padraoRecebimento"
+                           formControlName="padraoRecebimento"/> -->
+                           <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="padraoRecebimento">
+                            <label ngbButtonLabel class="btn-primary">
+                                <input ngbButton type="radio" [value]="true"> Conta padrão para recebimentos
+                            </label>
+
+                            <label ngbButtonLabel class="btn-primary">
+                                <input class="bg-danger" ngbButton type="radio" [value]="false"> Normal
+                            </label>
+                        </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.padraoPagamento" for="field_padraoPagamento">Padrao Pagamento</label>
-                    <input type="checkbox" class="form-control" name="padraoPagamento" id="field_padraoPagamento"
-                           formControlName="padraoPagamento"/>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.padraoPagamento" for="field_padraoPagamento">Padrao Pagamento</label> -->
+                    <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="padraoPagamento">
+                        <label ngbButtonLabel class="btn-primary">
+                            <input ngbButton type="radio" [value]="true"> Conta padrão para pagamentos
+                        </label>
+
+                        <label ngbButtonLabel class="btn-primary">
+                            <input class="bg-danger" ngbButton type="radio" [value]="false"> Normal
+                        </label>
+                    </div>
+                    <!-- <input type="checkbox" class="form-control" name="padraoPagamento" id="field_padraoPagamento"
+                           formControlName="padraoPagamento"/> -->
                 </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.conta" for="field_conta">Conta</label>
-                    <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
+
+                    <fa-icon pTooltip="Conta contabil que será movimentada a coordenada bancaria" tooltipPosition="top" icon="info-circle"
+                    fixedWidth="true"></fa-icon>
+                <label class="text-muted font-italic">(Opcional)</label>
+                    <div class="form-group">
+                        <p-autoComplete placeholder="Escreva o nome da conta" id="field_contaAgregadora" name="contaAgregadora" field="descricao"
+                            [suggestions]="contas" (completeMethod)="searchConta($event)"
+                            (onSelect)="onSelectConta($event)" required>
+                        </p-autoComplete>
+                    <!-- <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
-                    </select>
+                    </select> -->
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="mandaApp.coordenadaBancaria.empresa" for="field_empresas">Empresa</label>

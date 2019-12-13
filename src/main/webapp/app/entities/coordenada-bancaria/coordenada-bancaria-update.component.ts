@@ -144,4 +144,14 @@ export class CoordenadaBancariaUpdateComponent implements OnInit {
     }
     return option;
   }
+
+  onSelectConta(conta) {
+    this.editForm.get('contaId').patchValue(conta.id, { emitEvent: false });
+  }
+
+  searchConta(conta) {
+    this.contaService.query({ 'descricao.contains': conta.query }).subscribe(data => {
+      this.contas = data.body;
+    });
+  }
 }
