@@ -35,4 +35,16 @@ export class MoradaPessoaService {
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  deleteMorada(index: number): Observable<IMoradaPessoa> {
+    return this.http.delete<IMoradaPessoa>(`${this.resourceUrl}/delete/${index}`);
+  }
+
+  addMorada(morada: IMoradaPessoa): Observable<IMoradaPessoa> {
+    return this.http.post<IMoradaPessoa>(this.resourceUrl + '/add', morada);
+  }
+
+  getMoradas(): Observable<IMoradaPessoa[]> {
+    return this.http.get<IMoradaPessoa[]>(this.resourceUrl + '/lista');
+  }
 }

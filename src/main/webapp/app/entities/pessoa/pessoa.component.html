@@ -19,10 +19,10 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="imagem"><span jhiTranslate="mandaApp.pessoa.imagem">Imagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="tipoPessoa"><span jhiTranslate="mandaApp.pessoa.tipoPessoa">Tipo Pessoa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="nome"><span jhiTranslate="mandaApp.pessoa.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="nif"><span jhiTranslate="mandaApp.pessoa.nif">Nif</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="imagem"><span jhiTranslate="mandaApp.pessoa.imagem">Imagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.pessoa.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
@@ -30,15 +30,15 @@
             <tbody>
             <tr *ngFor="let pessoa of pessoas ;trackBy: trackId">
                 <td><a [routerLink]="['/pessoa', pessoa.id, 'view' ]">{{pessoa.id}}</a></td>
-                <td>{{pessoa.tipoPessoa}}</td>
-                <td>{{pessoa.nome}}</td>
-                <td>{{pessoa.nif}}</td>
                 <td>
                     <a *ngIf="pessoa.imagem" (click)="openFile(pessoa.imagemContentType, pessoa.imagem)">
                         <img [src]="'data:' + pessoa.imagemContentType + ';base64,' + pessoa.imagem" style="max-height: 30px;" alt="pessoa image"/>
                     </a>
                     <span *ngIf="pessoa.imagem">{{pessoa.imagemContentType}}, {{byteSize(pessoa.imagem)}}</span>
                 </td>
+                <td>{{pessoa.tipoPessoa}}</td>
+                <td>{{pessoa.nome}}</td>
+                <td>{{pessoa.nif}}</td>
                 <td>
                     {{pessoa.utilizadorLogin}}
                 </td>

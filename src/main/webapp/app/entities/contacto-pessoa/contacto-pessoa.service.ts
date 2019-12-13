@@ -35,4 +35,16 @@ export class ContactoPessoaService {
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  deleteContacto(index: number): Observable<IContactoPessoa> {
+    return this.http.delete<IContactoPessoa>(`${this.resourceUrl}/delete/${index}`);
+  }
+
+  addContacto(contacto: IContactoPessoa): Observable<IContactoPessoa> {
+    return this.http.post<IContactoPessoa>(this.resourceUrl + '/add', contacto);
+  }
+
+  getContactos(): Observable<IContactoPessoa[]> {
+    return this.http.get<IContactoPessoa[]>(this.resourceUrl + '/lista');
+  }
 }

@@ -126,4 +126,19 @@ public class ContactoPessoaResource {
         contactoPessoaService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @PostMapping("/contacto-pessoas/add")
+    public ContactoPessoaDTO addContacto(@RequestBody ContactoPessoaDTO contacto) {
+        return contactoPessoaService.addContacto(contacto);
+    }
+
+    @DeleteMapping("/contacto-pessoas/delete/{index}")
+    public ContactoPessoaDTO deleteContacto(@PathVariable int index) {
+        return contactoPessoaService.deleteContacto(index);
+    }
+
+    @GetMapping("/contacto-pessoas/lista")
+    public List<ContactoPessoaDTO> listarContactos() {
+        return contactoPessoaService.listContactos();
+    }
 }

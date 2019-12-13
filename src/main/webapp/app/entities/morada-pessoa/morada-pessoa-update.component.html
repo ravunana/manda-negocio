@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" autocomplete="off" >
             <h2 id="rv-morada-pessoa-heading" jhiTranslate="mandaApp.moradaPessoa.home.createOrEditLabel">Create or edit a Morada Pessoa</h2>
             <div>
                 <rv-alert-error></rv-alert-error>
@@ -9,22 +9,27 @@
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
                 </div>
-                <div class="form-group">
+                <div class="row">
+
+                <div class="form-group col">
                     <label class="form-control-label" jhiTranslate="mandaApp.moradaPessoa.pais" for="field_pais">Pais</label>
                     <input type="text" class="form-control" name="pais" id="field_pais"
                            formControlName="pais"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group col">
                     <label class="form-control-label" jhiTranslate="mandaApp.moradaPessoa.provincia" for="field_provincia">Provincia</label>
                     <input type="text" class="form-control" name="provincia" id="field_provincia"
                            formControlName="provincia"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group col">
                     <label class="form-control-label" jhiTranslate="mandaApp.moradaPessoa.municipio" for="field_municipio">Municipio</label>
                     <input type="text" class="form-control" name="municipio" id="field_municipio"
                            formControlName="municipio"/>
                 </div>
-                <div class="form-group">
+                </div>
+                <div class="row">
+
+                <div class="form-group col">
                     <label class="form-control-label" jhiTranslate="mandaApp.moradaPessoa.bairro" for="field_bairro">Bairro</label>
                     <input type="text" class="form-control" name="bairro" id="field_bairro"
                            formControlName="bairro"/>
@@ -35,7 +40,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group col">
                     <label class="form-control-label" jhiTranslate="mandaApp.moradaPessoa.rua" for="field_rua">Rua</label>
                     <input type="text" class="form-control" name="rua" id="field_rua"
                            formControlName="rua"/>
@@ -50,7 +55,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group col">
                     <label class="form-control-label" jhiTranslate="mandaApp.moradaPessoa.quarteirao" for="field_quarteirao">Quarteirao</label>
                     <input type="text" class="form-control" name="quarteirao" id="field_quarteirao"
                            formControlName="quarteirao"/>
@@ -61,7 +66,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group col">
                     <label class="form-control-label" jhiTranslate="mandaApp.moradaPessoa.numeroPorta" for="field_numeroPorta">Numero Porta</label>
                     <input type="text" class="form-control" name="numeroPorta" id="field_numeroPorta"
                            formControlName="numeroPorta"/>
@@ -73,7 +78,8 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                </div>
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.moradaPessoa.pessoa" for="field_pessoa">Pessoa</label>
                     <select class="form-control" id="field_pessoa" name="pessoa" formControlName="pessoaId">
                         <option *ngIf="!editForm.get('pessoaId').value" [ngValue]="null" selected></option>
@@ -85,7 +91,7 @@
                            *ngIf="editForm.get('pessoaId').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
-                </div>
+                </div> -->
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
@@ -93,6 +99,10 @@
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                <button (click)="onAddMorada()" type="button" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'plus'"></fa-icon>&nbsp;
+                    <span >Incluir morada</span>
                 </button>
             </div>
         </form>

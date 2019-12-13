@@ -2,27 +2,27 @@
   "mandaApp": {
     "moradaPessoa": {
       "home": {
-        "title": "Morada Pessoas",
-        "createLabel": "Criar novo(a) Morada Pessoa",
-        "createOrEditLabel": "Criar ou editar Morada Pessoa",
+        "title": "Morada da pessoa",
+        "createLabel": "Nova morada",
+        "createOrEditLabel": "Morada",
         "notFound": "Nenhum Morada Pessoas encontrado"
       },
-      "created": "Um novo Morada Pessoa foi criado com o identificador {{ param }}",
-      "updated": "Morada Pessoa com identificador {{ param }} foi actualizado",
+      "created": "Uma nova Morada foi criada com o identificador {{ param }}",
+      "updated": "Morada com identificador {{ param }} foi actualizado",
       "deleted": "Morada Pessoa com identificador {{ param }} foi eliminado",
       "delete": {
         "question": "Tem a certeza que pretende eliminar o(a) Morada Pessoa {{ id }}?"
       },
       "detail": {
-        "title": "Morada Pessoa"
+        "title": "Morada da pessoa"
       },
-      "pais": "Pais",
-      "provincia": "Provincia",
-      "municipio": "Municipio",
+      "pais": "PaÍs",
+      "provincia": "Provìncia",
+      "municipio": "Municìpio",
       "bairro": "Bairro",
       "rua": "Rua",
-      "quarteirao": "Quarteirao",
-      "numeroPorta": "Numero Porta",
+      "quarteirao": "Quarteirão | Edificio",
+      "numeroPorta": "Número da porta",
       "pessoa": "Pessoa"
     }
   }

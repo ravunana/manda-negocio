@@ -19,6 +19,7 @@ export class MoradaPessoaUpdateComponent implements OnInit {
   isSaving: boolean;
 
   pessoas: IPessoa[];
+  pessoaId = 0;
 
   editForm = this.fb.group({
     id: [],
@@ -29,7 +30,7 @@ export class MoradaPessoaUpdateComponent implements OnInit {
     rua: [null, [Validators.required, Validators.maxLength(200)]],
     quarteirao: [null, [Validators.maxLength(10)]],
     numeroPorta: [null, [Validators.maxLength(10)]],
-    pessoaId: [null, Validators.required]
+    pessoaId: [0]
   });
 
   constructor(
@@ -37,12 +38,14 @@ export class MoradaPessoaUpdateComponent implements OnInit {
     protected moradaPessoaService: MoradaPessoaService,
     protected pessoaService: PessoaService,
     protected activatedRoute: ActivatedRoute,
+    protected moradaService: MoradaPessoaService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ moradaPessoa }) => {
+      this.pessoaId = moradaPessoa.pessoaId;
       this.updateForm(moradaPessoa);
     });
     this.pessoaService
@@ -72,6 +75,8 @@ export class MoradaPessoaUpdateComponent implements OnInit {
     this.isSaving = true;
     const moradaPessoa = this.createFromForm();
     if (moradaPessoa.id !== undefined) {
+      // this.editForm.get('pessoaId').patchValue(this.pessoaId, { emitEvent: false });
+      // // alert( this.pessoaId );
       this.subscribeToSaveResponse(this.moradaPessoaService.update(moradaPessoa));
     } else {
       this.subscribeToSaveResponse(this.moradaPessoaService.create(moradaPessoa));
@@ -89,7 +94,8 @@ export class MoradaPessoaUpdateComponent implements OnInit {
       rua: this.editForm.get(['rua']).value,
       quarteirao: this.editForm.get(['quarteirao']).value,
       numeroPorta: this.editForm.get(['numeroPorta']).value,
-      pessoaId: this.editForm.get(['pessoaId']).value
+      pessoaId: this.pessoaId
+      // pessoaId: this.editForm.get(['pessoaId']).value
     };
   }
 
@@ -111,5 +117,11 @@ export class MoradaPessoaUpdateComponent implements OnInit {
 
   trackPessoaById(index: number, item: IPessoa) {
     return item.id;
+  }
+
+  onAddMorada() {
+    this.moradaPessoaService.addMorada(this.createFromForm()).subscribe(() => {
+      this.previousState();
+    });
   }
 }

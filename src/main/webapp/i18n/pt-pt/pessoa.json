@@ -2,23 +2,23 @@
   "mandaApp": {
     "pessoa": {
       "home": {
-        "title": "Pessoas",
-        "createLabel": "Criar novo(a) Pessoa",
-        "createOrEditLabel": "Criar ou editar Pessoa",
-        "notFound": "Nenhum Pessoas encontrado"
+        "title": "Lista de pessoas",
+        "createLabel": "Nova pessoa",
+        "createOrEditLabel": "Pessoa",
+        "notFound": "Nenhuma Pessoa encontrada"
       },
-      "created": "Um novo Pessoa foi criado com o identificador {{ param }}",
+      "created": "Uma nova pessoa foi criada com o identificador {{ param }}",
       "updated": "Pessoa com identificador {{ param }} foi actualizado",
       "deleted": "Pessoa com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Pessoa {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar a pessoa {{ id }}?"
       },
       "detail": {
         "title": "Pessoa"
       },
-      "tipoPessoa": "Tipo Pessoa",
+      "tipoPessoa": "Tipo de pessoa",
       "nome": "Nome",
-      "nif": "Nif",
+      "nif": "NIF",
       "imagem": "Imagem",
       "moradaPessoa": "Morada Pessoa",
       "contactoPessoa": "Contacto Pessoa",

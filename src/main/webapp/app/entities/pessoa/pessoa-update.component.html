@@ -2,68 +2,162 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="rv-pessoa-heading" jhiTranslate="mandaApp.pessoa.home.createOrEditLabel">Create or edit a Pessoa</h2>
+            <hr>
             <div>
                 <rv-alert-error></rv-alert-error>
-                <div class="form-group" [hidden]="!editForm.get('id').value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.pessoa.tipoPessoa" for="field_tipoPessoa">Tipo Pessoa</label>
-                    <input type="text" class="form-control" name="tipoPessoa" id="field_tipoPessoa"
-                           formControlName="tipoPessoa"/>
-                    <div *ngIf="editForm.get('tipoPessoa').invalid && (editForm.get('tipoPessoa').dirty || editForm.get('tipoPessoa').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('tipoPessoa').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.pessoa.nome" for="field_nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="field_nome"
-                           formControlName="nome"/>
-                    <div *ngIf="editForm.get('nome').invalid && (editForm.get('nome').dirty || editForm.get('nome').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('nome').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.pessoa.nif" for="field_nif">Nif</label>
-                    <input type="text" class="form-control" name="nif" id="field_nif"
-                           formControlName="nif"/>
-                    <div *ngIf="editForm.get('nif').invalid && (editForm.get('nif').dirty || editForm.get('nif').touched)">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.pessoa.imagem" for="field_imagem">Imagem</label>
-                    <div>
-                        <img [src]="'data:' + editForm.get('imagemContentType').value + ';base64,' + editForm.get('imagem').value" style="max-height: 100px;" *ngIf="editForm.get('imagem').value" alt="pessoa image"/>
-                        <div *ngIf="editForm.get('imagem').value" class="form-text text-danger clearfix">
-                            <span class="pull-left">{{editForm.get('imagemContentType').value}}, {{byteSize(editForm.get('imagem').value)}}</span>
-                            <button type="button" (click)="clearInputImage('imagem', 'imagemContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon [icon]="'times'"></fa-icon>
-                            </button>
+
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="mandaApp.pessoa.imagem" for="field_imagem">Imagem</label>
+                            <div>
+                                <img [src]="'data:' + editForm.get('imagemContentType').value + ';base64,' + editForm.get('imagem').value" style="max-height: 100%; max-width: 100%;" *ngIf="editForm.get('imagem').value" alt="pessoa image"/>
+                                <div *ngIf="editForm.get('imagem').value" class="form-text text-danger clearfix">
+                                    <span class="pull-left">{{editForm.get('imagemContentType').value}}, {{byteSize(editForm.get('imagem').value)}}</span>
+                                    <button type="button" (click)="clearInputImage('imagem', 'imagemContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                        <fa-icon [icon]="'times'"></fa-icon>
+                                    </button>
+                                </div>
+                                <input type="file" id="file_imagem" (change)="setFileData($event, 'imagem', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                            </div>
+                            <input type="hidden" class="form-control" name="imagem" id="field_imagem"
+                                   formControlName="imagem"/>
+                            <input type="hidden" class="form-control" name="imagemContentType" id="field_imagemContentType"
+                                   formControlName="imagemContentType" />
                         </div>
-                        <input type="file" id="file_imagem" (change)="setFileData($event, 'imagem', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
                     </div>
-                    <input type="hidden" class="form-control" name="imagem" id="field_imagem"
-                           formControlName="imagem"/>
-                    <input type="hidden" class="form-control" name="imagemContentType" id="field_imagemContentType"
-                           formControlName="imagemContentType" />
+                    <div class="col-md-6">
+
+                        <div class="form-group" [hidden]="!editForm.get('id').value">
+                            <label for="id" jhiTranslate="global.field.id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                                readonly />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="mandaApp.pessoa.tipoPessoa" for="field_tipoPessoa">Tipo Pessoa</label>
+                            <select class="form-control" formControlName="tipoPessoa">
+                                <option *ngFor="let tipo of tiposPessoa" [ngValue]="tipo.valor">
+                                    {{ tipo.nome }}
+                                </option>
+                            </select>
+                            <!-- <input type="text" class="form-control" name="tipoPessoa" id="field_tipoPessoa"
+                                   formControlName="tipoPessoa"/> -->
+                            <div *ngIf="editForm.get('tipoPessoa').invalid && (editForm.get('tipoPessoa').dirty || editForm.get('tipoPessoa').touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="editForm.get('tipoPessoa').errors.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="mandaApp.pessoa.nome" for="field_nome">Nome</label>
+                            <input type="text" class="form-control" name="nome" id="field_nome"
+                                   formControlName="nome"/>
+                            <div *ngIf="editForm.get('nome').invalid && (editForm.get('nome').dirty || editForm.get('nome').touched)">
+                                <small class="form-text text-danger"
+                                       *ngIf="editForm.get('nome').errors.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="mandaApp.pessoa.nif" for="field_nif">Nif</label>
+                            <input type="text" class="form-control" name="nif" id="field_nif"
+                                   formControlName="nif"/>
+                            <div *ngIf="editForm.get('nif').invalid && (editForm.get('nif').dirty || editForm.get('nif').touched)">
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.pessoa.utilizador" for="field_utilizador">Utilizador</label>
                     <select class="form-control" id="field_utilizador" name="utilizador" formControlName="utilizadorId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
                     </select>
-                </div>
+                </div> -->
+                <hr>
+
+
+                <p-accordion>
+                    <p-accordionTab header="Contactos" [selected]="true" >
+                        <table class="table" *ngIf="contactos.length > 0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tipo de contacto</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Contacto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let contacto of contactos; let i = index">
+                                    <td> {{ contacto.tipoContacto }} </td>
+                                    <td> {{ contacto.descricao }} </td>
+                                    <td> {{ contacto.contacto }} </td>
+                                    <td>
+                                        <!-- <button (click)="onUpdateItem(item)" type="button" class="btn btn-primary" >
+                                            <fa-icon [icon]="'edit'" ></fa-icon>
+                                        </button> -->
+                                        <button type="button" class="btn btn-danger" (click)="onDeleteContacto(i)" >
+                                            <fa-icon [icon]="'trash'"
+                                            pTooltip="Apagar contacto" tooltipPosition="right"></fa-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-primary" type="button" [routerLink]="['/contacto-pessoa/new']">
+                            <fa-icon [icon]="'plus'" ></fa-icon>
+                            <span>Novo contacto</span>
+                        </button>
+                    </p-accordionTab>
+                    <p-accordionTab header="Morada | Localização" [selected]="true" >
+                        <table class="table" *ngIf="moradas.length > 0" >
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Pais</th>
+                                    <th scope="col">Provincia</th>
+                                    <th scope="col">Municipio</th>
+                                    <th scope="col">Bairro</th>
+                                    <th scope="col">Rua</th>
+                                    <th scope="col">Quarteirão | Edificio</th>
+                                    <th scope="col">Nº da porta | Apartamento</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let morada of moradas; let i = index">
+                                    <th scope="row"> {{ morada.id }} </th>
+                                    <td> {{ morada.pais }} </td>
+                                    <td> {{ morada.provincia }} </td>
+                                    <td> {{ morada.municipio }} </td>
+                                    <td> {{ morada.bairro }} </td>
+                                    <td> {{ morada.rua }} </td>
+                                    <td> {{ morada.quarteirao }} </td>
+                                    <td> {{ morada.numeroPorta }} </td>
+
+                                    <button type="button" class="btn btn-danger" (click)="onDeleteMorada(i)">
+                                        <fa-icon [icon]="'trash'"></fa-icon>
+                                    </button>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    <button class="btn btn-primary" type="button" [routerLink]="['/morada-pessoa/new']"
+                        >
+                        <fa-icon [icon]="'plus'" ></fa-icon>
+                        <span>Nova morada</span>
+                    </button>
+                    </p-accordionTab>
+                </p-accordion>
+
             </div>
+            <hr>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

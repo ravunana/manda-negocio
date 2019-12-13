@@ -5,6 +5,15 @@
             <hr>
             <rv-alert-error></rv-alert-error>
             <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mandaApp.pessoa.imagem">Imagem</span></dt>
+                <dd>
+                    <div *ngIf="pessoa.imagem">
+                        <a (click)="openFile(pessoa.imagemContentType, pessoa.imagem)">
+                            <img [src]="'data:' + pessoa.imagemContentType + ';base64,' + pessoa.imagem" style="max-width: 45%;" alt="pessoa image"/>
+                        </a>
+                        {{pessoa.imagemContentType}}, {{byteSize(pessoa.imagem)}}
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="mandaApp.pessoa.tipoPessoa">Tipo Pessoa</span></dt>
                 <dd>
                     <span>{{pessoa.tipoPessoa}}</span>
@@ -17,20 +26,84 @@
                 <dd>
                     <span>{{pessoa.nif}}</span>
                 </dd>
-                <dt><span jhiTranslate="mandaApp.pessoa.imagem">Imagem</span></dt>
-                <dd>
-                    <div *ngIf="pessoa.imagem">
-                        <a (click)="openFile(pessoa.imagemContentType, pessoa.imagem)">
-                            <img [src]="'data:' + pessoa.imagemContentType + ';base64,' + pessoa.imagem" style="max-width: 100%;" alt="pessoa image"/>
-                        </a>
-                        {{pessoa.imagemContentType}}, {{byteSize(pessoa.imagem)}}
-                    </div>
-                </dd>
                 <dt><span jhiTranslate="mandaApp.pessoa.utilizador">Utilizador</span></dt>
                 <dd>
                     {{pessoa.utilizadorLogin}}
                 </dd>
             </dl>
+
+            <hr>
+
+            <div *ngIf="contactos.length > 0">
+
+            <h4 class="font-weight-bold">Contactos</h4>
+            <table class="table" *ngIf="contactos.length > 0">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Contacto</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contacto of contactos; let i = index">
+                        <th scope="row"> {{ contacto.id }} </th>
+                        <td> {{ contacto.tipoContacto }} </td>
+                        <td> {{ contacto.descricao }} </td>
+                        <td> {{ contacto.contacto }} </td>
+                        <td>
+                            <button [routerLink]="['/contacto-pessoa', contacto.id, 'edit']" type="button"
+                                class="btn btn-primary">
+                                <fa-icon [icon]="'edit'"></fa-icon>
+                            </button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <hr>
+            <div *ngIf="moradas.length > 0" >
+                <h4 class="font-weight-bold">Morada | Localização</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Pais</th>
+                            <th scope="col">Provincia</th>
+                            <th scope="col">Municipio</th>
+                            <th scope="col">Bairro</th>
+                            <th scope="col">Rua</th>
+                            <th scope="col">Quarteirão | Edificio</th>
+                            <th scope="col">Nº da porta | Apartamento</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let morada of moradas; let i = index">
+                            <th scope="row"> {{ morada.id }} </th>
+                            <td> {{ morada.pais }} </td>
+                            <td> {{ morada.provincia }} </td>
+                            <td> {{ morada.municipio }} </td>
+                            <td> {{ morada.bairro }} </td>
+                            <td> {{ morada.rua }} </td>
+                            <td> {{ morada.quarteirao }} </td>
+                            <td> {{ morada.numeroPorta }} </td>
+                            <td>
+                                <button [routerLink]="['/morada-pessoa', morada.id, 'edit']" type="button"
+                                    class="btn btn-primary">
+                                    <fa-icon [icon]="'edit'"></fa-icon>
+                                </button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
 
             <button type="submit"
                     (click)="previousState()"

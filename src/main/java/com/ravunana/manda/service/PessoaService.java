@@ -2,11 +2,14 @@ package com.ravunana.manda.service;
 
 import com.ravunana.manda.domain.Pessoa;
 import com.ravunana.manda.repository.PessoaRepository;
+import com.ravunana.manda.repository.UserRepository;
+import com.ravunana.manda.service.dto.ContactoPessoaDTO;
+import com.ravunana.manda.service.dto.MoradaPessoaDTO;
 import com.ravunana.manda.service.dto.PessoaDTO;
 import com.ravunana.manda.service.mapper.PessoaMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,13 @@ public class PessoaService {
 
     private final PessoaMapper pessoaMapper;
 
+    @Autowired
+    private ContactoPessoaService contactoPessoaService;
+    @Autowired
+    private MoradaPessoaService moradaPessoaService;
+    @Autowired
+    private UserRepository UserRepository;
+
     public PessoaService(PessoaRepository pessoaRepository, PessoaMapper pessoaMapper) {
         this.pessoaRepository = pessoaRepository;
         this.pessoaMapper = pessoaMapper;
@@ -41,7 +51,22 @@ public class PessoaService {
     public PessoaDTO save(PessoaDTO pessoaDTO) {
         log.debug("Request to save Pessoa : {}", pessoaDTO);
         Pessoa pessoa = pessoaMapper.toEntity(pessoaDTO);
+        pessoa.setUtilizador( UserRepository.findById(1L).get() );
         pessoa = pessoaRepository.save(pessoa);
+        // Percorrer contacto
+        for ( ContactoPessoaDTO contacto : contactoPessoaService.listContactos() ) {
+            contacto.setPessoaId( pessoa.getId() );
+            contactoPessoaService.save( contacto );
+        }
+
+        // Percorrer moradas
+        for ( MoradaPessoaDTO morada : moradaPessoaService.listMoradas() ) {
+            morada.setPessoaId( pessoa.getId() );
+            moradaPessoaService.save( morada );
+        }
+
+        contactoPessoaService.limparContactos();
+        moradaPessoaService.limparMoradas();
         return pessoaMapper.toDto(pessoa);
     }
 

@@ -10,6 +10,9 @@ import { IContactoPessoa, ContactoPessoa } from 'app/shared/model/contacto-pesso
 import { ContactoPessoaService } from './contacto-pessoa.service';
 import { IPessoa } from 'app/shared/model/pessoa.model';
 import { PessoaService } from 'app/entities/pessoa/pessoa.service';
+import { LookupItemService } from '../lookup-item/lookup-item.service';
+import { ILookupItem } from 'app/shared/model/lookup-item.model';
+import { IMoradaPessoa } from 'app/shared/model/morada-pessoa.model';
 
 @Component({
   selector: 'rv-contacto-pessoa-update',
@@ -17,15 +20,20 @@ import { PessoaService } from 'app/entities/pessoa/pessoa.service';
 })
 export class ContactoPessoaUpdateComponent implements OnInit {
   isSaving: boolean;
+  tiposContacto: ILookupItem[];
+  descricoesContacto: ILookupItem[];
+  contactos: IContactoPessoa[];
+  moradas: IMoradaPessoa[];
 
   pessoas: IPessoa[];
+  private pessoaId = 0;
 
   editForm = this.fb.group({
     id: [],
     tipoContacto: [null, [Validators.required]],
     descricao: [],
     contacto: [null, [Validators.required]],
-    pessoaId: [null, Validators.required]
+    pessoaId: [0]
   });
 
   constructor(
@@ -33,13 +41,22 @@ export class ContactoPessoaUpdateComponent implements OnInit {
     protected contactoPessoaService: ContactoPessoaService,
     protected pessoaService: PessoaService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected lookupItemService: LookupItemService,
+    protected contactoService: ContactoPessoaService
   ) {}
 
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ contactoPessoa }) => {
+      this.pessoaId = contactoPessoa.pessoaId;
       this.updateForm(contactoPessoa);
+    });
+    this.lookupItemService.query({ 'lookupId.equals': '12201' }).subscribe(data => {
+      this.tiposContacto = data.body;
+    });
+    this.lookupItemService.query({ 'lookupId.equals': '12202' }).subscribe(data => {
+      this.descricoesContacto = data.body;
     });
     this.pessoaService
       .query()
@@ -77,7 +94,7 @@ export class ContactoPessoaUpdateComponent implements OnInit {
       tipoContacto: this.editForm.get(['tipoContacto']).value,
       descricao: this.editForm.get(['descricao']).value,
       contacto: this.editForm.get(['contacto']).value,
-      pessoaId: this.editForm.get(['pessoaId']).value
+      pessoaId: this.pessoaId
     };
   }
 
@@ -99,5 +116,11 @@ export class ContactoPessoaUpdateComponent implements OnInit {
 
   trackPessoaById(index: number, item: IPessoa) {
     return item.id;
+  }
+
+  onAddContacto() {
+    this.contactoPessoaService.addContacto(this.createFromForm()).subscribe(contactoResult => {
+      this.previousState();
+    });
   }
 }

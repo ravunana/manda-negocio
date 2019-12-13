@@ -126,4 +126,19 @@ public class MoradaPessoaResource {
         moradaPessoaService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @PostMapping("/morada-pessoas/add")
+    public MoradaPessoaDTO addMorada(@RequestBody MoradaPessoaDTO contacto) {
+        return moradaPessoaService.addMorada(contacto);
+    }
+
+    @DeleteMapping("/morada-pessoas/delete/{index}")
+    public MoradaPessoaDTO deleteMorada(@PathVariable int index) {
+        return moradaPessoaService.deleteMorada(index);
+    }
+
+    @GetMapping("/morada-pessoas/lista")
+    public List<MoradaPessoaDTO> listarMoradas() {
+        return moradaPessoaService.listMoradas();
+    }
 }

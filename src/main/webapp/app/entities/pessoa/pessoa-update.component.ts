@@ -10,6 +10,12 @@ import { IPessoa, Pessoa } from 'app/shared/model/pessoa.model';
 import { PessoaService } from './pessoa.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { LookupItem } from 'app/shared/model/lookup-item.model';
+import { IContactoPessoa } from 'app/shared/model/contacto-pessoa.model';
+import { IMoradaPessoa } from 'app/shared/model/morada-pessoa.model';
+import { LookupItemService } from '../lookup-item/lookup-item.service';
+import { MoradaPessoaService } from '../morada-pessoa/morada-pessoa.service';
+import { ContactoPessoaService } from '../contacto-pessoa/contacto-pessoa.service';
 
 @Component({
   selector: 'rv-pessoa-update',
@@ -17,6 +23,9 @@ import { UserService } from 'app/core/user/user.service';
 })
 export class PessoaUpdateComponent implements OnInit {
   isSaving: boolean;
+  tiposPessoa: LookupItem[];
+  contactos: IContactoPessoa[];
+  moradas: IMoradaPessoa[];
 
   users: IUser[];
 
@@ -37,6 +46,9 @@ export class PessoaUpdateComponent implements OnInit {
     protected userService: UserService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
+    protected lookupItemService: LookupItemService,
+    protected moradaService: MoradaPessoaService,
+    protected contactoService: ContactoPessoaService,
     private fb: FormBuilder
   ) {}
 
@@ -45,6 +57,11 @@ export class PessoaUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ pessoa }) => {
       this.updateForm(pessoa);
     });
+    this.lookupItemService.query({ 'lookupId.equals': '11801' }).subscribe(data => {
+      this.tiposPessoa = data.body;
+    });
+    this.getContactos();
+    this.getMoradas();
     this.userService
       .query()
       .subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body), (res: HttpErrorResponse) => this.onError(res.message));
@@ -128,7 +145,8 @@ export class PessoaUpdateComponent implements OnInit {
       nif: this.editForm.get(['nif']).value,
       imagemContentType: this.editForm.get(['imagemContentType']).value,
       imagem: this.editForm.get(['imagem']).value,
-      utilizadorId: this.editForm.get(['utilizadorId']).value
+      utilizadorId: 0
+      // utilizadorId: this.editForm.get(['utilizadorId']).value
     };
   }
 
@@ -150,5 +168,29 @@ export class PessoaUpdateComponent implements OnInit {
 
   trackUserById(index: number, item: IUser) {
     return item.id;
+  }
+
+  getContactos() {
+    this.contactoService.getContactos().subscribe(contactoResult => {
+      this.contactos = contactoResult;
+    });
+  }
+
+  getMoradas() {
+    this.moradaService.getMoradas().subscribe(moradaResult => {
+      this.moradas = moradaResult;
+    });
+  }
+
+  onDeleteContacto(index) {
+    this.contactoService.deleteContacto(index).subscribe(() => {
+      this.getContactos();
+    });
+  }
+
+  onDeleteMorada(index) {
+    this.moradaService.deleteMorada(index).subscribe(() => {
+      this.getMoradas();
+    });
   }
 }
