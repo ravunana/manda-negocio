@@ -81,4 +81,12 @@ public class SerieDocumentoService {
         log.debug("Request to delete SerieDocumento : {}", id);
         serieDocumentoRepository.deleteById(id);
     }
+
+    public SerieDocumento getSerieDocumentoAnoActual() {
+        return serieDocumentoRepository.findAll().stream().findFirst().get();
+    }
+
+    public void atualizarSerieDocumento( SerieDocumento serie ) {
+        serieDocumentoRepository.save(serie);
+    }
 }

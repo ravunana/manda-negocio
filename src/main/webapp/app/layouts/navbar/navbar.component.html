@@ -312,6 +312,14 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="serie-documento"
+                            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.serieDocumento">Serie Documento</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_USER'" routerLink="arquivo"
                             routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
                             (click)="collapseNavbar()">

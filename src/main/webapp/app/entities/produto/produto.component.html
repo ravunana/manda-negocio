@@ -18,20 +18,20 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <th scope="col"  jhiSortBy="imagem"><span jhiTranslate="mandaApp.produto.imagem">Imagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="mandaApp.produto.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="ean"><span jhiTranslate="mandaApp.produto.ean">Ean</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.produto.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="nome"><span jhiTranslate="mandaApp.produto.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="imagem"><span jhiTranslate="mandaApp.produto.imagem">Imagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="composto"><span jhiTranslate="mandaApp.produto.composto">Composto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="estoqueMinimo"><span jhiTranslate="mandaApp.produto.estoqueMinimo">Estoque Minimo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="estoqueMaximo"><span jhiTranslate="mandaApp.produto.estoqueMaximo">Estoque Maximo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="estoqueMinimo"><span jhiTranslate="mandaApp.produto.estoqueMinimo">Estoque Minimo</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <!-- <th scope="col"  jhiSortBy="estoqueMaximo"><span jhiTranslate="mandaApp.produto.estoqueMaximo">Estoque Maximo</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="estoqueAtual"><span jhiTranslate="mandaApp.produto.estoqueAtual">Estoque Atual</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.produto.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="mostrarPDV"><span jhiTranslate="mandaApp.produto.mostrarPDV">Mostrar PDV</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.produto.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <!-- <th scope="col"  jhiSortBy="mostrarPDV"><span jhiTranslate="mandaApp.produto.mostrarPDV">Mostrar PDV</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="prazoMedioEntrega"><span jhiTranslate="mandaApp.produto.prazoMedioEntrega">Prazo Medio Entrega</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.produto.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.produto.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="localArmazenamentoNome"><span jhiTranslate="mandaApp.produto.localArmazenamento">Local Armazenamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="familiaNome"><span jhiTranslate="mandaApp.produto.familia">Familia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.produto.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -41,27 +41,27 @@
             </thead>
             <tbody>
             <tr *ngFor="let produto of produtos ;trackBy: trackId">
-                <td><a [routerLink]="['/produto', produto.id, 'view' ]">{{produto.id}}</a></td>
-                <td>{{produto.tipo}}</td>
-                <td>{{produto.ean}}</td>
-                <td>{{produto.numero}}</td>
-                <td>{{produto.nome}}</td>
+                <!-- <td><a [routerLink]="['/produto', produto.id, 'view' ]">{{produto.id}}</a></td> -->
                 <td>
                     <a *ngIf="produto.imagem" (click)="openFile(produto.imagemContentType, produto.imagem)">
                         <img [src]="'data:' + produto.imagemContentType + ';base64,' + produto.imagem" style="max-height: 30px;" alt="produto image"/>
                     </a>
                     <span *ngIf="produto.imagem">{{produto.imagemContentType}}, {{byteSize(produto.imagem)}}</span>
                 </td>
+                <td>{{produto.tipo}}</td>
+                <td>{{produto.ean}}</td>
+                <td>{{produto.numero}}</td>
+                <td>{{produto.nome}}</td>
                 <td>{{produto.composto}}</td>
-                <td>{{produto.estoqueMinimo}}</td>
-                <td>{{produto.estoqueMaximo}}</td>
-                <td>{{produto.estoqueAtual}}</td>
-                <td>{{produto.descricao}}</td>
-                <td>{{produto.mostrarPDV}}</td>
+                <!-- <td>{{produto.estoqueMinimo}}</td>
+                <td>{{produto.estoqueMaximo}}</td> -->
+                <td>{{produto.estoqueAtual | number }} unidade </td>
+                <!-- <td>{{produto.descricao}}</td> -->
+                <!-- <td>{{produto.mostrarPDV}}</td> -->
                 <td>{{produto.prazoMedioEntrega}}</td>
-                <td>
+                <!-- <td>
                     {{produto.utilizadorLogin}}
-                </td>
+                </td> -->
                 <td>
                     <div *ngIf="produto.localArmazenamentoId">
                         <a [routerLink]="['/local-armazenamento', produto.localArmazenamentoId , 'view' ]" >{{produto.localArmazenamentoNome}}</a>

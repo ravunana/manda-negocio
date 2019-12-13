@@ -3,41 +3,41 @@
     "produto": {
       "home": {
         "title": "Produtos",
-        "createLabel": "Criar novo(a) Produto",
-        "createOrEditLabel": "Criar ou editar Produto",
-        "notFound": "Nenhum Produtos encontrado"
+        "createLabel": "Novo produto",
+        "createOrEditLabel": "Produto",
+        "notFound": "Nenhum Produto encontrado"
       },
       "created": "Um novo Produto foi criado com o identificador {{ param }}",
       "updated": "Produto com identificador {{ param }} foi actualizado",
       "deleted": "Produto com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Produto {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar o Produto {{ id }}?"
       },
       "detail": {
         "title": "Produto"
       },
       "tipo": "Tipo",
-      "ean": "Ean",
-      "numero": "Numero",
+      "ean": "Código de barra",
+      "numero": "Número",
       "nome": "Nome",
       "imagem": "Imagem",
       "composto": "Composto",
-      "estoqueMinimo": "Estoque Minimo",
-      "estoqueMaximo": "Estoque Maximo",
-      "estoqueAtual": "Estoque Atual",
-      "descricao": "Descricao",
-      "mostrarPDV": "Mostrar PDV",
-      "prazoMedioEntrega": "Prazo Medio Entrega",
+      "estoqueMinimo": "Estoque minimo",
+      "estoqueMaximo": "Estoque maximo",
+      "estoqueAtual": "Estoque atual",
+      "descricao": "Descrição",
+      "mostrarPDV": "Mostrar no ponto de venda",
+      "prazoMedioEntrega": "Prazo médio de entrega",
       "compostoProduto": "Composto Produto",
-      "conversaoUnidade": "Conversao Unidade",
-      "estruturaCalculo": "Estrutura Calculo",
+      "conversaoUnidade": "Conversão de unidade",
+      "estruturaCalculo": "Estrutura de cálculo",
       "itemCompra": "Item Compra",
       "itemVenda": "Item Venda",
       "utilizador": "Utilizador",
       "imposto": "Imposto",
       "fornecedor": "Fornecedor",
-      "localArmazenamento": "Local Armazenamento",
-      "familia": "Familia",
+      "localArmazenamento": "Local de armazenamento",
+      "familia": "Familia ou Grupo",
       "empresa": "Empresa",
       "estado": "Estado"
     }

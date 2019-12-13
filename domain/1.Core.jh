@@ -301,3 +301,4 @@ service * with serviceClass
 paginate * with pagination
 filter Lookup, LookupItem, Cliente, Fornecedor, Pessoa, Empresa, Arquivo, CoordenadaBancaria
 filter Imposto, FluxoDocumento, DocumentoComercial, Arquivo
+
