@@ -2,27 +2,27 @@
   "mandaApp": {
     "unidadeMedida": {
       "home": {
-        "title": "Unidade Medidas",
-        "createLabel": "Criar novo(a) Unidade Medida",
-        "createOrEditLabel": "Criar ou editar Unidade Medida",
-        "notFound": "Nenhum Unidade Medidas encontrado"
+        "title": "Unidades de medidas",
+        "createLabel": "Nova unidade",
+        "createOrEditLabel": "Unidade de medida",
+        "notFound": "Nenhuma Unidade encontrada"
       },
-      "created": "Um novo Unidade Medida foi criado com o identificador {{ param }}",
-      "updated": "Unidade Medida com identificador {{ param }} foi actualizado",
-      "deleted": "Unidade Medida com identificador {{ param }} foi eliminado",
+      "created": "Uma nova Unidade foi criada com o identificador {{ param }}",
+      "updated": "Unidade com identificador {{ param }} foi actualizado",
+      "deleted": "Unidade com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Unidade Medida {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar a Unidade {{ id }}?"
       },
       "detail": {
-        "title": "Unidade Medida"
+        "title": "Unidade de medida"
       },
       "nome": "Nome",
       "sigla": "Sigla",
-      "valor": "Valor",
-      "unidadeMedida": "Unidade Medida",
+      "valor": "Valor de conversão",
+      "unidadeMedida": "Unidade de medida",
       "grupoTributacaoImposto": "Grupo Tributacao Imposto",
       "compostoProduto": "Composto Produto",
-      "unidadeConversao": "Unidade Conversao"
+      "unidadeConversao": "Unidade de conversão"
     }
   }
 }
