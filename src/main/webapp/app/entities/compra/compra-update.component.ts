@@ -32,7 +32,7 @@ export class CompraUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    numero: [null, [Validators.required]],
+    numero: [null],
     data: [],
     observacaoGeral: [],
     observacaoInterna: [],
@@ -135,11 +135,14 @@ export class CompraUpdateComponent implements OnInit {
     return {
       ...new Compra(),
       id: this.editForm.get(['id']).value,
-      numero: this.editForm.get(['numero']).value,
-      data: this.editForm.get(['data']).value != null ? moment(this.editForm.get(['data']).value, DATE_TIME_FORMAT) : undefined,
+      numero: '0',
+      // numero: this.editForm.get(['numero']).value,
+      data: moment(),
+      // data: this.editForm.get(['data']).value != null ? moment(this.editForm.get(['data']).value, DATE_TIME_FORMAT) : undefined,
       observacaoGeral: this.editForm.get(['observacaoGeral']).value,
       observacaoInterna: this.editForm.get(['observacaoInterna']).value,
-      utilizadorId: this.editForm.get(['utilizadorId']).value,
+      // utilizadorId: this.editForm.get(['utilizadorId']).value,
+      utilizadorId: 1,
       tipoDocumentoId: this.editForm.get(['tipoDocumentoId']).value,
       empresaId: this.editForm.get(['empresaId']).value
     };

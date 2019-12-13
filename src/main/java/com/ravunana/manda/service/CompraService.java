@@ -1,17 +1,21 @@
 package com.ravunana.manda.service;
 
 import com.ravunana.manda.domain.Compra;
+import com.ravunana.manda.domain.DocumentoComercial;
+import com.ravunana.manda.domain.SerieDocumento;
 import com.ravunana.manda.repository.CompraRepository;
+import com.ravunana.manda.repository.DocumentoComercialRepository;
 import com.ravunana.manda.service.dto.CompraDTO;
 import com.ravunana.manda.service.mapper.CompraMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
@@ -27,6 +31,15 @@ public class CompraService {
 
     private final CompraMapper compraMapper;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SerieDocumentoService serieDocumentoService;
+
+    @Autowired
+    private DocumentoComercialRepository documentoComercialRepository;
+
     public CompraService(CompraRepository compraRepository, CompraMapper compraMapper) {
         this.compraRepository = compraRepository;
         this.compraMapper = compraMapper;
@@ -40,7 +53,19 @@ public class CompraService {
      */
     public CompraDTO save(CompraDTO compraDTO) {
         log.debug("Request to save Compra : {}", compraDTO);
+        DocumentoComercial tipoDocumentoComercial = documentoComercialRepository.findById( compraDTO.getTipoDocumentoId() ).get();
         Compra compra = compraMapper.toEntity(compraDTO);
+        compra.setData(ZonedDateTime.now());
+        compra.setUtilizador( userService.getCurrentUserLogged() );
+        SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
+        if ( compraDTO.getId() == null || compraDTO.getId().equals(null) ) {
+            int sequencia = serieDocumento.getCodigoCompra();
+            compra.setNumero( tipoDocumentoComercial.getNome() + " " + serieDocumento.getSerie() + " " + sequencia ); // <TIPO_DOCUMENTO> <SEQUENCIA_FORNECEDOR>
+
+                // atualizar serie do documento
+                serieDocumento.setCodigoCompra( sequencia + 1 );
+                serieDocumentoService.atualizarSerieDocumento(serieDocumento);
+        }
         compra = compraRepository.save(compra);
         return compraMapper.toDto(compra);
     }

@@ -9,7 +9,7 @@
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.compra.numero" for="field_numero">Numero</label>
                     <input type="text" class="form-control" name="numero" id="field_numero"
                            formControlName="numero"/>
@@ -19,13 +19,13 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
-                <div class="form-group">
+                </div> -->
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.compra.data" for="field_data">Data</label>
                     <div class="d-flex">
                         <input id="field_data" type="datetime-local" class="form-control" name="data" formControlName="data" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.compra.observacaoGeral" for="field_observacaoGeral">Observacao Geral</label>
                     <textarea class="form-control" name="observacaoGeral" id="field_observacaoGeral"
@@ -37,18 +37,18 @@
                               formControlName="observacaoInterna"></textarea>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.compra.utilizador" for="field_utilizador">Utilizador</label>
                     <select class="form-control" id="field_utilizador" name="utilizador" formControlName="utilizadorId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
                     </select>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.compra.tipoDocumento" for="field_tipoDocumento">Tipo Documento</label>
                     <select class="form-control" id="field_tipoDocumento" name="tipoDocumento" formControlName="tipoDocumentoId">
                         <option *ngIf="!editForm.get('tipoDocumentoId').value" [ngValue]="null" selected></option>
-                        <option [ngValue]="documentoComercialOption.id" *ngFor="let documentoComercialOption of documentocomercials; trackBy: trackDocumentoComercialById">{{documentoComercialOption.nome}}</option>
+                        <option [ngValue]="documentoComercialOption.id" *ngFor="let documentoComercialOption of documentocomercials; trackBy: trackDocumentoComercialById">{{documentoComercialOption.nome}} - {{ documentoComercialOption.descricao }} </option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('tipoDocumentoId').invalid && (editForm.get('tipoDocumentoId').dirty || editForm.get('tipoDocumentoId').touched)">
@@ -65,6 +65,71 @@
                     </select>
                 </div>
             </div>
+
+            <hr>
+
+            <p-accordion>
+                <p-accordionTab header="Itens da compra" [selected]="true" >
+                        <!-- <table class="table" *ngIf="items.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Produto | Serviço</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col">Desconto</th>
+                                        <th scope="col">SubTotal</th>
+                                        <th scope="col">Opções</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of items; let i = index">
+                                        <th scope="row"> {{ item.produtoId }} </th>
+                                        <td> {{ item.produtoNome }} </td>
+                                        <td> {{ item.valor | currency: 'AOA' }} </td>
+                                        <td> {{ item.quantidade | number }} </td>
+                                        <td> {{ item.desconto/100 | percent }} </td>
+                                        <td> {{ itemVendaService.subTotal( item.valor, item.quantidade, item.desconto )  | currency: 'AOA'}}
+                                        </td>
+                                        <td>
+                                            <button (click)="onDeleteItem(i)" type="button" class="btn btn-danger">
+                                                <fa-icon [icon]="'trash'"></fa-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> -->
+                            <button class="btn btn-success" type="button" [routerLink]="['/item-compra/new']"> Adiconar item
+                            </button>
+                </p-accordionTab>
+                <p-accordionTab header="Pagamento" [selected]="true" >
+                        <!-- <table class="table" *ngIf="recebimentos.length > 0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Meio de recebimento</th>
+                                        <th scope="col">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let recebimento of recebimentos; let i = index">
+                                        <td> {{ recebimento.metodoLiquidacaoDescricao }} </td>
+                                        <td> {{ recebimento.valor | currency : recebimento.moedaCodigo }} </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger" (click)="onDeleteDetalhe(i)">
+                                                <fa-icon [icon]="'trash'"></fa-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> -->
+                            <button class="btn btn-success" type="button" [routerLink]="['/detalhe-lancamento/new']"
+                                [queryParams]="{ entidade: 'venda'}"> Novo valor
+                            </button>
+                </p-accordionTab>
+            </p-accordion>
+
+            <hr>
+
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
