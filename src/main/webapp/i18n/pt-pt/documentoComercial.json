@@ -2,30 +2,30 @@
   "mandaApp": {
     "documentoComercial": {
       "home": {
-        "title": "Documento Comercials",
-        "createLabel": "Criar novo(a) Documento Comercial",
-        "createOrEditLabel": "Criar ou editar Documento Comercial",
-        "notFound": "Nenhum Documento Comercials encontrado"
+        "title": "Documentos comerciais",
+        "createLabel": "Novo documento",
+        "createOrEditLabel": "Documento comercial",
+        "notFound": "Nenhum Documento Comercial encontrado"
       },
       "created": "Um novo Documento Comercial foi criado com o identificador {{ param }}",
       "updated": "Documento Comercial com identificador {{ param }} foi actualizado",
       "deleted": "Documento Comercial com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Documento Comercial {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar o Documento Comercial {{ id }}?"
       },
       "detail": {
-        "title": "Documento Comercial"
+        "title": "Documento comercial"
       },
-      "nome": "Nome",
+      "nome": "Código do tipo de documento",
       "serie": "Serie",
       "padrao": "Padrao",
       "movimentaEstoque": "Movimenta Estoque",
       "movimentaCaixa": "Movimenta Caixa",
       "movimentaContabilidade": "Movimenta Contabilidade",
       "cor": "Cor",
-      "descricao": "Descricao",
+      "descricao": "Nome do documento",
       "mostraPontoVenda": "Mostra Ponto Venda",
-      "entidade": "Entidade",
+      "entidade": "Entidade pertecente",
       "lancamentoFinanceiro": "Lancamento Financeiro",
       "compra": "Compra",
       "venda": "Venda"

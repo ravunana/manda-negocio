@@ -3,6 +3,7 @@
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="rv-documento-comercial-heading" jhiTranslate="mandaApp.documentoComercial.home.createOrEditLabel">Create or edit a Documento Comercial</h2>
             <div>
+                <hr>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
@@ -11,6 +12,10 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.nome" for="field_nome">Nome</label>
+
+                    <fa-icon pTooltip="Sigla do tipo de documento, Ex: FR para Factura/recibo" tooltipPosition="top" icon="info-circle"
+                    fixedWidth="true"></fa-icon>
+                <label class="text-muted font-italic">(Obrigatório)</label>
                     <input type="text" class="form-control" name="nome" id="field_nome"
                            formControlName="nome"/>
                     <div *ngIf="editForm.get('nome').invalid && (editForm.get('nome').dirty || editForm.get('nome').touched)">
@@ -20,6 +25,16 @@
                         </small>
                     </div>
                 </div>
+
+                <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.descricao" for="field_descricao">Descricao</label>
+
+                        <fa-icon pTooltip="Descrição do tipo do documento Ex: Factura/recibo para o tipo FR" tooltipPosition="top" icon="info-circle"
+                        fixedWidth="true"></fa-icon>
+                    <label class="text-muted font-italic">(Obrigatório)</label>
+                        <textarea class="form-control" name="descricao" id="field_descricao"
+                                  formControlName="descricao"></textarea>
+                    </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.serie" for="field_serie">Serie</label>
                     <input type="text" class="form-control" name="serie" id="field_serie"
@@ -32,9 +47,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.padrao" for="field_padrao">Padrao</label>
-                    <input type="checkbox" class="form-control" name="padrao" id="field_padrao"
-                           formControlName="padrao"/>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.padrao" for="field_padrao">Padrao</label> -->
+                    <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="padrao">
+                            <label ngbButtonLabel class="btn-primary">
+                                <input ngbButton type="radio" [value]="true"> Documento padrão
+                            </label>
+
+                            <label ngbButtonLabel class="btn-primary">
+                                <input class="bg-danger" ngbButton type="radio" [value]="false"> Documento normal
+                            </label>
+                        </div>
+                    <!-- <input type="checkbox" class="form-control" name="padrao" id="field_padrao"
+                           formControlName="padrao"/> -->
                     <div *ngIf="editForm.get('padrao').invalid && (editForm.get('padrao').dirty || editForm.get('padrao').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('padrao').errors.required" jhiTranslate="entity.validation.required">
@@ -43,9 +67,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.movimentaEstoque" for="field_movimentaEstoque">Movimenta Estoque</label>
+                        <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="movimentaEstoque">
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input ngbButton type="radio" [value]="true"> Movimenta estoque
+                                </label>
+
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input class="bg-danger" ngbButton type="radio" [value]="false"> Não movimenta estoque
+                                </label>
+                            </div>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.movimentaEstoque" for="field_movimentaEstoque">Movimenta Estoque</label>
                     <input type="checkbox" class="form-control" name="movimentaEstoque" id="field_movimentaEstoque"
-                           formControlName="movimentaEstoque"/>
+                           formControlName="movimentaEstoque"/> -->
                     <div *ngIf="editForm.get('movimentaEstoque').invalid && (editForm.get('movimentaEstoque').dirty || editForm.get('movimentaEstoque').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('movimentaEstoque').errors.required" jhiTranslate="entity.validation.required">
@@ -54,9 +87,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.movimentaCaixa" for="field_movimentaCaixa">Movimenta Caixa</label>
+                        <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="movimentaCaixa">
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input ngbButton type="radio" [value]="true"> Movimenta a tesouraria
+                                </label>
+
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input class="bg-danger" ngbButton type="radio" [value]="false"> Não movimenta a tesouraria
+                                </label>
+                            </div>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.movimentaCaixa" for="field_movimentaCaixa">Movimenta Caixa</label>
                     <input type="checkbox" class="form-control" name="movimentaCaixa" id="field_movimentaCaixa"
-                           formControlName="movimentaCaixa"/>
+                           formControlName="movimentaCaixa"/> -->
                     <div *ngIf="editForm.get('movimentaCaixa').invalid && (editForm.get('movimentaCaixa').dirty || editForm.get('movimentaCaixa').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('movimentaCaixa').errors.required" jhiTranslate="entity.validation.required">
@@ -65,9 +107,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.movimentaContabilidade" for="field_movimentaContabilidade">Movimenta Contabilidade</label>
-                    <input type="checkbox" class="form-control" name="movimentaContabilidade" id="field_movimentaContabilidade"
-                           formControlName="movimentaContabilidade"/>
+                        <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="movimentaContabilidade">
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input ngbButton type="radio" [value]="true"> Movimenta a contabilidade
+                                </label>
+
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input class="bg-danger" ngbButton type="radio" [value]="false"> Não movimenta a contabilidade
+                                </label>
+                            </div>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.movimentaContabilidade" for="field_movimentaContabilidade">Movimenta Contabilidade</label> -->
+                    <!-- <input type="checkbox" class="form-control" name="movimentaContabilidade" id="field_movimentaContabilidade"
+                           formControlName="movimentaContabilidade"/> -->
                     <div *ngIf="editForm.get('movimentaContabilidade').invalid && (editForm.get('movimentaContabilidade').dirty || editForm.get('movimentaContabilidade').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('movimentaContabilidade').errors.required" jhiTranslate="entity.validation.required">
@@ -77,18 +128,22 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.cor" for="field_cor">Cor</label>
-                    <input type="text" class="form-control" name="cor" id="field_cor"
+                    <input type="color" class="form-control" name="cor" id="field_cor"
                            formControlName="cor"/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.descricao" for="field_descricao">Descricao</label>
-                    <textarea class="form-control" name="descricao" id="field_descricao"
-                              formControlName="descricao"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.mostraPontoVenda" for="field_mostraPontoVenda">Mostra Ponto Venda</label>
+                        <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="mostraPontoVenda">
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input ngbButton type="radio" [value]="true"> Mostrar no ponto de venda
+                                </label>
+
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input class="bg-danger" ngbButton type="radio" [value]="false"> Não mostrar no ponto de venda
+                                </label>
+                            </div>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.mostraPontoVenda" for="field_mostraPontoVenda">Mostra Ponto Venda</label>
                     <input type="checkbox" class="form-control" name="mostraPontoVenda" id="field_mostraPontoVenda"
-                           formControlName="mostraPontoVenda"/>
+                           formControlName="mostraPontoVenda"/> -->
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.documentoComercial.entidade" for="field_entidade">Entidade</label>
