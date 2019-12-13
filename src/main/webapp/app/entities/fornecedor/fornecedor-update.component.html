@@ -3,26 +3,93 @@
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="rv-fornecedor-heading" jhiTranslate="mandaApp.fornecedor.home.createOrEditLabel">Create or edit a Fornecedor</h2>
             <div>
+                <hr>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
                 </div>
+
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.certificadoISO9001" for="field_certificadoISO9001">Certificado ISO 9001</label>
-                    <input type="checkbox" class="form-control" name="certificadoISO9001" id="field_certificadoISO9001"
-                           formControlName="certificadoISO9001"/>
+                        <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.pessoa" for="field_pessoa">Pessoa</label>
+                        <!-- <select class="form-control" id="field_pessoa" name="pessoa" formControlName="pessoaId">
+                            <option *ngIf="!editForm.get('pessoaId').value" [ngValue]="null" selected></option>
+                            <option [ngValue]="pessoaOption.id" *ngFor="let pessoaOption of pessoas; trackBy: trackPessoaById">{{pessoaOption.nome}}</option>
+                        </select> -->
+
+                    <p-autoComplete id="field_pessoa" name="cliente" field="nome" [suggestions]="pessoas"
+                    (completeMethod)="searchPessoa($event)" (onSelect)="onSelectPessoa($event)" required>
+                </p-autoComplete>
+                        <div *ngIf="editForm.get('pessoaId').invalid && (editForm.get('pessoaId').dirty || editForm.get('pessoaId').touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('pessoaId').errors.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.conta" for="field_conta">Conta</label>
+
+                    <fa-icon pTooltip="Conta contabil que será movimentada a coordenada bancaria" tooltipPosition="top" icon="info-circle"
+                    fixedWidth="true"></fa-icon>
+                <label class="text-muted font-italic">(Opcional)</label>
+                    <div class="form-group">
+                        <p-autoComplete placeholder="Escreva o nome da conta" id="field_contaAgregadora" name="contaAgregadora" field="descricao"
+                            [suggestions]="contas" (completeMethod)="searchConta($event)"
+                            (onSelect)="onSelectConta($event)" required>
+                        </p-autoComplete>
+                        <!-- <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
+                        </select> -->
+                    </div>
+
+                <div class="form-group">
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.certificadoISO9001" for="field_certificadoISO9001">Certificado ISO 9001</label> -->
+
+                <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="certificadoISO9001">
+                        <label ngbButtonLabel class="btn-primary">
+                            <input ngbButton type="radio" [value]="true"> Tem certificado ISO 9001
+                        </label>
+
+                        <label ngbButtonLabel class="btn-primary">
+                            <input class="bg-danger" ngbButton type="radio" [value]="false"> Não tem certificado ISO 9001
+                        </label>
+                    </div>
+                    <br>
+                    <!-- <input type="checkbox" class="form-control" name="certificadoISO9001" id="field_certificadoISO9001"
+                           formControlName="certificadoISO9001"/> -->
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.garantiaDefeitoFabrica" for="field_garantiaDefeitoFabrica">Garantia Defeito Fabrica</label>
-                    <input type="checkbox" class="form-control" name="garantiaDefeitoFabrica" id="field_garantiaDefeitoFabrica"
-                           formControlName="garantiaDefeitoFabrica"/>
+                        <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="garantiaDefeitoFabrica">
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input ngbButton type="radio" [value]="true"> Aceita devolução por defito da fábrica
+                                </label>
+
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input class="bg-danger" ngbButton type="radio" [value]="false"> Não aceita devolução por defito da fábrica
+                                </label>
+                            </div>
+                            <br>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.garantiaDefeitoFabrica" for="field_garantiaDefeitoFabrica">Garantia Defeito Fabrica</label> -->
+                    <!-- <input type="checkbox" class="form-control" name="garantiaDefeitoFabrica" id="field_garantiaDefeitoFabrica"
+                           formControlName="garantiaDefeitoFabrica"/> -->
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.transporte" for="field_transporte">Transporte</label>
-                    <input type="checkbox" class="form-control" name="transporte" id="field_transporte"
-                           formControlName="transporte"/>
+                        <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="transporte">
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input ngbButton type="radio" [value]="true"> Possui transporte
+                                </label>
+
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input class="bg-danger" ngbButton type="radio" [value]="false"> Não possui transporte
+                                </label>
+                            </div>
+                            <br>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.transporte" for="field_transporte">Transporte</label> -->
+                    <!-- <input type="checkbox" class="form-control" name="transporte" id="field_transporte"
+                           formControlName="transporte"/> -->
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.qualidade" for="field_qualidade">Qualidade</label>
@@ -44,9 +111,19 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.pagamentoPrazo" for="field_pagamentoPrazo">Pagamento Prazo</label>
+                        <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="pagamentoPrazo">
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input ngbButton type="radio" [value]="true"> Aceita pagamento à prazo
+                                </label>
+
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input class="bg-danger" ngbButton type="radio" [value]="false"> Não aceita pagamento à prazo
+                                </label>
+                            </div>
+                            <br>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.pagamentoPrazo" for="field_pagamentoPrazo">Pagamento Prazo</label>
                     <input type="checkbox" class="form-control" name="pagamentoPrazo" id="field_pagamentoPrazo"
-                           formControlName="pagamentoPrazo"/>
+                           formControlName="pagamentoPrazo"/> -->
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.metodosPagamento" for="field_metodosPagamento">Metodos Pagamento</label>
@@ -82,11 +159,21 @@
                               formControlName="descricao"></textarea>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.ativo" for="field_ativo">Ativo</label>
+                        <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="ativo">
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input ngbButton type="radio" [value]="true"> Activo
+                                </label>
+
+                                <label ngbButtonLabel class="btn-primary">
+                                    <input class="bg-danger" ngbButton type="radio" [value]="false"> Inactivo
+                                </label>
+                            </div>
+                            <br>
+                    <!-- <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.ativo" for="field_ativo">Ativo</label>
                     <input type="checkbox" class="form-control" name="ativo" id="field_ativo"
-                           formControlName="ativo"/>
+                           formControlName="ativo"/> -->
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.numero" for="field_numero">Numero</label>
                     <input type="text" class="form-control" name="numero" id="field_numero"
                            formControlName="numero"/>
@@ -96,28 +183,8 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.pessoa" for="field_pessoa">Pessoa</label>
-                    <select class="form-control" id="field_pessoa" name="pessoa" formControlName="pessoaId">
-                        <option *ngIf="!editForm.get('pessoaId').value" [ngValue]="null" selected></option>
-                        <option [ngValue]="pessoaOption.id" *ngFor="let pessoaOption of pessoas; trackBy: trackPessoaById">{{pessoaOption.nome}}</option>
-                    </select>
-                </div>
-                <div *ngIf="editForm.get('pessoaId').invalid && (editForm.get('pessoaId').dirty || editForm.get('pessoaId').touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('pessoaId').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.fornecedor.conta" for="field_conta">Conta</label>
-                    <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

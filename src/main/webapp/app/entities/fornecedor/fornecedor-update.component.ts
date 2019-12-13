@@ -39,8 +39,8 @@ export class FornecedorUpdateComponent implements OnInit {
     classificacao: [null, [Validators.required, Validators.min(0), Validators.max(10)]],
     descricao: [],
     ativo: [],
-    numero: [null, [Validators.required]],
-    pessoaId: [null, Validators.required],
+    numero: [null],
+    pessoaId: [null],
     contaId: []
   });
 
@@ -161,7 +161,8 @@ export class FornecedorUpdateComponent implements OnInit {
       classificacao: this.editForm.get(['classificacao']).value,
       descricao: this.editForm.get(['descricao']).value,
       ativo: this.editForm.get(['ativo']).value,
-      numero: this.editForm.get(['numero']).value,
+      numero: '0',
+      // numero: this.editForm.get(['numero']).value,
       pessoaId: this.editForm.get(['pessoaId']).value,
       contaId: this.editForm.get(['contaId']).value
     };
@@ -204,5 +205,25 @@ export class FornecedorUpdateComponent implements OnInit {
       }
     }
     return option;
+  }
+
+  onSelectConta(conta) {
+    this.editForm.get('contaId').patchValue(conta.id, { emitEvent: false });
+  }
+
+  searchConta(conta) {
+    this.contaService.query({ 'descricao.contains': conta.query }).subscribe(data => {
+      this.contas = data.body;
+    });
+  }
+
+  onSelectPessoa(pessoa) {
+    this.editForm.get('pessoaId').patchValue(pessoa.id, { emitEvent: false });
+  }
+
+  searchPessoa(pessoa) {
+    this.pessoaService.query({ 'nome.contains': pessoa.query }).subscribe(data => {
+      this.pessoas = data.body;
+    });
   }
 }

@@ -2,33 +2,33 @@
   "mandaApp": {
     "fornecedor": {
       "home": {
-        "title": "Fornecedors",
-        "createLabel": "Criar novo(a) Fornecedor",
-        "createOrEditLabel": "Criar ou editar Fornecedor",
-        "notFound": "Nenhum Fornecedors encontrado"
+        "title": "Fornecedores",
+        "createLabel": "Novo fornecedor",
+        "createOrEditLabel": "Fornecedor",
+        "notFound": "Nenhum Fornecedor encontrado"
       },
       "created": "Um novo Fornecedor foi criado com o identificador {{ param }}",
       "updated": "Fornecedor com identificador {{ param }} foi actualizado",
       "deleted": "Fornecedor com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Fornecedor {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar o Fornecedor {{ id }}?"
       },
       "detail": {
         "title": "Fornecedor"
       },
       "certificadoISO9001": "Certificado ISO 9001",
-      "garantiaDefeitoFabrica": "Garantia Defeito Fabrica",
+      "garantiaDefeitoFabrica": "Garantia Defeito Fábrica",
       "transporte": "Transporte",
       "qualidade": "Qualidade",
-      "pagamentoPrazo": "Pagamento Prazo",
-      "metodosPagamento": "Metodos Pagamento",
-      "classificacao": "Classificacao",
-      "descricao": "Descricao",
+      "pagamentoPrazo": "Pagamento à prazo",
+      "metodosPagamento": "Metodos de pagamento",
+      "classificacao": "Classificação",
+      "descricao": "Descrição",
       "ativo": "Ativo",
-      "numero": "Numero",
+      "numero": "Número",
       "pessoa": "Pessoa",
       "itemCompra": "Item Compra",
-      "conta": "Conta",
+      "conta": "Conta contabil",
       "produto": "Produto"
     }
   }

@@ -18,7 +18,10 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.fornecedor.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="pessoaNome"><span jhiTranslate="mandaApp.fornecedor.pessoa">Pessoa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="contaDescricao"><span jhiTranslate="mandaApp.fornecedor.conta">Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="certificadoISO9001"><span jhiTranslate="mandaApp.fornecedor.certificadoISO9001">Certificado ISO 9001</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="garantiaDefeitoFabrica"><span jhiTranslate="mandaApp.fornecedor.garantiaDefeitoFabrica">Garantia Defeito Fabrica</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="transporte"><span jhiTranslate="mandaApp.fornecedor.transporte">Transporte</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -28,24 +31,12 @@
             <th scope="col"  jhiSortBy="classificacao"><span jhiTranslate="mandaApp.fornecedor.classificacao">Classificacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.fornecedor.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="ativo"><span jhiTranslate="mandaApp.fornecedor.ativo">Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.fornecedor.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="pessoaNome"><span jhiTranslate="mandaApp.fornecedor.pessoa">Pessoa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="contaDescricao"><span jhiTranslate="mandaApp.fornecedor.conta">Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let fornecedor of fornecedors ;trackBy: trackId">
-                <td><a [routerLink]="['/fornecedor', fornecedor.id, 'view' ]">{{fornecedor.id}}</a></td>
-                <td>{{fornecedor.certificadoISO9001}}</td>
-                <td>{{fornecedor.garantiaDefeitoFabrica}}</td>
-                <td>{{fornecedor.transporte}}</td>
-                <td>{{fornecedor.qualidade}}</td>
-                <td>{{fornecedor.pagamentoPrazo}}</td>
-                <td>{{fornecedor.metodosPagamento}}</td>
-                <td>{{fornecedor.classificacao}}</td>
-                <td>{{fornecedor.descricao}}</td>
-                <td>{{fornecedor.ativo}}</td>
+                <!-- <td><a [routerLink]="['/fornecedor', fornecedor.id, 'view' ]">{{fornecedor.id}}</a></td> -->
                 <td>{{fornecedor.numero}}</td>
                 <td>
                     <div *ngIf="fornecedor.pessoaId">
@@ -57,6 +48,15 @@
                         <a [routerLink]="['/conta', fornecedor.contaId , 'view' ]" >{{fornecedor.contaDescricao}}</a>
                     </div>
                 </td>
+                <td>{{fornecedor.certificadoISO9001}}</td>
+                <td>{{fornecedor.garantiaDefeitoFabrica}}</td>
+                <td>{{fornecedor.transporte}}</td>
+                <td>{{fornecedor.qualidade}}</td>
+                <td>{{fornecedor.pagamentoPrazo}}</td>
+                <td>{{fornecedor.metodosPagamento}}</td>
+                <td>{{fornecedor.classificacao}}</td>
+                <td>{{fornecedor.descricao}}</td>
+                <td>{{fornecedor.ativo}}</td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

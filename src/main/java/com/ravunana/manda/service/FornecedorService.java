@@ -1,12 +1,15 @@
 package com.ravunana.manda.service;
 
 import com.ravunana.manda.domain.Fornecedor;
+import com.ravunana.manda.domain.Pessoa;
+import com.ravunana.manda.domain.SerieDocumento;
 import com.ravunana.manda.repository.FornecedorRepository;
+import com.ravunana.manda.repository.PessoaRepository;
 import com.ravunana.manda.service.dto.FornecedorDTO;
 import com.ravunana.manda.service.mapper.FornecedorMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,12 @@ public class FornecedorService {
 
     private final FornecedorMapper fornecedorMapper;
 
+    @Autowired
+    private SerieDocumentoService serieDocumentoService;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
     public FornecedorService(FornecedorRepository fornecedorRepository, FornecedorMapper fornecedorMapper) {
         this.fornecedorRepository = fornecedorRepository;
         this.fornecedorMapper = fornecedorMapper;
@@ -41,7 +50,16 @@ public class FornecedorService {
     public FornecedorDTO save(FornecedorDTO fornecedorDTO) {
         log.debug("Request to save Fornecedor : {}", fornecedorDTO);
         Fornecedor fornecedor = fornecedorMapper.toEntity(fornecedorDTO);
+        SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
+        int sequencia = serieDocumento.getCodigoFornecedor();
+        Pessoa pessoa = pessoaRepository.findById( fornecedorDTO.getPessoaId() ).get();
+        fornecedor.setNumero( pessoa.getTipoPessoa().substring(0, 1) + " " + serieDocumento.getSerie() + " " + sequencia ); // <TIPO_PESSOA> <SEQUENCIA_FORNECEDOR>
         fornecedor = fornecedorRepository.save(fornecedor);
+        if ( fornecedor.getId() > 0 ) {
+        // atualizar serie do documento
+        serieDocumento.setCodigoFornecedor( sequencia + 1 );
+        serieDocumentoService.atualizarSerieDocumento(serieDocumento);
+        }
         return fornecedorMapper.toDto(fornecedor);
     }
 
