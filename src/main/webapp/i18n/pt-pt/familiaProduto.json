@@ -2,26 +2,26 @@
   "mandaApp": {
     "familiaProduto": {
       "home": {
-        "title": "Familia Produtos",
-        "createLabel": "Criar novo(a) Familia Produto",
-        "createOrEditLabel": "Criar ou editar Familia Produto",
-        "notFound": "Nenhum Familia Produtos encontrado"
+        "title": "Familias ou grupo de produtos",
+        "createLabel": "Nova familia | grupo",
+        "createOrEditLabel": "Familia ou grupo de produto",
+        "notFound": "Nenhuma Familia encontrado"
       },
-      "created": "Um novo Familia Produto foi criado com o identificador {{ param }}",
+      "created": "Uma nova Familia Produto foi criado com o identificador {{ param }}",
       "updated": "Familia Produto com identificador {{ param }} foi actualizado",
       "deleted": "Familia Produto com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Familia Produto {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar a Familia Produto {{ id }}?"
       },
       "detail": {
-        "title": "Familia Produto"
+        "title": "Familia de produto"
       },
       "nome": "Nome",
-      "descricao": "Descricao",
-      "familiaProduto": "Familia Produto",
+      "descricao": "Descrição",
+      "familiaProduto": "Familia do produto",
       "produto": "Produto",
       "conta": "Conta",
-      "hierarquia": "Hierarquia"
+      "hierarquia": "Familia ou grupo agregador"
     }
   }
 }

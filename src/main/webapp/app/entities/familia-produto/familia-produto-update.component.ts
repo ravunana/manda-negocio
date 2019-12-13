@@ -146,4 +146,14 @@ export class FamiliaProdutoUpdateComponent implements OnInit {
   trackFamiliaProdutoById(index: number, item: IFamiliaProduto) {
     return item.id;
   }
+
+  onSelectConta(conta) {
+    this.editForm.get('contaId').patchValue(conta.id, { emitEvent: false });
+  }
+
+  searchConta(conta) {
+    this.contaService.query({ 'descricao.contains': conta.query }).subscribe(data => {
+      this.contas = data.body;
+    });
+  }
 }
