@@ -2,25 +2,25 @@
   "mandaApp": {
     "localArmazenamento": {
       "home": {
-        "title": "Local Armazenamentos",
-        "createLabel": "Criar novo(a) Local Armazenamento",
-        "createOrEditLabel": "Criar ou editar Local Armazenamento",
-        "notFound": "Nenhum Local Armazenamentos encontrado"
+        "title": "Locais de armazenamento",
+        "createLabel": "Novo local",
+        "createOrEditLabel": "Local de armazenamento",
+        "notFound": "Nenhum Local encontrado"
       },
-      "created": "Um novo Local Armazenamento foi criado com o identificador {{ param }}",
-      "updated": "Local Armazenamento com identificador {{ param }} foi actualizado",
-      "deleted": "Local Armazenamento com identificador {{ param }} foi eliminado",
+      "created": "Um novo Local foi criado com o identificador {{ param }}",
+      "updated": "Local com identificador {{ param }} foi actualizado",
+      "deleted": "Local com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Local Armazenamento {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar o Local {{ id }}?"
       },
       "detail": {
-        "title": "Local Armazenamento"
+        "title": "Local de armazenamento"
       },
       "nome": "Nome",
-      "descricao": "Descricao",
+      "descricao": "Descrição",
       "produto": "Produto",
-      "localArmazenamento": "Local Armazenamento",
-      "hierarquia": "Hierarquia",
+      "localArmazenamento": "Local de armazenamento",
+      "hierarquia": "Local agregador",
       "empresa": "Empresa"
     }
   }
