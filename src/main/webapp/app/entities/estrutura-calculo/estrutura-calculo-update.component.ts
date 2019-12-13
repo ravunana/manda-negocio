@@ -36,7 +36,7 @@ export class EstruturaCalculoUpdateComponent implements OnInit {
     margemLucro: [null, [Validators.min(0), Validators.max(100)]],
     precoVenda: [],
     data: [],
-    utilizadorId: [null, Validators.required],
+    utilizadorId: [null],
     produtoId: [null, Validators.required]
   });
 
@@ -104,7 +104,8 @@ export class EstruturaCalculoUpdateComponent implements OnInit {
       margemLucro: this.editForm.get(['margemLucro']).value,
       precoVenda: this.editForm.get(['precoVenda']).value,
       data: this.editForm.get(['data']).value != null ? moment(this.editForm.get(['data']).value, DATE_TIME_FORMAT) : undefined,
-      utilizadorId: this.editForm.get(['utilizadorId']).value,
+      utilizadorId: 1,
+      // utilizadorId: this.editForm.get(['utilizadorId']).value,
       produtoId: this.editForm.get(['produtoId']).value
     };
   }
@@ -131,5 +132,15 @@ export class EstruturaCalculoUpdateComponent implements OnInit {
 
   trackProdutoById(index: number, item: IProduto) {
     return item.id;
+  }
+
+  searchProdutos($event) {
+    this.produtoService
+      .query({ 'nome.contains': $event.query })
+      .subscribe((res: HttpResponse<IProduto[]>) => (this.produtos = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  onSelectProduto($event) {
+    this.editForm.get('produtoId').patchValue($event.id, { emitEvent: false });
   }
 }

@@ -49,9 +49,7 @@
             <!-- </ul>
                 </li> -->
 
-
             <!-- ./ Menu Customizado -->
-
 
             <!-- ./ Tesouraria -->
             <li *rvHasAnyAuthority="'ROLE_FINANCA'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
@@ -251,18 +249,18 @@
                             <span jhiTranslate="global.menu.entities.unidadeMedida">Unidade Medida</span>
                         </a>
                     </li>
-                    <!-- <li>
-                                    <a class="dropdown-item" routerLink="composto-produto" routerLinkActive="active"
-                                        [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                        <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                        <span jhiTranslate="global.menu.entities.compostoProduto">Composto Produto</span>
-                                    </a>
-                                </li> -->
                     <li>
                         <a class="dropdown-item" routerLink="produto" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="barcode" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.produto">Produto</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="estrutura-calculo" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="tags" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.estruturaCalculo">Estrutura Calculo</span>
                         </a>
                     </li>
                     <!-- <li>
@@ -337,8 +335,8 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="empresa" routerLinkActive="active"
-                        *rvHasAnyAuthority="'ROLE_RAVUNANA'"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            *rvHasAnyAuthority="'ROLE_RAVUNANA'" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
                             <fa-icon icon="building" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.empresa">Empresa</span>
                         </a>
@@ -352,16 +350,16 @@
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="fluxo-documento" routerLinkActive="active"
-                        *rvHasAnyAuthority="'ROLE_RAVUNANA'"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            *rvHasAnyAuthority="'ROLE_RAVUNANA'" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
                             <fa-icon icon="th" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.fluxoDocumento">Fluxo do documento</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="documento-comercial" routerLinkActive="active"
-                        *rvHasAnyAuthority="'ROLE_RAVUNANA'"
-                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            *rvHasAnyAuthority="'ROLE_RAVUNANA'" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
                             <fa-icon icon="th" fixedWidth="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.documentoComercial">Documento comercial</span>
                         </a>

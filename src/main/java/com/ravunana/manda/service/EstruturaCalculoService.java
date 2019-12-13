@@ -6,12 +6,13 @@ import com.ravunana.manda.service.dto.EstruturaCalculoDTO;
 import com.ravunana.manda.service.mapper.EstruturaCalculoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
@@ -27,6 +28,9 @@ public class EstruturaCalculoService {
 
     private final EstruturaCalculoMapper estruturaCalculoMapper;
 
+    @Autowired
+    private UserService userService;
+
     public EstruturaCalculoService(EstruturaCalculoRepository estruturaCalculoRepository, EstruturaCalculoMapper estruturaCalculoMapper) {
         this.estruturaCalculoRepository = estruturaCalculoRepository;
         this.estruturaCalculoMapper = estruturaCalculoMapper;
@@ -41,6 +45,9 @@ public class EstruturaCalculoService {
     public EstruturaCalculoDTO save(EstruturaCalculoDTO estruturaCalculoDTO) {
         log.debug("Request to save EstruturaCalculo : {}", estruturaCalculoDTO);
         EstruturaCalculo estruturaCalculo = estruturaCalculoMapper.toEntity(estruturaCalculoDTO);
+
+        estruturaCalculo.setUtilizador(userService.getCurrentUserLogged());
+        estruturaCalculo.setData(ZonedDateTime.now());
         estruturaCalculo = estruturaCalculoRepository.save(estruturaCalculo);
         return estruturaCalculoMapper.toDto(estruturaCalculo);
     }

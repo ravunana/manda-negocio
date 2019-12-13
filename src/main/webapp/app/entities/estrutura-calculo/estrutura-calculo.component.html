@@ -19,6 +19,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="produtoNome"><span jhiTranslate="mandaApp.estruturaCalculo.produto">Produto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="custoMateriaPrima"><span jhiTranslate="mandaApp.estruturaCalculo.custoMateriaPrima">Custo Materia Prima</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="custoMaoObra"><span jhiTranslate="mandaApp.estruturaCalculo.custoMaoObra">Custo Mao Obra</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="custoEmbalagem"><span jhiTranslate="mandaApp.estruturaCalculo.custoEmbalagem">Custo Embalagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -27,30 +28,29 @@
             <th scope="col"  jhiSortBy="margemLucro"><span jhiTranslate="mandaApp.estruturaCalculo.margemLucro">Margem Lucro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="precoVenda"><span jhiTranslate="mandaApp.estruturaCalculo.precoVenda">Preco Venda</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="data"><span jhiTranslate="mandaApp.estruturaCalculo.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.estruturaCalculo.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="produtoNome"><span jhiTranslate="mandaApp.estruturaCalculo.produto">Produto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.estruturaCalculo.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let estruturaCalculo of estruturaCalculos ;trackBy: trackId">
                 <td><a [routerLink]="['/estrutura-calculo', estruturaCalculo.id, 'view' ]">{{estruturaCalculo.id}}</a></td>
-                <td>{{estruturaCalculo.custoMateriaPrima}}</td>
-                <td>{{estruturaCalculo.custoMaoObra}}</td>
-                <td>{{estruturaCalculo.custoEmbalagem}}</td>
-                <td>{{estruturaCalculo.custoAquisicao}}</td>
-                <td>{{estruturaCalculo.comissao}}</td>
-                <td>{{estruturaCalculo.margemLucro}}</td>
-                <td>{{estruturaCalculo.precoVenda}}</td>
-                <td>{{estruturaCalculo.data | date:'medium'}}</td>
-                <td>
-                    {{estruturaCalculo.utilizadorLogin}}
-                </td>
                 <td>
                     <div *ngIf="estruturaCalculo.produtoId">
                         <a [routerLink]="['/produto', estruturaCalculo.produtoId , 'view' ]" >{{estruturaCalculo.produtoNome}}</a>
                     </div>
                 </td>
+                <td>{{estruturaCalculo.custoMateriaPrima | currency : moedaNacional.codigo }}</td>
+                <td>{{estruturaCalculo.custoMaoObra | currency : moedaNacional.codigo}}</td>
+                <td>{{estruturaCalculo.custoEmbalagem | currency : moedaNacional.codigo}}</td>
+                <td>{{estruturaCalculo.custoAquisicao | currency : moedaNacional.codigo}}</td>
+                <td>{{estruturaCalculo.comissao/100 | percent}}</td>
+                <td>{{estruturaCalculo.margemLucro/100 | percent}}</td>
+                <td>{{estruturaCalculo.precoVenda | currency : moedaNacional.codigo}}</td>
+                <td>{{estruturaCalculo.data | date:'medium'}}</td>
+                <!-- <td>
+                    {{estruturaCalculo.utilizadorLogin}}
+                </td> -->
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"

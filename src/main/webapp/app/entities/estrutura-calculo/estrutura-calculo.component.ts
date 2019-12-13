@@ -10,6 +10,8 @@ import { IEstruturaCalculo } from 'app/shared/model/estrutura-calculo.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { EstruturaCalculoService } from './estrutura-calculo.service';
 import { EstruturaCalculoDeleteDialogComponent } from './estrutura-calculo-delete-dialog.component';
+import { IMoeda } from 'app/shared/model/moeda.model';
+import { MoedaService } from '../moeda/moeda.service';
 
 @Component({
   selector: 'rv-estrutura-calculo',
@@ -28,6 +30,7 @@ export class EstruturaCalculoComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  moedaNacional: IMoeda;
 
   constructor(
     protected estruturaCalculoService: EstruturaCalculoService,
@@ -35,7 +38,8 @@ export class EstruturaCalculoComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected moedaService: MoedaService
   ) {
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -89,6 +93,9 @@ export class EstruturaCalculoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadAll();
     this.registerChangeInEstruturaCalculos();
+    this.moedaService.query().subscribe(moedaResult => {
+      this.moedaNacional = moedaResult.body.filter(m => m.nacional === true).shift();
+    });
   }
 
   ngOnDestroy() {
