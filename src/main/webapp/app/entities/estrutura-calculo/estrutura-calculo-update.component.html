@@ -3,6 +3,7 @@
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="rv-estrutura-calculo-heading" jhiTranslate="mandaApp.estruturaCalculo.home.createOrEditLabel">Create or edit a Estrutura Calculo</h2>
             <div>
+                <hr>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>

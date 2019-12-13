@@ -2,27 +2,27 @@
   "mandaApp": {
     "estruturaCalculo": {
       "home": {
-        "title": "Estrutura Calculos",
-        "createLabel": "Criar novo(a) Estrutura Calculo",
-        "createOrEditLabel": "Criar ou editar Estrutura Calculo",
-        "notFound": "Nenhum Estrutura Calculos encontrado"
+        "title": "Estrutura de calculos",
+        "createLabel": "Nova estrutura",
+        "createOrEditLabel": "Estrutura de cálculo",
+        "notFound": "Nenhuma Estrutura encontrado"
       },
-      "created": "Um novo Estrutura Calculo foi criado com o identificador {{ param }}",
+      "created": "Uma nova Estrutura Calculo foi criado com o identificador {{ param }}",
       "updated": "Estrutura Calculo com identificador {{ param }} foi actualizado",
       "deleted": "Estrutura Calculo com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Estrutura Calculo {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar a Estrutura Calculo {{ id }}?"
       },
       "detail": {
-        "title": "Estrutura Calculo"
+        "title": "Estrutura de cálculo"
       },
-      "custoMateriaPrima": "Custo Materia Prima",
-      "custoMaoObra": "Custo Mao Obra",
-      "custoEmbalagem": "Custo Embalagem",
-      "custoAquisicao": "Custo Aquisicao",
-      "comissao": "Comissao",
-      "margemLucro": "Margem Lucro",
-      "precoVenda": "Preco Venda",
+      "custoMateriaPrima": "Custo de máteria prima",
+      "custoMaoObra": "Custo de mão de obra",
+      "custoEmbalagem": "Custo de embalagem",
+      "custoAquisicao": "Custo de aquisição",
+      "comissao": "Taxa de comissão (%)",
+      "margemLucro": "Margem de lucro (%)",
+      "precoVenda": "Preço de venda",
       "data": "Data",
       "utilizador": "Utilizador",
       "produto": "Produto"
