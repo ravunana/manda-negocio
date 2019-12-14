@@ -87,6 +87,7 @@ public class ContactoPessoaService {
     }
 
     public ContactoPessoaDTO addContacto(ContactoPessoaDTO contacto) {
+
         Boolean result = contactos.add(contacto);
         if ( result )
             return contacto;

@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -125,5 +127,10 @@ public class EstruturaCalculoResource {
         log.debug("REST request to delete EstruturaCalculo : {}", id);
         estruturaCalculoService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/estrutura-calculos/preco/{produtoId}")
+    public BigDecimal getPrecoAtualProduto( @PathVariable int produtoId) {
+        return estruturaCalculoService.getPrecoUnitarioAtualizado(produtoId);
     }
 }

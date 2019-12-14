@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 /**
@@ -109,5 +110,10 @@ public class ProdutoService {
     public void delete(Long id) {
         log.debug("Request to delete Produto : {}", id);
         produtoRepository.deleteById(id);
+    }
+
+    public BigDecimal getTotalUnitario( int quantidade, double desconto, Double precoUnitario ) {
+        desconto = ( precoUnitario  * quantidade * desconto ) / 100;
+        return new BigDecimal((quantidade * precoUnitario ) - desconto);
     }
 }

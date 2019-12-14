@@ -81,4 +81,8 @@ public class MoedaService {
         log.debug("Request to delete Moeda : {}", id);
         moedaRepository.deleteById(id);
     }
+
+    public String getMoedaNacional() {
+        return this.moedaRepository.findAll().stream().filter( m -> m.isNacional() == true ).findFirst().get().getCodigo();
+    }
 }

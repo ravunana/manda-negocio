@@ -76,4 +76,20 @@ export class ItemCompraService {
     }
     return res;
   }
+
+  deleteItem(index: number): Observable<IItemCompra> {
+    return this.http.delete<IItemCompra>(`${this.resourceUrl}/delete/${index}`);
+  }
+
+  addItem(item: IItemCompra): Observable<IItemCompra> {
+    return this.http.post<IItemCompra>(this.resourceUrl + '/add', item);
+  }
+
+  getItems(): Observable<IItemCompra[]> {
+    return this.http.get<IItemCompra[]>(this.resourceUrl + '/lista');
+  }
+
+  cleanItems() {
+    return this.http.get(this.resourceUrl + '/lista/clean');
+  }
 }

@@ -20,6 +20,8 @@ import { IFornecedor } from 'app/shared/model/fornecedor.model';
 import { FornecedorService } from 'app/entities/fornecedor/fornecedor.service';
 import { IFluxoDocumento } from 'app/shared/model/fluxo-documento.model';
 import { FluxoDocumentoService } from 'app/entities/fluxo-documento/fluxo-documento.service';
+import { EstruturaCalculoService } from '../estrutura-calculo/estrutura-calculo.service';
+import { MoedaService } from '../moeda/moeda.service';
 
 @Component({
   selector: 'rv-item-compra-update',
@@ -27,6 +29,8 @@ import { FluxoDocumentoService } from 'app/entities/fluxo-documento/fluxo-docume
 })
 export class ItemCompraUpdateComponent implements OnInit {
   isSaving: boolean;
+  compraId = 0;
+  opcao;
 
   users: IUser[];
 
@@ -37,20 +41,22 @@ export class ItemCompraUpdateComponent implements OnInit {
   fornecedors: IFornecedor[];
 
   fluxodocumentos: IFluxoDocumento[];
+  moedaNacional: string;
 
   editForm = this.fb.group({
     id: [],
-    quantidade: [null, [Validators.min(1)]],
+    quantidade: [1, [Validators.min(1)]],
     desconto: [null, [Validators.min(0), Validators.max(100)]],
     dataSolicitacao: [],
     dataEntrega: [],
     descricao: [],
     valor: [],
     solicitanteId: [],
-    compraId: [null, Validators.required],
+    compraId: [0],
     produtoId: [null, Validators.required],
     fornecedorId: [],
-    statusId: [null, Validators.required]
+    statusId: [null, Validators.required],
+    subTotal: [0]
   });
 
   constructor(
@@ -63,12 +69,15 @@ export class ItemCompraUpdateComponent implements OnInit {
     protected fornecedorService: FornecedorService,
     protected fluxoDocumentoService: FluxoDocumentoService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected estruturaCalculoService: EstruturaCalculoService,
+    protected moedaService: MoedaService
   ) {}
 
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ itemCompra }) => {
+      this.compraId = itemCompra.compraId;
       this.updateForm(itemCompra);
     });
     this.userService
@@ -92,6 +101,16 @@ export class ItemCompraUpdateComponent implements OnInit {
         (res: HttpResponse<IFluxoDocumento[]>) => (this.fluxodocumentos = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+
+    this.initForm();
+    this.onFormChanche();
+    this.activatedRoute.queryParams.subscribe(parmas => {
+      this.opcao = parmas.op;
+    });
+
+    this.moedaService.query().subscribe(moedaResult => {
+      this.moedaNacional = moedaResult.body.filter(m => m.nacional === true).shift().codigo;
+    });
   }
 
   updateForm(itemCompra: IItemCompra) {
@@ -173,7 +192,7 @@ export class ItemCompraUpdateComponent implements OnInit {
       descricao: this.editForm.get(['descricao']).value,
       valor: this.editForm.get(['valor']).value,
       solicitanteId: this.editForm.get(['solicitanteId']).value,
-      compraId: this.editForm.get(['compraId']).value,
+      compraId: this.compraId,
       produtoId: this.editForm.get(['produtoId']).value,
       fornecedorId: this.editForm.get(['fornecedorId']).value,
       statusId: this.editForm.get(['statusId']).value
@@ -214,5 +233,53 @@ export class ItemCompraUpdateComponent implements OnInit {
 
   trackFluxoDocumentoById(index: number, item: IFluxoDocumento) {
     return item.id;
+  }
+
+  searchProdutos($event) {
+    this.produtoService
+      .query({ 'nome.contains': $event.query })
+      .subscribe((res: HttpResponse<IProduto[]>) => (this.produtos = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  onSelectProduto($event) {
+    this.editForm.get('produtoId').patchValue($event.id, { emitEvent: false });
+    this.estruturaCalculoService.getPrecoAtualizado(this.editForm.get('produtoId').value).subscribe(precoResult => {
+      this.calcularSubTotal(precoResult);
+    });
+  }
+
+  initForm() {
+    this.editForm.patchValue({
+      quantidade: 1,
+      dataEntrega: moment(new Date()),
+      dataSolicitacao: moment(new Date()),
+      desconto: 0,
+      valor: 0,
+      subTotal: 0
+    });
+  }
+
+  calcularSubTotal(preco?: number) {
+    this.editForm.get('valor').patchValue(preco, { emitEvent: false });
+
+    const qtdeForm = this.editForm.get(['quantidade']).value;
+    const valorForm = this.editForm.get(['valor']).value;
+    const descontoForm = this.editForm.get(['desconto']).value;
+
+    const totalUnitario = this.produtoService.calcularSubTotalItem(qtdeForm, descontoForm, valorForm);
+    this.editForm.get('subTotal').patchValue(totalUnitario, { emitEvent: false });
+  }
+
+  onFormChanche() {
+    this.editForm.valueChanges.subscribe((value: IItemCompra) => {
+      this.editForm.patchValue(value, { emitEvent: false });
+      this.calcularSubTotal(value.valor);
+    });
+  }
+
+  onAddItem() {
+    this.itemCompraService.addItem(this.createFromForm()).subscribe(data => {
+      alert(data.produtoNome + ' incluido na lista de compra');
+    });
   }
 }

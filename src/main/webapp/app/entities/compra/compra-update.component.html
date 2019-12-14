@@ -26,16 +26,6 @@
                         <input id="field_data" type="datetime-local" class="form-control" name="data" formControlName="data" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                 </div> -->
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.compra.observacaoGeral" for="field_observacaoGeral">Observacao Geral</label>
-                    <textarea class="form-control" name="observacaoGeral" id="field_observacaoGeral"
-                              formControlName="observacaoGeral"></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.compra.observacaoInterna" for="field_observacaoInterna">Observacao Interna</label>
-                    <textarea class="form-control" name="observacaoInterna" id="field_observacaoInterna"
-                              formControlName="observacaoInterna"></textarea>
-                </div>
 
                 <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.compra.utilizador" for="field_utilizador">Utilizador</label>
@@ -70,7 +60,7 @@
 
             <p-accordion>
                 <p-accordionTab header="Itens da compra" [selected]="true" >
-                        <!-- <table class="table" *ngIf="items.length > 0">
+                        <table class="table" *ngIf="items.length > 0">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -86,11 +76,10 @@
                                     <tr *ngFor="let item of items; let i = index">
                                         <th scope="row"> {{ item.produtoId }} </th>
                                         <td> {{ item.produtoNome }} </td>
-                                        <td> {{ item.valor | currency: 'AOA' }} </td>
+                                        <td> {{ item.valor | currency: moedaNacional }}
                                         <td> {{ item.quantidade | number }} </td>
                                         <td> {{ item.desconto/100 | percent }} </td>
-                                        <td> {{ itemVendaService.subTotal( item.valor, item.quantidade, item.desconto )  | currency: 'AOA'}}
-                                        </td>
+                                        <td> {{ produtoService.calcularSubTotalItem(item.quantidade, item.desconto, item.valor)   | currency: moedaNacional}}</td>
                                         <td>
                                             <button (click)="onDeleteItem(i)" type="button" class="btn btn-danger">
                                                 <fa-icon [icon]="'trash'"></fa-icon>
@@ -98,8 +87,8 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table> -->
-                            <button class="btn btn-success" type="button" [routerLink]="['/item-compra/new']"> Adiconar item
+                            </table>
+                            <button class="btn btn-success" type="button" [routerLink]="['/item-compra/new']" [queryParams]="{ op: 'new'}" > Adiconar item
                             </button>
                 </p-accordionTab>
                 <p-accordionTab header="Pagamento" [selected]="true" >
@@ -127,6 +116,21 @@
                             </button>
                 </p-accordionTab>
             </p-accordion>
+            <hr>
+
+            <div class="row">
+
+                    <div class="form-group col">
+                            <label class="form-control-label" jhiTranslate="mandaApp.compra.observacaoGeral" for="field_observacaoGeral">Observacao Geral</label>
+                            <textarea class="form-control" name="observacaoGeral" id="field_observacaoGeral"
+                                      formControlName="observacaoGeral"></textarea>
+                        </div>
+                        <div class="form-group col">
+                            <label class="form-control-label" jhiTranslate="mandaApp.compra.observacaoInterna" for="field_observacaoInterna">Observacao Interna</label>
+                            <textarea class="form-control" name="observacaoInterna" id="field_observacaoInterna"
+                                      formControlName="observacaoInterna"></textarea>
+                        </div>
+            </div>
 
             <hr>
 

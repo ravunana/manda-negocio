@@ -35,4 +35,8 @@ export class MoedaService {
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  getMoedaNacional(): Observable<string> {
+    return this.http.get<string>(this.resourceUrl + '/nacional');
+  }
 }

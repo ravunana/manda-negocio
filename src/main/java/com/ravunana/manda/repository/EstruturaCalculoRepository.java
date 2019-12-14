@@ -1,8 +1,11 @@
 package com.ravunana.manda.repository;
 import com.ravunana.manda.domain.EstruturaCalculo;
+import com.ravunana.manda.domain.Produto;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**

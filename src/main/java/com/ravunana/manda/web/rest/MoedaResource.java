@@ -144,4 +144,11 @@ public class MoedaResource {
         moedaService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping( "/moedas/nacional" )
+    public String getMoedaNacional() {
+        String moedaNacional = this.moedaService.getMoedaNacional();
+        log.debug("REST request to get moeda nacional : {}", moedaNacional);
+        return moedaNacional;
+    }
 }

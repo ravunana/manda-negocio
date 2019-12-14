@@ -72,4 +72,8 @@ export class EstruturaCalculoService {
     }
     return res;
   }
+
+  public getPrecoAtualizado(produtoId: number): Observable<number> {
+    return this.http.get<number>(`${this.resourceUrl}/preco/${produtoId}`);
+  }
 }

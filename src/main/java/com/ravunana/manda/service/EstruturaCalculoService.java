@@ -1,6 +1,7 @@
 package com.ravunana.manda.service;
 
 import com.ravunana.manda.domain.EstruturaCalculo;
+import com.ravunana.manda.domain.Produto;
 import com.ravunana.manda.repository.EstruturaCalculoRepository;
 import com.ravunana.manda.service.dto.EstruturaCalculoDTO;
 import com.ravunana.manda.service.mapper.EstruturaCalculoMapper;
@@ -12,8 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Service Implementation for managing {@link EstruturaCalculo}.
@@ -87,5 +90,9 @@ public class EstruturaCalculoService {
     public void delete(Long id) {
         log.debug("Request to delete EstruturaCalculo : {}", id);
         estruturaCalculoRepository.deleteById(id);
+    }
+
+    public BigDecimal getPrecoUnitarioAtualizado(int produtoId) {
+       return this.estruturaCalculoRepository.findAll().stream().filter( p -> p.getProduto().getId() == produtoId ).reduce( (a,b) -> b ).get().getPrecoVenda();
     }
 }

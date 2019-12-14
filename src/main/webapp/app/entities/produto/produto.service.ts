@@ -35,4 +35,15 @@ export class ProdutoService {
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  getTotalUnitarioItem(quantidade: number, desconto: number, precoUnitario: number): Observable<number> {
+    return this.http.get<number>(`${this.resourceUrl}/totalUnitario/${quantidade}/${desconto}/${precoUnitario}`);
+  }
+
+  calcularSubTotalItem(quantidade?: number, desconto?: number, precoUnitario?: number) {
+    const semDesconto = precoUnitario * quantidade;
+    const valorDesconto = (desconto / 100) * precoUnitario;
+    const totalUnitario = semDesconto - valorDesconto;
+    return totalUnitario;
+  }
 }

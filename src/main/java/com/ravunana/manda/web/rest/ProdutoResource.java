@@ -21,6 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -143,5 +145,10 @@ public class ProdutoResource {
         log.debug("REST request to delete Produto : {}", id);
         produtoService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/produtos/totalUnitario/{quantidade}/{desconto}/{precoUnitario}")
+    public BigDecimal getTotalUnitarioItem( @PathVariable int quantidade, @PathVariable Double desconto, @PathVariable Double precoUnitario) {
+        return produtoService.getTotalUnitario(quantidade, desconto, precoUnitario);
     }
 }

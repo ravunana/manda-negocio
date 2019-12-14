@@ -16,6 +16,10 @@ import { IDocumentoComercial } from 'app/shared/model/documento-comercial.model'
 import { DocumentoComercialService } from 'app/entities/documento-comercial/documento-comercial.service';
 import { IEmpresa } from 'app/shared/model/empresa.model';
 import { EmpresaService } from 'app/entities/empresa/empresa.service';
+import { IItemCompra } from 'app/shared/model/item-compra.model';
+import { ItemCompraService } from '../item-compra/item-compra.service';
+import { ProdutoService } from '../produto/produto.service';
+import { MoedaService } from '../moeda/moeda.service';
 
 @Component({
   selector: 'rv-compra-update',
@@ -26,9 +30,12 @@ export class CompraUpdateComponent implements OnInit {
 
   users: IUser[];
 
+  items: IItemCompra[];
+
   documentocomercials: IDocumentoComercial[];
 
   empresas: IEmpresa[];
+  moedaNacional = 'Moeda';
 
   editForm = this.fb.group({
     id: [],
@@ -49,11 +56,18 @@ export class CompraUpdateComponent implements OnInit {
     protected documentoComercialService: DocumentoComercialService,
     protected empresaService: EmpresaService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    protected itemCompraSrvice: ItemCompraService,
+    public produtoService: ProdutoService,
+    private fb: FormBuilder,
+    protected moedaService: MoedaService
   ) {}
 
   ngOnInit() {
     this.isSaving = false;
+    this.moedaService.query().subscribe(moedaResult => {
+      this.moedaNacional = moedaResult.body.filter(m => m.nacional === true).shift().codigo;
+    });
+
     this.activatedRoute.data.subscribe(({ compra }) => {
       this.updateForm(compra);
     });
@@ -66,6 +80,9 @@ export class CompraUpdateComponent implements OnInit {
         (res: HttpResponse<IDocumentoComercial[]>) => (this.documentocomercials = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+
+    this.getItems();
+
     this.empresaService
       .query()
       .subscribe((res: HttpResponse<IEmpresa[]>) => (this.empresas = res.body), (res: HttpErrorResponse) => this.onError(res.message));
@@ -174,5 +191,18 @@ export class CompraUpdateComponent implements OnInit {
 
   trackEmpresaById(index: number, item: IEmpresa) {
     return item.id;
+  }
+
+  getItems() {
+    this.itemCompraSrvice.getItems().subscribe(itemsResult => {
+      this.items = itemsResult;
+    });
+  }
+
+  onDeleteItem(index) {
+    this.itemCompraSrvice.deleteItem(index).subscribe(itemEliminado => {
+      alert(itemEliminado.produtoNome + ' foi removido da lista');
+      this.getItems();
+    });
   }
 }

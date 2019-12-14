@@ -27,6 +27,8 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     LoadingBarHttpClientModule,
     LoadingBarModule,
     LoadingBarRouterModule
-  ]
+    // MoedaNacionalDirective
+  ],
+  providers: []
 })
 export class MandaSharedModule {}

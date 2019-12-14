@@ -144,4 +144,24 @@ public class ItemCompraResource {
         itemCompraService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @PostMapping("/item-compras/add")
+    public ItemCompraDTO addContacto(@RequestBody ItemCompraDTO item) {
+        return itemCompraService.addItem(item);
+    }
+
+    @DeleteMapping("/item-compras/delete/{index}")
+    public ItemCompraDTO deleteContacto(@PathVariable int index) {
+        return itemCompraService.deleteItem(index);
+    }
+
+    @GetMapping("/item-compras/lista")
+    public List<ItemCompraDTO> getItems() {
+        return itemCompraService.getItems();
+    }
+
+    @GetMapping("/item-compras/lista/clean")
+    public void cleanItem() {
+        itemCompraService.cleanItems();
+    }
 }
