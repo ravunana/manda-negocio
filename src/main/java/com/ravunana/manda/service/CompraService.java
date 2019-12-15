@@ -57,7 +57,7 @@ public class CompraService {
      */
     public CompraDTO save(CompraDTO compraDTO) {
         log.debug("Request to save Compra : {}", compraDTO);
-        var tipoDocumentoComercial = documentoComercialRepository.findById( compraDTO.getTipoDocumentoId() ).get();
+        DocumentoComercial tipoDocumentoComercial = documentoComercialRepository.findById( compraDTO.getTipoDocumentoId() ).get();
         Compra compra = compraMapper.toEntity(compraDTO);
         compra.setData(ZonedDateTime.now());
         compra.setUtilizador( userService.getCurrentUserLogged() );

@@ -37,6 +37,8 @@
     "enableTranslation": true,
     "nativeLanguage": "pt-pt",
     "languages": ["pt-pt"],
-    "blueprints": []
+    "blueprints": [],
+    "herokuAppName": "manda-negocio",
+    "herokuDeployType": "jar"
   }
 }
