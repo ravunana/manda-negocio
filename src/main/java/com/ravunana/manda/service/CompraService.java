@@ -63,8 +63,8 @@ public class CompraService {
         compra.setUtilizador( userService.getCurrentUserLogged() );
 
         if (compra.getId() != null ) {
-            String numero = compraRepository.findById( compra.getId() ).get().getNumero();
-            compra.setNumero( numero );
+            String numeroCompraSalvo = compraRepository.findById( compra.getId() ).get().getNumero();
+            compra.setNumero( numeroCompraSalvo );
             compra = compraRepository.save(compra);
         } else {
 
