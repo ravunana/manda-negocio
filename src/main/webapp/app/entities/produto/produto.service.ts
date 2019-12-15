@@ -40,7 +40,7 @@ export class ProdutoService {
     return this.http.get<number>(`${this.resourceUrl}/totalUnitario/${quantidade}/${desconto}/${precoUnitario}`);
   }
 
-  calcularSubTotalItem(quantidade?: number, desconto?: number, precoUnitario?: number) {
+  calcularSubTotalItem(quantidade?: number, desconto?: number, precoUnitario?: number): number {
     const semDesconto = precoUnitario * quantidade;
     const valorDesconto = (desconto / 100) * precoUnitario;
     const totalUnitario = semDesconto - valorDesconto;

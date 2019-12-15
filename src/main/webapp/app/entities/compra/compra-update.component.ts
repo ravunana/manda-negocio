@@ -30,6 +30,12 @@ export class CompraUpdateComponent implements OnInit {
 
   users: IUser[];
 
+  SUB_TOTAL = 0;
+  TOTAL_DESCONTO = 0;
+  TOTAL_PAGAR = 0;
+  TOTAL_ENTREGUE = 0;
+  TROCO = 0;
+
   items: IItemCompra[];
 
   documentocomercials: IDocumentoComercial[];
@@ -196,6 +202,22 @@ export class CompraUpdateComponent implements OnInit {
   getItems() {
     this.itemCompraSrvice.getItems().subscribe(itemsResult => {
       this.items = itemsResult;
+
+      // Calcular subTotal sem desconto da factura
+      this.SUB_TOTAL = this.items
+        .map(i => i.quantidade * i.valor)
+        .reduce(function(total, subTotal) {
+          return total + subTotal;
+        });
+      // calcular valor em numerario do desconto da factura
+      const valorDesconto = this.items
+        .map(i => this.produtoService.calcularSubTotalItem(i.quantidade, i.desconto, i.valor))
+        .reduce(function(total, desconto) {
+          return total + desconto;
+        });
+
+      this.TOTAL_DESCONTO = this.SUB_TOTAL - valorDesconto;
+      this.TOTAL_PAGAR = this.SUB_TOTAL - this.TOTAL_DESCONTO;
     });
   }
 

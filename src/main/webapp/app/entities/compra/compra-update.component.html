@@ -1,13 +1,13 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="rv-compra-heading" jhiTranslate="mandaApp.compra.home.createOrEditLabel">Create or edit a Compra</h2>
+            <h2 id="rv-compra-heading" jhiTranslate="mandaApp.compra.home.createOrEditLabel">Create or edit a Compra
+            </h2>
             <div>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
                 <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.compra.numero" for="field_numero">Numero</label>
@@ -35,23 +35,31 @@
                     </select>
                 </div> -->
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.compra.tipoDocumento" for="field_tipoDocumento">Tipo Documento</label>
-                    <select class="form-control" id="field_tipoDocumento" name="tipoDocumento" formControlName="tipoDocumentoId">
+                    <label class="form-control-label" jhiTranslate="mandaApp.compra.tipoDocumento"
+                        for="field_tipoDocumento">Tipo Documento</label>
+                    <select class="form-control" id="field_tipoDocumento" name="tipoDocumento"
+                        formControlName="tipoDocumentoId">
                         <option *ngIf="!editForm.get('tipoDocumentoId').value" [ngValue]="null" selected></option>
-                        <option [ngValue]="documentoComercialOption.id" *ngFor="let documentoComercialOption of documentocomercials; trackBy: trackDocumentoComercialById">{{documentoComercialOption.nome}} - {{ documentoComercialOption.descricao }} </option>
+                        <option [ngValue]="documentoComercialOption.id"
+                            *ngFor="let documentoComercialOption of documentocomercials; trackBy: trackDocumentoComercialById">
+                            {{documentoComercialOption.nome}} - {{ documentoComercialOption.descricao }} </option>
                     </select>
                 </div>
-                <div *ngIf="editForm.get('tipoDocumentoId').invalid && (editForm.get('tipoDocumentoId').dirty || editForm.get('tipoDocumentoId').touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('tipoDocumentoId').errors.required" jhiTranslate="entity.validation.required">
+                <div
+                    *ngIf="editForm.get('tipoDocumentoId').invalid && (editForm.get('tipoDocumentoId').dirty || editForm.get('tipoDocumentoId').touched)">
+                    <small class="form-text text-danger" *ngIf="editForm.get('tipoDocumentoId').errors.required"
+                        jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.compra.empresa" for="field_empresa">Empresa</label>
+                    <label class="form-control-label" jhiTranslate="mandaApp.compra.empresa"
+                        for="field_empresa">Empresa</label>
                     <select class="form-control" id="field_empresa" name="empresa" formControlName="empresaId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="empresaOption.id" *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}</option>
+                        <option [ngValue]="empresaOption.id"
+                            *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -59,40 +67,44 @@
             <hr>
 
             <p-accordion>
-                <p-accordionTab header="Itens da compra" [selected]="true" >
-                        <table class="table" *ngIf="items.length > 0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Produto | Serviço</th>
-                                        <th scope="col">Valor</th>
-                                        <th scope="col">Quantidade</th>
-                                        <th scope="col">Desconto</th>
-                                        <th scope="col">SubTotal</th>
-                                        <th scope="col">Opções</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of items; let i = index">
-                                        <th scope="row"> {{ item.produtoId }} </th>
-                                        <td> {{ item.produtoNome }} </td>
-                                        <td> {{ item.valor | currency: moedaNacional }}
-                                        <td> {{ item.quantidade | number }} </td>
-                                        <td> {{ item.desconto/100 | percent }} </td>
-                                        <td> {{ produtoService.calcularSubTotalItem(item.quantidade, item.desconto, item.valor)   | currency: moedaNacional}}</td>
-                                        <td>
-                                            <button (click)="onDeleteItem(i)" type="button" class="btn btn-danger">
-                                                <fa-icon [icon]="'trash'"></fa-icon>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button class="btn btn-success" type="button" [routerLink]="['/item-compra/new']" [queryParams]="{ op: 'new'}" > Adiconar item
-                            </button>
+                <p-accordionTab header="Itens da compra" [selected]="true">
+                    <table class="table" *ngIf="items.length > 0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col" > Fornecedor </th>
+                                <th scope="col">Produto | Serviço</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">Desconto</th>
+                                <th scope="col">SubTotal</th>
+                                <th scope="col">Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of items; let i = index">
+                                <th scope="row"> {{ item.produtoId }} </th>
+                                <td> {{ item.fornecedorNumero }} </td>
+                                <td> {{ item.produtoNome }} </td>
+                                <td> {{ item.valor | currency: moedaNacional }}
+                                <td> {{ item.quantidade | number }} </td>
+                                <td> {{ item.desconto/100 | percent }} </td>
+                                <td> {{ produtoService.calcularSubTotalItem(item.quantidade, item.desconto, item.valor)   | currency: moedaNacional}}
+                                </td>
+                                <td>
+                                    <button (click)="onDeleteItem(i)" type="button" class="btn btn-danger">
+                                        <fa-icon [icon]="'trash'"></fa-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-success" type="button" [routerLink]="['/item-compra/new']"
+                        [queryParams]="{ op: 'new'}"> Adiconar item
+                    </button>
                 </p-accordionTab>
-                <p-accordionTab header="Pagamento" [selected]="true" >
-                        <!-- <table class="table" *ngIf="recebimentos.length > 0">
+                <p-accordionTab header="Pagamento" [selected]="true">
+                    <!-- <table class="table" *ngIf="recebimentos.length > 0">
                                 <thead>
                                     <tr>
                                         <th scope="col">Meio de recebimento</th>
@@ -111,37 +123,91 @@
                                     </tr>
                                 </tbody>
                             </table> -->
-                            <button class="btn btn-success" type="button" [routerLink]="['/detalhe-lancamento/new']"
-                                [queryParams]="{ entidade: 'venda'}"> Novo valor
-                            </button>
+                    <button class="btn btn-success" type="button" [routerLink]="['/detalhe-lancamento/new']"
+                        [queryParams]="{ entidade: 'venda'}"> Novo valor
+                    </button>
                 </p-accordionTab>
             </p-accordion>
             <hr>
 
             <div class="row">
 
-                    <div class="form-group col">
-                            <label class="form-control-label" jhiTranslate="mandaApp.compra.observacaoGeral" for="field_observacaoGeral">Observacao Geral</label>
-                            <textarea class="form-control" name="observacaoGeral" id="field_observacaoGeral"
-                                      formControlName="observacaoGeral"></textarea>
-                        </div>
-                        <div class="form-group col">
-                            <label class="form-control-label" jhiTranslate="mandaApp.compra.observacaoInterna" for="field_observacaoInterna">Observacao Interna</label>
-                            <textarea class="form-control" name="observacaoInterna" id="field_observacaoInterna"
-                                      formControlName="observacaoInterna"></textarea>
-                        </div>
+                <div class="form-group col">
+                    <label class="form-control-label" jhiTranslate="mandaApp.compra.observacaoGeral"
+                        for="field_observacaoGeral">Observacao Geral</label>
+                    <textarea class="form-control" name="observacaoGeral" id="field_observacaoGeral"
+                        formControlName="observacaoGeral"></textarea>
+                </div>
+                <div class="form-group col">
+                    <label class="form-control-label" jhiTranslate="mandaApp.compra.observacaoInterna"
+                        for="field_observacaoInterna">Observacao Interna</label>
+                    <textarea class="form-control" name="observacaoInterna" id="field_observacaoInterna"
+                        formControlName="observacaoInterna"></textarea>
+                </div>
             </div>
 
             <hr>
 
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>
     </div>
+    <div class="col-md-4">
+            <div class="row">
+                <div class="col">
+                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                        <div class="card-header font-weight-bold">SUB TOTAL</div>
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold"> {{ SUB_TOTAL | currency: moedaNacional }} </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-dark bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-header font-weight-bold">DESCONTOS</div>
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">{{ TOTAL_DESCONTO  | currency: moedaNacional}}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                        <div class="card-header font-weight-bold">POR PAGAR</div>
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">{{ TOTAL_PAGAR  | currency: moedaNacional}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                        <div class="card-header font-weight-bold">ENTREGUE</div>
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">{{ TOTAL_ENTREGUE  | currency: moedaNacional}}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                        <div class="card-header font-weight-bold">TROCO</div>
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">
+                                {{ (TOTAL_ENTREGUE - TOTAL_PAGAR) | currency: moedaNacional }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 </div>

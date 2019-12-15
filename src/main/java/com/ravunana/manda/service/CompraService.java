@@ -57,27 +57,25 @@ public class CompraService {
      */
     public CompraDTO save(CompraDTO compraDTO) {
         log.debug("Request to save Compra : {}", compraDTO);
-        DocumentoComercial tipoDocumentoComercial = documentoComercialRepository.findById( compraDTO.getTipoDocumentoId() ).get();
         Compra compra = compraMapper.toEntity(compraDTO);
+
         compra.setData(ZonedDateTime.now());
         compra.setUtilizador( userService.getCurrentUserLogged() );
-        SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
-        if ( compraDTO.getId() == null || compraDTO.getId().equals(null) ) {
-            int sequencia = serieDocumento.getCodigoCompra();
-            compra.setNumero( tipoDocumentoComercial.getNome() + " " + serieDocumento.getSerie() + " " + sequencia ); // <TIPO_DOCUMENTO> <SEQUENCIA_FORNECEDOR>
-            // atualizar serie do documento
-            serieDocumento.setCodigoCompra( sequencia + 1 );
-            serieDocumentoService.atualizarSerieDocumento(serieDocumento);
-        }
-        compra = compraRepository.save(compra);
 
-        // Save itemCompraList
-        for ( ItemCompraDTO item : itemCompraService.getItems() ) {
-            item.setCompraId( compra.getId() );
-            itemCompraService.save( item );
-        }
+        if (compra.getId() != null ) {
+            String numero = compraRepository.findById( compra.getId() ).get().getNumero();
+            compra.setNumero( numero );
+            compra = compraRepository.save(compra);
+        } else {
 
-        itemCompraService.cleanItems();
+            String numeroCompra = getNumeroCompra( compraDTO.getTipoDocumentoId() );
+            compra.setNumero(numeroCompra);
+            compra = compraRepository.save(compra);
+
+            salvarItemCompra(compra.getId());
+
+            itemCompraService.cleanItems();
+        }
         return compraMapper.toDto(compra);
     }
 
@@ -116,5 +114,25 @@ public class CompraService {
     public void delete(Long id) {
         log.debug("Request to delete Compra : {}", id);
         compraRepository.deleteById(id);
+    }
+
+    private String getNumeroCompra( Long tipoDocumentoId ) {
+        DocumentoComercial tipoDocumentoComercial = documentoComercialRepository.findById( tipoDocumentoId ).get();
+        SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
+
+        int sequencia = serieDocumento.getCodigoCompra();
+        String numero = tipoDocumentoComercial.getNome() + " " + serieDocumento.getSerie() + "/" + sequencia; // <TIPO_DOCUMENTO> <SEQUENCIA_FORNECEDOR>
+        // atualizar serie do documento
+        serieDocumento.setCodigoCompra( sequencia + 1 );
+        serieDocumentoService.atualizarSerieDocumento(serieDocumento);
+
+        return numero;
+    }
+
+    private void salvarItemCompra(Long compraId) {
+            for ( ItemCompraDTO item : itemCompraService.getItems() ) {
+                item.setCompraId( compraId );
+                itemCompraService.save( item );
+            }
     }
 }

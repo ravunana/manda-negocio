@@ -39,11 +39,12 @@
                 </dd>
 
                 <hr>
-                <h2>Items da factura</h2>
+                <h2>Itens da factura</h2>
                 <table class="table" *ngIf="items.length > 0">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Fornecedor</th>
                                 <th scope="col">Produto | Serviço</th>
                                 <th scope="col">Valor</th>
                                 <th scope="col">Quantidade</th>
@@ -55,6 +56,7 @@
                         <tbody>
                             <tr *ngFor="let item of items; let i = index">
                                 <th scope="row"> {{ item.produtoId }} </th>
+                                <td> {{ item.fornecedorNumero }} </td>
                                 <td> {{ item.produtoNome }} </td>
                                 <td> {{ item.valor | currency: moedaNacional }}
                                 <td> {{ item.quantidade | number }} </td>
@@ -62,7 +64,7 @@
                                 <td> {{ produtoService.calcularSubTotalItem(item.quantidade, item.desconto, item.valor)   | currency: moedaNacional}}</td>
                                 <td>
                                         <button type="submit"
-                                                [routerLink]="['/compra', compra.id, 'edit']"
+                                                [routerLink]="['/item-compra', item.id, 'edit']" [queryParams]="{ op: 'update'}"
                                                 class="btn btn-primary btn-sm">
                                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>

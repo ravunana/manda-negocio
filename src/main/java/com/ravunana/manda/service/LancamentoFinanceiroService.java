@@ -66,7 +66,7 @@ public class LancamentoFinanceiroService {
     public Page<LancamentoFinanceiroDTO> findAllWithEagerRelationships(Pageable pageable) {
         return lancamentoFinanceiroRepository.findAllWithEagerRelationships(pageable).map(lancamentoFinanceiroMapper::toDto);
     }
-    
+
 
     /**
      * Get one lancamentoFinanceiro by id.

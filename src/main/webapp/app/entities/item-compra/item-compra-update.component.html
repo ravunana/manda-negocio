@@ -4,6 +4,7 @@
             <h2 id="rv-item-compra-heading" jhiTranslate="mandaApp.itemCompra.home.createOrEditLabel">Create or edit a
                 Item Compra</h2>
             <div>
+                <hr>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
@@ -98,36 +99,75 @@
                                 <span class="input-group-text" id="basic-addon2">{{ moedaNacional }}</span>
                             </div>
                         </div>
-                        <!-- <label class="text-muted font-italic">(Kz)</label>
-                                <input type="number" formControlName="subTotal" class="form-control" > -->
                     </div>
                 </div>
 
-                <!-- <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.dataSolicitacao" for="field_dataSolicitacao">Data Solicitacao</label>
-                    <div class="d-flex">
-                        <input id="field_dataSolicitacao" type="datetime-local" class="form-control" name="dataSolicitacao" formControlName="dataSolicitacao" placeholder="YYYY-MM-DD HH:mm"/>
+                <div class="row">
+
+                    <div class="form-group col">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.fornecedor"
+                            for="field_fornecedor">Fornecedor</label>
+                            <p-autoComplete id="field_fornecedor" name="fornecedor" field="nome" [suggestions]="pessoas"
+                            (completeMethod)="searchPessoa($event)" (onSelect)="onSelectPessoa($event)" required>
+                        </p-autoComplete>
+                        <!-- <select class="form-control" id="field_fornecedor" name="fornecedor"
+                            formControlName="fornecedorId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="fornecedorOption.id"
+                                *ngFor="let fornecedorOption of fornecedors; trackBy: trackFornecedorById">
+                                {{fornecedorOption.numero}}</option>
+                        </select> -->
                     </div>
-                </div> -->
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.dataEntrega"
-                        for="field_dataEntrega">Data Entrega</label>
-                    <div class="d-flex">
-                        <input id="field_dataEntrega" type="datetime-local" class="form-control" name="dataEntrega"
-                            formControlName="dataEntrega" placeholder="YYYY-MM-DD HH:mm" />
+                    <div class="form-group col">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.solicitante"
+                            for="field_solicitante">Solicitante</label>
+                        <select class="form-control" id="field_solicitante" name="solicitante"
+                            formControlName="solicitanteId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">
+                                {{userOption.login}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.status"
+                            for="field_status">Status</label>
+                        <select class="form-control" id="field_status" name="status" formControlName="statusId">
+                            <option *ngIf="!editForm.get('statusId').value" [ngValue]="null" selected></option>
+                            <option [ngValue]="fluxoDocumentoOption.id"
+                                *ngFor="let fluxoDocumentoOption of fluxodocumentos; trackBy: trackFluxoDocumentoById">
+                                {{fluxoDocumentoOption.nome}}</option>
+                        </select>
+                        <div
+                            *ngIf="editForm.get('statusId').invalid && (editForm.get('statusId').dirty || editForm.get('statusId').touched)">
+                            <small class="form-text text-danger" *ngIf="editForm.get('statusId').errors.required"
+                                jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.solicitante"
-                        for="field_solicitante">Solicitante</label>
-                    <select class="form-control" id="field_solicitante" name="solicitante"
-                        formControlName="solicitanteId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">
-                            {{userOption.login}}</option>
-                    </select>
+                <div class="row">
+
+                    <div class="form-group col">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.dataSolicitacao"
+                            for="field_dataSolicitacao">Data Solicitacao</label>
+                        <div class="d-flex">
+                            <input id="field_dataSolicitacao" type="datetime-local" class="form-control"
+                                name="dataSolicitacao" formControlName="dataSolicitacao"
+                                placeholder="YYYY-MM-DD HH:mm" />
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.dataEntrega"
+                            for="field_dataEntrega">Data Entrega</label>
+                        <div class="d-flex">
+                            <input id="field_dataEntrega" type="datetime-local" class="form-control" name="dataEntrega"
+                                formControlName="dataEntrega" placeholder="YYYY-MM-DD HH:mm" />
+                        </div>
+                    </div>
                 </div>
+
                 <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.compra" for="field_compra">Compra</label>
                     <select class="form-control" id="field_compra" name="compra" formControlName="compraId">
@@ -141,33 +181,6 @@
                         </small>
                     </div>
                 </div> -->
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.fornecedor"
-                        for="field_fornecedor">Fornecedor</label>
-                    <select class="form-control" id="field_fornecedor" name="fornecedor" formControlName="fornecedorId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="fornecedorOption.id"
-                            *ngFor="let fornecedorOption of fornecedors; trackBy: trackFornecedorById">
-                            {{fornecedorOption.numero}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.status"
-                        for="field_status">Status</label>
-                    <select class="form-control" id="field_status" name="status" formControlName="statusId">
-                        <option *ngIf="!editForm.get('statusId').value" [ngValue]="null" selected></option>
-                        <option [ngValue]="fluxoDocumentoOption.id"
-                            *ngFor="let fluxoDocumentoOption of fluxodocumentos; trackBy: trackFluxoDocumentoById">
-                            {{fluxoDocumentoOption.nome}}</option>
-                    </select>
-                </div>
-                <div
-                    *ngIf="editForm.get('statusId').invalid && (editForm.get('statusId').dirty || editForm.get('statusId').touched)">
-                    <small class="form-text text-danger" *ngIf="editForm.get('statusId').errors.required"
-                        jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.itemCompra.descricao"
@@ -178,17 +191,17 @@
                 <hr>
 
                 <div *ngIf="opcao === 'new'">
-                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                         <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Finalizar inclusão</span>
                     </button>
-                <button (click)="onAddItem()" type="button" id="save-entity" [disabled]="editForm.invalid || isSaving"
-                    class="btn btn-success">
-                    <fa-icon [icon]="'plus'"></fa-icon>&nbsp;<span>Incluir item à compra</span>
-                </button>
+                    <button (click)="onAddItem()" type="button" id="save-entity"
+                        [disabled]="editForm.invalid || isSaving" class="btn btn-success">
+                        <fa-icon [icon]="'plus'"></fa-icon>&nbsp;<span>Incluir item à compra</span>
+                    </button>
                 </div>
                 <hr>
             </div>
-            <div *ngIf="opcao === 'update' " >
+            <div *ngIf="opcao === 'update' ">
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>

@@ -22,6 +22,9 @@ import { IFluxoDocumento } from 'app/shared/model/fluxo-documento.model';
 import { FluxoDocumentoService } from 'app/entities/fluxo-documento/fluxo-documento.service';
 import { EstruturaCalculoService } from '../estrutura-calculo/estrutura-calculo.service';
 import { MoedaService } from '../moeda/moeda.service';
+import { PessoaService } from '../pessoa/pessoa.service';
+import { IPessoa } from 'app/shared/model/pessoa.model';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'rv-item-compra-update',
@@ -30,9 +33,11 @@ import { MoedaService } from '../moeda/moeda.service';
 export class ItemCompraUpdateComponent implements OnInit {
   isSaving: boolean;
   compraId = 0;
+  fornecedorId = 0;
   opcao;
 
   users: IUser[];
+  pessoas: IPessoa[];
 
   compras: ICompra[];
 
@@ -71,14 +76,17 @@ export class ItemCompraUpdateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     protected estruturaCalculoService: EstruturaCalculoService,
-    protected moedaService: MoedaService
+    protected moedaService: MoedaService,
+    protected pessoaService: PessoaService
   ) {}
 
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ itemCompra }) => {
-      this.compraId = itemCompra.compraId;
       this.updateForm(itemCompra);
+      this.compraId = itemCompra.compraId;
+      this.fornecedorId = itemCompra.fornecedorId;
+      this.calcularSubTotal(itemCompra.valor);
     });
     this.userService
       .query()
@@ -89,12 +97,12 @@ export class ItemCompraUpdateComponent implements OnInit {
     this.produtoService
       .query()
       .subscribe((res: HttpResponse<IProduto[]>) => (this.produtos = res.body), (res: HttpErrorResponse) => this.onError(res.message));
-    this.fornecedorService
-      .query()
-      .subscribe(
-        (res: HttpResponse<IFornecedor[]>) => (this.fornecedors = res.body),
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
+    // this.fornecedorService
+    //   .query()
+    //   .subscribe(
+    //     (res: HttpResponse<IFornecedor[]>) => (this.fornecedors = res.body),
+    //     (res: HttpErrorResponse) => this.onError(res.message)
+    //   );
     this.fluxoDocumentoService
       .query()
       .subscribe(
@@ -102,11 +110,14 @@ export class ItemCompraUpdateComponent implements OnInit {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
 
-    this.initForm();
     this.onFormChanche();
     this.activatedRoute.queryParams.subscribe(parmas => {
       this.opcao = parmas.op;
     });
+
+    if (this.opcao === 'new') {
+      this.initForm();
+    }
 
     this.moedaService.query().subscribe(moedaResult => {
       this.moedaNacional = moedaResult.body.filter(m => m.nacional === true).shift().codigo;
@@ -194,7 +205,7 @@ export class ItemCompraUpdateComponent implements OnInit {
       solicitanteId: this.editForm.get(['solicitanteId']).value,
       compraId: this.compraId,
       produtoId: this.editForm.get(['produtoId']).value,
-      fornecedorId: this.editForm.get(['fornecedorId']).value,
+      fornecedorId: this.fornecedorId,
       statusId: this.editForm.get(['statusId']).value
     };
   }
@@ -279,7 +290,27 @@ export class ItemCompraUpdateComponent implements OnInit {
 
   onAddItem() {
     this.itemCompraService.addItem(this.createFromForm()).subscribe(data => {
-      alert(data.produtoNome + ' incluido na lista de compra');
+      alert(data.produtoNome + ' incluido na lista de compra' + data.fornecedorId);
+    });
+  }
+
+  onSelectPessoa(pessoa) {
+    this.fornecedorService.query({ 'pessoaId.equals': pessoa.id }).subscribe(fornecedorResult => {
+      this.fornecedorId = fornecedorResult.body.shift().id;
+      alert(this.fornecedorId);
+      // this.editForm.get('fornecedorId').patchValue(fornecedorId, { emitEvent: false });
+    });
+  }
+
+  searchFornecedor(fornecedor) {
+    this.fornecedorService.query({ 'pessoaNome.contains': fornecedor.query }).subscribe(data => {
+      this.fornecedors = data.body;
+    });
+  }
+
+  searchPessoa(pessoa) {
+    this.pessoaService.query({ 'nome.contains': pessoa.query }).subscribe(data => {
+      this.pessoas = data.body;
     });
   }
 }
