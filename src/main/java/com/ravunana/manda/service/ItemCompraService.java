@@ -2,6 +2,7 @@ package com.ravunana.manda.service;
 
 import com.ravunana.manda.domain.ItemCompra;
 import com.ravunana.manda.domain.Produto;
+import com.ravunana.manda.repository.FluxoDocumentoRepository;
 import com.ravunana.manda.repository.ItemCompraRepository;
 import com.ravunana.manda.repository.ProdutoRepository;
 import com.ravunana.manda.service.dto.ItemCompraDTO;
@@ -36,6 +37,12 @@ public class ItemCompraService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private FluxoDocumentoRepository fluxoDocumentoRepository;
+
+    @Autowired
+    private ProdutoService produtoService;
+
     public ItemCompraService(ItemCompraRepository itemCompraRepository, ItemCompraMapper itemCompraMapper) {
         this.itemCompraRepository = itemCompraRepository;
         this.itemCompraMapper = itemCompraMapper;
@@ -51,6 +58,12 @@ public class ItemCompraService {
         log.debug("Request to save ItemCompra : {}", itemCompraDTO);
         ItemCompra itemCompra = itemCompraMapper.toEntity(itemCompraDTO);
         itemCompra = itemCompraRepository.save(itemCompra);
+        Boolean isAumentaEstoque = fluxoDocumentoRepository.findById( itemCompraDTO.getStatusId() ).get().isAumentaEstoque();
+
+        if ( isAumentaEstoque == true ) {
+        produtoService.aumentarQuantidadeEstoque(itemCompraDTO.getProdutoId(), itemCompraDTO.getQuantidade());
+        }
+
         return itemCompraMapper.toDto(itemCompra);
     }
 

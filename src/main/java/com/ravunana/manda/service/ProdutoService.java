@@ -116,4 +116,26 @@ public class ProdutoService {
         desconto = ( precoUnitario  * quantidade * desconto ) / 100;
         return new BigDecimal((quantidade * precoUnitario ) - desconto);
     }
+
+    public Produto aumentarQuantidadeEstoque( Long produtoId, Double quantidade ) {
+        Produto produto = produtoRepository.findById( produtoId ).get();
+        if ( produto.getTipo() != "S" || produto.getTipo() != "Serviço" ) {
+            Double estoqueAtual = produto.getEstoqueAtual();
+            produto.setEstoqueAtual(estoqueAtual + quantidade);
+            return produtoRepository.save( produto );
+        } else {
+            return produto;
+        }
+    }
+
+    public Produto diminuirQuantidadeEstoque( Long produtoId, Double quantidade ) {
+        Produto produto = produtoRepository.findById( produtoId ).get();
+        if ( produto.getTipo() != "S" || produto.getTipo() != "Serviço" ) {
+        Double estoqueAtual = produto.getEstoqueAtual();
+        produto.setEstoqueAtual(estoqueAtual - quantidade);
+        return produtoRepository.save( produto );
+        } else {
+            return produto;
+        }
+    }
 }

@@ -2,9 +2,11 @@ package com.ravunana.manda.service;
 
 import com.ravunana.manda.domain.Compra;
 import com.ravunana.manda.domain.DocumentoComercial;
+import com.ravunana.manda.domain.ItemCompra;
 import com.ravunana.manda.domain.SerieDocumento;
 import com.ravunana.manda.repository.CompraRepository;
 import com.ravunana.manda.repository.DocumentoComercialRepository;
+import com.ravunana.manda.repository.FluxoDocumentoRepository;
 import com.ravunana.manda.service.dto.CompraDTO;
 import com.ravunana.manda.service.dto.ItemCompraDTO;
 import com.ravunana.manda.service.mapper.CompraMapper;
@@ -43,6 +45,12 @@ public class CompraService {
 
     @Autowired
     private ItemCompraService itemCompraService;
+
+    @Autowired
+    private ProdutoService produtoService;
+
+    @Autowired
+    private FluxoDocumentoRepository fluxoDocumentoRepository;
 
     public CompraService(CompraRepository compraRepository, CompraMapper compraMapper) {
         this.compraRepository = compraRepository;

@@ -1,8 +1,11 @@
 package com.ravunana.manda.service;
 
+import com.ravunana.manda.domain.Conta;
+import com.ravunana.manda.domain.DocumentoComercial;
 import com.ravunana.manda.domain.Fornecedor;
 import com.ravunana.manda.domain.Pessoa;
 import com.ravunana.manda.domain.SerieDocumento;
+import com.ravunana.manda.repository.DocumentoComercialRepository;
 import com.ravunana.manda.repository.FornecedorRepository;
 import com.ravunana.manda.repository.PessoaRepository;
 import com.ravunana.manda.service.dto.FornecedorDTO;
@@ -36,6 +39,9 @@ public class FornecedorService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @Autowired
+    private ContaService contaService;
+
     public FornecedorService(FornecedorRepository fornecedorRepository, FornecedorMapper fornecedorMapper) {
         this.fornecedorRepository = fornecedorRepository;
         this.fornecedorMapper = fornecedorMapper;
@@ -49,18 +55,37 @@ public class FornecedorService {
      */
     public FornecedorDTO save(FornecedorDTO fornecedorDTO) {
         log.debug("Request to save Fornecedor : {}", fornecedorDTO);
+
         Fornecedor fornecedor = fornecedorMapper.toEntity(fornecedorDTO);
-        SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
-        int sequencia = serieDocumento.getCodigoFornecedor();
+
         Pessoa pessoa = pessoaRepository.findById( fornecedorDTO.getPessoaId() ).get();
-        fornecedor.setNumero( pessoa.getTipoPessoa().substring(0, 1) + " " + serieDocumento.getSerie() + " " + sequencia ); // <TIPO_PESSOA> <SEQUENCIA_FORNECEDOR>
-        fornecedor = fornecedorRepository.save(fornecedor);
-        if ( fornecedor.getId() > 0 ) {
+
+        if ( fornecedor.getId() != null ) {
+            String numeroSalvo = fornecedorRepository.findById( fornecedorDTO.getId() ).get().getNumero();
+            fornecedor.setNumero(numeroSalvo);
+            fornecedor = fornecedorRepository.save(fornecedor);
+        } else {
+
+            Conta conta = contaService.addSubConta(1187L, pessoa.getNome());
+            fornecedor.setConta(conta);
+            fornecedor.setNumero( getNumeroFornecedor(pessoa.getTipoPessoa()));
+            fornecedor = fornecedorRepository.save(fornecedor);
+        }
+
+        return fornecedorMapper.toDto(fornecedor);
+    }
+
+
+    private String getNumeroFornecedor( String tipoPessoa ) {
+        SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
+
+        int sequencia = serieDocumento.getCodigoFornecedor();
+        String numero = "P" + tipoPessoa.substring(0, 1) + " " + serieDocumento.getSerie() + "/" + sequencia; // <TIPO_DOCUMENTO> <SEQUENCIA_FORNECEDOR>
         // atualizar serie do documento
         serieDocumento.setCodigoFornecedor( sequencia + 1 );
         serieDocumentoService.atualizarSerieDocumento(serieDocumento);
-        }
-        return fornecedorMapper.toDto(fornecedor);
+
+        return numero;
     }
 
     /**
