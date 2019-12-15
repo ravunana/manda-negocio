@@ -119,7 +119,7 @@ public class ProdutoService {
 
     public Produto aumentarQuantidadeEstoque( Long produtoId, Double quantidade ) {
         Produto produto = produtoRepository.findById( produtoId ).get();
-        if ( produto.getTipo() != "S" || produto.getTipo() != "Serviço" ) {
+        if ( produto.getTipo() != "S" || produto.getTipo() != "Serviço" || produto.getTipo() != "Servico" ) {
             Double estoqueAtual = produto.getEstoqueAtual();
             produto.setEstoqueAtual(estoqueAtual + quantidade);
             return produtoRepository.save( produto );
@@ -130,7 +130,7 @@ public class ProdutoService {
 
     public Produto diminuirQuantidadeEstoque( Long produtoId, Double quantidade ) {
         Produto produto = produtoRepository.findById( produtoId ).get();
-        if ( produto.getTipo() != "S" || produto.getTipo() != "Serviço" ) {
+        if ( produto.getTipo() != "S" || produto.getTipo() != "Serviço" || produto.getTipo() != "Servico" ) {
         Double estoqueAtual = produto.getEstoqueAtual();
         produto.setEstoqueAtual(estoqueAtual - quantidade);
         return produtoRepository.save( produto );
