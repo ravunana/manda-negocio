@@ -25,4 +25,6 @@ public interface ContaRepository extends JpaRepository<Conta, Long>, JpaSpecific
     @Query("select conta from Conta conta left join fetch conta.empresas where conta.id =:id")
     Optional<Conta> findOneWithEagerRelationships(@Param("id") Long id);
 
+    List<Conta> findByContaAgregadora(Conta contaAgregadora);
+
 }
