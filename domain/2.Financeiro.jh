@@ -65,7 +65,8 @@ relationship OneToMany {
     DetalheLancamento to RetencaoFonte{detalhe},
     Imposto to RetencaoFonte{imposto(codigoImposto)},
     DocumentoComercial to LancamentoFinanceiro{tipoRecibo(nome) required},
-    CoordenadaBancaria to DetalheLancamento{coordenada(descricao) required}
+    CoordenadaBancaria to DetalheLancamento{coordenada(descricao) required},
+    LancamentoFinanceiro{conta(descricao)} to Conta
 }
 
 relationship ManyToMany {
