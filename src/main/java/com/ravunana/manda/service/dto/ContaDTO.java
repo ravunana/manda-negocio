@@ -21,8 +21,8 @@ public class ContaDTO implements Serializable {
 
     private String tipo;
 
+    @NotNull
     @Min(value = 1)
-    @Max(value = 5)
     private Integer grau;
 
     private String natureza;

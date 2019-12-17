@@ -33,7 +33,7 @@
             <column name="valor" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="solicitante_id" type="bigint">
+            <column name="solicitante" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="compra_id" type="bigint">
@@ -79,6 +79,7 @@
             <column name="data_entrega" type="datetime"/>
             <column name="descricao" type="clob"/>
             <column name="valor" type="numeric"/>
+            <column name="solicitante" type="string"/>
             <column name="compra_id" type="numeric"/>
             <column name="produto_id" type="numeric"/>
             <column name="status_id" type="numeric"/>

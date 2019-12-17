@@ -24,8 +24,9 @@
             <th scope="col"  jhiSortBy="externo"><span jhiTranslate="mandaApp.lancamentoFinanceiro.externo">Externo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.lancamentoFinanceiro.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.lancamentoFinanceiro.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="entidadeDocumento"><span jhiTranslate="mandaApp.lancamentoFinanceiro.entidadeDocumento">Entidade Documento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="numeroDocumento"><span jhiTranslate="mandaApp.lancamentoFinanceiro.numeroDocumento">Numero Documento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.lancamentoFinanceiro.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="contaDescricao"><span jhiTranslate="mandaApp.lancamentoFinanceiro.conta">Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="formaLiquidacaoNome"><span jhiTranslate="mandaApp.lancamentoFinanceiro.formaLiquidacao">Forma Liquidacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.lancamentoFinanceiro.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="tipoReciboNome"><span jhiTranslate="mandaApp.lancamentoFinanceiro.tipoRecibo">Tipo Recibo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -40,13 +41,10 @@
                 <td>{{lancamentoFinanceiro.externo}}</td>
                 <td>{{lancamentoFinanceiro.numero}}</td>
                 <td>{{lancamentoFinanceiro.descricao}}</td>
+                <td jhiTranslate="{{'mandaApp.EntidadeSistema.' + lancamentoFinanceiro.entidadeDocumento}}">{{lancamentoFinanceiro.entidadeDocumento}}</td>
+                <td>{{lancamentoFinanceiro.numeroDocumento}}</td>
                 <td>
                     {{lancamentoFinanceiro.utilizadorLogin}}
-                </td>
-                <td>
-                    <div *ngIf="lancamentoFinanceiro.contaId">
-                        <a [routerLink]="['/conta', lancamentoFinanceiro.contaId , 'view' ]" >{{lancamentoFinanceiro.contaDescricao}}</a>
-                    </div>
                 </td>
                 <td>
                     <div *ngIf="lancamentoFinanceiro.formaLiquidacaoId">

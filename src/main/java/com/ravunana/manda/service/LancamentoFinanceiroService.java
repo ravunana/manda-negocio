@@ -1,8 +1,6 @@
 package com.ravunana.manda.service;
 
-import com.ravunana.manda.domain.DocumentoComercial;
 import com.ravunana.manda.domain.LancamentoFinanceiro;
-import com.ravunana.manda.domain.SerieDocumento;
 import com.ravunana.manda.repository.DocumentoComercialRepository;
 import com.ravunana.manda.repository.LancamentoFinanceiroRepository;
 import com.ravunana.manda.service.dto.DetalheLancamentoDTO;
@@ -16,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +49,7 @@ public class LancamentoFinanceiroService {
 
     @Autowired
     SerieDocumentoService serieDocumentoService;
+
 
 
     public LancamentoFinanceiroService(LancamentoFinanceiroRepository lancamentoFinanceiroRepository, LancamentoFinanceiroMapper lancamentoFinanceiroMapper) {
@@ -132,6 +130,7 @@ public class LancamentoFinanceiroService {
         log.debug("Request to delete LancamentoFinanceiro : {}", id);
         lancamentoFinanceiroRepository.deleteById(id);
     }
+
 
     public DetalheLancamentoDTO addDetalheLancamento( DetalheLancamentoDTO detalheLancamentoDTO ) {
         Boolean result = detalhesLancamento.add(detalheLancamentoDTO);

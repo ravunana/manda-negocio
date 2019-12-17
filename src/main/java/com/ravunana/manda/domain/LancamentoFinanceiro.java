@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.ravunana.manda.domain.enumeration.EntidadeSistema;
+
 /**
  * A LancamentoFinanceiro.
  */
@@ -49,6 +51,15 @@ public class LancamentoFinanceiro implements Serializable {
     @Column(name = "descricao", nullable = false)
     private String descricao;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "entidade_documento", nullable = false)
+    private EntidadeSistema entidadeDocumento;
+
+    @NotNull
+    @Column(name = "numero_documento", nullable = false)
+    private String numeroDocumento;
+
     @OneToMany(mappedBy = "lancamentoFinanceiro")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DetalheLancamento> detalheLancamentos = new HashSet<>();
@@ -56,10 +67,6 @@ public class LancamentoFinanceiro implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("lancamentoFinanceiros")
     private User utilizador;
-
-    @ManyToOne
-    @JsonIgnoreProperties("lancamentoFinanceiros")
-    private Conta conta;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -157,6 +164,32 @@ public class LancamentoFinanceiro implements Serializable {
         this.descricao = descricao;
     }
 
+    public EntidadeSistema getEntidadeDocumento() {
+        return entidadeDocumento;
+    }
+
+    public LancamentoFinanceiro entidadeDocumento(EntidadeSistema entidadeDocumento) {
+        this.entidadeDocumento = entidadeDocumento;
+        return this;
+    }
+
+    public void setEntidadeDocumento(EntidadeSistema entidadeDocumento) {
+        this.entidadeDocumento = entidadeDocumento;
+    }
+
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public LancamentoFinanceiro numeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+        return this;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
     public Set<DetalheLancamento> getDetalheLancamentos() {
         return detalheLancamentos;
     }
@@ -193,19 +226,6 @@ public class LancamentoFinanceiro implements Serializable {
 
     public void setUtilizador(User user) {
         this.utilizador = user;
-    }
-
-    public Conta getConta() {
-        return conta;
-    }
-
-    public LancamentoFinanceiro conta(Conta conta) {
-        this.conta = conta;
-        return this;
-    }
-
-    public void setConta(Conta conta) {
-        this.conta = conta;
     }
 
     public Set<Imposto> getImpostos() {
@@ -298,6 +318,8 @@ public class LancamentoFinanceiro implements Serializable {
             ", externo='" + isExterno() + "'" +
             ", numero='" + getNumero() + "'" +
             ", descricao='" + getDescricao() + "'" +
+            ", entidadeDocumento='" + getEntidadeDocumento() + "'" +
+            ", numeroDocumento='" + getNumeroDocumento() + "'" +
             "}";
     }
 }

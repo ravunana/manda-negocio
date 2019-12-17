@@ -8,11 +8,9 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link ItemCompra} and its DTO {@link ItemCompraDTO}.
  */
-@Mapper(componentModel = "spring", uses = {UserMapper.class, CompraMapper.class, ProdutoMapper.class, FornecedorMapper.class, FluxoDocumentoMapper.class})
+@Mapper(componentModel = "spring", uses = {CompraMapper.class, ProdutoMapper.class, FornecedorMapper.class, FluxoDocumentoMapper.class})
 public interface ItemCompraMapper extends EntityMapper<ItemCompraDTO, ItemCompra> {
 
-    @Mapping(source = "solicitante.id", target = "solicitanteId")
-    @Mapping(source = "solicitante.login", target = "solicitanteLogin")
     @Mapping(source = "compra.id", target = "compraId")
     @Mapping(source = "compra.numero", target = "compraNumero")
     @Mapping(source = "produto.id", target = "produtoId")
@@ -23,7 +21,6 @@ public interface ItemCompraMapper extends EntityMapper<ItemCompraDTO, ItemCompra
     @Mapping(source = "status.nome", target = "statusNome")
     ItemCompraDTO toDto(ItemCompra itemCompra);
 
-    @Mapping(source = "solicitanteId", target = "solicitante")
     @Mapping(source = "compraId", target = "compra")
     @Mapping(source = "produtoId", target = "produto")
     @Mapping(source = "fornecedorId", target = "fornecedor")

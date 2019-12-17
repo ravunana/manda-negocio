@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 import javax.persistence.Lob;
+import com.ravunana.manda.domain.enumeration.EntidadeSistema;
 
 /**
  * A DTO for the {@link com.ravunana.manda.domain.LancamentoFinanceiro} entity.
@@ -26,16 +27,20 @@ public class LancamentoFinanceiroDTO implements Serializable {
     @NotNull
     private String numero;
 
+    
     @Lob
     private String descricao;
+
+    @NotNull
+    private EntidadeSistema entidadeDocumento;
+
+    @NotNull
+    private String numeroDocumento;
+
 
     private Long utilizadorId;
 
     private String utilizadorLogin;
-
-    private Long contaId;
-
-    private String contaDescricao;
 
     private Set<ImpostoDTO> impostos = new HashSet<>();
 
@@ -99,6 +104,22 @@ public class LancamentoFinanceiroDTO implements Serializable {
         this.descricao = descricao;
     }
 
+    public EntidadeSistema getEntidadeDocumento() {
+        return entidadeDocumento;
+    }
+
+    public void setEntidadeDocumento(EntidadeSistema entidadeDocumento) {
+        this.entidadeDocumento = entidadeDocumento;
+    }
+
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
     public Long getUtilizadorId() {
         return utilizadorId;
     }
@@ -113,22 +134,6 @@ public class LancamentoFinanceiroDTO implements Serializable {
 
     public void setUtilizadorLogin(String userLogin) {
         this.utilizadorLogin = userLogin;
-    }
-
-    public Long getContaId() {
-        return contaId;
-    }
-
-    public void setContaId(Long contaId) {
-        this.contaId = contaId;
-    }
-
-    public String getContaDescricao() {
-        return contaDescricao;
-    }
-
-    public void setContaDescricao(String contaDescricao) {
-        this.contaDescricao = contaDescricao;
     }
 
     public Set<ImpostoDTO> getImpostos() {
@@ -217,10 +222,10 @@ public class LancamentoFinanceiroDTO implements Serializable {
             ", externo='" + isExterno() + "'" +
             ", numero='" + getNumero() + "'" +
             ", descricao='" + getDescricao() + "'" +
+            ", entidadeDocumento='" + getEntidadeDocumento() + "'" +
+            ", numeroDocumento='" + getNumeroDocumento() + "'" +
             ", utilizador=" + getUtilizadorId() +
             ", utilizador='" + getUtilizadorLogin() + "'" +
-            ", conta=" + getContaId() +
-            ", conta='" + getContaDescricao() + "'" +
             ", formaLiquidacao=" + getFormaLiquidacaoId() +
             ", formaLiquidacao='" + getFormaLiquidacaoNome() + "'" +
             ", empresa=" + getEmpresaId() +

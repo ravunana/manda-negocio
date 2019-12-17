@@ -25,7 +25,7 @@
             <th scope="col"  jhiSortBy="dataEntrega"><span jhiTranslate="mandaApp.itemCompra.dataEntrega">Data Entrega</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.itemCompra.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="valor"><span jhiTranslate="mandaApp.itemCompra.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="solicitanteLogin"><span jhiTranslate="mandaApp.itemCompra.solicitante">Solicitante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="solicitante"><span jhiTranslate="mandaApp.itemCompra.solicitante">Solicitante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="compraNumero"><span jhiTranslate="mandaApp.itemCompra.compra">Compra</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="produtoNome"><span jhiTranslate="mandaApp.itemCompra.produto">Produto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="fornecedorNumero"><span jhiTranslate="mandaApp.itemCompra.fornecedor">Fornecedor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -42,9 +42,7 @@
                 <td>{{itemCompra.dataEntrega | date:'medium'}}</td>
                 <td>{{itemCompra.descricao}}</td>
                 <td>{{itemCompra.valor}}</td>
-                <td>
-                    {{itemCompra.solicitanteLogin}}
-                </td>
+                <td>{{itemCompra.solicitante}}</td>
                 <td>
                     <div *ngIf="itemCompra.compraId">
                         <a [routerLink]="['/compra', itemCompra.compraId , 'view' ]" >{{itemCompra.compraNumero}}</a>

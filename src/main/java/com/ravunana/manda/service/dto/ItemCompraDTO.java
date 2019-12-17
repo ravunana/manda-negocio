@@ -29,10 +29,8 @@ public class ItemCompraDTO implements Serializable {
 
     private BigDecimal valor;
 
+    private String solicitante;
 
-    private Long solicitanteId;
-
-    private String solicitanteLogin;
 
     private Long compraId;
 
@@ -106,20 +104,12 @@ public class ItemCompraDTO implements Serializable {
         this.valor = valor;
     }
 
-    public Long getSolicitanteId() {
-        return solicitanteId;
+    public String getSolicitante() {
+        return solicitante;
     }
 
-    public void setSolicitanteId(Long userId) {
-        this.solicitanteId = userId;
-    }
-
-    public String getSolicitanteLogin() {
-        return solicitanteLogin;
-    }
-
-    public void setSolicitanteLogin(String userLogin) {
-        this.solicitanteLogin = userLogin;
+    public void setSolicitante(String solicitante) {
+        this.solicitante = solicitante;
     }
 
     public Long getCompraId() {
@@ -217,8 +207,7 @@ public class ItemCompraDTO implements Serializable {
             ", dataEntrega='" + getDataEntrega() + "'" +
             ", descricao='" + getDescricao() + "'" +
             ", valor=" + getValor() +
-            ", solicitante=" + getSolicitanteId() +
-            ", solicitante='" + getSolicitanteLogin() + "'" +
+            ", solicitante='" + getSolicitante() + "'" +
             ", compra=" + getCompraId() +
             ", compra='" + getCompraNumero() + "'" +
             ", produto=" + getProdutoId() +

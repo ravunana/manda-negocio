@@ -122,7 +122,7 @@
             "otherEntityName": "imposto",
             "otherEntityRelationshipName": "produto",
             "relationshipName": "imposto",
-            "otherEntityField": "nome",
+            "otherEntityField": "codigoImposto",
             "ownerSide": true
         },
         {
@@ -130,7 +130,7 @@
             "otherEntityName": "fornecedor",
             "otherEntityRelationshipName": "produto",
             "relationshipName": "fornecedor",
-            "otherEntityField": "nome",
+            "otherEntityField": "pessoaNome",
             "ownerSide": true
         },
         {

@@ -31,7 +31,7 @@ export class ContaUpdateComponent implements OnInit {
     descricao: [null, [Validators.required]],
     codigo: [null, [Validators.required]],
     tipo: [],
-    grau: [null, [Validators.min(1), Validators.max(5)]],
+    grau: [null, [Validators.required, Validators.min(1)]],
     natureza: [],
     grupo: [],
     conteudo: [],
@@ -58,11 +58,9 @@ export class ContaUpdateComponent implements OnInit {
     this.empresaService
       .query()
       .subscribe((res: HttpResponse<IEmpresa[]>) => (this.empresas = res.body), (res: HttpErrorResponse) => this.onError(res.message));
-
     this.contaService
       .query()
       .subscribe((res: HttpResponse<IConta[]>) => (this.contas = res.body), (res: HttpErrorResponse) => this.onError(res.message));
-
     this.classeContaService
       .query()
       .subscribe(

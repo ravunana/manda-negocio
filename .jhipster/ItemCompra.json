@@ -35,16 +35,13 @@
         {
             "fieldName": "valor",
             "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "solicitante",
+            "fieldType": "String"
         }
     ],
     "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "user",
-            "otherEntityRelationshipName": "itemCompra",
-            "relationshipName": "solicitante",
-            "otherEntityField": "login"
-        },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "compra",

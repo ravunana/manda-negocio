@@ -30,10 +30,13 @@
             <column name="descricao" type="${clobType}">
                 <constraints nullable="false" />
             </column>
-            <column name="utilizador_id" type="bigint">
-                <constraints nullable="true" />
+            <column name="entidade_documento" type="varchar(255)">
+                <constraints nullable="false" />
             </column>
-            <column name="conta_id" type="bigint">
+            <column name="numero_documento" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="utilizador_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="forma_liquidacao_id" type="bigint">
@@ -84,6 +87,8 @@
             <column name="externo" type="boolean"/>
             <column name="numero" type="string"/>
             <column name="descricao" type="clob"/>
+            <column name="entidade_documento" type="string"/>
+            <column name="numero_documento" type="string"/>
             <column name="forma_liquidacao_id" type="numeric"/>
             <column name="tipo_recibo_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->

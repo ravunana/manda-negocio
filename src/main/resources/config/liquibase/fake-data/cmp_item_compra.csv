@@ -1,11 +1,11 @@
-id;quantidade;desconto;data_solicitacao;data_entrega;descricao;valor;compra_id;produto_id;status_id
-1;60970;17;2019-12-11T17:22:53;2019-12-11T23:17:12;../fake-data/blob/hipster.txt;83815;1;1;1
-2;45487;81;2019-12-11T17:42:57;2019-12-11T11:06:39;../fake-data/blob/hipster.txt;91021;2;2;2
-3;53593;64;2019-12-11T22:26:56;2019-12-11T11:17:17;../fake-data/blob/hipster.txt;40188;3;3;3
-4;88161;15;2019-12-11T20:08:41;2019-12-11T20:25:49;../fake-data/blob/hipster.txt;83379;4;4;4
-5;27701;64;2019-12-11T12:03:41;2019-12-12T08:17:14;../fake-data/blob/hipster.txt;58319;5;5;5
-6;74056;59;2019-12-12T07:53:41;2019-12-12T01:39:16;../fake-data/blob/hipster.txt;59408;6;6;6
-7;5199;70;2019-12-12T09:24:39;2019-12-12T08:34:33;../fake-data/blob/hipster.txt;42333;7;7;7
-8;23080;8;2019-12-11T12:11:48;2019-12-11T19:36:30;../fake-data/blob/hipster.txt;61631;8;8;8
-9;88097;24;2019-12-11T12:58:58;2019-12-11T17:35:47;../fake-data/blob/hipster.txt;65904;9;9;9
-10;59678;21;2019-12-11T22:08:06;2019-12-11T13:27:39;../fake-data/blob/hipster.txt;97618;10;10;10
+id;quantidade;desconto;data_solicitacao;data_entrega;descricao;valor;solicitante;compra_id;produto_id;status_id
+1;9121;94;2019-12-16T21:36:14;2019-12-16T10:05:18;../fake-data/blob/hipster.txt;5755;Austria mindshare EXE;1;1;1
+2;35092;71;2019-12-17T06:39:37;2019-12-16T10:13:21;../fake-data/blob/hipster.txt;14299;program Auto Loan Account Refined;2;2;2
+3;8411;43;2019-12-16T16:38:49;2019-12-17T04:07:41;../fake-data/blob/hipster.txt;7276;programming panel;3;3;3
+4;8135;51;2019-12-17T07:26:02;2019-12-17T03:52:21;../fake-data/blob/hipster.txt;98663;exploit transition;4;4;4
+5;81280;23;2019-12-16T10:44:10;2019-12-16T11:41:08;../fake-data/blob/hipster.txt;98600;navigate repurpose;5;5;5
+6;8350;48;2019-12-16T14:49:07;2019-12-17T00:23:54;../fake-data/blob/hipster.txt;55840;communities National Cotton;6;6;6
+7;49263;25;2019-12-17T09:11:51;2019-12-16T23:44:43;../fake-data/blob/hipster.txt;46866;Handmade Wooden Cheese Fresh;7;7;7
+8;64921;75;2019-12-16T15:33:54;2019-12-16T17:07:30;../fake-data/blob/hipster.txt;58336;Markets;8;8;8
+9;37487;48;2019-12-17T02:36:46;2019-12-17T07:28:50;../fake-data/blob/hipster.txt;86859;Mandatory Assistant;9;9;9
+10;1216;98;2019-12-16T10:11:35;2019-12-16T20:07:33;../fake-data/blob/hipster.txt;4315;Lead;10;10;10

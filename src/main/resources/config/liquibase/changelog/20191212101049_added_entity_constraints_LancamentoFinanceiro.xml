@@ -14,12 +14,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="rv_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="conta_id"
-                                 baseTableName="fnc_lancamento_financeiro"
-                                 constraintName="fk_fnc_lancamento_financeiro_conta_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="ctb_conta"/>
-
         <addForeignKeyConstraint baseColumnNames="lancamento_financeiro_id"
                                  baseTableName="fnc_lancamento_financeiro_imposto"
                                  constraintName="fnc_lancamento_financeiro_impo_fnc_lancamento_financeiro_id"

@@ -1,11 +1,11 @@
-id;tipo_lancamento;valor;externo;numero;descricao;forma_liquidacao_id;tipo_recibo_id
-1;Industrial Electronics;82939;true;National Quality Markets;../fake-data/blob/hipster.txt;1;1
-2;Metrics Producer;39279;false;Springs card Enterprise-wide;../fake-data/blob/hipster.txt;2;2
-3;Prairie back-end;96016;true;program Borders Sports;../fake-data/blob/hipster.txt;3;3
-4;cross-platform;37698;true;Self-enabling deposit;../fake-data/blob/hipster.txt;4;4
-5;virtual;17788;true;transmitter Gorgeous;../fake-data/blob/hipster.txt;5;5
-6;Ameliorated grow;89464;true;Fresh;../fake-data/blob/hipster.txt;6;6
-7;Shirt;99008;true;Analyst Sleek Soft Shoes expedite;../fake-data/blob/hipster.txt;7;7
-8;Handmade Automotive;5770;true;Indiana extensible;../fake-data/blob/hipster.txt;8;8
-9;Engineer mesh Louisiana;41560;true;Triple-buffered cyan Principal;../fake-data/blob/hipster.txt;9;9
-10;Beauty;83981;false;Intelligent Steel Sausages Keyboard SMTP;../fake-data/blob/hipster.txt;10;10
+id;tipo_lancamento;valor;externo;numero;descricao;entidade_documento;numero_documento;forma_liquidacao_id;tipo_recibo_id
+1;encompassing;24412;true;conglomeration;../fake-data/blob/hipster.txt;LOOKUP;Versatile Exclusive Moroccan Dirham;1;1
+2;capability zero tolerance Computers;60956;true;paradigms Home;../fake-data/blob/hipster.txt;IMPOSTO;Berkshire Designer;2;2
+3;Credit Card Account;8085;true;Ergonomic transmitter;../fake-data/blob/hipster.txt;ARQUIVO;bypassing optical;3;3
+4;installation;18651;true;HDD;../fake-data/blob/hipster.txt;SOFTWARE;Buckinghamshire Future-proofed deposit;4;4
+5;Quality;39757;false;Creative Metal;../fake-data/blob/hipster.txt;REGRA_MOVIMENTACAO_DEBITO;Fiji Dollar Profound Bacon;5;5
+6;Macao Equatorial Guinea Vision-oriented;9310;true;Virginia THX pink;../fake-data/blob/hipster.txt;LOCAL_ARMAZENAMENTO;Internal AI optical;6;6
+7;bypassing Marketing;78534;true;Home Loan Account Tools Unbranded;../fake-data/blob/hipster.txt;CLIENTE;Buckinghamshire Ports;7;7
+8;Devolved driver Networked;32539;false;world-class program alarm;../fake-data/blob/hipster.txt;FLUXO_DOCUMENTO;turn-key dedicated;8;8
+9;Wisconsin;97889;false;Human withdrawal;../fake-data/blob/hipster.txt;ITEM_COMPRA;Re-contextualized;9;9
+10;local Shoes;64547;false;Representative;../fake-data/blob/hipster.txt;RELACIONAMENTO_PESSOA;Automotive Tactics architectures;10;10

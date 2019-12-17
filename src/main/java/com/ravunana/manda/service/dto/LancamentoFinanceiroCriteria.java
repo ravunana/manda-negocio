@@ -3,6 +3,7 @@ package com.ravunana.manda.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 import io.github.jhipster.service.Criteria;
+import com.ravunana.manda.domain.enumeration.EntidadeSistema;
 import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
@@ -22,6 +23,24 @@ import io.github.jhipster.service.filter.BigDecimalFilter;
  * fix type specific filters.
  */
 public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
+    /**
+     * Class for filtering EntidadeSistema
+     */
+    public static class EntidadeSistemaFilter extends Filter<EntidadeSistema> {
+
+        public EntidadeSistemaFilter() {
+        }
+
+        public EntidadeSistemaFilter(EntidadeSistemaFilter filter) {
+            super(filter);
+        }
+
+        @Override
+        public EntidadeSistemaFilter copy() {
+            return new EntidadeSistemaFilter(this);
+        }
+
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -35,11 +54,13 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
 
     private StringFilter numero;
 
+    private EntidadeSistemaFilter entidadeDocumento;
+
+    private StringFilter numeroDocumento;
+
     private LongFilter detalheLancamentoId;
 
     private LongFilter utilizadorId;
-
-    private LongFilter contaId;
 
     private LongFilter impostoId;
 
@@ -58,9 +79,10 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         this.valor = other.valor == null ? null : other.valor.copy();
         this.externo = other.externo == null ? null : other.externo.copy();
         this.numero = other.numero == null ? null : other.numero.copy();
+        this.entidadeDocumento = other.entidadeDocumento == null ? null : other.entidadeDocumento.copy();
+        this.numeroDocumento = other.numeroDocumento == null ? null : other.numeroDocumento.copy();
         this.detalheLancamentoId = other.detalheLancamentoId == null ? null : other.detalheLancamentoId.copy();
         this.utilizadorId = other.utilizadorId == null ? null : other.utilizadorId.copy();
-        this.contaId = other.contaId == null ? null : other.contaId.copy();
         this.impostoId = other.impostoId == null ? null : other.impostoId.copy();
         this.formaLiquidacaoId = other.formaLiquidacaoId == null ? null : other.formaLiquidacaoId.copy();
         this.empresaId = other.empresaId == null ? null : other.empresaId.copy();
@@ -112,6 +134,22 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         this.numero = numero;
     }
 
+    public EntidadeSistemaFilter getEntidadeDocumento() {
+        return entidadeDocumento;
+    }
+
+    public void setEntidadeDocumento(EntidadeSistemaFilter entidadeDocumento) {
+        this.entidadeDocumento = entidadeDocumento;
+    }
+
+    public StringFilter getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(StringFilter numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
     public LongFilter getDetalheLancamentoId() {
         return detalheLancamentoId;
     }
@@ -126,14 +164,6 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
 
     public void setUtilizadorId(LongFilter utilizadorId) {
         this.utilizadorId = utilizadorId;
-    }
-
-    public LongFilter getContaId() {
-        return contaId;
-    }
-
-    public void setContaId(LongFilter contaId) {
-        this.contaId = contaId;
     }
 
     public LongFilter getImpostoId() {
@@ -184,9 +214,10 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
             Objects.equals(valor, that.valor) &&
             Objects.equals(externo, that.externo) &&
             Objects.equals(numero, that.numero) &&
+            Objects.equals(entidadeDocumento, that.entidadeDocumento) &&
+            Objects.equals(numeroDocumento, that.numeroDocumento) &&
             Objects.equals(detalheLancamentoId, that.detalheLancamentoId) &&
             Objects.equals(utilizadorId, that.utilizadorId) &&
-            Objects.equals(contaId, that.contaId) &&
             Objects.equals(impostoId, that.impostoId) &&
             Objects.equals(formaLiquidacaoId, that.formaLiquidacaoId) &&
             Objects.equals(empresaId, that.empresaId) &&
@@ -201,9 +232,10 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         valor,
         externo,
         numero,
+        entidadeDocumento,
+        numeroDocumento,
         detalheLancamentoId,
         utilizadorId,
-        contaId,
         impostoId,
         formaLiquidacaoId,
         empresaId,
@@ -219,9 +251,10 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
                 (valor != null ? "valor=" + valor + ", " : "") +
                 (externo != null ? "externo=" + externo + ", " : "") +
                 (numero != null ? "numero=" + numero + ", " : "") +
+                (entidadeDocumento != null ? "entidadeDocumento=" + entidadeDocumento + ", " : "") +
+                (numeroDocumento != null ? "numeroDocumento=" + numeroDocumento + ", " : "") +
                 (detalheLancamentoId != null ? "detalheLancamentoId=" + detalheLancamentoId + ", " : "") +
                 (utilizadorId != null ? "utilizadorId=" + utilizadorId + ", " : "") +
-                (contaId != null ? "contaId=" + contaId + ", " : "") +
                 (impostoId != null ? "impostoId=" + impostoId + ", " : "") +
                 (formaLiquidacaoId != null ? "formaLiquidacaoId=" + formaLiquidacaoId + ", " : "") +
                 (empresaId != null ? "empresaId=" + empresaId + ", " : "") +

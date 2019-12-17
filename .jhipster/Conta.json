@@ -5,8 +5,7 @@
             "fieldName": "descricao",
             "fieldType": "String",
             "fieldValidateRules": [
-                "required",
-                "unique"
+                "required"
             ]
         },
         {
@@ -26,10 +25,9 @@
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "min",
-                "max"
+                "required"
             ],
-            "fieldValidateRulesMin": 1,
-            "fieldValidateRulesMax": 5
+            "fieldValidateRulesMin": 1
         },
         {
             "fieldName": "natureza",

@@ -27,7 +27,7 @@ public class Conta implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "descricao", nullable = false, unique = true)
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
     @NotNull
@@ -37,9 +37,9 @@ public class Conta implements Serializable {
     @Column(name = "tipo")
     private String tipo;
 
+    @NotNull
     @Min(value = 1)
-    @Max(value = 5)
-    @Column(name = "grau")
+    @Column(name = "grau", nullable = false)
     private Integer grau;
 
     @Column(name = "natureza")

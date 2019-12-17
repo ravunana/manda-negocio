@@ -8,12 +8,6 @@
     -->
     <changeSet id="20191212101103-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="solicitante_id"
-                                 baseTableName="cmp_item_compra"
-                                 constraintName="fk_cmp_item_compra_solicitante_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="rv_user"/>
-
         <addForeignKeyConstraint baseColumnNames="compra_id"
                                  baseTableName="cmp_item_compra"
                                  constraintName="fk_cmp_item_compra_compra_id"

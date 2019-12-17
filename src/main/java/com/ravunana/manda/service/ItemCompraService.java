@@ -43,6 +43,7 @@ public class ItemCompraService {
     @Autowired
     private ProdutoService produtoService;
 
+
     public ItemCompraService(ItemCompraRepository itemCompraRepository, ItemCompraMapper itemCompraMapper) {
         this.itemCompraRepository = itemCompraRepository;
         this.itemCompraMapper = itemCompraMapper;
@@ -63,7 +64,6 @@ public class ItemCompraService {
         if ( isAumentaEstoque == true ) {
         produtoService.aumentarQuantidadeEstoque(itemCompraDTO.getProdutoId(), itemCompraDTO.getQuantidade());
         }
-
         return itemCompraMapper.toDto(itemCompra);
     }
 

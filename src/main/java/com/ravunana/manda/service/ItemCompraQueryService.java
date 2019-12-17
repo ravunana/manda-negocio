@@ -106,9 +106,8 @@ public class ItemCompraQueryService extends QueryService<ItemCompra> {
             if (criteria.getValor() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getValor(), ItemCompra_.valor));
             }
-            if (criteria.getSolicitanteId() != null) {
-                specification = specification.and(buildSpecification(criteria.getSolicitanteId(),
-                    root -> root.join(ItemCompra_.solicitante, JoinType.LEFT).get(User_.id)));
+            if (criteria.getSolicitante() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getSolicitante(), ItemCompra_.solicitante));
             }
             if (criteria.getCompraId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCompraId(),

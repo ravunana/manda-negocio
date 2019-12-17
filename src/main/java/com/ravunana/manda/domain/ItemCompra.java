@@ -49,9 +49,8 @@ public class ItemCompra implements Serializable {
     @Column(name = "valor", precision = 21, scale = 2)
     private BigDecimal valor;
 
-    @ManyToOne
-    @JsonIgnoreProperties("itemCompras")
-    private User solicitante;
+    @Column(name = "solicitante")
+    private String solicitante;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -159,17 +158,17 @@ public class ItemCompra implements Serializable {
         this.valor = valor;
     }
 
-    public User getSolicitante() {
+    public String getSolicitante() {
         return solicitante;
     }
 
-    public ItemCompra solicitante(User user) {
-        this.solicitante = user;
+    public ItemCompra solicitante(String solicitante) {
+        this.solicitante = solicitante;
         return this;
     }
 
-    public void setSolicitante(User user) {
-        this.solicitante = user;
+    public void setSolicitante(String solicitante) {
+        this.solicitante = solicitante;
     }
 
     public Compra getCompra() {
@@ -251,6 +250,7 @@ public class ItemCompra implements Serializable {
             ", dataEntrega='" + getDataEntrega() + "'" +
             ", descricao='" + getDescricao() + "'" +
             ", valor=" + getValor() +
+            ", solicitante='" + getSolicitante() + "'" +
             "}";
     }
 }

@@ -103,6 +103,12 @@ public class LancamentoFinanceiroQueryService extends QueryService<LancamentoFin
             if (criteria.getNumero() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getNumero(), LancamentoFinanceiro_.numero));
             }
+            if (criteria.getEntidadeDocumento() != null) {
+                specification = specification.and(buildSpecification(criteria.getEntidadeDocumento(), LancamentoFinanceiro_.entidadeDocumento));
+            }
+            if (criteria.getNumeroDocumento() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNumeroDocumento(), LancamentoFinanceiro_.numeroDocumento));
+            }
             if (criteria.getDetalheLancamentoId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDetalheLancamentoId(),
                     root -> root.join(LancamentoFinanceiro_.detalheLancamentos, JoinType.LEFT).get(DetalheLancamento_.id)));
@@ -110,10 +116,6 @@ public class LancamentoFinanceiroQueryService extends QueryService<LancamentoFin
             if (criteria.getUtilizadorId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUtilizadorId(),
                     root -> root.join(LancamentoFinanceiro_.utilizador, JoinType.LEFT).get(User_.id)));
-            }
-            if (criteria.getContaId() != null) {
-                specification = specification.and(buildSpecification(criteria.getContaId(),
-                    root -> root.join(LancamentoFinanceiro_.conta, JoinType.LEFT).get(Conta_.id)));
             }
             if (criteria.getImpostoId() != null) {
                 specification = specification.and(buildSpecification(criteria.getImpostoId(),

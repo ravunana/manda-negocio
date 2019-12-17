@@ -38,7 +38,7 @@ public class ItemCompraCriteria implements Serializable, Criteria {
 
     private BigDecimalFilter valor;
 
-    private LongFilter solicitanteId;
+    private StringFilter solicitante;
 
     private LongFilter compraId;
 
@@ -58,7 +58,7 @@ public class ItemCompraCriteria implements Serializable, Criteria {
         this.dataSolicitacao = other.dataSolicitacao == null ? null : other.dataSolicitacao.copy();
         this.dataEntrega = other.dataEntrega == null ? null : other.dataEntrega.copy();
         this.valor = other.valor == null ? null : other.valor.copy();
-        this.solicitanteId = other.solicitanteId == null ? null : other.solicitanteId.copy();
+        this.solicitante = other.solicitante == null ? null : other.solicitante.copy();
         this.compraId = other.compraId == null ? null : other.compraId.copy();
         this.produtoId = other.produtoId == null ? null : other.produtoId.copy();
         this.fornecedorId = other.fornecedorId == null ? null : other.fornecedorId.copy();
@@ -118,12 +118,12 @@ public class ItemCompraCriteria implements Serializable, Criteria {
         this.valor = valor;
     }
 
-    public LongFilter getSolicitanteId() {
-        return solicitanteId;
+    public StringFilter getSolicitante() {
+        return solicitante;
     }
 
-    public void setSolicitanteId(LongFilter solicitanteId) {
-        this.solicitanteId = solicitanteId;
+    public void setSolicitante(StringFilter solicitante) {
+        this.solicitante = solicitante;
     }
 
     public LongFilter getCompraId() {
@@ -175,7 +175,7 @@ public class ItemCompraCriteria implements Serializable, Criteria {
             Objects.equals(dataSolicitacao, that.dataSolicitacao) &&
             Objects.equals(dataEntrega, that.dataEntrega) &&
             Objects.equals(valor, that.valor) &&
-            Objects.equals(solicitanteId, that.solicitanteId) &&
+            Objects.equals(solicitante, that.solicitante) &&
             Objects.equals(compraId, that.compraId) &&
             Objects.equals(produtoId, that.produtoId) &&
             Objects.equals(fornecedorId, that.fornecedorId) &&
@@ -191,7 +191,7 @@ public class ItemCompraCriteria implements Serializable, Criteria {
         dataSolicitacao,
         dataEntrega,
         valor,
-        solicitanteId,
+        solicitante,
         compraId,
         produtoId,
         fornecedorId,
@@ -208,7 +208,7 @@ public class ItemCompraCriteria implements Serializable, Criteria {
                 (dataSolicitacao != null ? "dataSolicitacao=" + dataSolicitacao + ", " : "") +
                 (dataEntrega != null ? "dataEntrega=" + dataEntrega + ", " : "") +
                 (valor != null ? "valor=" + valor + ", " : "") +
-                (solicitanteId != null ? "solicitanteId=" + solicitanteId + ", " : "") +
+                (solicitante != null ? "solicitante=" + solicitante + ", " : "") +
                 (compraId != null ? "compraId=" + compraId + ", " : "") +
                 (produtoId != null ? "produtoId=" + produtoId + ", " : "") +
                 (fornecedorId != null ? "fornecedorId=" + fornecedorId + ", " : "") +
