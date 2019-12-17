@@ -20,6 +20,13 @@ import { IItemCompra } from 'app/shared/model/item-compra.model';
 import { ItemCompraService } from '../item-compra/item-compra.service';
 import { ProdutoService } from '../produto/produto.service';
 import { MoedaService } from '../moeda/moeda.service';
+import { ImpostoService } from '../imposto/imposto.service';
+import { FormaLiquidacaoService } from '../forma-liquidacao/forma-liquidacao.service';
+import { IImposto } from 'app/shared/model/imposto.model';
+import { IFormaLiquidacao } from 'app/shared/model/forma-liquidacao.model';
+import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
+import { DetalheLancamentoService } from '../detalhe-lancamento/detalhe-lancamento.service';
+import { LancamentoFinanceiroService } from '../lancamento-financeiro/lancamento-financeiro.service';
 
 @Component({
   selector: 'rv-compra-update',
@@ -29,6 +36,7 @@ export class CompraUpdateComponent implements OnInit {
   isSaving: boolean;
 
   users: IUser[];
+  pagamentos: IDetalheLancamento[];
 
   SUB_TOTAL = 0;
   TOTAL_DESCONTO = 0;
@@ -37,6 +45,8 @@ export class CompraUpdateComponent implements OnInit {
   TROCO = 0;
 
   items: IItemCompra[];
+  impostos: IImposto[];
+  formaliquidacaos: IFormaLiquidacao[];
 
   documentocomercials: IDocumentoComercial[];
 
@@ -51,7 +61,9 @@ export class CompraUpdateComponent implements OnInit {
     observacaoInterna: [],
     utilizadorId: [],
     tipoDocumentoId: [null, Validators.required],
-    empresaId: []
+    empresaId: [],
+    impostos: [null, Validators.required],
+    formaLiquidacaoId: [null, Validators.required]
   });
 
   constructor(
@@ -65,7 +77,10 @@ export class CompraUpdateComponent implements OnInit {
     protected itemCompraSrvice: ItemCompraService,
     public produtoService: ProdutoService,
     private fb: FormBuilder,
-    protected moedaService: MoedaService
+    protected moedaService: MoedaService,
+    protected impostoService: ImpostoService,
+    protected formaLiquidacaoService: FormaLiquidacaoService,
+    protected lancamentoFinancerioService: LancamentoFinanceiroService
   ) {}
 
   ngOnInit() {
@@ -88,6 +103,17 @@ export class CompraUpdateComponent implements OnInit {
       );
 
     this.getItems();
+    this.getPagamentos();
+
+    this.impostoService
+      .query()
+      .subscribe((res: HttpResponse<IImposto[]>) => (this.impostos = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+    this.formaLiquidacaoService
+      .query()
+      .subscribe(
+        (res: HttpResponse<IFormaLiquidacao[]>) => (this.formaliquidacaos = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
 
     this.empresaService
       .query()
@@ -167,7 +193,9 @@ export class CompraUpdateComponent implements OnInit {
       // utilizadorId: this.editForm.get(['utilizadorId']).value,
       utilizadorId: 1,
       tipoDocumentoId: this.editForm.get(['tipoDocumentoId']).value,
-      empresaId: this.editForm.get(['empresaId']).value
+      empresaId: this.editForm.get(['empresaId']).value,
+      impostos: this.editForm.get(['impostos']).value,
+      formaLiquidacaoId: this.editForm.get(['formaLiquidacaoId']).value
     };
   }
 
@@ -199,6 +227,17 @@ export class CompraUpdateComponent implements OnInit {
     return item.id;
   }
 
+  getPagamentos() {
+    this.lancamentoFinancerioService.getDetalhes().subscribe(data => {
+      this.pagamentos = data;
+      this.TOTAL_ENTREGUE = this.pagamentos
+        .map(i => i.valor)
+        .reduce(function(total, subTotal) {
+          return total + subTotal;
+        });
+    });
+  }
+
   getItems() {
     this.itemCompraSrvice.getItems().subscribe(itemsResult => {
       this.items = itemsResult;
@@ -226,5 +265,23 @@ export class CompraUpdateComponent implements OnInit {
       alert(itemEliminado.produtoNome + ' foi removido da lista');
       this.getItems();
     });
+  }
+
+  onDeleteValor(index) {
+    this.lancamentoFinancerioService.deleteDetalhe(index).subscribe(valorEliminado => {
+      alert(valorEliminado.valor + ' foi removido');
+      this.getPagamentos();
+    });
+  }
+
+  getSelected(selectedVals: any[], option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

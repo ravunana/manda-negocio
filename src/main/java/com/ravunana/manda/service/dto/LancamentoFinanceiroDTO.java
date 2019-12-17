@@ -26,10 +26,8 @@ public class LancamentoFinanceiroDTO implements Serializable {
     @NotNull
     private String numero;
 
-    
     @Lob
     private String descricao;
-
 
     private Long utilizadorId;
 

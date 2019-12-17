@@ -81,4 +81,9 @@ public class EmpresaService {
         log.debug("Request to delete Empresa : {}", id);
         empresaRepository.deleteById(id);
     }
+
+    public Empresa getFirstEmpresa() {
+        Empresa empresa = empresaRepository.findAll().stream().findFirst().get();
+        return empresa;
+    }
 }

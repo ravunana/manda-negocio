@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { ILancamentoFinanceiro } from 'app/shared/model/lancamento-financeiro.model';
+import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
 
 type EntityResponseType = HttpResponse<ILancamentoFinanceiro>;
 type EntityArrayResponseType = HttpResponse<ILancamentoFinanceiro[]>;
@@ -34,5 +35,17 @@ export class LancamentoFinanceiroService {
 
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  addDetalhe(detalhe: IDetalheLancamento): Observable<IDetalheLancamento> {
+    return this.http.post<IDetalheLancamento>(`${this.resourceUrl}/add-valor`, detalhe);
+  }
+
+  deleteDetalhe(index: number): Observable<IDetalheLancamento> {
+    return this.http.delete<IDetalheLancamento>(`${this.resourceUrl}/delete-detalhe/${index}`);
+  }
+
+  getDetalhes(): Observable<IDetalheLancamento[]> {
+    return this.http.get<IDetalheLancamento[]>(this.resourceUrl + '/listar-detalhes');
   }
 }

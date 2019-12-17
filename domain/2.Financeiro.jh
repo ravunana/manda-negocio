@@ -28,11 +28,12 @@ entity MeioLiquidacao(fnc_meio_liquidacao) {
 entity LancamentoFinanceiro(fnc_lancamento_financeiro) {
     tipoLancamento String required, // Entrada, Saida (Credito ou Debito), Neutro (Aviso)
     valor BigDecimal required min(0),
-
     externo Boolean, // Se ficheiro externo deve ter referencia ao arquivo da factura. O numero do lancamento sera a referencia do id da tabela Arquivo
     //
     numero String unique required, // Numero da factura se houver ou gerar automaticamente
-    descricao TextBlob required
+    descricao TextBlob required,
+    entidadeDocumento EntidadeSistema required,
+    numeroDocumento String required
 }
 
 entity DetalheLancamento(fnc_detalhe_lancamento) {
@@ -76,8 +77,7 @@ relationship ManyToMany {
  */
 relationship ManyToOne {
     LancamentoFinanceiro{utilizador(login)} to User,
-    DetalheLancamento{utilizador(login)} to User,
-    LancamentoFinanceiro{conta(descricao)} to Conta
+    DetalheLancamento{utilizador(login)} to User
 
 }
 

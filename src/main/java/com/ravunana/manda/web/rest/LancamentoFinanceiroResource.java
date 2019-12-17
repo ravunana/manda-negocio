@@ -3,6 +3,7 @@ package com.ravunana.manda.web.rest;
 import com.ravunana.manda.service.LancamentoFinanceiroService;
 import com.ravunana.manda.web.rest.errors.BadRequestAlertException;
 import com.ravunana.manda.service.dto.LancamentoFinanceiroDTO;
+import com.ravunana.manda.service.dto.DetalheLancamentoDTO;
 import com.ravunana.manda.service.dto.LancamentoFinanceiroCriteria;
 import com.ravunana.manda.service.LancamentoFinanceiroQueryService;
 
@@ -143,5 +144,20 @@ public class LancamentoFinanceiroResource {
         log.debug("REST request to delete LancamentoFinanceiro : {}", id);
         lancamentoFinanceiroService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    @PostMapping("/lancamento-financeiros/add-valor")
+    public DetalheLancamentoDTO addDetalheLancamento(@RequestBody DetalheLancamentoDTO detalheLancamentoDTO ) {
+        return lancamentoFinanceiroService.addDetalheLancamento(detalheLancamentoDTO);
+    }
+
+    @GetMapping("/lancamento-financeiros/listar-detalhes")
+    public List<DetalheLancamentoDTO> listarDetalhe() {
+    	return lancamentoFinanceiroService.listarDetalhe();
+    }
+
+    @DeleteMapping("/lancamento-financeiros/delete-detalhe/{index}")
+    public DetalheLancamentoDTO deleteDetalhe(@PathVariable int index) {
+        return lancamentoFinanceiroService.deleteDetalhe(index);
     }
 }

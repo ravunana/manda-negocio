@@ -59,6 +59,12 @@
                         <a [routerLink]="['/documento-comercial', lancamentoFinanceiro.tipoReciboId, 'view']">{{lancamentoFinanceiro.tipoReciboNome}}</a>
                     </div>
                 </dd>
+
+                <div *ngIf="detalhesLancamento.length > 0" >
+                    <ul>
+                        <li *ngFor="let detalhe of detalhesLancamento" > {{ detalhe.valor }} </li>
+                    </ul>
+                </div>
             </dl>
 
             <button type="submit"

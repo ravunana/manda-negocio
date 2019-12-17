@@ -108,8 +108,8 @@ relationship ManyToOne {
 }
 
 relationship ManyToMany {
-    Produto{imposto(nome)} to Imposto{produto},
-    Produto{fornecedor(nome)} to Fornecedor{produto}
+    Produto{imposto(codigoImposto)} to Imposto{produto},
+    Produto{fornecedor(pessoaNome)} to Fornecedor{produto}
 }
 
 relationship OneToOne {

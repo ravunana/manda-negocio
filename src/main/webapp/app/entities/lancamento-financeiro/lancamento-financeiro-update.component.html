@@ -86,12 +86,12 @@
                     <select class="form-control" id="field_impostos" multiple name="impostos" formControlName="impostos">
                         <option [ngValue]="getSelected(editForm.get('impostos').value, impostoOption)" *ngFor="let impostoOption of impostos; trackBy: trackImpostoById">{{impostoOption.codigoImposto}}</option>
                     </select>
-                </div>
-                <div *ngIf="editForm.get('impostos').invalid && (editForm.get('impostos').dirty || editForm.get('impostos').touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('impostos').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
+                    <div *ngIf="editForm.get('impostos').invalid && (editForm.get('impostos').dirty || editForm.get('impostos').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('impostos').errors.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.formaLiquidacao" for="field_formaLiquidacao">Forma Liquidacao</label>
@@ -99,12 +99,12 @@
                         <option *ngIf="!editForm.get('formaLiquidacaoId').value" [ngValue]="null" selected></option>
                         <option [ngValue]="formaLiquidacaoOption.id" *ngFor="let formaLiquidacaoOption of formaliquidacaos; trackBy: trackFormaLiquidacaoById">{{formaLiquidacaoOption.nome}}</option>
                     </select>
-                </div>
-                <div *ngIf="editForm.get('formaLiquidacaoId').invalid && (editForm.get('formaLiquidacaoId').dirty || editForm.get('formaLiquidacaoId').touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('formaLiquidacaoId').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
+                    <div *ngIf="editForm.get('formaLiquidacaoId').invalid && (editForm.get('formaLiquidacaoId').dirty || editForm.get('formaLiquidacaoId').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('formaLiquidacaoId').errors.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.empresa" for="field_empresa">Empresa</label>

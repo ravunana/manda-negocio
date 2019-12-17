@@ -74,6 +74,35 @@
                         </tbody>
                     </table>
 
+                    <div>
+                        <h2>Pagamentos</h2>
+                        <table class="table" *ngIf="pagamentos.length > 0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Valor</th>
+                                    <th> Banco | Caixa </th>
+                                    <th> Liquidado? </th>
+                                    <th> Metodo liquidação </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let pagamento of pagamentos; let i = index">
+                                    <td> {{ i}} </td>
+                                    <td> {{ pagamento.valor | currency : pagamento.moedaCodigo }} </td>
+                                    <td> {{ pagamento.coordenadaDescricao }} </td>
+                                    <td> {{ pagamento.liquidado }} </td>
+                                    <td> {{ pagamento.metodoLiquidacaoNome }} </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" (click)="onDeleteValor(i)">
+                                            <fa-icon [icon]="'trash'"></fa-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
             </dl>
 
             <button type="submit"

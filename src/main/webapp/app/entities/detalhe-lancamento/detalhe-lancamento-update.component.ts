@@ -29,12 +29,15 @@ export class DetalheLancamentoUpdateComponent implements OnInit {
   isSaving: boolean;
 
   users: IUser[];
+  lancamentoFinanceiroId = 0;
+  opcao = '';
 
   lancamentofinanceiros: ILancamentoFinanceiro[];
 
   meioliquidacaos: IMeioLiquidacao[];
 
   moedas: IMoeda[];
+  moedaNacional: String;
 
   coordenadabancarias: ICoordenadaBancaria[];
   dataVencimentoDp: any;
@@ -45,12 +48,12 @@ export class DetalheLancamentoUpdateComponent implements OnInit {
     desconto: [null, [Validators.min(0)]],
     juro: [null, [Validators.min(0), Validators.max(100)]],
     descricao: [],
-    data: [null, [Validators.required]],
-    retencaoFonte: [],
-    dataVencimento: [null, [Validators.required]],
-    liquidado: [],
+    data: [moment()],
+    retencaoFonte: [false],
+    dataVencimento: [moment(), [Validators.required]],
+    liquidado: [false],
     utilizadorId: [],
-    lancamentoFinanceiroId: [null, Validators.required],
+    lancamentoFinanceiroId: [0],
     metodoLiquidacaoId: [null, Validators.required],
     moedaId: [null, Validators.required],
     coordenadaId: [null, Validators.required]
@@ -72,6 +75,7 @@ export class DetalheLancamentoUpdateComponent implements OnInit {
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ detalheLancamento }) => {
+      this.lancamentoFinanceiroId = detalheLancamento.lancamentoFinanceiroId;
       this.updateForm(detalheLancamento);
     });
     this.userService
@@ -98,6 +102,18 @@ export class DetalheLancamentoUpdateComponent implements OnInit {
         (res: HttpResponse<ICoordenadaBancaria[]>) => (this.coordenadabancarias = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+
+    this.moedaService.query().subscribe(moedaResult => {
+      this.moedaNacional = moedaResult.body.filter(m => m.nacional === true).shift().codigo;
+    });
+
+    this.activatedRoute.queryParams.subscribe(parmas => {
+      this.opcao = parmas.op;
+    });
+
+    if (this.opcao === 'new') {
+      this.initForm();
+    }
   }
 
   updateForm(detalheLancamento: IDetalheLancamento) {
@@ -174,12 +190,12 @@ export class DetalheLancamentoUpdateComponent implements OnInit {
       desconto: this.editForm.get(['desconto']).value,
       juro: this.editForm.get(['juro']).value,
       descricao: this.editForm.get(['descricao']).value,
-      data: this.editForm.get(['data']).value != null ? moment(this.editForm.get(['data']).value, DATE_TIME_FORMAT) : undefined,
+      data: moment(),
       retencaoFonte: this.editForm.get(['retencaoFonte']).value,
       dataVencimento: this.editForm.get(['dataVencimento']).value,
       liquidado: this.editForm.get(['liquidado']).value,
-      utilizadorId: this.editForm.get(['utilizadorId']).value,
-      lancamentoFinanceiroId: this.editForm.get(['lancamentoFinanceiroId']).value,
+      utilizadorId: 0,
+      lancamentoFinanceiroId: this.lancamentoFinanceiroId,
       metodoLiquidacaoId: this.editForm.get(['metodoLiquidacaoId']).value,
       moedaId: this.editForm.get(['moedaId']).value,
       coordenadaId: this.editForm.get(['coordenadaId']).value
@@ -220,5 +236,23 @@ export class DetalheLancamentoUpdateComponent implements OnInit {
 
   trackCoordenadaBancariaById(index: number, item: ICoordenadaBancaria) {
     return item.id;
+  }
+
+  initForm() {
+    this.editForm.patchValue({
+      valor: 0,
+      juro: 0,
+      desconto: 0,
+      dataVencimento: moment(),
+      data: moment(),
+      retencaoFonte: false,
+      liquidado: true
+    });
+  }
+
+  onAddDetalheLancamento() {
+    this.lancamentoFinanceiroService.addDetalhe(this.createFromForm()).subscribe(dataResult => {
+      alert('Valor de ' + dataResult.valor + ',00' + ' adicionado ao pagamento');
+    });
   }
 }

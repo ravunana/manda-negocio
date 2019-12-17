@@ -1,57 +1,64 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="rv-coordenada-bancaria-heading" jhiTranslate="mandaApp.coordenadaBancaria.home.createOrEditLabel">Create or edit a Coordenada Bancaria</h2>
+            <h2 id="rv-coordenada-bancaria-heading" jhiTranslate="mandaApp.coordenadaBancaria.home.createOrEditLabel">
+                Create or edit a Coordenada Bancaria</h2>
             <hr>
             <div>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.descricao" for="field_descricao">Descricao</label>
+                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.descricao"
+                        for="field_descricao">Descricao</label>
 
                     <fa-icon pTooltip="Nome do banco ou caixa usado na empresa" tooltipPosition="top" icon="info-circle"
-                    fixedWidth="true"></fa-icon>
-                <label class="text-muted font-italic">(Obrigatório)</label>
+                        fixedWidth="true"></fa-icon>
+                    <label class="text-muted font-italic">(Obrigatório)</label>
                     <input type="text" class="form-control" name="descricao" id="field_descricao"
-                           formControlName="descricao"/>
-                    <div *ngIf="editForm.get('descricao').invalid && (editForm.get('descricao').dirty || editForm.get('descricao').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('descricao').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                        formControlName="descricao" />
+                    <div
+                        *ngIf="editForm.get('descricao').invalid && (editForm.get('descricao').dirty || editForm.get('descricao').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('descricao').errors.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.proprietario" for="field_proprietario">Proprietario</label>
+                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.proprietario"
+                        for="field_proprietario">Proprietario</label>
                     <input type="text" class="form-control" name="proprietario" id="field_proprietario"
-                           formControlName="proprietario"/>
-                    <div *ngIf="editForm.get('proprietario').invalid && (editForm.get('proprietario').dirty || editForm.get('proprietario').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('proprietario').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                        formControlName="proprietario" />
+                    <div
+                        *ngIf="editForm.get('proprietario').invalid && (editForm.get('proprietario').dirty || editForm.get('proprietario').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('proprietario').errors.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.numeroConta" for="field_numeroConta">Numero Conta</label>
+                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.numeroConta"
+                        for="field_numeroConta">Numero Conta</label>
                     <input type="text" class="form-control" name="numeroConta" id="field_numeroConta"
-                           formControlName="numeroConta"/>
-                    <div *ngIf="editForm.get('numeroConta').invalid && (editForm.get('numeroConta').dirty || editForm.get('numeroConta').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('numeroConta').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                        formControlName="numeroConta" />
+                    <div
+                        *ngIf="editForm.get('numeroConta').invalid && (editForm.get('numeroConta').dirty || editForm.get('numeroConta').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('numeroConta').errors.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.iban" for="field_iban">Iban</label>
-                    <input type="text" class="form-control" name="iban" id="field_iban"
-                           formControlName="iban"/>
-                    <div *ngIf="editForm.get('iban').invalid && (editForm.get('iban').dirty || editForm.get('iban').touched)">
+                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.iban"
+                        for="field_iban">Iban</label>
+                    <input type="text" class="form-control" name="iban" id="field_iban" formControlName="iban" />
+                    <div
+                        *ngIf="editForm.get('iban').invalid && (editForm.get('iban').dirty || editForm.get('iban').touched)">
                     </div>
                 </div>
                 <div class="form-group">
@@ -59,20 +66,21 @@
                     <!-- <input type="checkbox" class="form-control" name="ativo" id="field_ativo"
                            formControlName="ativo"/> -->
 
-                <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="ativo">
-                    <label ngbButtonLabel class="btn-primary">
-                        <input ngbButton type="radio" [value]="true"> Activo
-                    </label>
+                    <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="ativo">
+                        <label ngbButtonLabel class="btn-primary">
+                            <input ngbButton type="radio" [value]="true"> Activo
+                        </label>
 
-                    <label ngbButtonLabel class="btn-primary">
-                        <input class="bg-danger" ngbButton type="radio" [value]="false"> Inactivo
-                    </label>
-                </div>
-                <br>
-                    <div *ngIf="editForm.get('ativo').invalid && (editForm.get('ativo').dirty || editForm.get('ativo').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('ativo').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                        <label ngbButtonLabel class="btn-primary">
+                            <input class="bg-danger" ngbButton type="radio" [value]="false"> Inactivo
+                        </label>
+                    </div>
+                    <br>
+                    <div
+                        *ngIf="editForm.get('ativo').invalid && (editForm.get('ativo').dirty || editForm.get('ativo').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('ativo').errors.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
@@ -81,16 +89,16 @@
                     <!-- <input type="checkbox" class="form-control" name="mostrarDocumento" id="field_mostrarDocumento"
                            formControlName="mostrarDocumento"/> -->
 
-                <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="mostrarDocumento">
-                    <label ngbButtonLabel class="btn-primary">
-                        <input ngbButton type="radio" [value]="true"> Mostra no documento
-                    </label>
+                    <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="mostrarDocumento">
+                        <label ngbButtonLabel class="btn-primary">
+                            <input ngbButton type="radio" [value]="true"> Mostra no documento
+                        </label>
 
-                    <label ngbButtonLabel class="btn-primary">
-                        <input class="bg-danger" ngbButton type="radio" [value]="false"> Não mostra no documento
-                    </label>
-                </div>
-                <br>
+                        <label ngbButtonLabel class="btn-primary">
+                            <input class="bg-danger" ngbButton type="radio" [value]="false"> Não mostra no documento
+                        </label>
+                    </div>
+                    <br>
                 </div>
                 <div class="form-group">
                     <!-- <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.mostrarPontoVenda" for="field_mostrarPontoVenda">Mostrar Ponto Venda</label> -->
@@ -100,7 +108,8 @@
                         </label>
 
                         <label ngbButtonLabel class="btn-primary">
-                            <input class="bg-danger" ngbButton type="radio" [value]="false"> Não mostra no ponto de venda
+                            <input class="bg-danger" ngbButton type="radio" [value]="false"> Não mostra no ponto de
+                            venda
                         </label>
                     </div>
                     <!-- <input type="checkbox" class="form-control" name="mostrarPontoVenda" id="field_mostrarPontoVenda"
@@ -110,15 +119,15 @@
                     <!-- <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.padraoRecebimento" for="field_padraoRecebimento">Padrao Recebimento</label> -->
                     <!-- <input type="checkbox" class="form-control" name="padraoRecebimento" id="field_padraoRecebimento"
                            formControlName="padraoRecebimento"/> -->
-                           <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="padraoRecebimento">
-                            <label ngbButtonLabel class="btn-primary">
-                                <input ngbButton type="radio" [value]="true"> Conta padrão para recebimentos
-                            </label>
+                    <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="padraoRecebimento">
+                        <label ngbButtonLabel class="btn-primary">
+                            <input ngbButton type="radio" [value]="true"> Conta padrão para recebimentos
+                        </label>
 
-                            <label ngbButtonLabel class="btn-primary">
-                                <input class="bg-danger" ngbButton type="radio" [value]="false"> Normal
-                            </label>
-                        </div>
+                        <label ngbButtonLabel class="btn-primary">
+                            <input class="bg-danger" ngbButton type="radio" [value]="false"> Normal
+                        </label>
+                    </div>
                 </div>
                 <div class="form-group">
                     <!-- <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.padraoPagamento" for="field_padraoPagamento">Padrao Pagamento</label> -->
@@ -136,42 +145,48 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.conta" for="field_conta">Conta</label>
+                    <label class="form-control-label" jhiTranslate="mandaApp.coordenadaBancaria.conta"
+                        for="field_conta">Conta</label>
 
-                    <fa-icon pTooltip="Conta contabil que será movimentada a coordenada bancaria" tooltipPosition="top" icon="info-circle"
-                    fixedWidth="true"></fa-icon>
-                <label class="text-muted font-italic">(Opcional)</label>
+                    <fa-icon pTooltip="Conta contabil que será movimentada a coordenada bancaria" tooltipPosition="top"
+                        icon="info-circle" fixedWidth="true"></fa-icon>
+                    <label class="text-muted font-italic">(Opcional)</label>
                     <div class="form-group">
-                        <p-autoComplete placeholder="Escreva o nome da conta" id="field_contaAgregadora" name="contaAgregadora" field="descricao"
-                            [suggestions]="contas" (completeMethod)="searchConta($event)"
-                            (onSelect)="onSelectConta($event)" required>
+                        <p-autoComplete placeholder="Escreva o nome da conta" id="field_contaAgregadora"
+                            name="contaAgregadora" field="descricao" [suggestions]="contas"
+                            (completeMethod)="searchConta($event)" (onSelect)="onSelectConta($event)" required>
                         </p-autoComplete>
-                    <!-- <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
+                        <!-- <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
                     </select> -->
+                    </div>
+                    <div class="form-group">
+                        <label jhiTranslate="mandaApp.coordenadaBancaria.empresa" for="field_empresas">Empresa</label>
+                        <select class="form-control" id="field_empresas" multiple name="empresas"
+                            formControlName="empresas">
+                            <option [ngValue]="getSelected(editForm.get('empresas').value, empresaOption)"
+                                *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}
+                            </option>
+                        </select>
+                    </div>
+                    <div
+                        *ngIf="editForm.get('empresas').invalid && (editForm.get('empresas').dirty || editForm.get('empresas').touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('empresas').errors.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label jhiTranslate="mandaApp.coordenadaBancaria.empresa" for="field_empresas">Empresa</label>
-                    <select class="form-control" id="field_empresas" multiple name="empresas" formControlName="empresas">
-                        <option [ngValue]="getSelected(editForm.get('empresas').value, empresaOption)" *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}</option>
-                    </select>
+                <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                        class="btn btn-primary">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
                 </div>
-                <div *ngIf="editForm.get('empresas').invalid && (editForm.get('empresas').dirty || editForm.get('empresas').touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('empresas').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
-            </div>
         </form>
     </div>
 </div>

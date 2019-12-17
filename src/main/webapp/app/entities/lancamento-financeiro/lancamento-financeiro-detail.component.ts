@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
 import { ILancamentoFinanceiro } from 'app/shared/model/lancamento-financeiro.model';
+import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
+import { DetalheLancamentoService } from '../detalhe-lancamento/detalhe-lancamento.service';
 
 @Component({
   selector: 'rv-lancamento-financeiro-detail',
@@ -10,12 +12,20 @@ import { ILancamentoFinanceiro } from 'app/shared/model/lancamento-financeiro.mo
 })
 export class LancamentoFinanceiroDetailComponent implements OnInit {
   lancamentoFinanceiro: ILancamentoFinanceiro;
+  detalhesLancamento: IDetalheLancamento[];
 
-  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(
+    protected dataUtils: JhiDataUtils,
+    protected activatedRoute: ActivatedRoute,
+    protected detalheLancamentoService: DetalheLancamentoService
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ lancamentoFinanceiro }) => {
       this.lancamentoFinanceiro = lancamentoFinanceiro;
+    });
+    this.detalheLancamentoService.query().subscribe(detalheResult => {
+      this.detalhesLancamento = detalheResult.body.filter(d => d.lancamentoFinanceiroId === this.lancamentoFinanceiro.id);
     });
   }
 

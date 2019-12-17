@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IItemCompra } from 'app/shared/model/item-compra.model';
+import { IImposto } from './imposto.model';
 
 export interface ICompra {
   id?: number;
@@ -14,6 +15,8 @@ export interface ICompra {
   tipoDocumentoId?: number;
   empresaNome?: string;
   empresaId?: number;
+  impostos?: IImposto[];
+  formaLiquidacaoId?: number;
 }
 
 export class Compra implements ICompra {
@@ -29,6 +32,8 @@ export class Compra implements ICompra {
     public tipoDocumentoNome?: string,
     public tipoDocumentoId?: number,
     public empresaNome?: string,
-    public empresaId?: number
+    public empresaId?: number,
+    public impostos?: IImposto[],
+    public formaLiquidacaoId?: number
   ) {}
 }

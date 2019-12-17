@@ -7,6 +7,9 @@ import { IItemCompra } from 'app/shared/model/item-compra.model';
 import { ItemCompraService } from '../item-compra/item-compra.service';
 import { MoedaService } from '../moeda/moeda.service';
 import { ProdutoService } from '../produto/produto.service';
+import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
+import { DetalheLancamentoService } from '../detalhe-lancamento/detalhe-lancamento.service';
+import { LancamentoFinanceiroService } from '../lancamento-financeiro/lancamento-financeiro.service';
 
 @Component({
   selector: 'rv-compra-detail',
@@ -16,13 +19,17 @@ export class CompraDetailComponent implements OnInit {
   compra: ICompra;
   items: IItemCompra[];
   moedaNacional;
+  pagamentos: IDetalheLancamento[];
+  private lancamentoFinanceiroId = 0;
 
   constructor(
     protected dataUtils: JhiDataUtils,
     protected activatedRoute: ActivatedRoute,
     protected itemService: ItemCompraService,
     protected moedaService: MoedaService,
-    public produtoService: ProdutoService
+    public produtoService: ProdutoService,
+    protected detalheLancamentoService: DetalheLancamentoService,
+    private lancamentoFinanceiroService: LancamentoFinanceiroService
   ) {}
 
   ngOnInit() {
@@ -35,6 +42,12 @@ export class CompraDetailComponent implements OnInit {
 
     this.moedaService.query().subscribe(moedaResult => {
       this.moedaNacional = moedaResult.body.filter(m => m.nacional).shift().codigo;
+    });
+
+    // this.lancamentoFinanceiroService.query({'descricao'}).subscribe()
+
+    this.detalheLancamentoService.query().subscribe(data => {
+      this.pagamentos = data.body.filter(d => d.lancamentoFinanceiroId === this.lancamentoFinanceiroId);
     });
   }
 

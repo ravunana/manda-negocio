@@ -83,6 +83,13 @@
                         </a>
                     </li>
                     <li>
+                        <a class="dropdown-item" routerLink="meio-liquidacao" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="comments-dollar" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.meioLiquidacao">Meio Liquidacao</span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="dropdown-item" routerLink="lancamento-financeiro" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="file-invoice-dollar" fixedWidth="true"></fa-icon>

@@ -112,9 +112,9 @@ public class ProdutoService {
         produtoRepository.deleteById(id);
     }
 
-    public BigDecimal getTotalUnitario( int quantidade, double desconto, Double precoUnitario ) {
-        desconto = ( precoUnitario  * quantidade * desconto ) / 100;
-        return new BigDecimal((quantidade * precoUnitario ) - desconto);
+    public BigDecimal getTotalUnitario( Double quantidade, Double desconto, BigDecimal precoUnitario ) {
+        desconto = ( precoUnitario.doubleValue()  * quantidade * desconto ) / 100;
+        return new BigDecimal((quantidade * precoUnitario.doubleValue() ) - desconto);
     }
 
     public Produto aumentarQuantidadeEstoque( Long produtoId, Double quantidade ) {

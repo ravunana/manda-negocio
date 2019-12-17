@@ -2,13 +2,14 @@ package com.ravunana.manda.service;
 
 import com.ravunana.manda.domain.Compra;
 import com.ravunana.manda.domain.DocumentoComercial;
-import com.ravunana.manda.domain.ItemCompra;
+import com.ravunana.manda.domain.FormaLiquidacao;
 import com.ravunana.manda.domain.SerieDocumento;
 import com.ravunana.manda.repository.CompraRepository;
 import com.ravunana.manda.repository.DocumentoComercialRepository;
-import com.ravunana.manda.repository.FluxoDocumentoRepository;
+import com.ravunana.manda.repository.FormaLiquidacaoRepository;
 import com.ravunana.manda.service.dto.CompraDTO;
 import com.ravunana.manda.service.dto.ItemCompraDTO;
+import com.ravunana.manda.service.dto.LancamentoFinanceiroDTO;
 import com.ravunana.manda.service.mapper.CompraMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -47,10 +50,17 @@ public class CompraService {
     private ItemCompraService itemCompraService;
 
     @Autowired
-    private ProdutoService produtoService;
+    private LancamentoFinanceiroService lancamentoFinanceiroService;
+
+    private LancamentoFinanceiroDTO lancamentoFinanceiroDTO = new LancamentoFinanceiroDTO();
+
+    private BigDecimal TOTAL_FACTURA = new BigDecimal(0);
 
     @Autowired
-    private FluxoDocumentoRepository fluxoDocumentoRepository;
+    private FormaLiquidacaoRepository formaLiquidacaoRepository;
+
+    @Autowired
+    private ProdutoService produtoService;
 
     public CompraService(CompraRepository compraRepository, CompraMapper compraMapper) {
         this.compraRepository = compraRepository;
@@ -82,7 +92,12 @@ public class CompraService {
 
             salvarItemCompra(compra.getId());
 
+            compraDTO.setNumero( numeroCompra );
+
+            getRecebimento(compraDTO);
+
             itemCompraService.cleanItems();
+            TOTAL_FACTURA = new BigDecimal(0);
         }
         return compraMapper.toDto(compra);
     }
@@ -138,9 +153,25 @@ public class CompraService {
     }
 
     private void salvarItemCompra(Long compraId) {
+
             for ( ItemCompraDTO item : itemCompraService.getItems() ) {
                 item.setCompraId( compraId );
+                BigDecimal totalUnitario = produtoService.getTotalUnitario(item.getQuantidade(), item.getDesconto(), item.getValor());
+                TOTAL_FACTURA = TOTAL_FACTURA.add( totalUnitario );
                 itemCompraService.save( item );
             }
+    }
+
+    private LancamentoFinanceiroDTO getRecebimento( CompraDTO compra ) {
+        FormaLiquidacao formaLiquidacao = formaLiquidacaoRepository.findById( compra.getFormaLiquidacaoId() ).get();
+        lancamentoFinanceiroDTO.setExterno( false );
+        lancamentoFinanceiroDTO.setDescricao( "Compra de mercadoria na modalidade "  + formaLiquidacao.getNome() + " no valor de " + TOTAL_FACTURA + " referente a factura nº " + compra.getNumero() + " data de liquidação " + LocalDate.now().plusDays( formaLiquidacao.getPrazoLiquidacao() ) );
+        lancamentoFinanceiroDTO.setFormaLiquidacaoId( compra.getFormaLiquidacaoId() );
+        lancamentoFinanceiroDTO.setValor( TOTAL_FACTURA );
+        // lancamentoFinanceiroDTO.setImpostos( compra.getImpostos() );
+
+        lancamentoFinanceiroDTO.setTipoLancamento( "SAIDA" );
+        lancamentoFinanceiroDTO.setTipoReciboId( compra.getTipoDocumentoId() );
+        return lancamentoFinanceiroService.save( lancamentoFinanceiroDTO );
     }
 }
