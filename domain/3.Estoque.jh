@@ -86,7 +86,7 @@ relationship OneToMany {
     Produto to ConversaoUnidade{produto(nome) required},
     Empresa to Produto{empresa(nome)},
     Empresa to LocalArmazenamento{empresa(nome)},
-    FluxoDocumento to Produto{estado(nome) required },
+    FluxoDocumento to Produto{estado(nome) },
     Produto to EstruturaCalculo{produto(nome) required}
 }
 
