@@ -22,12 +22,7 @@
         },
         {
             "fieldName": "grau",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "min",
-                "required"
-            ],
-            "fieldValidateRulesMin": 1
+            "fieldType": "Integer"
         },
         {
             "fieldName": "natureza",

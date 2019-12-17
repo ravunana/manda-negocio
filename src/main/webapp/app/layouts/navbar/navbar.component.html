@@ -1,517 +1,517 @@
 <nav class="navbar navbar-dark navbar-expand-md bg-dark">
-        <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
-            <!-- <span class="logo-img"></span> -->
-            <span jhiTranslate="global.title" class="navbar-title">MANDA</span>
-            <!-- <span class="navbar-version">{{version}}</span> -->
-        </a>
-        <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse"
-            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-            aria-label="Toggle navigation" (click)="toggleNavbar()">
-            <fa-icon icon="bars"></fa-icon>
-        </a>
-        <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
-            [ngSwitch]="isAuthenticated()">
-            <ul class="navbar-nav ml-auto">
-                <!-- <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
-                            <span>
-                                <fa-icon icon="home"></fa-icon>
-                                <span jhiTranslate="global.menu.home">Home</span>
+    <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
+        <!-- <span class="logo-img"></span> -->
+        <span jhiTranslate="global.title" class="navbar-title">MANDA</span>
+        <!-- <span class="navbar-version">{{version}}</span> -->
+    </a>
+    <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation" (click)="toggleNavbar()">
+        <fa-icon icon="bars"></fa-icon>
+    </a>
+    <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed"
+        [ngSwitch]="isAuthenticated()">
+        <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+                        <span>
+                            <fa-icon icon="home"></fa-icon>
+                            <span jhiTranslate="global.menu.home">Home</span>
+                        </span>
+                    </a>
+                </li> -->
+            <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+            <!-- <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
+                        <span>
+                            <fa-icon icon="th-list"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.main">
+                                Entities
                             </span>
-                        </a>
-                    </li> -->
-                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <!-- <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
-                        routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
-                            <span>
-                                <fa-icon icon="th-list"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.main">
-                                    Entities
-                                </span>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu"> -->
-                <!-- <li>
-                                <a class="dropdown-item" routerLink="produto" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                    <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                    <span jhiTranslate="global.menu.entities.produto">Produto</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" routerLink="conversao-unidade" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                    <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                    <span jhiTranslate="global.menu.entities.conversaoUnidade">Conversao Unidade</span>
-                                </a>
-                            </li> -->
-                <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-                <!-- </ul>
-                    </li> -->
-
-                <!-- ./ Menu Customizado -->
-
-                <!-- ./ Tesouraria -->
-                <li *rvHasAnyAuthority="'ROLE_FINANCA'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="tesouraria-menu">
-                        <span>
-                            <fa-icon icon="balance-scale"></fa-icon>
-                            <span jhiTranslate="global.menu.tesouraria">Tesouraria</span>
                         </span>
                     </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="tesouraria-menu">
-                        <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
-                            <a class="dropdown-item" routerLink="moeda" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="coins" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.moeda">Moeda</span>
-                            </a>
-                        </li>
-                        <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
-                            <a class="dropdown-item" routerLink="imposto" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="percent" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.imposto">Imposto</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="forma-liquidacao" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="hand-holding-usd" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.formaLiquidacao">Forma Liquidacao</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="meio-liquidacao" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="comments-dollar" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.meioLiquidacao">Meio Liquidacao</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="lancamento-financeiro" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="file-invoice-dollar" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.lancamentoFinanceiro">Lancamento Financeiro</span>
-                            </a>
-                        </li>
-                        <hr>
-                        <li>
-                            <a class="dropdown-item" routerLink="financa-dashboard" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="file-invoice-dollar" fixedWidth="true"></fa-icon>
-                                <span> Dashboard </span>
-                                <!-- <span jhiTranslate="global.menu.entities.lancamentoFinanceiro">Lancamento Financeiro</span> -->
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <!-- /. Tesouraria -->
-
-                <!-- ./ Contabilidade -->
-                <li *rvHasAnyAuthority="'ROLE_CONTADOR'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
-                        id="contabilidade-menu">
-                        <span>
-                            <fa-icon icon="file-invoice-dollar"></fa-icon>
-                            <span jhiTranslate="global.menu.contabilidade">Contabilidade</span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="contabilidade-menu">
-                        <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
-                            <a class="dropdown-item" routerLink="classe-conta" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="book" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.classeConta">Classe Conta</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="conta" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="book" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.conta">Conta</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="escrituracao-contabil" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="file-invoice" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.escrituracaoContabil">Escrituracao Contabil</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- /. Contabilidade -->
-
-                <!-- ./ Facturação -->
-                <li *rvHasAnyAuthority="'ROLE_VENDA'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="venda-menu">
-                        <span>
-                            <fa-icon icon="cash-register"></fa-icon>
-                            <span jhiTranslate="global.menu.venda">Venda</span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="venda-menu">
-                        <li>
-                            <a class="dropdown-item" routerLink="cliente" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="user-tag" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.cliente">Cliente</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="venda" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="tags" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.venda">Venda</span>
-                            </a>
-                        </li>
-                        <!-- <li>
-                            <a class="dropdown-item" routerLink="devolucao-venda" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="th" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.devolucaoVenda">Devolucao Venda</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item" routerLink="/venda/pdv" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="store" fixedWidth="true"></fa-icon>
-                                <span>PONTO DE VENDA - PDV</span>
-                            </a>
-                        </li> -->
-                    </ul>
-                </li>
-                <!-- /. Facturação -->
-
-                <!-- ./ Compra -->
-                <li *rvHasAnyAuthority="'ROLE_COMPRA'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="compra-menu">
-                        <span>
-                            <fa-icon icon="dolly-flatbed"></fa-icon>
-                            <span jhiTranslate="global.menu.compra">Compra</span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="compra-menu">
-                        <li>
-                            <a class="dropdown-item" routerLink="fornecedor" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="truck-moving" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.fornecedor">Fornecedor</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="compra" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="cart-arrow-down" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.compra">Compra</span>
-                            </a>
-                        </li>
-                        <!-- <li>
-                            <a class="dropdown-item" routerLink="devolucao-compra" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="th" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.devolucaoCompra">Devolucao Compra</span>
-                            </a>
-                        </li> -->
-                    </ul>
-                </li>
-                <!-- /. Compra -->
-
-                <!-- ./ Estoque -->
-                <li *rvHasAnyAuthority="'ROLE_ESTOQUE'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="estoque-menu">
-                        <span>
-                            <fa-icon icon="box-open"></fa-icon>
-                            <span jhiTranslate="global.menu.inventario">Estoque</span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="estoque-menu">
-
-                        <li>
-                            <a class="dropdown-item" routerLink="familia-produto" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="layer-group" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.familiaProduto">Familia Produto</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="local-armazenamento" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="archive" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.localArmazenamento">Local Armazenamento</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="unidade-medida" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="weight-hanging" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.unidadeMedida">Unidade Medida</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="produto" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="barcode" fixedWidth="true"></fa-icon>
+                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu"> -->
+            <!-- <li>
+                            <a class="dropdown-item" routerLink="produto" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
                                 <span jhiTranslate="global.menu.entities.produto">Produto</span>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" routerLink="estrutura-calculo" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="tags" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.estruturaCalculo">Estrutura Calculo</span>
-                            </a>
-                        </li>
-                        <!-- <li>
-                                <a class="dropdown-item" [routerLink]="['/produto/estatistica']" routerLinkActive="active"
-                                    [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                    <fa-icon icon="tachometer-alt" fixedWidth="true"></fa-icon>
-                                    <span>Estatistica</span>
-                                </a>
-                            </li> -->
-                    </ul>
-                </li>
-                <!-- /. Estoque -->
-
-                <!-- ./ Core -->
-                <li *rvHasAnyAuthority="'ROLE_GERENTE'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="core-menu">
-                        <span>
-                            <fa-icon icon="warehouse"></fa-icon>
-                            <span jhiTranslate="global.menu.core">Core</span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="core-menu">
-
-                        <li>
-                            <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="software"
-                                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                                (click)="collapseNavbar()">
+                            <a class="dropdown-item" routerLink="conversao-unidade" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                                 <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.software">Software</span>
+                                <span jhiTranslate="global.menu.entities.conversaoUnidade">Conversao Unidade</span>
                             </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="lookup"
-                                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="th" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.lookup">Lookup</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="lookup-item"
-                                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="th" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.lookupItem">Lookup Item</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="serie-documento"
-                                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="th" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.serieDocumento">Serie Documento</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_USER'" routerLink="arquivo"
-                                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="th" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.arquivo">Arquivo</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="licenca-software"
-                                routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.licencaSoftware">Licenca Software</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="empresa" routerLinkActive="active"
-                                *rvHasAnyAuthority="'ROLE_RAVUNANA'" [routerLinkActiveOptions]="{ exact: true }"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="building" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.empresa">Empresa</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="coordenada-bancaria" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="piggy-bank" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.coordenadaBancaria">Coordenada Bancaria</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="fluxo-documento" routerLinkActive="active"
-                                *rvHasAnyAuthority="'ROLE_RAVUNANA'" [routerLinkActiveOptions]="{ exact: true }"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="th" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.fluxoDocumento">Fluxo do documento</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="documento-comercial" routerLinkActive="active"
-                                *rvHasAnyAuthority="'ROLE_RAVUNANA'" [routerLinkActiveOptions]="{ exact: true }"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="th" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.documentoComercial">Documento comercial</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="pessoa" routerLinkActive="active"
-                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                                <fa-icon icon="th" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.entities.pessoa">Pessoa</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- /. Core -->
-                <!-- /. Menu Customizado -->
+                        </li> -->
+            <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+            <!-- </ul>
+                </li> -->
 
-                <span class="ml-2"></span>
-                <span class="ml-2"></span>
-                <span class="ml-2"></span>
+            <!-- ./ Menu Customizado -->
 
-                <li *rvHasAnyAuthority="'ROLE_RAVUNANA'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
-                        <span>
-                            <fa-icon icon="user-plus"></fa-icon>
-                            <span jhiTranslate="global.menu.admin.main">Administration</span>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
-                        <li>
-                            <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="user" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.admin.userManagement">User management</span>
-                            </a>
-                        </li>
-                        <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
-                            <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active"
-                                (click)="collapseNavbar()">
+            <!-- ./ Tesouraria -->
+            <li *rvHasAnyAuthority="'ROLE_FINANCA'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="tesouraria-menu">
+                    <span>
+                        <fa-icon icon="balance-scale"></fa-icon>
+                        <span jhiTranslate="global.menu.tesouraria">Tesouraria</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="tesouraria-menu">
+                    <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
+                        <a class="dropdown-item" routerLink="moeda" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="coins" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.moeda">Moeda</span>
+                        </a>
+                    </li>
+                    <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
+                        <a class="dropdown-item" routerLink="imposto" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="percent" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.imposto">Imposto</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="forma-liquidacao" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="hand-holding-usd" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.formaLiquidacao">Forma Liquidacao</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="meio-liquidacao" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="comments-dollar" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.meioLiquidacao">Meio Liquidacao</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="lancamento-financeiro" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="file-invoice-dollar" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.lancamentoFinanceiro">Lancamento Financeiro</span>
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a class="dropdown-item" routerLink="financa-dashboard" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="file-invoice-dollar" fixedWidth="true"></fa-icon>
+                            <span> Dashboard </span>
+                            <!-- <span jhiTranslate="global.menu.entities.lancamentoFinanceiro">Lancamento Financeiro</span> -->
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <!-- /. Tesouraria -->
+
+            <!-- ./ Contabilidade -->
+            <li *rvHasAnyAuthority="'ROLE_CONTADOR'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
+                    id="contabilidade-menu">
+                    <span>
+                        <fa-icon icon="file-invoice-dollar"></fa-icon>
+                        <span jhiTranslate="global.menu.contabilidade">Contabilidade</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="contabilidade-menu">
+                    <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
+                        <a class="dropdown-item" routerLink="classe-conta" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="book" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.classeConta">Classe Conta</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="conta" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="book" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.conta">Conta</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="escrituracao-contabil" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="file-invoice" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.escrituracaoContabil">Escrituracao Contabil</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- /. Contabilidade -->
+
+            <!-- ./ Facturação -->
+            <li *rvHasAnyAuthority="'ROLE_VENDA'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="venda-menu">
+                    <span>
+                        <fa-icon icon="cash-register"></fa-icon>
+                        <span jhiTranslate="global.menu.venda">Venda</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="venda-menu">
+                    <li>
+                        <a class="dropdown-item" routerLink="cliente" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="user-tag" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.cliente">Cliente</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="venda" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="tags" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.venda">Venda</span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a class="dropdown-item" routerLink="devolucao-venda" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.devolucaoVenda">Devolucao Venda</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" routerLink="/venda/pdv" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="store" fixedWidth="true"></fa-icon>
+                            <span>PONTO DE VENDA - PDV</span>
+                        </a>
+                    </li> -->
+                </ul>
+            </li>
+            <!-- /. Facturação -->
+
+            <!-- ./ Compra -->
+            <li *rvHasAnyAuthority="'ROLE_COMPRA'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="compra-menu">
+                    <span>
+                        <fa-icon icon="dolly-flatbed"></fa-icon>
+                        <span jhiTranslate="global.menu.compra">Compra</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="compra-menu">
+                    <li>
+                        <a class="dropdown-item" routerLink="fornecedor" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="truck-moving" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.fornecedor">Fornecedor</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="compra" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="cart-arrow-down" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.compra">Compra</span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a class="dropdown-item" routerLink="devolucao-compra" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.devolucaoCompra">Devolucao Compra</span>
+                        </a>
+                    </li> -->
+                </ul>
+            </li>
+            <!-- /. Compra -->
+
+            <!-- ./ Estoque -->
+            <li *rvHasAnyAuthority="'ROLE_ESTOQUE'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="estoque-menu">
+                    <span>
+                        <fa-icon icon="box-open"></fa-icon>
+                        <span jhiTranslate="global.menu.inventario">Estoque</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="estoque-menu">
+
+                    <li>
+                        <a class="dropdown-item" routerLink="familia-produto" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="layer-group" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.familiaProduto">Familia Produto</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="local-armazenamento" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="archive" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.localArmazenamento">Local Armazenamento</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="unidade-medida" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="weight-hanging" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.unidadeMedida">Unidade Medida</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="produto" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="barcode" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.produto">Produto</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="estrutura-calculo" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="tags" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.estruturaCalculo">Estrutura Calculo</span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                            <a class="dropdown-item" [routerLink]="['/produto/estatistica']" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                                 <fa-icon icon="tachometer-alt" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
+                                <span>Estatistica</span>
                             </a>
-                        </li>
-                        <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
-                            <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="heart" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.admin.health">Health</span>
-                            </a>
-                        </li>
-                        <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
-                            <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="list" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
-                            </a>
-                        </li>
-                        <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
-                            <a class="dropdown-item" routerLink="admin/audits" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="bell" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.admin.audits">Audits</span>
-                            </a>
-                        </li>
-                        <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
-                            <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="tasks" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.admin.logs">Logs</span>
-                            </a>
-                        </li>
-                        <li *ngIf="swaggerEnabled">
-                            <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="book" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.admin.apidocs">API</span>
-                            </a>
-                        </li>
-                        <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-                    </ul>
-                </li>
-                <li ngbDropdown class="nav-item dropdown pointer" display="dynamic"
-                    *ngIf="languages && languages.length > 1">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
-                        id="languagesnavBarDropdown">
-                        <span>
-                            <fa-icon icon="flag"></fa-icon>
-                            <span jhiTranslate="global.menu.language">Language</span>
+                        </li> -->
+                </ul>
+            </li>
+            <!-- /. Estoque -->
+
+            <!-- ./ Core -->
+            <li *rvHasAnyAuthority="'ROLE_GERENTE'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="core-menu">
+                    <span>
+                        <fa-icon icon="warehouse"></fa-icon>
+                        <span jhiTranslate="global.menu.core">Core</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="core-menu">
+
+                    <li>
+                        <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="software"
+                            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.software">Software</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="lookup"
+                            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.lookup">Lookup</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="lookup-item"
+                            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.lookupItem">Lookup Item</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="serie-documento"
+                            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.serieDocumento">Serie Documento</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_USER'" routerLink="arquivo"
+                            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.arquivo">Arquivo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" *rvHasAnyAuthority="'ROLE_RAVUNANA'" routerLink="licenca-software"
+                            routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.licencaSoftware">Licenca Software</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="empresa" routerLinkActive="active"
+                            *rvHasAnyAuthority="'ROLE_RAVUNANA'" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="building" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.empresa">Empresa</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="coordenada-bancaria" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="piggy-bank" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.coordenadaBancaria">Coordenada Bancaria</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="fluxo-documento" routerLinkActive="active"
+                            *rvHasAnyAuthority="'ROLE_RAVUNANA'" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.fluxoDocumento">Fluxo do documento</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="documento-comercial" routerLinkActive="active"
+                            *rvHasAnyAuthority="'ROLE_RAVUNANA'" [routerLinkActiveOptions]="{ exact: true }"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.documentoComercial">Documento comercial</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="pessoa" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="th" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.pessoa">Pessoa</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- /. Core -->
+            <!-- /. Menu Customizado -->
+
+            <span class="ml-2"></span>
+            <span class="ml-2"></span>
+            <span class="ml-2"></span>
+
+            <li *rvHasAnyAuthority="'ROLE_RAVUNANA'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
+                    <span>
+                        <fa-icon icon="user-plus"></fa-icon>
+                        <span jhiTranslate="global.menu.admin.main">Administration</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
+                    <li>
+                        <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="user" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.userManagement">User management</span>
+                        </a>
+                    </li>
+                    <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
+                        <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="tachometer-alt" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
+                        </a>
+                    </li>
+                    <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
+                        <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="heart" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.health">Health</span>
+                        </a>
+                    </li>
+                    <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
+                        <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="list" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
+                        </a>
+                    </li>
+                    <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
+                        <a class="dropdown-item" routerLink="admin/audits" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="bell" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.audits">Audits</span>
+                        </a>
+                    </li>
+                    <li *rvHasAnyAuthority="'ROLE_RAVUNANA'">
+                        <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="tasks" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.logs">Logs</span>
+                        </a>
+                    </li>
+                    <li *ngIf="swaggerEnabled">
+                        <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="book" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.admin.apidocs">API</span>
+                        </a>
+                    </li>
+                    <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                </ul>
+            </li>
+            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+                *ngIf="languages && languages.length > 1">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);"
+                    id="languagesnavBarDropdown">
+                    <span>
+                        <fa-icon icon="flag"></fa-icon>
+                        <span jhiTranslate="global.menu.language">Language</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
+                    <li *ngFor="let language of languages">
+                        <a class="dropdown-item" [rvActiveMenu]="language" href="javascript:void(0);"
+                            (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>
+                    </li>
+                </ul>
+            </li>
+            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
+                    <span *ngIf="!getImageUrl()">
+                        <fa-icon icon="user"></fa-icon>
+                        <span jhiTranslate="global.menu.account.main">
+                            Account
                         </span>
-                    </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="languagesnavBarDropdown">
-                        <li *ngFor="let language of languages">
-                            <a class="dropdown-item" [rvActiveMenu]="language" href="javascript:void(0);"
-                                (click)="changeLanguage(language);collapseNavbar();">{{language | findLanguageFromKey}}</a>
-                        </li>
-                    </ul>
-                </li>
-                <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active"
-                    [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
-                        <span *ngIf="!getImageUrl()">
-                            <fa-icon icon="user"></fa-icon>
-                            <span jhiTranslate="global.menu.account.main">
-                                Account
-                            </span>
-                        </span>
-                        <span *ngIf="getImageUrl()">
-                            <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar">
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
-                        <li *ngSwitchCase="true">
-                            <a class="dropdown-item" routerLink="account/settings" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.account.settings">Settings</span>
-                            </a>
-                        </li>
-                        <li *ngSwitchCase="true">
-                            <a class="dropdown-item" routerLink="account/password" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="lock" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.account.password">Password</span>
-                            </a>
-                        </li>
-                        <li *ngSwitchCase="true">
-                            <a class="dropdown-item" (click)="logout()" id="logout">
-                                <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.account.logout">Sign out</span>
-                            </a>
-                        </li>
-                        <li *ngSwitchCase="false">
-                            <a class="dropdown-item" (click)="login()" id="login">
-                                <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.account.login">Sign in</span>
-                            </a>
-                        </li>
-                        <li *ngSwitchCase="false">
-                            <a class="dropdown-item" routerLink="account/register" routerLinkActive="active"
-                                (click)="collapseNavbar()">
-                                <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
-                                <span jhiTranslate="global.menu.account.register">Register</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
+                    </span>
+                    <span *ngIf="getImageUrl()">
+                        <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar">
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
+                    <li *ngSwitchCase="true">
+                        <a class="dropdown-item" routerLink="account/settings" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.account.settings">Settings</span>
+                        </a>
+                    </li>
+                    <li *ngSwitchCase="true">
+                        <a class="dropdown-item" routerLink="account/password" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="lock" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.account.password">Password</span>
+                        </a>
+                    </li>
+                    <li *ngSwitchCase="true">
+                        <a class="dropdown-item" (click)="logout()" id="logout">
+                            <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.account.logout">Sign out</span>
+                        </a>
+                    </li>
+                    <li *ngSwitchCase="false">
+                        <a class="dropdown-item" (click)="login()" id="login">
+                            <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.account.login">Sign in</span>
+                        </a>
+                    </li>
+                    <li *ngSwitchCase="false">
+                        <a class="dropdown-item" routerLink="account/register" routerLinkActive="active"
+                            (click)="collapseNavbar()">
+                            <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.account.register">Register</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -267,25 +267,6 @@ public class ContaResourceIT {
 
     @Test
     @Transactional
-    public void checkGrauIsRequired() throws Exception {
-        int databaseSizeBeforeTest = contaRepository.findAll().size();
-        // set the field null
-        conta.setGrau(null);
-
-        // Create the Conta, which fails.
-        ContaDTO contaDTO = contaMapper.toDto(conta);
-
-        restContaMockMvc.perform(post("/api/contas")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(contaDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Conta> contaList = contaRepository.findAll();
-        assertThat(contaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllContas() throws Exception {
         // Initialize the database
         contaRepository.saveAndFlush(conta);

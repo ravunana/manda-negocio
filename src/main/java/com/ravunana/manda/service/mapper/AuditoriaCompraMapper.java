@@ -4,10 +4,12 @@ import com.ravunana.manda.domain.*;
 import com.ravunana.manda.service.dto.AuditoriaCompraDTO;
 
 import org.mapstruct.*;
+import org.springframework.stereotype.Component;
 
 /**
  * Mapper for the entity {@link AuditoriaCompra} and its DTO {@link AuditoriaCompraDTO}.
  */
+@Component
 @Mapper(componentModel = "spring", uses = {CompraMapper.class, UserMapper.class})
 public interface AuditoriaCompraMapper extends EntityMapper<AuditoriaCompraDTO, AuditoriaCompra> {
 

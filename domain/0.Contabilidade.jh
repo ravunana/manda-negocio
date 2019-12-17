@@ -7,7 +7,7 @@ entity Conta(ctb_conta) {
     descricao String required,
     codigo String required unique,
     tipo String,
-    grau Integer min(1) required,
+    grau Integer,
     natureza String, // Credora (C+), Devedora(D-)
     grupo String, // Activo, Passivo {Circulante e nao circulante}, Patrimonio liquido
     conteudo TextBlob

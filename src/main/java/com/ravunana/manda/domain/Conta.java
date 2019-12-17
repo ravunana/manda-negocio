@@ -37,9 +37,7 @@ public class Conta implements Serializable {
     @Column(name = "tipo")
     private String tipo;
 
-    @NotNull
-    @Min(value = 1)
-    @Column(name = "grau", nullable = false)
+    @Column(name = "grau")
     private Integer grau;
 
     @Column(name = "natureza")

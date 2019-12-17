@@ -25,7 +25,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="grau" type="integer">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="natureza" type="varchar(255)">
                 <constraints nullable="true" />

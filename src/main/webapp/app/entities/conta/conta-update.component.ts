@@ -31,7 +31,7 @@ export class ContaUpdateComponent implements OnInit {
     descricao: [null, [Validators.required]],
     codigo: [null, [Validators.required]],
     tipo: [],
-    grau: [null, [Validators.required, Validators.min(1)]],
+    grau: [],
     natureza: [],
     grupo: [],
     conteudo: [],

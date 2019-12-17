@@ -4,10 +4,12 @@ import com.ravunana.manda.domain.*;
 import com.ravunana.manda.service.dto.CompraDTO;
 
 import org.mapstruct.*;
+import org.springframework.stereotype.Component;
 
 /**
  * Mapper for the entity {@link Compra} and its DTO {@link CompraDTO}.
  */
+@Component
 @Mapper(componentModel = "spring", uses = {UserMapper.class, DocumentoComercialMapper.class, EmpresaMapper.class})
 public interface CompraMapper extends EntityMapper<CompraDTO, Compra> {
 
