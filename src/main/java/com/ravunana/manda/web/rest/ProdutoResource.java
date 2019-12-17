@@ -148,7 +148,7 @@ public class ProdutoResource {
     }
 
     @GetMapping("/produtos/totalUnitario/{quantidade}/{desconto}/{precoUnitario}")
-    public BigDecimal getTotalUnitarioItem( @PathVariable int quantidade, @PathVariable Double desconto, @PathVariable Double precoUnitario) {
+    public BigDecimal getTotalUnitarioItem( @PathVariable Double quantidade, @PathVariable Double desconto, @PathVariable BigDecimal precoUnitario) {
         return produtoService.getTotalUnitario(quantidade, desconto, precoUnitario);
     }
 }
