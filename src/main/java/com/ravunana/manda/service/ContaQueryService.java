@@ -133,6 +133,10 @@ public class ContaQueryService extends QueryService<Conta> {
                 specification = specification.and(buildSpecification(criteria.getClasseContaId(),
                     root -> root.join(Conta_.classeConta, JoinType.LEFT).get(ClasseConta_.id)));
             }
+            if (criteria.getLancamentoFinanceiroId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLancamentoFinanceiroId(),
+                    root -> root.join(Conta_.lancamentoFinanceiro, JoinType.LEFT).get(LancamentoFinanceiro_.id)));
+            }
         }
         return specification;
     }

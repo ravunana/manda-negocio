@@ -53,6 +53,7 @@ describe('Conta e2e test', () => {
             // contaUpdatePage.empresaSelectLastOption(),
             contaUpdatePage.contaAgregadoraSelectLastOption(),
             contaUpdatePage.classeContaSelectLastOption(),
+            contaUpdatePage.lancamentoFinanceiroSelectLastOption(),
         ]);
         expect(await contaUpdatePage.getDescricaoInput()).to.eq('descricao', 'Expected Descricao value to be equals to descricao');
         expect(await contaUpdatePage.getCodigoInput()).to.eq('codigo', 'Expected Codigo value to be equals to codigo');

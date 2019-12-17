@@ -7,6 +7,7 @@ import com.ravunana.manda.domain.ContaDebito;
 import com.ravunana.manda.domain.ContaCredito;
 import com.ravunana.manda.domain.Empresa;
 import com.ravunana.manda.domain.ClasseConta;
+import com.ravunana.manda.domain.LancamentoFinanceiro;
 import com.ravunana.manda.repository.ContaRepository;
 import com.ravunana.manda.service.ContaService;
 import com.ravunana.manda.service.dto.ContaDTO;
@@ -984,6 +985,26 @@ public class ContaResourceIT {
 
         // Get all the contaList where classeConta equals to classeContaId + 1
         defaultContaShouldNotBeFound("classeContaId.equals=" + (classeContaId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllContasByLancamentoFinanceiroIsEqualToSomething() throws Exception {
+        // Initialize the database
+        contaRepository.saveAndFlush(conta);
+        LancamentoFinanceiro lancamentoFinanceiro = LancamentoFinanceiroResourceIT.createEntity(em);
+        em.persist(lancamentoFinanceiro);
+        em.flush();
+        conta.setLancamentoFinanceiro(lancamentoFinanceiro);
+        contaRepository.saveAndFlush(conta);
+        Long lancamentoFinanceiroId = lancamentoFinanceiro.getId();
+
+        // Get all the contaList where lancamentoFinanceiro equals to lancamentoFinanceiroId
+        defaultContaShouldBeFound("lancamentoFinanceiroId.equals=" + lancamentoFinanceiroId);
+
+        // Get all the contaList where lancamentoFinanceiro equals to lancamentoFinanceiroId + 1
+        defaultContaShouldNotBeFound("lancamentoFinanceiroId.equals=" + (lancamentoFinanceiroId + 1));
     }
 
     /**

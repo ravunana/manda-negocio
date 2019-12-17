@@ -23,6 +23,8 @@ public interface LancamentoFinanceiroMapper extends EntityMapper<LancamentoFinan
 
     @Mapping(target = "detalheLancamentos", ignore = true)
     @Mapping(target = "removeDetalheLancamento", ignore = true)
+    @Mapping(target = "contas", ignore = true)
+    @Mapping(target = "removeConta", ignore = true)
     @Mapping(source = "utilizadorId", target = "utilizador")
     @Mapping(target = "removeImposto", ignore = true)
     @Mapping(source = "formaLiquidacaoId", target = "formaLiquidacao")

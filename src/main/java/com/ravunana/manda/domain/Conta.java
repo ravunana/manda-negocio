@@ -81,6 +81,10 @@ public class Conta implements Serializable {
     @JsonIgnoreProperties("contas")
     private ClasseConta classeConta;
 
+    @ManyToOne
+    @JsonIgnoreProperties("contas")
+    private LancamentoFinanceiro lancamentoFinanceiro;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -305,6 +309,19 @@ public class Conta implements Serializable {
 
     public void setClasseConta(ClasseConta classeConta) {
         this.classeConta = classeConta;
+    }
+
+    public LancamentoFinanceiro getLancamentoFinanceiro() {
+        return lancamentoFinanceiro;
+    }
+
+    public Conta lancamentoFinanceiro(LancamentoFinanceiro lancamentoFinanceiro) {
+        this.lancamentoFinanceiro = lancamentoFinanceiro;
+        return this;
+    }
+
+    public void setLancamentoFinanceiro(LancamentoFinanceiro lancamentoFinanceiro) {
+        this.lancamentoFinanceiro = lancamentoFinanceiro;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

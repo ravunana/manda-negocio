@@ -64,6 +64,10 @@ public class LancamentoFinanceiro implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DetalheLancamento> detalheLancamentos = new HashSet<>();
 
+    @OneToMany(mappedBy = "lancamentoFinanceiro")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Conta> contas = new HashSet<>();
+
     @ManyToOne
     @JsonIgnoreProperties("lancamentoFinanceiros")
     private User utilizador;
@@ -213,6 +217,31 @@ public class LancamentoFinanceiro implements Serializable {
 
     public void setDetalheLancamentos(Set<DetalheLancamento> detalheLancamentos) {
         this.detalheLancamentos = detalheLancamentos;
+    }
+
+    public Set<Conta> getContas() {
+        return contas;
+    }
+
+    public LancamentoFinanceiro contas(Set<Conta> contas) {
+        this.contas = contas;
+        return this;
+    }
+
+    public LancamentoFinanceiro addConta(Conta conta) {
+        this.contas.add(conta);
+        conta.setLancamentoFinanceiro(this);
+        return this;
+    }
+
+    public LancamentoFinanceiro removeConta(Conta conta) {
+        this.contas.remove(conta);
+        conta.setLancamentoFinanceiro(null);
+        return this;
+    }
+
+    public void setContas(Set<Conta> contas) {
+        this.contas = contas;
     }
 
     public User getUtilizador() {

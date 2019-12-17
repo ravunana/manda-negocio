@@ -66,7 +66,7 @@ public class ContaService {
     public Page<ContaDTO> findAllWithEagerRelationships(Pageable pageable) {
         return contaRepository.findAllWithEagerRelationships(pageable).map(contaMapper::toDto);
     }
-
+    
 
     /**
      * Get one conta by id.
@@ -90,58 +90,4 @@ public class ContaService {
         log.debug("Request to delete Conta : {}", id);
         contaRepository.deleteById(id);
     }
-
-    public Conta addSubConta(Long contaAgregadoraId, String descricao) {
-        Conta contaAgregadora = null;
-        Conta novaConta = null;
-        try{
-            contaAgregadora = contaRepository.findById( contaAgregadoraId ).get();
-            if ( contaAgregadora.equals(null) || contaAgregadora == null ) {
-                return new Conta();
-            } else {
-
-                String codigoUltimaConta = contaRepository.findByContaAgregadora(contaAgregadora)
-                .stream()
-                .reduce( (a,b) -> b ).get().getCodigo();
-
-                int sequenciaCodigoConta = Integer.parseInt(codigoUltimaConta.substring( codigoUltimaConta.length() -1 ));
-
-                novaConta = new Conta();
-                novaConta.setClasseConta( contaAgregadora.getClasseConta() );
-
-                novaConta.setCodigo( contaAgregadora.getCodigo() + "." + (sequenciaCodigoConta + 1) );
-                novaConta.setContaAgregadora( contaAgregadora );
-                novaConta.setConteudo("");
-                novaConta.setDescricao(descricao);
-                novaConta.setGrau(contaAgregadora.getGrau());
-                novaConta.setGrupo( contaAgregadora.getGrupo() );
-                novaConta.setNatureza( contaAgregadora.getNatureza() );
-                novaConta.setTipo( contaAgregadora.getTipo() );
-
-                novaConta = contaRepository.save(novaConta);
-
-                return novaConta;
-            }
-        } catch (Exception ex) {
-
-            novaConta = new Conta();
-            novaConta.setClasseConta( contaAgregadora.getClasseConta() );
-
-            novaConta.setCodigo( contaAgregadora.getCodigo() + "." + 1 );
-            novaConta.setContaAgregadora( contaAgregadora );
-            novaConta.setConteudo("");
-            novaConta.setDescricao(descricao);
-            novaConta.setGrau(contaAgregadora.getGrau());
-            novaConta.setGrupo( contaAgregadora.getGrupo() );
-            novaConta.setNatureza( contaAgregadora.getNatureza() );
-            novaConta.setTipo( contaAgregadora.getTipo() );
-
-            novaConta = contaRepository.save(novaConta);
-
-            return novaConta;
-
-        }
-
-    }
-
 }

@@ -1,4 +1,5 @@
 import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
+import { IConta } from 'app/shared/model/conta.model';
 import { IImposto } from 'app/shared/model/imposto.model';
 import { EntidadeSistema } from 'app/shared/model/enumerations/entidade-sistema.model';
 
@@ -12,6 +13,7 @@ export interface ILancamentoFinanceiro {
   entidadeDocumento?: EntidadeSistema;
   numeroDocumento?: string;
   detalheLancamentos?: IDetalheLancamento[];
+  contas?: IConta[];
   utilizadorLogin?: string;
   utilizadorId?: number;
   impostos?: IImposto[];
@@ -34,6 +36,7 @@ export class LancamentoFinanceiro implements ILancamentoFinanceiro {
     public entidadeDocumento?: EntidadeSistema,
     public numeroDocumento?: string,
     public detalheLancamentos?: IDetalheLancamento[],
+    public contas?: IConta[],
     public utilizadorLogin?: string,
     public utilizadorId?: number,
     public impostos?: IImposto[],

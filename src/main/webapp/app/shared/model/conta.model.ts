@@ -20,6 +20,7 @@ export interface IConta {
   contaAgregadoraId?: number;
   classeContaDescricao?: string;
   classeContaId?: number;
+  lancamentoFinanceiroId?: number;
 }
 
 export class Conta implements IConta {
@@ -39,6 +40,7 @@ export class Conta implements IConta {
     public contaAgregadoraDescricao?: string,
     public contaAgregadoraId?: number,
     public classeContaDescricao?: string,
-    public classeContaId?: number
+    public classeContaId?: number,
+    public lancamentoFinanceiroId?: number
   ) {}
 }

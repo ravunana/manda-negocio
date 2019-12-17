@@ -61,6 +61,12 @@
             "relationshipName": "detalheLancamento"
         },
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "lancamentoFinanceiro",
+            "relationshipName": "conta"
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "lancamentoFinanceiro",

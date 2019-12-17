@@ -50,6 +50,8 @@ public class ContaCriteria implements Serializable, Criteria {
 
     private LongFilter classeContaId;
 
+    private LongFilter lancamentoFinanceiroId;
+
     public ContaCriteria(){
     }
 
@@ -67,6 +69,7 @@ public class ContaCriteria implements Serializable, Criteria {
         this.empresaId = other.empresaId == null ? null : other.empresaId.copy();
         this.contaAgregadoraId = other.contaAgregadoraId == null ? null : other.contaAgregadoraId.copy();
         this.classeContaId = other.classeContaId == null ? null : other.classeContaId.copy();
+        this.lancamentoFinanceiroId = other.lancamentoFinanceiroId == null ? null : other.lancamentoFinanceiroId.copy();
     }
 
     @Override
@@ -178,6 +181,14 @@ public class ContaCriteria implements Serializable, Criteria {
         this.classeContaId = classeContaId;
     }
 
+    public LongFilter getLancamentoFinanceiroId() {
+        return lancamentoFinanceiroId;
+    }
+
+    public void setLancamentoFinanceiroId(LongFilter lancamentoFinanceiroId) {
+        this.lancamentoFinanceiroId = lancamentoFinanceiroId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -201,7 +212,8 @@ public class ContaCriteria implements Serializable, Criteria {
             Objects.equals(contaCreditoId, that.contaCreditoId) &&
             Objects.equals(empresaId, that.empresaId) &&
             Objects.equals(contaAgregadoraId, that.contaAgregadoraId) &&
-            Objects.equals(classeContaId, that.classeContaId);
+            Objects.equals(classeContaId, that.classeContaId) &&
+            Objects.equals(lancamentoFinanceiroId, that.lancamentoFinanceiroId);
     }
 
     @Override
@@ -219,7 +231,8 @@ public class ContaCriteria implements Serializable, Criteria {
         contaCreditoId,
         empresaId,
         contaAgregadoraId,
-        classeContaId
+        classeContaId,
+        lancamentoFinanceiroId
         );
     }
 
@@ -239,6 +252,7 @@ public class ContaCriteria implements Serializable, Criteria {
                 (empresaId != null ? "empresaId=" + empresaId + ", " : "") +
                 (contaAgregadoraId != null ? "contaAgregadoraId=" + contaAgregadoraId + ", " : "") +
                 (classeContaId != null ? "classeContaId=" + classeContaId + ", " : "") +
+                (lancamentoFinanceiroId != null ? "lancamentoFinanceiroId=" + lancamentoFinanceiroId + ", " : "") +
             "}";
     }
 

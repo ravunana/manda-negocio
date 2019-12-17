@@ -3,6 +3,7 @@ package com.ravunana.manda.web.rest;
 import com.ravunana.manda.MandaApp;
 import com.ravunana.manda.domain.LancamentoFinanceiro;
 import com.ravunana.manda.domain.DetalheLancamento;
+import com.ravunana.manda.domain.Conta;
 import com.ravunana.manda.domain.User;
 import com.ravunana.manda.domain.Imposto;
 import com.ravunana.manda.domain.FormaLiquidacao;
@@ -917,6 +918,26 @@ public class LancamentoFinanceiroResourceIT {
 
         // Get all the lancamentoFinanceiroList where detalheLancamento equals to detalheLancamentoId + 1
         defaultLancamentoFinanceiroShouldNotBeFound("detalheLancamentoId.equals=" + (detalheLancamentoId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByContaIsEqualToSomething() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+        Conta conta = ContaResourceIT.createEntity(em);
+        em.persist(conta);
+        em.flush();
+        lancamentoFinanceiro.addConta(conta);
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+        Long contaId = conta.getId();
+
+        // Get all the lancamentoFinanceiroList where conta equals to contaId
+        defaultLancamentoFinanceiroShouldBeFound("contaId.equals=" + contaId);
+
+        // Get all the lancamentoFinanceiroList where conta equals to contaId + 1
+        defaultLancamentoFinanceiroShouldNotBeFound("contaId.equals=" + (contaId + 1));
     }
 
 

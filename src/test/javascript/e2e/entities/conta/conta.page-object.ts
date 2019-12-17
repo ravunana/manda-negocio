@@ -36,6 +36,7 @@ export class ContaUpdatePage {
   empresaSelect = element(by.id('field_empresa'));
   contaAgregadoraSelect = element(by.id('field_contaAgregadora'));
   classeContaSelect = element(by.id('field_classeConta'));
+  lancamentoFinanceiroSelect = element(by.id('field_lancamentoFinanceiro'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -152,6 +153,25 @@ export class ContaUpdatePage {
 
   async getClasseContaSelectedOption() {
     return await this.classeContaSelect.element(by.css('option:checked')).getText();
+  }
+
+  async lancamentoFinanceiroSelectLastOption() {
+    await this.lancamentoFinanceiroSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async lancamentoFinanceiroSelectOption(option) {
+    await this.lancamentoFinanceiroSelect.sendKeys(option);
+  }
+
+  getLancamentoFinanceiroSelect(): ElementFinder {
+    return this.lancamentoFinanceiroSelect;
+  }
+
+  async getLancamentoFinanceiroSelectedOption() {
+    return await this.lancamentoFinanceiroSelect.element(by.css('option:checked')).getText();
   }
 
   async save() {

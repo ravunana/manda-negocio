@@ -43,6 +43,8 @@ public class ContaDTO implements Serializable {
 
     private String classeContaDescricao;
 
+    private Long lancamentoFinanceiroId;
+
     public Long getId() {
         return id;
     }
@@ -147,6 +149,14 @@ public class ContaDTO implements Serializable {
         this.classeContaDescricao = classeContaDescricao;
     }
 
+    public Long getLancamentoFinanceiroId() {
+        return lancamentoFinanceiroId;
+    }
+
+    public void setLancamentoFinanceiroId(Long lancamentoFinanceiroId) {
+        this.lancamentoFinanceiroId = lancamentoFinanceiroId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -183,6 +193,7 @@ public class ContaDTO implements Serializable {
             ", contaAgregadora='" + getContaAgregadoraDescricao() + "'" +
             ", classeConta=" + getClasseContaId() +
             ", classeConta='" + getClasseContaDescricao() + "'" +
+            ", lancamentoFinanceiro=" + getLancamentoFinanceiroId() +
             "}";
     }
 }

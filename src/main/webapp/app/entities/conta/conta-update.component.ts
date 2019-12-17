@@ -12,6 +12,8 @@ import { IEmpresa } from 'app/shared/model/empresa.model';
 import { EmpresaService } from 'app/entities/empresa/empresa.service';
 import { IClasseConta } from 'app/shared/model/classe-conta.model';
 import { ClasseContaService } from 'app/entities/classe-conta/classe-conta.service';
+import { ILancamentoFinanceiro } from 'app/shared/model/lancamento-financeiro.model';
+import { LancamentoFinanceiroService } from 'app/entities/lancamento-financeiro/lancamento-financeiro.service';
 
 @Component({
   selector: 'rv-conta-update',
@@ -26,6 +28,8 @@ export class ContaUpdateComponent implements OnInit {
 
   classecontas: IClasseConta[];
 
+  lancamentofinanceiros: ILancamentoFinanceiro[];
+
   editForm = this.fb.group({
     id: [],
     descricao: [null, [Validators.required]],
@@ -37,7 +41,8 @@ export class ContaUpdateComponent implements OnInit {
     conteudo: [],
     empresas: [],
     contaAgregadoraId: [],
-    classeContaId: [null, Validators.required]
+    classeContaId: [null, Validators.required],
+    lancamentoFinanceiroId: []
   });
 
   constructor(
@@ -46,6 +51,7 @@ export class ContaUpdateComponent implements OnInit {
     protected contaService: ContaService,
     protected empresaService: EmpresaService,
     protected classeContaService: ClasseContaService,
+    protected lancamentoFinanceiroService: LancamentoFinanceiroService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -67,6 +73,12 @@ export class ContaUpdateComponent implements OnInit {
         (res: HttpResponse<IClasseConta[]>) => (this.classecontas = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+    this.lancamentoFinanceiroService
+      .query()
+      .subscribe(
+        (res: HttpResponse<ILancamentoFinanceiro[]>) => (this.lancamentofinanceiros = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
   }
 
   updateForm(conta: IConta) {
@@ -81,7 +93,8 @@ export class ContaUpdateComponent implements OnInit {
       conteudo: conta.conteudo,
       empresas: conta.empresas,
       contaAgregadoraId: conta.contaAgregadoraId,
-      classeContaId: conta.classeContaId
+      classeContaId: conta.classeContaId,
+      lancamentoFinanceiroId: conta.lancamentoFinanceiroId
     });
   }
 
@@ -145,7 +158,8 @@ export class ContaUpdateComponent implements OnInit {
       conteudo: this.editForm.get(['conteudo']).value,
       empresas: this.editForm.get(['empresas']).value,
       contaAgregadoraId: this.editForm.get(['contaAgregadoraId']).value,
-      classeContaId: this.editForm.get(['classeContaId']).value
+      classeContaId: this.editForm.get(['classeContaId']).value,
+      lancamentoFinanceiroId: this.editForm.get(['lancamentoFinanceiroId']).value
     };
   }
 
@@ -177,6 +191,10 @@ export class ContaUpdateComponent implements OnInit {
     return item.id;
   }
 
+  trackLancamentoFinanceiroById(index: number, item: ILancamentoFinanceiro) {
+    return item.id;
+  }
+
   getSelected(selectedVals: any[], option: any) {
     if (selectedVals) {
       for (let i = 0; i < selectedVals.length; i++) {
@@ -186,15 +204,5 @@ export class ContaUpdateComponent implements OnInit {
       }
     }
     return option;
-  }
-
-  onSelectConta(conta) {
-    this.editForm.get('contaAgregadoraId').patchValue(conta.id, { emitEvent: false });
-  }
-
-  searchConta(conta) {
-    this.contaService.query({ 'descricao.contains': conta.query }).subscribe(data => {
-      this.contas = data.body;
-    });
   }
 }

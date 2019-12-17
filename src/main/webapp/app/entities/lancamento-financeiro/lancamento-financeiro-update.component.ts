@@ -10,8 +10,6 @@ import { ILancamentoFinanceiro, LancamentoFinanceiro } from 'app/shared/model/la
 import { LancamentoFinanceiroService } from './lancamento-financeiro.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
-import { IConta } from 'app/shared/model/conta.model';
-import { ContaService } from 'app/entities/conta/conta.service';
 import { IImposto } from 'app/shared/model/imposto.model';
 import { ImpostoService } from 'app/entities/imposto/imposto.service';
 import { IFormaLiquidacao } from 'app/shared/model/forma-liquidacao.model';
@@ -30,8 +28,6 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
 
   users: IUser[];
 
-  contas: IConta[];
-
   impostos: IImposto[];
 
   formaliquidacaos: IFormaLiquidacao[];
@@ -47,8 +43,9 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
     externo: [],
     numero: [null, [Validators.required]],
     descricao: [null, [Validators.required]],
+    entidadeDocumento: [null, [Validators.required]],
+    numeroDocumento: [null, [Validators.required]],
     utilizadorId: [],
-    contaId: [],
     impostos: [null, Validators.required],
     formaLiquidacaoId: [null, Validators.required],
     empresaId: [],
@@ -60,7 +57,6 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
     protected jhiAlertService: JhiAlertService,
     protected lancamentoFinanceiroService: LancamentoFinanceiroService,
     protected userService: UserService,
-    protected contaService: ContaService,
     protected impostoService: ImpostoService,
     protected formaLiquidacaoService: FormaLiquidacaoService,
     protected empresaService: EmpresaService,
@@ -77,9 +73,6 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
     this.userService
       .query()
       .subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body), (res: HttpErrorResponse) => this.onError(res.message));
-    this.contaService
-      .query()
-      .subscribe((res: HttpResponse<IConta[]>) => (this.contas = res.body), (res: HttpErrorResponse) => this.onError(res.message));
     this.impostoService
       .query()
       .subscribe((res: HttpResponse<IImposto[]>) => (this.impostos = res.body), (res: HttpErrorResponse) => this.onError(res.message));
@@ -108,8 +101,9 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
       externo: lancamentoFinanceiro.externo,
       numero: lancamentoFinanceiro.numero,
       descricao: lancamentoFinanceiro.descricao,
+      entidadeDocumento: lancamentoFinanceiro.entidadeDocumento,
+      numeroDocumento: lancamentoFinanceiro.numeroDocumento,
       utilizadorId: lancamentoFinanceiro.utilizadorId,
-      contaId: lancamentoFinanceiro.contaId,
       impostos: lancamentoFinanceiro.impostos,
       formaLiquidacaoId: lancamentoFinanceiro.formaLiquidacaoId,
       empresaId: lancamentoFinanceiro.empresaId,
@@ -173,8 +167,9 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
       externo: this.editForm.get(['externo']).value,
       numero: this.editForm.get(['numero']).value,
       descricao: this.editForm.get(['descricao']).value,
+      entidadeDocumento: this.editForm.get(['entidadeDocumento']).value,
+      numeroDocumento: this.editForm.get(['numeroDocumento']).value,
       utilizadorId: this.editForm.get(['utilizadorId']).value,
-      contaId: this.editForm.get(['contaId']).value,
       impostos: this.editForm.get(['impostos']).value,
       formaLiquidacaoId: this.editForm.get(['formaLiquidacaoId']).value,
       empresaId: this.editForm.get(['empresaId']).value,
@@ -199,10 +194,6 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
   }
 
   trackUserById(index: number, item: IUser) {
-    return item.id;
-  }
-
-  trackContaById(index: number, item: IConta) {
     return item.id;
   }
 

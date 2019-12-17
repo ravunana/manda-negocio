@@ -60,6 +60,8 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
 
     private LongFilter detalheLancamentoId;
 
+    private LongFilter contaId;
+
     private LongFilter utilizadorId;
 
     private LongFilter impostoId;
@@ -82,6 +84,7 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         this.entidadeDocumento = other.entidadeDocumento == null ? null : other.entidadeDocumento.copy();
         this.numeroDocumento = other.numeroDocumento == null ? null : other.numeroDocumento.copy();
         this.detalheLancamentoId = other.detalheLancamentoId == null ? null : other.detalheLancamentoId.copy();
+        this.contaId = other.contaId == null ? null : other.contaId.copy();
         this.utilizadorId = other.utilizadorId == null ? null : other.utilizadorId.copy();
         this.impostoId = other.impostoId == null ? null : other.impostoId.copy();
         this.formaLiquidacaoId = other.formaLiquidacaoId == null ? null : other.formaLiquidacaoId.copy();
@@ -158,6 +161,14 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         this.detalheLancamentoId = detalheLancamentoId;
     }
 
+    public LongFilter getContaId() {
+        return contaId;
+    }
+
+    public void setContaId(LongFilter contaId) {
+        this.contaId = contaId;
+    }
+
     public LongFilter getUtilizadorId() {
         return utilizadorId;
     }
@@ -217,6 +228,7 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
             Objects.equals(entidadeDocumento, that.entidadeDocumento) &&
             Objects.equals(numeroDocumento, that.numeroDocumento) &&
             Objects.equals(detalheLancamentoId, that.detalheLancamentoId) &&
+            Objects.equals(contaId, that.contaId) &&
             Objects.equals(utilizadorId, that.utilizadorId) &&
             Objects.equals(impostoId, that.impostoId) &&
             Objects.equals(formaLiquidacaoId, that.formaLiquidacaoId) &&
@@ -235,6 +247,7 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         entidadeDocumento,
         numeroDocumento,
         detalheLancamentoId,
+        contaId,
         utilizadorId,
         impostoId,
         formaLiquidacaoId,
@@ -254,6 +267,7 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
                 (entidadeDocumento != null ? "entidadeDocumento=" + entidadeDocumento + ", " : "") +
                 (numeroDocumento != null ? "numeroDocumento=" + numeroDocumento + ", " : "") +
                 (detalheLancamentoId != null ? "detalheLancamentoId=" + detalheLancamentoId + ", " : "") +
+                (contaId != null ? "contaId=" + contaId + ", " : "") +
                 (utilizadorId != null ? "utilizadorId=" + utilizadorId + ", " : "") +
                 (impostoId != null ? "impostoId=" + impostoId + ", " : "") +
                 (formaLiquidacaoId != null ? "formaLiquidacaoId=" + formaLiquidacaoId + ", " : "") +

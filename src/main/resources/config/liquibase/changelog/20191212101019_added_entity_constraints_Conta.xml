@@ -32,5 +32,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="ctb_classe"/>
 
+        <addForeignKeyConstraint baseColumnNames="lancamento_financeiro_id"
+                                 baseTableName="ctb_conta"
+                                 constraintName="fk_ctb_conta_lancamento_financeiro_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fnc_lancamento_financeiro"/>
+
     </changeSet>
 </databaseChangeLog>

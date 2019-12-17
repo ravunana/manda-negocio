@@ -42,6 +42,9 @@
             <column name="classe_conta_id" type="bigint">
                 <constraints nullable="false" />
             </column>
+            <column name="lancamento_financeiro_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
     </changeSet>

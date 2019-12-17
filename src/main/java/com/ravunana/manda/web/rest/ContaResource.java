@@ -4,7 +4,6 @@ import com.ravunana.manda.service.ContaService;
 import com.ravunana.manda.web.rest.errors.BadRequestAlertException;
 import com.ravunana.manda.service.dto.ContaDTO;
 import com.ravunana.manda.service.dto.ContaCriteria;
-import com.ravunana.manda.domain.Conta;
 import com.ravunana.manda.service.ContaQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -144,10 +143,5 @@ public class ContaResource {
         log.debug("REST request to delete Conta : {}", id);
         contaService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
-    }
-
-    @GetMapping("/contas/add-subconta/{contaAgregadoraId}/{descricao}")
-    public Conta addSubConta( @PathVariable Long contaAgregadoraId, @PathVariable String descricao ) {
-        return contaService.addSubConta(contaAgregadoraId, descricao);
     }
 }

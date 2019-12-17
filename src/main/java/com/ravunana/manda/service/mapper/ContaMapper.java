@@ -8,13 +8,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Conta} and its DTO {@link ContaDTO}.
  */
-@Mapper(componentModel = "spring", uses = {EmpresaMapper.class, ClasseContaMapper.class})
+@Mapper(componentModel = "spring", uses = {EmpresaMapper.class, ClasseContaMapper.class, LancamentoFinanceiroMapper.class})
 public interface ContaMapper extends EntityMapper<ContaDTO, Conta> {
 
     @Mapping(source = "contaAgregadora.id", target = "contaAgregadoraId")
     @Mapping(source = "contaAgregadora.descricao", target = "contaAgregadoraDescricao")
     @Mapping(source = "classeConta.id", target = "classeContaId")
     @Mapping(source = "classeConta.descricao", target = "classeContaDescricao")
+    @Mapping(source = "lancamentoFinanceiro.id", target = "lancamentoFinanceiroId")
     ContaDTO toDto(Conta conta);
 
     @Mapping(target = "contas", ignore = true)
@@ -26,6 +27,7 @@ public interface ContaMapper extends EntityMapper<ContaDTO, Conta> {
     @Mapping(target = "removeEmpresa", ignore = true)
     @Mapping(source = "contaAgregadoraId", target = "contaAgregadora")
     @Mapping(source = "classeContaId", target = "classeConta")
+    @Mapping(source = "lancamentoFinanceiroId", target = "lancamentoFinanceiro")
     Conta toEntity(ContaDTO contaDTO);
 
     default Conta fromId(Long id) {
