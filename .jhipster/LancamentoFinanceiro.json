@@ -61,12 +61,6 @@
             "relationshipName": "detalheLancamento"
         },
         {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "conta",
-            "otherEntityRelationshipName": "lancamentoFinanceiro",
-            "relationshipName": "conta"
-        },
-        {
             "relationshipType": "many-to-one",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "lancamentoFinanceiro",
@@ -104,6 +98,13 @@
             "relationshipValidateRules": "required",
             "relationshipName": "tipoRecibo",
             "otherEntityField": "nome"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "conta",
+            "otherEntityRelationshipName": "lancamentoFinanceiro",
+            "relationshipName": "conta",
+            "otherEntityField": "descricao"
         }
     ],
     "changelogDate": "20191212101049",

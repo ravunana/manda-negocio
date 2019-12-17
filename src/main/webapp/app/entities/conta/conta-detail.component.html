@@ -51,12 +51,6 @@
                         <a [routerLink]="['/classe-conta', conta.classeContaId, 'view']">{{conta.classeContaDescricao}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="mandaApp.conta.lancamentoFinanceiro">Lancamento Financeiro</span></dt>
-                <dd>
-                    <div *ngIf="conta.lancamentoFinanceiroId">
-                        <a [routerLink]="['/lancamento-financeiro', conta.lancamentoFinanceiroId, 'view']">{{conta.lancamentoFinanceiroId}}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

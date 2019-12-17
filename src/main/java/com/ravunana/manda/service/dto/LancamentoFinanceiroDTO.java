@@ -56,6 +56,10 @@ public class LancamentoFinanceiroDTO implements Serializable {
 
     private String tipoReciboNome;
 
+    private Long contaId;
+
+    private String contaDescricao;
+
     public Long getId() {
         return id;
     }
@@ -192,6 +196,22 @@ public class LancamentoFinanceiroDTO implements Serializable {
         this.tipoReciboNome = documentoComercialNome;
     }
 
+    public Long getContaId() {
+        return contaId;
+    }
+
+    public void setContaId(Long contaId) {
+        this.contaId = contaId;
+    }
+
+    public String getContaDescricao() {
+        return contaDescricao;
+    }
+
+    public void setContaDescricao(String contaDescricao) {
+        this.contaDescricao = contaDescricao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -232,6 +252,8 @@ public class LancamentoFinanceiroDTO implements Serializable {
             ", empresa='" + getEmpresaNome() + "'" +
             ", tipoRecibo=" + getTipoReciboId() +
             ", tipoRecibo='" + getTipoReciboNome() + "'" +
+            ", conta=" + getContaId() +
+            ", conta='" + getContaDescricao() + "'" +
             "}";
     }
 }

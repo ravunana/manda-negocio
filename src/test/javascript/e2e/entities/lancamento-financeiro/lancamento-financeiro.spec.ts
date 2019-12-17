@@ -54,6 +54,7 @@ describe('LancamentoFinanceiro e2e test', () => {
             lancamentoFinanceiroUpdatePage.formaLiquidacaoSelectLastOption(),
             lancamentoFinanceiroUpdatePage.empresaSelectLastOption(),
             lancamentoFinanceiroUpdatePage.tipoReciboSelectLastOption(),
+            lancamentoFinanceiroUpdatePage.contaSelectLastOption(),
         ]);
         expect(await lancamentoFinanceiroUpdatePage.getTipoLancamentoInput()).to.eq('tipoLancamento', 'Expected TipoLancamento value to be equals to tipoLancamento');
         expect(await lancamentoFinanceiroUpdatePage.getValorInput()).to.eq('5', 'Expected valor value to be equals to 5');

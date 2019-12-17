@@ -44,13 +44,13 @@ public class ContaCriteria implements Serializable, Criteria {
 
     private LongFilter contaCreditoId;
 
+    private LongFilter lancamentoFinanceiroId;
+
     private LongFilter empresaId;
 
     private LongFilter contaAgregadoraId;
 
     private LongFilter classeContaId;
-
-    private LongFilter lancamentoFinanceiroId;
 
     public ContaCriteria(){
     }
@@ -66,10 +66,10 @@ public class ContaCriteria implements Serializable, Criteria {
         this.contaId = other.contaId == null ? null : other.contaId.copy();
         this.contaDebitoId = other.contaDebitoId == null ? null : other.contaDebitoId.copy();
         this.contaCreditoId = other.contaCreditoId == null ? null : other.contaCreditoId.copy();
+        this.lancamentoFinanceiroId = other.lancamentoFinanceiroId == null ? null : other.lancamentoFinanceiroId.copy();
         this.empresaId = other.empresaId == null ? null : other.empresaId.copy();
         this.contaAgregadoraId = other.contaAgregadoraId == null ? null : other.contaAgregadoraId.copy();
         this.classeContaId = other.classeContaId == null ? null : other.classeContaId.copy();
-        this.lancamentoFinanceiroId = other.lancamentoFinanceiroId == null ? null : other.lancamentoFinanceiroId.copy();
     }
 
     @Override
@@ -157,6 +157,14 @@ public class ContaCriteria implements Serializable, Criteria {
         this.contaCreditoId = contaCreditoId;
     }
 
+    public LongFilter getLancamentoFinanceiroId() {
+        return lancamentoFinanceiroId;
+    }
+
+    public void setLancamentoFinanceiroId(LongFilter lancamentoFinanceiroId) {
+        this.lancamentoFinanceiroId = lancamentoFinanceiroId;
+    }
+
     public LongFilter getEmpresaId() {
         return empresaId;
     }
@@ -181,14 +189,6 @@ public class ContaCriteria implements Serializable, Criteria {
         this.classeContaId = classeContaId;
     }
 
-    public LongFilter getLancamentoFinanceiroId() {
-        return lancamentoFinanceiroId;
-    }
-
-    public void setLancamentoFinanceiroId(LongFilter lancamentoFinanceiroId) {
-        this.lancamentoFinanceiroId = lancamentoFinanceiroId;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -210,10 +210,10 @@ public class ContaCriteria implements Serializable, Criteria {
             Objects.equals(contaId, that.contaId) &&
             Objects.equals(contaDebitoId, that.contaDebitoId) &&
             Objects.equals(contaCreditoId, that.contaCreditoId) &&
+            Objects.equals(lancamentoFinanceiroId, that.lancamentoFinanceiroId) &&
             Objects.equals(empresaId, that.empresaId) &&
             Objects.equals(contaAgregadoraId, that.contaAgregadoraId) &&
-            Objects.equals(classeContaId, that.classeContaId) &&
-            Objects.equals(lancamentoFinanceiroId, that.lancamentoFinanceiroId);
+            Objects.equals(classeContaId, that.classeContaId);
     }
 
     @Override
@@ -229,10 +229,10 @@ public class ContaCriteria implements Serializable, Criteria {
         contaId,
         contaDebitoId,
         contaCreditoId,
+        lancamentoFinanceiroId,
         empresaId,
         contaAgregadoraId,
-        classeContaId,
-        lancamentoFinanceiroId
+        classeContaId
         );
     }
 
@@ -249,10 +249,10 @@ public class ContaCriteria implements Serializable, Criteria {
                 (contaId != null ? "contaId=" + contaId + ", " : "") +
                 (contaDebitoId != null ? "contaDebitoId=" + contaDebitoId + ", " : "") +
                 (contaCreditoId != null ? "contaCreditoId=" + contaCreditoId + ", " : "") +
+                (lancamentoFinanceiroId != null ? "lancamentoFinanceiroId=" + lancamentoFinanceiroId + ", " : "") +
                 (empresaId != null ? "empresaId=" + empresaId + ", " : "") +
                 (contaAgregadoraId != null ? "contaAgregadoraId=" + contaAgregadoraId + ", " : "") +
                 (classeContaId != null ? "classeContaId=" + classeContaId + ", " : "") +
-                (lancamentoFinanceiroId != null ? "lancamentoFinanceiroId=" + lancamentoFinanceiroId + ", " : "") +
             "}";
     }
 

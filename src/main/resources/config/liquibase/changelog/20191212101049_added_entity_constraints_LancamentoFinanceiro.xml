@@ -44,5 +44,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="core_documento_comercial"/>
 
+        <addForeignKeyConstraint baseColumnNames="conta_id"
+                                 baseTableName="fnc_lancamento_financeiro"
+                                 constraintName="fk_fnc_lancamento_financeiro_conta_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ctb_conta"/>
+
     </changeSet>
 </databaseChangeLog>

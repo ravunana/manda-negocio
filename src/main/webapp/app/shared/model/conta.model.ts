@@ -1,6 +1,7 @@
 import { IConta } from 'app/shared/model/conta.model';
 import { IContaDebito } from 'app/shared/model/conta-debito.model';
 import { IContaCredito } from 'app/shared/model/conta-credito.model';
+import { ILancamentoFinanceiro } from 'app/shared/model/lancamento-financeiro.model';
 import { IEmpresa } from 'app/shared/model/empresa.model';
 
 export interface IConta {
@@ -15,12 +16,12 @@ export interface IConta {
   contas?: IConta[];
   contaDebitos?: IContaDebito[];
   contaCreditos?: IContaCredito[];
+  lancamentoFinanceiros?: ILancamentoFinanceiro[];
   empresas?: IEmpresa[];
   contaAgregadoraDescricao?: string;
   contaAgregadoraId?: number;
   classeContaDescricao?: string;
   classeContaId?: number;
-  lancamentoFinanceiroId?: number;
 }
 
 export class Conta implements IConta {
@@ -36,11 +37,11 @@ export class Conta implements IConta {
     public contas?: IConta[],
     public contaDebitos?: IContaDebito[],
     public contaCreditos?: IContaCredito[],
+    public lancamentoFinanceiros?: ILancamentoFinanceiro[],
     public empresas?: IEmpresa[],
     public contaAgregadoraDescricao?: string,
     public contaAgregadoraId?: number,
     public classeContaDescricao?: string,
-    public classeContaId?: number,
-    public lancamentoFinanceiroId?: number
+    public classeContaId?: number
   ) {}
 }

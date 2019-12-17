@@ -28,7 +28,6 @@
             <th scope="col"  jhiSortBy="conteudo"><span jhiTranslate="mandaApp.conta.conteudo">Conteudo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="contaAgregadoraDescricao"><span jhiTranslate="mandaApp.conta.contaAgregadora">Conta Agregadora</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="classeContaDescricao"><span jhiTranslate="mandaApp.conta.classeConta">Classe Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="lancamentoFinanceiroId"><span jhiTranslate="mandaApp.conta.lancamentoFinanceiro">Lancamento Financeiro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -50,11 +49,6 @@
                 <td>
                     <div *ngIf="conta.classeContaId">
                         <a [routerLink]="['/classe-conta', conta.classeContaId , 'view' ]" >{{conta.classeContaDescricao}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="conta.lancamentoFinanceiroId">
-                        <a [routerLink]="['/lancamento-financeiro', conta.lancamentoFinanceiroId , 'view' ]" >{{conta.lancamentoFinanceiroId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

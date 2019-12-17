@@ -18,6 +18,8 @@ import { IEmpresa } from 'app/shared/model/empresa.model';
 import { EmpresaService } from 'app/entities/empresa/empresa.service';
 import { IDocumentoComercial } from 'app/shared/model/documento-comercial.model';
 import { DocumentoComercialService } from 'app/entities/documento-comercial/documento-comercial.service';
+import { IConta } from 'app/shared/model/conta.model';
+import { ContaService } from 'app/entities/conta/conta.service';
 
 @Component({
   selector: 'rv-lancamento-financeiro-update',
@@ -36,6 +38,8 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
 
   documentocomercials: IDocumentoComercial[];
 
+  contas: IConta[];
+
   editForm = this.fb.group({
     id: [],
     tipoLancamento: [null, [Validators.required]],
@@ -49,7 +53,8 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
     impostos: [null, Validators.required],
     formaLiquidacaoId: [null, Validators.required],
     empresaId: [],
-    tipoReciboId: [null, Validators.required]
+    tipoReciboId: [null, Validators.required],
+    contaId: []
   });
 
   constructor(
@@ -61,6 +66,7 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
     protected formaLiquidacaoService: FormaLiquidacaoService,
     protected empresaService: EmpresaService,
     protected documentoComercialService: DocumentoComercialService,
+    protected contaService: ContaService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -91,6 +97,9 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
         (res: HttpResponse<IDocumentoComercial[]>) => (this.documentocomercials = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+    this.contaService
+      .query()
+      .subscribe((res: HttpResponse<IConta[]>) => (this.contas = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(lancamentoFinanceiro: ILancamentoFinanceiro) {
@@ -107,7 +116,8 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
       impostos: lancamentoFinanceiro.impostos,
       formaLiquidacaoId: lancamentoFinanceiro.formaLiquidacaoId,
       empresaId: lancamentoFinanceiro.empresaId,
-      tipoReciboId: lancamentoFinanceiro.tipoReciboId
+      tipoReciboId: lancamentoFinanceiro.tipoReciboId,
+      contaId: lancamentoFinanceiro.contaId
     });
   }
 
@@ -173,7 +183,8 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
       impostos: this.editForm.get(['impostos']).value,
       formaLiquidacaoId: this.editForm.get(['formaLiquidacaoId']).value,
       empresaId: this.editForm.get(['empresaId']).value,
-      tipoReciboId: this.editForm.get(['tipoReciboId']).value
+      tipoReciboId: this.editForm.get(['tipoReciboId']).value,
+      contaId: this.editForm.get(['contaId']).value
     };
   }
 
@@ -210,6 +221,10 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
   }
 
   trackDocumentoComercialById(index: number, item: IDocumentoComercial) {
+    return item.id;
+  }
+
+  trackContaById(index: number, item: IConta) {
     return item.id;
   }
 

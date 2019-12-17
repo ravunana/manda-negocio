@@ -61,6 +61,12 @@
                         <a [routerLink]="['/documento-comercial', lancamentoFinanceiro.tipoReciboId, 'view']">{{lancamentoFinanceiro.tipoReciboNome}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="mandaApp.lancamentoFinanceiro.conta">Conta</span></dt>
+                <dd>
+                    <div *ngIf="lancamentoFinanceiro.contaId">
+                        <a [routerLink]="['/conta', lancamentoFinanceiro.contaId, 'view']">{{lancamentoFinanceiro.contaDescricao}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

@@ -26,10 +26,10 @@
       "conta": "Conta",
       "contaDebito": "Conta Debito",
       "contaCredito": "Conta Credito",
+      "lancamentoFinanceiro": "Lancamento Financeiro",
       "empresa": "Empresa",
       "contaAgregadora": "Conta Agregadora",
-      "classeConta": "Classe Conta",
-      "lancamentoFinanceiro": "Lancamento Financeiro"
+      "classeConta": "Classe Conta"
     }
   }
 }

@@ -3,12 +3,12 @@ package com.ravunana.manda.web.rest;
 import com.ravunana.manda.MandaApp;
 import com.ravunana.manda.domain.LancamentoFinanceiro;
 import com.ravunana.manda.domain.DetalheLancamento;
-import com.ravunana.manda.domain.Conta;
 import com.ravunana.manda.domain.User;
 import com.ravunana.manda.domain.Imposto;
 import com.ravunana.manda.domain.FormaLiquidacao;
 import com.ravunana.manda.domain.Empresa;
 import com.ravunana.manda.domain.DocumentoComercial;
+import com.ravunana.manda.domain.Conta;
 import com.ravunana.manda.repository.LancamentoFinanceiroRepository;
 import com.ravunana.manda.service.LancamentoFinanceiroService;
 import com.ravunana.manda.service.dto.LancamentoFinanceiroDTO;
@@ -923,26 +923,6 @@ public class LancamentoFinanceiroResourceIT {
 
     @Test
     @Transactional
-    public void getAllLancamentoFinanceirosByContaIsEqualToSomething() throws Exception {
-        // Initialize the database
-        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
-        Conta conta = ContaResourceIT.createEntity(em);
-        em.persist(conta);
-        em.flush();
-        lancamentoFinanceiro.addConta(conta);
-        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
-        Long contaId = conta.getId();
-
-        // Get all the lancamentoFinanceiroList where conta equals to contaId
-        defaultLancamentoFinanceiroShouldBeFound("contaId.equals=" + contaId);
-
-        // Get all the lancamentoFinanceiroList where conta equals to contaId + 1
-        defaultLancamentoFinanceiroShouldNotBeFound("contaId.equals=" + (contaId + 1));
-    }
-
-
-    @Test
-    @Transactional
     public void getAllLancamentoFinanceirosByUtilizadorIsEqualToSomething() throws Exception {
         // Initialize the database
         lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
@@ -1026,6 +1006,26 @@ public class LancamentoFinanceiroResourceIT {
 
         // Get all the lancamentoFinanceiroList where tipoRecibo equals to tipoReciboId + 1
         defaultLancamentoFinanceiroShouldNotBeFound("tipoReciboId.equals=" + (tipoReciboId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByContaIsEqualToSomething() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+        Conta conta = ContaResourceIT.createEntity(em);
+        em.persist(conta);
+        em.flush();
+        lancamentoFinanceiro.setConta(conta);
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+        Long contaId = conta.getId();
+
+        // Get all the lancamentoFinanceiroList where conta equals to contaId
+        defaultLancamentoFinanceiroShouldBeFound("contaId.equals=" + contaId);
+
+        // Get all the lancamentoFinanceiroList where conta equals to contaId + 1
+        defaultLancamentoFinanceiroShouldNotBeFound("contaId.equals=" + (contaId + 1));
     }
 
     /**

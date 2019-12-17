@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link LancamentoFinanceiro} and its DTO {@link LancamentoFinanceiroDTO}.
  */
-@Mapper(componentModel = "spring", uses = {UserMapper.class, ImpostoMapper.class, FormaLiquidacaoMapper.class, EmpresaMapper.class, DocumentoComercialMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class, ImpostoMapper.class, FormaLiquidacaoMapper.class, EmpresaMapper.class, DocumentoComercialMapper.class, ContaMapper.class})
 public interface LancamentoFinanceiroMapper extends EntityMapper<LancamentoFinanceiroDTO, LancamentoFinanceiro> {
 
     @Mapping(source = "utilizador.id", target = "utilizadorId")
@@ -19,17 +19,18 @@ public interface LancamentoFinanceiroMapper extends EntityMapper<LancamentoFinan
     @Mapping(source = "empresa.nome", target = "empresaNome")
     @Mapping(source = "tipoRecibo.id", target = "tipoReciboId")
     @Mapping(source = "tipoRecibo.nome", target = "tipoReciboNome")
+    @Mapping(source = "conta.id", target = "contaId")
+    @Mapping(source = "conta.descricao", target = "contaDescricao")
     LancamentoFinanceiroDTO toDto(LancamentoFinanceiro lancamentoFinanceiro);
 
     @Mapping(target = "detalheLancamentos", ignore = true)
     @Mapping(target = "removeDetalheLancamento", ignore = true)
-    @Mapping(target = "contas", ignore = true)
-    @Mapping(target = "removeConta", ignore = true)
     @Mapping(source = "utilizadorId", target = "utilizador")
     @Mapping(target = "removeImposto", ignore = true)
     @Mapping(source = "formaLiquidacaoId", target = "formaLiquidacao")
     @Mapping(source = "empresaId", target = "empresa")
     @Mapping(source = "tipoReciboId", target = "tipoRecibo")
+    @Mapping(source = "contaId", target = "conta")
     LancamentoFinanceiro toEntity(LancamentoFinanceiroDTO lancamentoFinanceiroDTO);
 
     default LancamentoFinanceiro fromId(Long id) {

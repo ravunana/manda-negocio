@@ -97,13 +97,6 @@
                         This field is required.
                     </small>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.conta.lancamentoFinanceiro" for="field_lancamentoFinanceiro">Lancamento Financeiro</label>
-                    <select class="form-control" id="field_lancamentoFinanceiro" name="lancamentoFinanceiro" formControlName="lancamentoFinanceiroId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="lancamentoFinanceiroOption.id" *ngFor="let lancamentoFinanceiroOption of lancamentofinanceiros; trackBy: trackLancamentoFinanceiroById">{{lancamentoFinanceiroOption.id}}</option>
-                    </select>
-                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

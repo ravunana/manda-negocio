@@ -65,6 +65,10 @@ public class Conta implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ContaCredito> contaCreditos = new HashSet<>();
 
+    @OneToMany(mappedBy = "conta")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<LancamentoFinanceiro> lancamentoFinanceiros = new HashSet<>();
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "ctb_conta_empresa",
@@ -80,10 +84,6 @@ public class Conta implements Serializable {
     @NotNull
     @JsonIgnoreProperties("contas")
     private ClasseConta classeConta;
-
-    @ManyToOne
-    @JsonIgnoreProperties("contas")
-    private LancamentoFinanceiro lancamentoFinanceiro;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -260,6 +260,31 @@ public class Conta implements Serializable {
         this.contaCreditos = contaCreditos;
     }
 
+    public Set<LancamentoFinanceiro> getLancamentoFinanceiros() {
+        return lancamentoFinanceiros;
+    }
+
+    public Conta lancamentoFinanceiros(Set<LancamentoFinanceiro> lancamentoFinanceiros) {
+        this.lancamentoFinanceiros = lancamentoFinanceiros;
+        return this;
+    }
+
+    public Conta addLancamentoFinanceiro(LancamentoFinanceiro lancamentoFinanceiro) {
+        this.lancamentoFinanceiros.add(lancamentoFinanceiro);
+        lancamentoFinanceiro.setConta(this);
+        return this;
+    }
+
+    public Conta removeLancamentoFinanceiro(LancamentoFinanceiro lancamentoFinanceiro) {
+        this.lancamentoFinanceiros.remove(lancamentoFinanceiro);
+        lancamentoFinanceiro.setConta(null);
+        return this;
+    }
+
+    public void setLancamentoFinanceiros(Set<LancamentoFinanceiro> lancamentoFinanceiros) {
+        this.lancamentoFinanceiros = lancamentoFinanceiros;
+    }
+
     public Set<Empresa> getEmpresas() {
         return empresas;
     }
@@ -309,19 +334,6 @@ public class Conta implements Serializable {
 
     public void setClasseConta(ClasseConta classeConta) {
         this.classeConta = classeConta;
-    }
-
-    public LancamentoFinanceiro getLancamentoFinanceiro() {
-        return lancamentoFinanceiro;
-    }
-
-    public Conta lancamentoFinanceiro(LancamentoFinanceiro lancamentoFinanceiro) {
-        this.lancamentoFinanceiro = lancamentoFinanceiro;
-        return this;
-    }
-
-    public void setLancamentoFinanceiro(LancamentoFinanceiro lancamentoFinanceiro) {
-        this.lancamentoFinanceiro = lancamentoFinanceiro;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

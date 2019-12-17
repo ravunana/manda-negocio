@@ -63,6 +63,12 @@
             "relationshipName": "contaCredito"
         },
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "lancamentoFinanceiro",
+            "otherEntityRelationshipName": "conta",
+            "relationshipName": "lancamentoFinanceiro"
+        },
+        {
             "relationshipType": "many-to-many",
             "otherEntityName": "empresa",
             "otherEntityRelationshipName": "conta",
@@ -84,13 +90,6 @@
             "relationshipValidateRules": "required",
             "relationshipName": "classeConta",
             "otherEntityField": "descricao"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "lancamentoFinanceiro",
-            "otherEntityRelationshipName": "conta",
-            "relationshipName": "lancamentoFinanceiro",
-            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20191212101019",

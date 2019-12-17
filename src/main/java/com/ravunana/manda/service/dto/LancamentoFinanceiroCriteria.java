@@ -60,8 +60,6 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
 
     private LongFilter detalheLancamentoId;
 
-    private LongFilter contaId;
-
     private LongFilter utilizadorId;
 
     private LongFilter impostoId;
@@ -71,6 +69,8 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
     private LongFilter empresaId;
 
     private LongFilter tipoReciboId;
+
+    private LongFilter contaId;
 
     public LancamentoFinanceiroCriteria(){
     }
@@ -84,12 +84,12 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         this.entidadeDocumento = other.entidadeDocumento == null ? null : other.entidadeDocumento.copy();
         this.numeroDocumento = other.numeroDocumento == null ? null : other.numeroDocumento.copy();
         this.detalheLancamentoId = other.detalheLancamentoId == null ? null : other.detalheLancamentoId.copy();
-        this.contaId = other.contaId == null ? null : other.contaId.copy();
         this.utilizadorId = other.utilizadorId == null ? null : other.utilizadorId.copy();
         this.impostoId = other.impostoId == null ? null : other.impostoId.copy();
         this.formaLiquidacaoId = other.formaLiquidacaoId == null ? null : other.formaLiquidacaoId.copy();
         this.empresaId = other.empresaId == null ? null : other.empresaId.copy();
         this.tipoReciboId = other.tipoReciboId == null ? null : other.tipoReciboId.copy();
+        this.contaId = other.contaId == null ? null : other.contaId.copy();
     }
 
     @Override
@@ -161,14 +161,6 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         this.detalheLancamentoId = detalheLancamentoId;
     }
 
-    public LongFilter getContaId() {
-        return contaId;
-    }
-
-    public void setContaId(LongFilter contaId) {
-        this.contaId = contaId;
-    }
-
     public LongFilter getUtilizadorId() {
         return utilizadorId;
     }
@@ -209,6 +201,14 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         this.tipoReciboId = tipoReciboId;
     }
 
+    public LongFilter getContaId() {
+        return contaId;
+    }
+
+    public void setContaId(LongFilter contaId) {
+        this.contaId = contaId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -228,12 +228,12 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
             Objects.equals(entidadeDocumento, that.entidadeDocumento) &&
             Objects.equals(numeroDocumento, that.numeroDocumento) &&
             Objects.equals(detalheLancamentoId, that.detalheLancamentoId) &&
-            Objects.equals(contaId, that.contaId) &&
             Objects.equals(utilizadorId, that.utilizadorId) &&
             Objects.equals(impostoId, that.impostoId) &&
             Objects.equals(formaLiquidacaoId, that.formaLiquidacaoId) &&
             Objects.equals(empresaId, that.empresaId) &&
-            Objects.equals(tipoReciboId, that.tipoReciboId);
+            Objects.equals(tipoReciboId, that.tipoReciboId) &&
+            Objects.equals(contaId, that.contaId);
     }
 
     @Override
@@ -247,12 +247,12 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
         entidadeDocumento,
         numeroDocumento,
         detalheLancamentoId,
-        contaId,
         utilizadorId,
         impostoId,
         formaLiquidacaoId,
         empresaId,
-        tipoReciboId
+        tipoReciboId,
+        contaId
         );
     }
 
@@ -267,12 +267,12 @@ public class LancamentoFinanceiroCriteria implements Serializable, Criteria {
                 (entidadeDocumento != null ? "entidadeDocumento=" + entidadeDocumento + ", " : "") +
                 (numeroDocumento != null ? "numeroDocumento=" + numeroDocumento + ", " : "") +
                 (detalheLancamentoId != null ? "detalheLancamentoId=" + detalheLancamentoId + ", " : "") +
-                (contaId != null ? "contaId=" + contaId + ", " : "") +
                 (utilizadorId != null ? "utilizadorId=" + utilizadorId + ", " : "") +
                 (impostoId != null ? "impostoId=" + impostoId + ", " : "") +
                 (formaLiquidacaoId != null ? "formaLiquidacaoId=" + formaLiquidacaoId + ", " : "") +
                 (empresaId != null ? "empresaId=" + empresaId + ", " : "") +
                 (tipoReciboId != null ? "tipoReciboId=" + tipoReciboId + ", " : "") +
+                (contaId != null ? "contaId=" + contaId + ", " : "") +
             "}";
     }
 

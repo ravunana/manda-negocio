@@ -121,6 +121,10 @@ public class ContaQueryService extends QueryService<Conta> {
                 specification = specification.and(buildSpecification(criteria.getContaCreditoId(),
                     root -> root.join(Conta_.contaCreditos, JoinType.LEFT).get(ContaCredito_.id)));
             }
+            if (criteria.getLancamentoFinanceiroId() != null) {
+                specification = specification.and(buildSpecification(criteria.getLancamentoFinanceiroId(),
+                    root -> root.join(Conta_.lancamentoFinanceiros, JoinType.LEFT).get(LancamentoFinanceiro_.id)));
+            }
             if (criteria.getEmpresaId() != null) {
                 specification = specification.and(buildSpecification(criteria.getEmpresaId(),
                     root -> root.join(Conta_.empresas, JoinType.LEFT).get(Empresa_.id)));
@@ -132,10 +136,6 @@ public class ContaQueryService extends QueryService<Conta> {
             if (criteria.getClasseContaId() != null) {
                 specification = specification.and(buildSpecification(criteria.getClasseContaId(),
                     root -> root.join(Conta_.classeConta, JoinType.LEFT).get(ClasseConta_.id)));
-            }
-            if (criteria.getLancamentoFinanceiroId() != null) {
-                specification = specification.and(buildSpecification(criteria.getLancamentoFinanceiroId(),
-                    root -> root.join(Conta_.lancamentoFinanceiro, JoinType.LEFT).get(LancamentoFinanceiro_.id)));
             }
         }
         return specification;

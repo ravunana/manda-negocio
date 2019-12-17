@@ -64,10 +64,6 @@ public class LancamentoFinanceiro implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<DetalheLancamento> detalheLancamentos = new HashSet<>();
 
-    @OneToMany(mappedBy = "lancamentoFinanceiro")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Conta> contas = new HashSet<>();
-
     @ManyToOne
     @JsonIgnoreProperties("lancamentoFinanceiros")
     private User utilizador;
@@ -93,6 +89,10 @@ public class LancamentoFinanceiro implements Serializable {
     @NotNull
     @JsonIgnoreProperties("lancamentoFinanceiros")
     private DocumentoComercial tipoRecibo;
+
+    @ManyToOne
+    @JsonIgnoreProperties("lancamentoFinanceiros")
+    private Conta conta;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -219,31 +219,6 @@ public class LancamentoFinanceiro implements Serializable {
         this.detalheLancamentos = detalheLancamentos;
     }
 
-    public Set<Conta> getContas() {
-        return contas;
-    }
-
-    public LancamentoFinanceiro contas(Set<Conta> contas) {
-        this.contas = contas;
-        return this;
-    }
-
-    public LancamentoFinanceiro addConta(Conta conta) {
-        this.contas.add(conta);
-        conta.setLancamentoFinanceiro(this);
-        return this;
-    }
-
-    public LancamentoFinanceiro removeConta(Conta conta) {
-        this.contas.remove(conta);
-        conta.setLancamentoFinanceiro(null);
-        return this;
-    }
-
-    public void setContas(Set<Conta> contas) {
-        this.contas = contas;
-    }
-
     public User getUtilizador() {
         return utilizador;
     }
@@ -319,6 +294,19 @@ public class LancamentoFinanceiro implements Serializable {
 
     public void setTipoRecibo(DocumentoComercial documentoComercial) {
         this.tipoRecibo = documentoComercial;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public LancamentoFinanceiro conta(Conta conta) {
+        this.conta = conta;
+        return this;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

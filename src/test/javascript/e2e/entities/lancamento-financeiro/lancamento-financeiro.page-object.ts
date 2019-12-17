@@ -38,6 +38,7 @@ export class LancamentoFinanceiroUpdatePage {
   formaLiquidacaoSelect = element(by.id('field_formaLiquidacao'));
   empresaSelect = element(by.id('field_empresa'));
   tipoReciboSelect = element(by.id('field_tipoRecibo'));
+  contaSelect = element(by.id('field_conta'));
 
   async getPageTitle() {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -194,6 +195,25 @@ export class LancamentoFinanceiroUpdatePage {
 
   async getTipoReciboSelectedOption() {
     return await this.tipoReciboSelect.element(by.css('option:checked')).getText();
+  }
+
+  async contaSelectLastOption() {
+    await this.contaSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async contaSelectOption(option) {
+    await this.contaSelect.sendKeys(option);
+  }
+
+  getContaSelect(): ElementFinder {
+    return this.contaSelect;
+  }
+
+  async getContaSelectedOption() {
+    return await this.contaSelect.element(by.css('option:checked')).getText();
   }
 
   async save() {
