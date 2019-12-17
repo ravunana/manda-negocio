@@ -78,6 +78,7 @@ class ItemCompraGatlingTest extends Simulation {
                 , "dataEntrega":"2020-01-01T00:00:00.000Z"
                 , "descricao":null
                 , "valor":"0"
+                , "solicitante":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_itemCompra_url"))).exitHereIfFailed

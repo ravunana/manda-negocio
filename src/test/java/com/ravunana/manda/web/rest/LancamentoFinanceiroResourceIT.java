@@ -4,7 +4,6 @@ import com.ravunana.manda.MandaApp;
 import com.ravunana.manda.domain.LancamentoFinanceiro;
 import com.ravunana.manda.domain.DetalheLancamento;
 import com.ravunana.manda.domain.User;
-import com.ravunana.manda.domain.Conta;
 import com.ravunana.manda.domain.Imposto;
 import com.ravunana.manda.domain.FormaLiquidacao;
 import com.ravunana.manda.domain.Empresa;
@@ -46,6 +45,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.ravunana.manda.domain.enumeration.EntidadeSistema;
 /**
  * Integration tests for the {@link LancamentoFinanceiroResource} REST controller.
  */
@@ -67,6 +67,12 @@ public class LancamentoFinanceiroResourceIT {
 
     private static final String DEFAULT_DESCRICAO = "AAAAAAAAAA";
     private static final String UPDATED_DESCRICAO = "BBBBBBBBBB";
+
+    private static final EntidadeSistema DEFAULT_ENTIDADE_DOCUMENTO = EntidadeSistema.SOFTWARE;
+    private static final EntidadeSistema UPDATED_ENTIDADE_DOCUMENTO = EntidadeSistema.LICENCA_SOFTWARE;
+
+    private static final String DEFAULT_NUMERO_DOCUMENTO = "AAAAAAAAAA";
+    private static final String UPDATED_NUMERO_DOCUMENTO = "BBBBBBBBBB";
 
     @Autowired
     private LancamentoFinanceiroRepository lancamentoFinanceiroRepository;
@@ -129,7 +135,9 @@ public class LancamentoFinanceiroResourceIT {
             .valor(DEFAULT_VALOR)
             .externo(DEFAULT_EXTERNO)
             .numero(DEFAULT_NUMERO)
-            .descricao(DEFAULT_DESCRICAO);
+            .descricao(DEFAULT_DESCRICAO)
+            .entidadeDocumento(DEFAULT_ENTIDADE_DOCUMENTO)
+            .numeroDocumento(DEFAULT_NUMERO_DOCUMENTO);
         // Add required entity
         Imposto imposto;
         if (TestUtil.findAll(em, Imposto.class).isEmpty()) {
@@ -174,7 +182,9 @@ public class LancamentoFinanceiroResourceIT {
             .valor(UPDATED_VALOR)
             .externo(UPDATED_EXTERNO)
             .numero(UPDATED_NUMERO)
-            .descricao(UPDATED_DESCRICAO);
+            .descricao(UPDATED_DESCRICAO)
+            .entidadeDocumento(UPDATED_ENTIDADE_DOCUMENTO)
+            .numeroDocumento(UPDATED_NUMERO_DOCUMENTO);
         // Add required entity
         Imposto imposto;
         if (TestUtil.findAll(em, Imposto.class).isEmpty()) {
@@ -234,6 +244,8 @@ public class LancamentoFinanceiroResourceIT {
         assertThat(testLancamentoFinanceiro.isExterno()).isEqualTo(DEFAULT_EXTERNO);
         assertThat(testLancamentoFinanceiro.getNumero()).isEqualTo(DEFAULT_NUMERO);
         assertThat(testLancamentoFinanceiro.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
+        assertThat(testLancamentoFinanceiro.getEntidadeDocumento()).isEqualTo(DEFAULT_ENTIDADE_DOCUMENTO);
+        assertThat(testLancamentoFinanceiro.getNumeroDocumento()).isEqualTo(DEFAULT_NUMERO_DOCUMENTO);
     }
 
     @Test
@@ -316,6 +328,44 @@ public class LancamentoFinanceiroResourceIT {
 
     @Test
     @Transactional
+    public void checkEntidadeDocumentoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = lancamentoFinanceiroRepository.findAll().size();
+        // set the field null
+        lancamentoFinanceiro.setEntidadeDocumento(null);
+
+        // Create the LancamentoFinanceiro, which fails.
+        LancamentoFinanceiroDTO lancamentoFinanceiroDTO = lancamentoFinanceiroMapper.toDto(lancamentoFinanceiro);
+
+        restLancamentoFinanceiroMockMvc.perform(post("/api/lancamento-financeiros")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lancamentoFinanceiroDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<LancamentoFinanceiro> lancamentoFinanceiroList = lancamentoFinanceiroRepository.findAll();
+        assertThat(lancamentoFinanceiroList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNumeroDocumentoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = lancamentoFinanceiroRepository.findAll().size();
+        // set the field null
+        lancamentoFinanceiro.setNumeroDocumento(null);
+
+        // Create the LancamentoFinanceiro, which fails.
+        LancamentoFinanceiroDTO lancamentoFinanceiroDTO = lancamentoFinanceiroMapper.toDto(lancamentoFinanceiro);
+
+        restLancamentoFinanceiroMockMvc.perform(post("/api/lancamento-financeiros")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(lancamentoFinanceiroDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<LancamentoFinanceiro> lancamentoFinanceiroList = lancamentoFinanceiroRepository.findAll();
+        assertThat(lancamentoFinanceiroList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLancamentoFinanceiros() throws Exception {
         // Initialize the database
         lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
@@ -329,9 +379,11 @@ public class LancamentoFinanceiroResourceIT {
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
             .andExpect(jsonPath("$.[*].externo").value(hasItem(DEFAULT_EXTERNO.booleanValue())))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)))
-            .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())));
+            .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())))
+            .andExpect(jsonPath("$.[*].entidadeDocumento").value(hasItem(DEFAULT_ENTIDADE_DOCUMENTO.toString())))
+            .andExpect(jsonPath("$.[*].numeroDocumento").value(hasItem(DEFAULT_NUMERO_DOCUMENTO)));
     }
-
+    
     @SuppressWarnings({"unchecked"})
     public void getAllLancamentoFinanceirosWithEagerRelationshipsIsEnabled() throws Exception {
         LancamentoFinanceiroResource lancamentoFinanceiroResource = new LancamentoFinanceiroResource(lancamentoFinanceiroServiceMock, lancamentoFinanceiroQueryService);
@@ -380,7 +432,9 @@ public class LancamentoFinanceiroResourceIT {
             .andExpect(jsonPath("$.valor").value(DEFAULT_VALOR.intValue()))
             .andExpect(jsonPath("$.externo").value(DEFAULT_EXTERNO.booleanValue()))
             .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO))
-            .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO.toString()));
+            .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO.toString()))
+            .andExpect(jsonPath("$.entidadeDocumento").value(DEFAULT_ENTIDADE_DOCUMENTO.toString()))
+            .andExpect(jsonPath("$.numeroDocumento").value(DEFAULT_NUMERO_DOCUMENTO));
     }
 
 
@@ -718,6 +772,136 @@ public class LancamentoFinanceiroResourceIT {
 
     @Test
     @Transactional
+    public void getAllLancamentoFinanceirosByEntidadeDocumentoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where entidadeDocumento equals to DEFAULT_ENTIDADE_DOCUMENTO
+        defaultLancamentoFinanceiroShouldBeFound("entidadeDocumento.equals=" + DEFAULT_ENTIDADE_DOCUMENTO);
+
+        // Get all the lancamentoFinanceiroList where entidadeDocumento equals to UPDATED_ENTIDADE_DOCUMENTO
+        defaultLancamentoFinanceiroShouldNotBeFound("entidadeDocumento.equals=" + UPDATED_ENTIDADE_DOCUMENTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByEntidadeDocumentoIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where entidadeDocumento not equals to DEFAULT_ENTIDADE_DOCUMENTO
+        defaultLancamentoFinanceiroShouldNotBeFound("entidadeDocumento.notEquals=" + DEFAULT_ENTIDADE_DOCUMENTO);
+
+        // Get all the lancamentoFinanceiroList where entidadeDocumento not equals to UPDATED_ENTIDADE_DOCUMENTO
+        defaultLancamentoFinanceiroShouldBeFound("entidadeDocumento.notEquals=" + UPDATED_ENTIDADE_DOCUMENTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByEntidadeDocumentoIsInShouldWork() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where entidadeDocumento in DEFAULT_ENTIDADE_DOCUMENTO or UPDATED_ENTIDADE_DOCUMENTO
+        defaultLancamentoFinanceiroShouldBeFound("entidadeDocumento.in=" + DEFAULT_ENTIDADE_DOCUMENTO + "," + UPDATED_ENTIDADE_DOCUMENTO);
+
+        // Get all the lancamentoFinanceiroList where entidadeDocumento equals to UPDATED_ENTIDADE_DOCUMENTO
+        defaultLancamentoFinanceiroShouldNotBeFound("entidadeDocumento.in=" + UPDATED_ENTIDADE_DOCUMENTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByEntidadeDocumentoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where entidadeDocumento is not null
+        defaultLancamentoFinanceiroShouldBeFound("entidadeDocumento.specified=true");
+
+        // Get all the lancamentoFinanceiroList where entidadeDocumento is null
+        defaultLancamentoFinanceiroShouldNotBeFound("entidadeDocumento.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByNumeroDocumentoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento equals to DEFAULT_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldBeFound("numeroDocumento.equals=" + DEFAULT_NUMERO_DOCUMENTO);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento equals to UPDATED_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldNotBeFound("numeroDocumento.equals=" + UPDATED_NUMERO_DOCUMENTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByNumeroDocumentoIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento not equals to DEFAULT_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldNotBeFound("numeroDocumento.notEquals=" + DEFAULT_NUMERO_DOCUMENTO);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento not equals to UPDATED_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldBeFound("numeroDocumento.notEquals=" + UPDATED_NUMERO_DOCUMENTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByNumeroDocumentoIsInShouldWork() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento in DEFAULT_NUMERO_DOCUMENTO or UPDATED_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldBeFound("numeroDocumento.in=" + DEFAULT_NUMERO_DOCUMENTO + "," + UPDATED_NUMERO_DOCUMENTO);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento equals to UPDATED_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldNotBeFound("numeroDocumento.in=" + UPDATED_NUMERO_DOCUMENTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByNumeroDocumentoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento is not null
+        defaultLancamentoFinanceiroShouldBeFound("numeroDocumento.specified=true");
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento is null
+        defaultLancamentoFinanceiroShouldNotBeFound("numeroDocumento.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByNumeroDocumentoContainsSomething() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento contains DEFAULT_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldBeFound("numeroDocumento.contains=" + DEFAULT_NUMERO_DOCUMENTO);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento contains UPDATED_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldNotBeFound("numeroDocumento.contains=" + UPDATED_NUMERO_DOCUMENTO);
+    }
+
+    @Test
+    @Transactional
+    public void getAllLancamentoFinanceirosByNumeroDocumentoNotContainsSomething() throws Exception {
+        // Initialize the database
+        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento does not contain DEFAULT_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldNotBeFound("numeroDocumento.doesNotContain=" + DEFAULT_NUMERO_DOCUMENTO);
+
+        // Get all the lancamentoFinanceiroList where numeroDocumento does not contain UPDATED_NUMERO_DOCUMENTO
+        defaultLancamentoFinanceiroShouldBeFound("numeroDocumento.doesNotContain=" + UPDATED_NUMERO_DOCUMENTO);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllLancamentoFinanceirosByDetalheLancamentoIsEqualToSomething() throws Exception {
         // Initialize the database
         lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
@@ -758,22 +942,19 @@ public class LancamentoFinanceiroResourceIT {
 
     @Test
     @Transactional
-    public void getAllLancamentoFinanceirosByContaIsEqualToSomething() throws Exception {
-        // Initialize the database
+    public void getAllLancamentoFinanceirosByImpostoIsEqualToSomething() throws Exception {
+        // Get already existing entity
+        Imposto imposto = lancamentoFinanceiro.getImposto();
         lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
-        Conta conta = ContaResourceIT.createEntity(em);
-        em.persist(conta);
-        em.flush();
-        lancamentoFinanceiro.setConta(conta);
-        lancamentoFinanceiroRepository.saveAndFlush(lancamentoFinanceiro);
-        Long contaId = conta.getId();
+        Long impostoId = imposto.getId();
 
-        // Get all the lancamentoFinanceiroList where conta equals to contaId
-        defaultLancamentoFinanceiroShouldBeFound("contaId.equals=" + contaId);
+        // Get all the lancamentoFinanceiroList where imposto equals to impostoId
+        defaultLancamentoFinanceiroShouldBeFound("impostoId.equals=" + impostoId);
 
-        // Get all the lancamentoFinanceiroList where conta equals to contaId + 1
-        defaultLancamentoFinanceiroShouldNotBeFound("contaId.equals=" + (contaId + 1));
+        // Get all the lancamentoFinanceiroList where imposto equals to impostoId + 1
+        defaultLancamentoFinanceiroShouldNotBeFound("impostoId.equals=" + (impostoId + 1));
     }
+
 
     @Test
     @Transactional
@@ -838,7 +1019,9 @@ public class LancamentoFinanceiroResourceIT {
             .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
             .andExpect(jsonPath("$.[*].externo").value(hasItem(DEFAULT_EXTERNO.booleanValue())))
             .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)))
-            .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())));
+            .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())))
+            .andExpect(jsonPath("$.[*].entidadeDocumento").value(hasItem(DEFAULT_ENTIDADE_DOCUMENTO.toString())))
+            .andExpect(jsonPath("$.[*].numeroDocumento").value(hasItem(DEFAULT_NUMERO_DOCUMENTO)));
 
         // Check, that the count call also returns 1
         restLancamentoFinanceiroMockMvc.perform(get("/api/lancamento-financeiros/count?sort=id,desc&" + filter))
@@ -890,7 +1073,9 @@ public class LancamentoFinanceiroResourceIT {
             .valor(UPDATED_VALOR)
             .externo(UPDATED_EXTERNO)
             .numero(UPDATED_NUMERO)
-            .descricao(UPDATED_DESCRICAO);
+            .descricao(UPDATED_DESCRICAO)
+            .entidadeDocumento(UPDATED_ENTIDADE_DOCUMENTO)
+            .numeroDocumento(UPDATED_NUMERO_DOCUMENTO);
         LancamentoFinanceiroDTO lancamentoFinanceiroDTO = lancamentoFinanceiroMapper.toDto(updatedLancamentoFinanceiro);
 
         restLancamentoFinanceiroMockMvc.perform(put("/api/lancamento-financeiros")
@@ -907,6 +1092,8 @@ public class LancamentoFinanceiroResourceIT {
         assertThat(testLancamentoFinanceiro.isExterno()).isEqualTo(UPDATED_EXTERNO);
         assertThat(testLancamentoFinanceiro.getNumero()).isEqualTo(UPDATED_NUMERO);
         assertThat(testLancamentoFinanceiro.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
+        assertThat(testLancamentoFinanceiro.getEntidadeDocumento()).isEqualTo(UPDATED_ENTIDADE_DOCUMENTO);
+        assertThat(testLancamentoFinanceiro.getNumeroDocumento()).isEqualTo(UPDATED_NUMERO_DOCUMENTO);
     }
 
     @Test

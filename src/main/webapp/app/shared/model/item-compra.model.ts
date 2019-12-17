@@ -8,8 +8,7 @@ export interface IItemCompra {
   dataEntrega?: Moment;
   descricao?: any;
   valor?: number;
-  solicitanteLogin?: string;
-  solicitanteId?: number;
+  solicitante?: string;
   compraNumero?: string;
   compraId?: number;
   produtoNome?: string;
@@ -29,8 +28,7 @@ export class ItemCompra implements IItemCompra {
     public dataEntrega?: Moment,
     public descricao?: any,
     public valor?: number,
-    public solicitanteLogin?: string,
-    public solicitanteId?: number,
+    public solicitante?: string,
     public compraNumero?: string,
     public compraId?: number,
     public produtoNome?: string,

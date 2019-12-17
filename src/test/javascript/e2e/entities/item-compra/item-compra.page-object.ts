@@ -32,7 +32,7 @@ export class ItemCompraUpdatePage {
   dataEntregaInput = element(by.id('field_dataEntrega'));
   descricaoInput = element(by.id('field_descricao'));
   valorInput = element(by.id('field_valor'));
-  solicitanteSelect = element(by.id('field_solicitante'));
+  solicitanteInput = element(by.id('field_solicitante'));
   compraSelect = element(by.id('field_compra'));
   produtoSelect = element(by.id('field_produto'));
   fornecedorSelect = element(by.id('field_fornecedor'));
@@ -90,23 +90,12 @@ export class ItemCompraUpdatePage {
     return await this.valorInput.getAttribute('value');
   }
 
-  async solicitanteSelectLastOption() {
-    await this.solicitanteSelect
-      .all(by.tagName('option'))
-      .last()
-      .click();
+  async setSolicitanteInput(solicitante) {
+    await this.solicitanteInput.sendKeys(solicitante);
   }
 
-  async solicitanteSelectOption(option) {
-    await this.solicitanteSelect.sendKeys(option);
-  }
-
-  getSolicitanteSelect(): ElementFinder {
-    return this.solicitanteSelect;
-  }
-
-  async getSolicitanteSelectedOption() {
-    return await this.solicitanteSelect.element(by.css('option:checked')).getText();
+  async getSolicitanteInput() {
+    return await this.solicitanteInput.getAttribute('value');
   }
 
   async compraSelectLastOption() {

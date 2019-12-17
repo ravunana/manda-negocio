@@ -65,13 +65,13 @@
                 <dt><span jhiTranslate="mandaApp.produto.imposto">Imposto</span></dt>
                 <dd>
                     <span *ngFor="let imposto of produto.impostos; let last = last">
-                        <a [routerLink]="['/imposto', imposto?.id, 'view' ]">{{imposto.nome}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/imposto', imposto?.id, 'view' ]">{{imposto.codigoImposto}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="mandaApp.produto.fornecedor">Fornecedor</span></dt>
                 <dd>
                     <span *ngFor="let fornecedor of produto.fornecedors; let last = last">
-                        <a [routerLink]="['/fornecedor', fornecedor?.id, 'view' ]">{{fornecedor.nome}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/fornecedor', fornecedor?.id, 'view' ]">{{fornecedor.pessoaNome}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="mandaApp.produto.localArmazenamento">Local Armazenamento</span></dt>

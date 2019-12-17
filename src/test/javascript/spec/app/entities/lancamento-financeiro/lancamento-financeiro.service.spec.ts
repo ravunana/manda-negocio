@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { take, map } from 'rxjs/operators';
 import { LancamentoFinanceiroService } from 'app/entities/lancamento-financeiro/lancamento-financeiro.service';
 import { ILancamentoFinanceiro, LancamentoFinanceiro } from 'app/shared/model/lancamento-financeiro.model';
+import { EntidadeSistema } from 'app/shared/model/enumerations/entidade-sistema.model';
 
 describe('Service Tests', () => {
   describe('LancamentoFinanceiro Service', () => {
@@ -20,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(LancamentoFinanceiroService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new LancamentoFinanceiro(0, 'AAAAAAA', 0, false, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new LancamentoFinanceiro(0, 'AAAAAAA', 0, false, 'AAAAAAA', 'AAAAAAA', EntidadeSistema.SOFTWARE, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -60,7 +61,9 @@ describe('Service Tests', () => {
             valor: 1,
             externo: true,
             numero: 'BBBBBB',
-            descricao: 'BBBBBB'
+            descricao: 'BBBBBB',
+            entidadeDocumento: 'BBBBBB',
+            numeroDocumento: 'BBBBBB'
           },
           elemDefault
         );
@@ -82,7 +85,9 @@ describe('Service Tests', () => {
             valor: 1,
             externo: true,
             numero: 'BBBBBB',
-            descricao: 'BBBBBB'
+            descricao: 'BBBBBB',
+            entidadeDocumento: 'BBBBBB',
+            numeroDocumento: 'BBBBBB'
           },
           elemDefault
         );

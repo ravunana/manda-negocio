@@ -49,7 +49,7 @@ describe('ItemCompra e2e test', () => {
             itemCompraUpdatePage.setDataEntregaInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
             itemCompraUpdatePage.setDescricaoInput('descricao'),
             itemCompraUpdatePage.setValorInput('5'),
-            itemCompraUpdatePage.solicitanteSelectLastOption(),
+            itemCompraUpdatePage.setSolicitanteInput('solicitante'),
             itemCompraUpdatePage.compraSelectLastOption(),
             itemCompraUpdatePage.produtoSelectLastOption(),
             itemCompraUpdatePage.fornecedorSelectLastOption(),
@@ -61,6 +61,7 @@ describe('ItemCompra e2e test', () => {
         expect(await itemCompraUpdatePage.getDataEntregaInput()).to.contain('2001-01-01T02:30', 'Expected dataEntrega value to be equals to 2000-12-31');
         expect(await itemCompraUpdatePage.getDescricaoInput()).to.eq('descricao', 'Expected Descricao value to be equals to descricao');
         expect(await itemCompraUpdatePage.getValorInput()).to.eq('5', 'Expected valor value to be equals to 5');
+        expect(await itemCompraUpdatePage.getSolicitanteInput()).to.eq('solicitante', 'Expected Solicitante value to be equals to solicitante');
         await itemCompraUpdatePage.save();
         expect(await itemCompraUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

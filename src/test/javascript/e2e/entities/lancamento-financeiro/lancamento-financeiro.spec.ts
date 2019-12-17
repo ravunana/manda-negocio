@@ -47,8 +47,9 @@ describe('LancamentoFinanceiro e2e test', () => {
             lancamentoFinanceiroUpdatePage.setValorInput('5'),
             lancamentoFinanceiroUpdatePage.setNumeroInput('numero'),
             lancamentoFinanceiroUpdatePage.setDescricaoInput('descricao'),
+            lancamentoFinanceiroUpdatePage.entidadeDocumentoSelectLastOption(),
+            lancamentoFinanceiroUpdatePage.setNumeroDocumentoInput('numeroDocumento'),
             lancamentoFinanceiroUpdatePage.utilizadorSelectLastOption(),
-            lancamentoFinanceiroUpdatePage.contaSelectLastOption(),
             // lancamentoFinanceiroUpdatePage.impostoSelectLastOption(),
             lancamentoFinanceiroUpdatePage.formaLiquidacaoSelectLastOption(),
             lancamentoFinanceiroUpdatePage.empresaSelectLastOption(),
@@ -66,6 +67,7 @@ describe('LancamentoFinanceiro e2e test', () => {
         }
         expect(await lancamentoFinanceiroUpdatePage.getNumeroInput()).to.eq('numero', 'Expected Numero value to be equals to numero');
         expect(await lancamentoFinanceiroUpdatePage.getDescricaoInput()).to.eq('descricao', 'Expected Descricao value to be equals to descricao');
+        expect(await lancamentoFinanceiroUpdatePage.getNumeroDocumentoInput()).to.eq('numeroDocumento', 'Expected NumeroDocumento value to be equals to numeroDocumento');
         await lancamentoFinanceiroUpdatePage.save();
         expect(await lancamentoFinanceiroUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

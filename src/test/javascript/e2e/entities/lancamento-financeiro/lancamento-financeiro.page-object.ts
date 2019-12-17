@@ -31,8 +31,9 @@ export class LancamentoFinanceiroUpdatePage {
   externoInput = element(by.id('field_externo'));
   numeroInput = element(by.id('field_numero'));
   descricaoInput = element(by.id('field_descricao'));
+  entidadeDocumentoSelect = element(by.id('field_entidadeDocumento'));
+  numeroDocumentoInput = element(by.id('field_numeroDocumento'));
   utilizadorSelect = element(by.id('field_utilizador'));
-  contaSelect = element(by.id('field_conta'));
   impostoSelect = element(by.id('field_imposto'));
   formaLiquidacaoSelect = element(by.id('field_formaLiquidacao'));
   empresaSelect = element(by.id('field_empresa'));
@@ -77,6 +78,29 @@ export class LancamentoFinanceiroUpdatePage {
     return await this.descricaoInput.getAttribute('value');
   }
 
+  async setEntidadeDocumentoSelect(entidadeDocumento) {
+    await this.entidadeDocumentoSelect.sendKeys(entidadeDocumento);
+  }
+
+  async getEntidadeDocumentoSelect() {
+    return await this.entidadeDocumentoSelect.element(by.css('option:checked')).getText();
+  }
+
+  async entidadeDocumentoSelectLastOption() {
+    await this.entidadeDocumentoSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async setNumeroDocumentoInput(numeroDocumento) {
+    await this.numeroDocumentoInput.sendKeys(numeroDocumento);
+  }
+
+  async getNumeroDocumentoInput() {
+    return await this.numeroDocumentoInput.getAttribute('value');
+  }
+
   async utilizadorSelectLastOption() {
     await this.utilizadorSelect
       .all(by.tagName('option'))
@@ -94,25 +118,6 @@ export class LancamentoFinanceiroUpdatePage {
 
   async getUtilizadorSelectedOption() {
     return await this.utilizadorSelect.element(by.css('option:checked')).getText();
-  }
-
-  async contaSelectLastOption() {
-    await this.contaSelect
-      .all(by.tagName('option'))
-      .last()
-      .click();
-  }
-
-  async contaSelectOption(option) {
-    await this.contaSelect.sendKeys(option);
-  }
-
-  getContaSelect(): ElementFinder {
-    return this.contaSelect;
-  }
-
-  async getContaSelectedOption() {
-    return await this.contaSelect.element(by.css('option:checked')).getText();
   }
 
   async impostoSelectLastOption() {

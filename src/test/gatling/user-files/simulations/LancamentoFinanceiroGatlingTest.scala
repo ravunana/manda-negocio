@@ -77,6 +77,8 @@ class LancamentoFinanceiroGatlingTest extends Simulation {
                 , "externo":null
                 , "numero":"SAMPLE_TEXT"
                 , "descricao":null
+                , "entidadeDocumento":"SOFTWARE"
+                , "numeroDocumento":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_lancamentoFinanceiro_url"))).exitHereIfFailed

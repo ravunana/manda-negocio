@@ -266,6 +266,25 @@ public class ContaResourceIT {
 
     @Test
     @Transactional
+    public void checkGrauIsRequired() throws Exception {
+        int databaseSizeBeforeTest = contaRepository.findAll().size();
+        // set the field null
+        conta.setGrau(null);
+
+        // Create the Conta, which fails.
+        ContaDTO contaDTO = contaMapper.toDto(conta);
+
+        restContaMockMvc.perform(post("/api/contas")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(contaDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Conta> contaList = contaRepository.findAll();
+        assertThat(contaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllContas() throws Exception {
         // Initialize the database
         contaRepository.saveAndFlush(conta);
@@ -652,8 +671,8 @@ public class ContaResourceIT {
         // Get all the contaList where grau is greater than or equal to DEFAULT_GRAU
         defaultContaShouldBeFound("grau.greaterThanOrEqual=" + DEFAULT_GRAU);
 
-        // Get all the contaList where grau is greater than or equal to (DEFAULT_GRAU + 1)
-        defaultContaShouldNotBeFound("grau.greaterThanOrEqual=" + (DEFAULT_GRAU + 1));
+        // Get all the contaList where grau is greater than or equal to UPDATED_GRAU
+        defaultContaShouldNotBeFound("grau.greaterThanOrEqual=" + UPDATED_GRAU);
     }
 
     @Test
@@ -678,8 +697,8 @@ public class ContaResourceIT {
         // Get all the contaList where grau is less than DEFAULT_GRAU
         defaultContaShouldNotBeFound("grau.lessThan=" + DEFAULT_GRAU);
 
-        // Get all the contaList where grau is less than (DEFAULT_GRAU + 1)
-        defaultContaShouldBeFound("grau.lessThan=" + (DEFAULT_GRAU + 1));
+        // Get all the contaList where grau is less than UPDATED_GRAU
+        defaultContaShouldBeFound("grau.lessThan=" + UPDATED_GRAU);
     }
 
     @Test

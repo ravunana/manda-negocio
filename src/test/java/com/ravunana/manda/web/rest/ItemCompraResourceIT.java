@@ -2,7 +2,6 @@ package com.ravunana.manda.web.rest;
 
 import com.ravunana.manda.MandaApp;
 import com.ravunana.manda.domain.ItemCompra;
-import com.ravunana.manda.domain.User;
 import com.ravunana.manda.domain.Compra;
 import com.ravunana.manda.domain.Produto;
 import com.ravunana.manda.domain.Fornecedor;
@@ -73,6 +72,9 @@ public class ItemCompraResourceIT {
     private static final BigDecimal UPDATED_VALOR = new BigDecimal(2);
     private static final BigDecimal SMALLER_VALOR = new BigDecimal(1 - 1);
 
+    private static final String DEFAULT_SOLICITANTE = "AAAAAAAAAA";
+    private static final String UPDATED_SOLICITANTE = "BBBBBBBBBB";
+
     @Autowired
     private ItemCompraRepository itemCompraRepository;
 
@@ -129,7 +131,8 @@ public class ItemCompraResourceIT {
             .dataSolicitacao(DEFAULT_DATA_SOLICITACAO)
             .dataEntrega(DEFAULT_DATA_ENTREGA)
             .descricao(DEFAULT_DESCRICAO)
-            .valor(DEFAULT_VALOR);
+            .valor(DEFAULT_VALOR)
+            .solicitante(DEFAULT_SOLICITANTE);
         // Add required entity
         Compra compra;
         if (TestUtil.findAll(em, Compra.class).isEmpty()) {
@@ -175,7 +178,8 @@ public class ItemCompraResourceIT {
             .dataSolicitacao(UPDATED_DATA_SOLICITACAO)
             .dataEntrega(UPDATED_DATA_ENTREGA)
             .descricao(UPDATED_DESCRICAO)
-            .valor(UPDATED_VALOR);
+            .valor(UPDATED_VALOR)
+            .solicitante(UPDATED_SOLICITANTE);
         // Add required entity
         Compra compra;
         if (TestUtil.findAll(em, Compra.class).isEmpty()) {
@@ -236,6 +240,7 @@ public class ItemCompraResourceIT {
         assertThat(testItemCompra.getDataEntrega()).isEqualTo(DEFAULT_DATA_ENTREGA);
         assertThat(testItemCompra.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
         assertThat(testItemCompra.getValor()).isEqualTo(DEFAULT_VALOR);
+        assertThat(testItemCompra.getSolicitante()).isEqualTo(DEFAULT_SOLICITANTE);
     }
 
     @Test
@@ -275,7 +280,8 @@ public class ItemCompraResourceIT {
             .andExpect(jsonPath("$.[*].dataSolicitacao").value(hasItem(sameInstant(DEFAULT_DATA_SOLICITACAO))))
             .andExpect(jsonPath("$.[*].dataEntrega").value(hasItem(sameInstant(DEFAULT_DATA_ENTREGA))))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())))
-            .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())));
+            .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
+            .andExpect(jsonPath("$.[*].solicitante").value(hasItem(DEFAULT_SOLICITANTE)));
     }
     
     @Test
@@ -294,7 +300,8 @@ public class ItemCompraResourceIT {
             .andExpect(jsonPath("$.dataSolicitacao").value(sameInstant(DEFAULT_DATA_SOLICITACAO)))
             .andExpect(jsonPath("$.dataEntrega").value(sameInstant(DEFAULT_DATA_ENTREGA)))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO.toString()))
-            .andExpect(jsonPath("$.valor").value(DEFAULT_VALOR.intValue()));
+            .andExpect(jsonPath("$.valor").value(DEFAULT_VALOR.intValue()))
+            .andExpect(jsonPath("$.solicitante").value(DEFAULT_SOLICITANTE));
     }
 
 
@@ -847,18 +854,76 @@ public class ItemCompraResourceIT {
     public void getAllItemComprasBySolicitanteIsEqualToSomething() throws Exception {
         // Initialize the database
         itemCompraRepository.saveAndFlush(itemCompra);
-        User solicitante = UserResourceIT.createEntity(em);
-        em.persist(solicitante);
-        em.flush();
-        itemCompra.setSolicitante(solicitante);
+
+        // Get all the itemCompraList where solicitante equals to DEFAULT_SOLICITANTE
+        defaultItemCompraShouldBeFound("solicitante.equals=" + DEFAULT_SOLICITANTE);
+
+        // Get all the itemCompraList where solicitante equals to UPDATED_SOLICITANTE
+        defaultItemCompraShouldNotBeFound("solicitante.equals=" + UPDATED_SOLICITANTE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllItemComprasBySolicitanteIsNotEqualToSomething() throws Exception {
+        // Initialize the database
         itemCompraRepository.saveAndFlush(itemCompra);
-        Long solicitanteId = solicitante.getId();
 
-        // Get all the itemCompraList where solicitante equals to solicitanteId
-        defaultItemCompraShouldBeFound("solicitanteId.equals=" + solicitanteId);
+        // Get all the itemCompraList where solicitante not equals to DEFAULT_SOLICITANTE
+        defaultItemCompraShouldNotBeFound("solicitante.notEquals=" + DEFAULT_SOLICITANTE);
 
-        // Get all the itemCompraList where solicitante equals to solicitanteId + 1
-        defaultItemCompraShouldNotBeFound("solicitanteId.equals=" + (solicitanteId + 1));
+        // Get all the itemCompraList where solicitante not equals to UPDATED_SOLICITANTE
+        defaultItemCompraShouldBeFound("solicitante.notEquals=" + UPDATED_SOLICITANTE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllItemComprasBySolicitanteIsInShouldWork() throws Exception {
+        // Initialize the database
+        itemCompraRepository.saveAndFlush(itemCompra);
+
+        // Get all the itemCompraList where solicitante in DEFAULT_SOLICITANTE or UPDATED_SOLICITANTE
+        defaultItemCompraShouldBeFound("solicitante.in=" + DEFAULT_SOLICITANTE + "," + UPDATED_SOLICITANTE);
+
+        // Get all the itemCompraList where solicitante equals to UPDATED_SOLICITANTE
+        defaultItemCompraShouldNotBeFound("solicitante.in=" + UPDATED_SOLICITANTE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllItemComprasBySolicitanteIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        itemCompraRepository.saveAndFlush(itemCompra);
+
+        // Get all the itemCompraList where solicitante is not null
+        defaultItemCompraShouldBeFound("solicitante.specified=true");
+
+        // Get all the itemCompraList where solicitante is null
+        defaultItemCompraShouldNotBeFound("solicitante.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllItemComprasBySolicitanteContainsSomething() throws Exception {
+        // Initialize the database
+        itemCompraRepository.saveAndFlush(itemCompra);
+
+        // Get all the itemCompraList where solicitante contains DEFAULT_SOLICITANTE
+        defaultItemCompraShouldBeFound("solicitante.contains=" + DEFAULT_SOLICITANTE);
+
+        // Get all the itemCompraList where solicitante contains UPDATED_SOLICITANTE
+        defaultItemCompraShouldNotBeFound("solicitante.contains=" + UPDATED_SOLICITANTE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllItemComprasBySolicitanteNotContainsSomething() throws Exception {
+        // Initialize the database
+        itemCompraRepository.saveAndFlush(itemCompra);
+
+        // Get all the itemCompraList where solicitante does not contain DEFAULT_SOLICITANTE
+        defaultItemCompraShouldNotBeFound("solicitante.doesNotContain=" + DEFAULT_SOLICITANTE);
+
+        // Get all the itemCompraList where solicitante does not contain UPDATED_SOLICITANTE
+        defaultItemCompraShouldBeFound("solicitante.doesNotContain=" + UPDATED_SOLICITANTE);
     }
 
 
@@ -942,7 +1007,8 @@ public class ItemCompraResourceIT {
             .andExpect(jsonPath("$.[*].dataSolicitacao").value(hasItem(sameInstant(DEFAULT_DATA_SOLICITACAO))))
             .andExpect(jsonPath("$.[*].dataEntrega").value(hasItem(sameInstant(DEFAULT_DATA_ENTREGA))))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())))
-            .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())));
+            .andExpect(jsonPath("$.[*].valor").value(hasItem(DEFAULT_VALOR.intValue())))
+            .andExpect(jsonPath("$.[*].solicitante").value(hasItem(DEFAULT_SOLICITANTE)));
 
         // Check, that the count call also returns 1
         restItemCompraMockMvc.perform(get("/api/item-compras/count?sort=id,desc&" + filter))
@@ -995,7 +1061,8 @@ public class ItemCompraResourceIT {
             .dataSolicitacao(UPDATED_DATA_SOLICITACAO)
             .dataEntrega(UPDATED_DATA_ENTREGA)
             .descricao(UPDATED_DESCRICAO)
-            .valor(UPDATED_VALOR);
+            .valor(UPDATED_VALOR)
+            .solicitante(UPDATED_SOLICITANTE);
         ItemCompraDTO itemCompraDTO = itemCompraMapper.toDto(updatedItemCompra);
 
         restItemCompraMockMvc.perform(put("/api/item-compras")
@@ -1013,6 +1080,7 @@ public class ItemCompraResourceIT {
         assertThat(testItemCompra.getDataEntrega()).isEqualTo(UPDATED_DATA_ENTREGA);
         assertThat(testItemCompra.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
         assertThat(testItemCompra.getValor()).isEqualTo(UPDATED_VALOR);
+        assertThat(testItemCompra.getSolicitante()).isEqualTo(UPDATED_SOLICITANTE);
     }
 
     @Test
