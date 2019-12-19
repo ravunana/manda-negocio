@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FamiliaProdutoRepository extends JpaRepository<FamiliaProduto, Long> {
 
+    FamiliaProduto findByHierarquia(FamiliaProduto hierarquia);
+
 }

@@ -1,12 +1,15 @@
 package com.ravunana.manda.service;
 
+import com.ravunana.manda.domain.Conta;
 import com.ravunana.manda.domain.FamiliaProduto;
+import com.ravunana.manda.repository.ContaRepository;
 import com.ravunana.manda.repository.FamiliaProdutoRepository;
+import com.ravunana.manda.service.dto.ContaDTO;
 import com.ravunana.manda.service.dto.FamiliaProdutoDTO;
 import com.ravunana.manda.service.mapper.FamiliaProdutoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,11 @@ public class FamiliaProdutoService {
 
     private final FamiliaProdutoMapper familiaProdutoMapper;
 
+    @Autowired
+    private ContaService contaService;
+
+    @Autowired ContaRepository contareRepository;
+
     public FamiliaProdutoService(FamiliaProdutoRepository familiaProdutoRepository, FamiliaProdutoMapper familiaProdutoMapper) {
         this.familiaProdutoRepository = familiaProdutoRepository;
         this.familiaProdutoMapper = familiaProdutoMapper;
@@ -41,8 +49,22 @@ public class FamiliaProdutoService {
     public FamiliaProdutoDTO save(FamiliaProdutoDTO familiaProdutoDTO) {
         log.debug("Request to save FamiliaProduto : {}", familiaProdutoDTO);
         FamiliaProduto familiaProduto = familiaProdutoMapper.toEntity(familiaProdutoDTO);
+
+        Conta contaCriada = contaService.addSubConta(1112L, familiaProdutoDTO.getNome());
+        familiaProduto.setConta(contaCriada);
         familiaProduto = familiaProdutoRepository.save(familiaProduto);
         return familiaProdutoMapper.toDto(familiaProduto);
+    }
+
+    private Long getContaFamiliaId( Long heararquiaId ) {
+
+        // preciso do id da conta onde a hearquia é igual a digitada
+
+        FamiliaProduto familiaHearquia = familiaProdutoRepository.findById( heararquiaId ).get();
+
+        Conta conta = contareRepository.findById( familiaHearquia.getId() ).get();
+
+        return conta.getId();
     }
 
     /**

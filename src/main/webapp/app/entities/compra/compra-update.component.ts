@@ -36,7 +36,7 @@ export class CompraUpdateComponent implements OnInit {
   isSaving: boolean;
 
   users: IUser[];
-  pagamentos: IDetalheLancamento[];
+  pagamentos: IDetalheLancamento[] = [];
 
   SUB_TOTAL = 0;
   TOTAL_DESCONTO = 0;
@@ -44,13 +44,13 @@ export class CompraUpdateComponent implements OnInit {
   TOTAL_ENTREGUE = 0;
   TROCO = 0;
 
-  items: IItemCompra[];
-  impostos: IImposto[];
-  formaliquidacaos: IFormaLiquidacao[];
+  items: IItemCompra[] = [];
+  impostos: IImposto[] = [];
+  formaliquidacaos: IFormaLiquidacao[] = [];
 
-  documentocomercials: IDocumentoComercial[];
+  documentocomercials: IDocumentoComercial[] = [];
 
-  empresas: IEmpresa[];
+  empresas: IEmpresa[] = [];
   moedaNacional = 'Moeda';
 
   editForm = this.fb.group({

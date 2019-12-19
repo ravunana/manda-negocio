@@ -4,6 +4,7 @@ import com.ravunana.manda.domain.Compra;
 import com.ravunana.manda.domain.DocumentoComercial;
 import com.ravunana.manda.domain.FormaLiquidacao;
 import com.ravunana.manda.domain.SerieDocumento;
+import com.ravunana.manda.domain.enumeration.EntidadeSistema;
 import com.ravunana.manda.repository.CompraRepository;
 import com.ravunana.manda.repository.DocumentoComercialRepository;
 import com.ravunana.manda.repository.FormaLiquidacaoRepository;
@@ -168,7 +169,9 @@ public class CompraService {
         lancamentoFinanceiroDTO.setDescricao( "Compra de mercadoria na modalidade "  + formaLiquidacao.getNome() + " no valor de " + TOTAL_FACTURA + " referente a factura nº " + compra.getNumero() + " data de liquidação " + LocalDate.now().plusDays( formaLiquidacao.getPrazoLiquidacao() ) );
         lancamentoFinanceiroDTO.setFormaLiquidacaoId( compra.getFormaLiquidacaoId() );
         lancamentoFinanceiroDTO.setValor( TOTAL_FACTURA );
-        // lancamentoFinanceiroDTO.setImpostos( compra.getImpostos() );
+        lancamentoFinanceiroDTO.setImpostos( compra.getImpostos() );
+        lancamentoFinanceiroDTO.setNumeroDocumento( compra.getNumero() );
+        lancamentoFinanceiroDTO.setEntidadeDocumento( EntidadeSistema.COMPRA );
 
         lancamentoFinanceiroDTO.setTipoLancamento( "SAIDA" );
         lancamentoFinanceiroDTO.setTipoReciboId( compra.getTipoDocumentoId() );

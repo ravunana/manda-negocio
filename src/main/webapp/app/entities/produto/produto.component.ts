@@ -10,6 +10,8 @@ import { IProduto } from 'app/shared/model/produto.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ProdutoService } from './produto.service';
 import { ProdutoDeleteDialogComponent } from './produto-delete-dialog.component';
+import { EstruturaCalculoService } from '../estrutura-calculo/estrutura-calculo.service';
+import { FunctionCall } from '@angular/compiler';
 
 @Component({
   selector: 'rv-produto',
@@ -28,6 +30,9 @@ export class ProdutoComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  custo = 0;
+  preco = 0;
+  produtoId = 0;
 
   constructor(
     protected produtoService: ProdutoService,
@@ -36,7 +41,8 @@ export class ProdutoComponent implements OnInit, OnDestroy {
     protected dataUtils: JhiDataUtils,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected estruturaCalculoService: EstruturaCalculoService
   ) {
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -54,7 +60,16 @@ export class ProdutoComponent implements OnInit, OnDestroy {
         size: this.itemsPerPage,
         sort: this.sort()
       })
-      .subscribe((res: HttpResponse<IProduto[]>) => this.paginateProdutos(res.body, res.headers));
+      .subscribe((res: HttpResponse<IProduto[]>) => {
+        this.paginateProdutos(res.body, res.headers);
+        res.body.map(p => {
+          this.estruturaCalculoService.query({ produtoId: p.id }).subscribe(estruturaResult => {
+            const estrutura = estruturaResult.body.pop();
+            this.preco = estrutura.precoVenda;
+            this.custo = estrutura.custoAquisicao + estrutura.custoEmbalagem + estrutura.custoMaoObra + estrutura.custoMateriaPrima;
+          });
+        });
+      });
   }
 
   loadPage(page: number) {

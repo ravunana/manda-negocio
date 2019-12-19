@@ -1,17 +1,24 @@
 package com.ravunana.manda.service;
 
+import com.ravunana.manda.domain.DocumentoComercial;
 import com.ravunana.manda.domain.LancamentoFinanceiro;
+import com.ravunana.manda.domain.SerieDocumento;
+import com.ravunana.manda.repository.DocumentoComercialRepository;
 import com.ravunana.manda.repository.LancamentoFinanceiroRepository;
+import com.ravunana.manda.service.dto.DetalheLancamentoDTO;
 import com.ravunana.manda.service.dto.LancamentoFinanceiroDTO;
 import com.ravunana.manda.service.mapper.LancamentoFinanceiroMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,6 +34,27 @@ public class LancamentoFinanceiroService {
 
     private final LancamentoFinanceiroMapper lancamentoFinanceiroMapper;
 
+
+    private List<DetalheLancamentoDTO> detalhesLancamento = new ArrayList<>();
+
+    private LancamentoFinanceiroDTO lancamentoFinanceiroDTO;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private DetalheLancamentoService detalheLancamentoService;
+
+    @Autowired
+    private EmpresaService empresaService;
+
+    @Autowired
+    private DocumentoComercialRepository documentoComercialRepository;
+
+    @Autowired
+    SerieDocumentoService serieDocumentoService;
+
+
     public LancamentoFinanceiroService(LancamentoFinanceiroRepository lancamentoFinanceiroRepository, LancamentoFinanceiroMapper lancamentoFinanceiroMapper) {
         this.lancamentoFinanceiroRepository = lancamentoFinanceiroRepository;
         this.lancamentoFinanceiroMapper = lancamentoFinanceiroMapper;
@@ -41,7 +69,22 @@ public class LancamentoFinanceiroService {
     public LancamentoFinanceiroDTO save(LancamentoFinanceiroDTO lancamentoFinanceiroDTO) {
         log.debug("Request to save LancamentoFinanceiro : {}", lancamentoFinanceiroDTO);
         LancamentoFinanceiro lancamentoFinanceiro = lancamentoFinanceiroMapper.toEntity(lancamentoFinanceiroDTO);
+
+        lancamentoFinanceiro.setUtilizador(userService.getCurrentUserLogged());
+        lancamentoFinanceiro.setEmpresa(empresaService.getFirstEmpresa());
+
+        lancamentoFinanceiro.setNumero( getNumeroRecibo(lancamentoFinanceiroDTO.getTipoReciboId()) );
+
         lancamentoFinanceiro = lancamentoFinanceiroRepository.save(lancamentoFinanceiro);
+
+        for ( DetalheLancamentoDTO detalheLancamentoDTO : detalhesLancamento ) {
+            detalheLancamentoDTO.setLancamentoFinanceiroId(lancamentoFinanceiro.getId());
+            detalheLancamentoDTO.setData( ZonedDateTime.now() );
+            detalheLancamentoDTO.setUtilizadorId(userService.getCurrentUserLogged().getId());
+            detalheLancamentoService.save( detalheLancamentoDTO );
+        }
+
+        clearDetahesLancamento();
         return lancamentoFinanceiroMapper.toDto(lancamentoFinanceiro);
     }
 
@@ -66,7 +109,7 @@ public class LancamentoFinanceiroService {
     public Page<LancamentoFinanceiroDTO> findAllWithEagerRelationships(Pageable pageable) {
         return lancamentoFinanceiroRepository.findAllWithEagerRelationships(pageable).map(lancamentoFinanceiroMapper::toDto);
     }
-    
+
 
     /**
      * Get one lancamentoFinanceiro by id.
@@ -89,5 +132,40 @@ public class LancamentoFinanceiroService {
     public void delete(Long id) {
         log.debug("Request to delete LancamentoFinanceiro : {}", id);
         lancamentoFinanceiroRepository.deleteById(id);
+    }
+
+
+    public DetalheLancamentoDTO addDetalheLancamento( DetalheLancamentoDTO detalheLancamentoDTO ) {
+        Boolean result = detalhesLancamento.add(detalheLancamentoDTO);
+        if ( result == true ) {
+            return detalheLancamentoDTO;
+        } else {
+            return new DetalheLancamentoDTO();
+        }
+    }
+
+    public List<DetalheLancamentoDTO> listarDetalhe() {
+        return detalhesLancamento;
+    }
+
+    public DetalheLancamentoDTO deleteDetalhe(int index) {
+        return detalhesLancamento.remove(index);
+    }
+
+    private String getNumeroRecibo( Long tipoDocumentoId ) {
+        DocumentoComercial tipoDocumentoComercial = documentoComercialRepository.findById( tipoDocumentoId ).get();
+        SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
+
+        int sequencia = serieDocumento.getCodigoLancamentoFinanceiro();
+        String numero = tipoDocumentoComercial.getNome() + " " + serieDocumento.getSerie() + "/" + sequencia; // <TIPO_DOCUMENTO> <SEQUENCIA_FORNECEDOR>
+        // atualizar serie do documento
+        serieDocumento.setCodigoLancamentoFinanceiro( sequencia + 1 );
+        serieDocumentoService.atualizarSerieDocumento(serieDocumento);
+
+        return numero;
+    }
+
+    public void clearDetahesLancamento() {
+        detalhesLancamento.clear();
     }
 }

@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label jhiTranslate="mandaApp.lancamentoFinanceiro.imposto" for="field_impostos">Imposto</label>
                     <select class="form-control" id="field_impostos" multiple name="impostos" formControlName="impostos">
-                        <option [ngValue]="getSelected(editForm.get('impostos').value, impostoOption)" *ngFor="let impostoOption of impostos; trackBy: trackImpostoById">{{impostoOption.codigoImposto}}</option>
+                        <option [ngValue]="getSelected(editForm.get('impostos').value, impostoOption)" *ngFor="let impostoOption of impostos;">{{impostoOption.codigoImposto}}</option>
                     </select>
                     <div *ngIf="editForm.get('impostos').invalid && (editForm.get('impostos').dirty || editForm.get('impostos').touched)">
                         <small class="form-text text-danger"
@@ -84,7 +84,7 @@
                         formControlName="formaLiquidacaoId">
                         <option *ngIf="!editForm.get('formaLiquidacaoId').value" [ngValue]="null" selected></option>
                         <option [ngValue]="formaLiquidacaoOption.id"
-                            *ngFor="let formaLiquidacaoOption of formaliquidacaos; trackBy: trackFormaLiquidacaoById">
+                            *ngFor="let formaLiquidacaoOption of formaliquidacaos;">
                             {{formaLiquidacaoOption.nome}}</option>
                     </select>
                     <div

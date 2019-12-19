@@ -22,20 +22,22 @@
                 <th scope="col"  jhiSortBy="imagem"><span jhiTranslate="mandaApp.produto.imagem">Imagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="mandaApp.produto.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th scope="col"  jhiSortBy="ean"><span jhiTranslate="mandaApp.produto.ean">Ean</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.produto.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!-- <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.produto.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <th scope="col"  jhiSortBy="nome"><span jhiTranslate="mandaApp.produto.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th scope="col"  jhiSortBy="composto"><span jhiTranslate="mandaApp.produto.composto">Composto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!-- <th scope="col"  jhiSortBy="composto"><span jhiTranslate="mandaApp.produto.composto">Composto</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <!-- <th scope="col"  jhiSortBy="estoqueMinimo"><span jhiTranslate="mandaApp.produto.estoqueMinimo">Estoque Minimo</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <!-- <th scope="col"  jhiSortBy="estoqueMaximo"><span jhiTranslate="mandaApp.produto.estoqueMaximo">Estoque Maximo</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <th scope="col"  jhiSortBy="estoqueAtual"><span jhiTranslate="mandaApp.produto.estoqueAtual">Estoque Atual</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <!-- <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.produto.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <!-- <th scope="col"  jhiSortBy="mostrarPDV"><span jhiTranslate="mandaApp.produto.mostrarPDV">Mostrar PDV</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
-                <th scope="col"  jhiSortBy="prazoMedioEntrega"><span jhiTranslate="mandaApp.produto.prazoMedioEntrega">Prazo Medio Entrega</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!-- <th scope="col"  jhiSortBy="prazoMedioEntrega"><span jhiTranslate="mandaApp.produto.prazoMedioEntrega">Prazo Medio Entrega</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <!-- <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.produto.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <th scope="col"  jhiSortBy="localArmazenamentoNome"><span jhiTranslate="mandaApp.produto.localArmazenamento">Local Armazenamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <th scope="col"  jhiSortBy="familiaNome"><span jhiTranslate="mandaApp.produto.familia">Familia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.produto.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <!-- <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.produto.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <th scope="col"  jhiSortBy="estadoNome"><span jhiTranslate="mandaApp.produto.estado">Estado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th scope="col"> Preço</th>
+                <th scope="col"> Custo </th>
                 <th scope="col"></th>
                 </tr>
                 </thead>
@@ -50,15 +52,15 @@
                     </td>
                     <td>{{produto.tipo}}</td>
                     <td>{{produto.ean}}</td>
-                    <td>{{produto.numero}}</td>
+                    <!-- <td>{{produto.numero}}</td> -->
                     <td>{{produto.nome}}</td>
-                    <td>{{produto.composto}}</td>
+                    <!-- <td>{{produto.composto}}</td> -->
                     <!-- <td>{{produto.estoqueMinimo}}</td>
                     <td>{{produto.estoqueMaximo}}</td> -->
                     <td>{{produto.estoqueAtual | number }} unidade </td>
                     <!-- <td>{{produto.descricao}}</td> -->
                     <!-- <td>{{produto.mostrarPDV}}</td> -->
-                    <td>{{produto.prazoMedioEntrega}}</td>
+                    <!-- <td>{{produto.prazoMedioEntrega}}</td> -->
                     <!-- <td>
                         {{produto.utilizadorLogin}}
                     </td> -->
@@ -72,32 +74,41 @@
                             <a [routerLink]="['/familia-produto', produto.familiaId , 'view' ]" >{{produto.familiaNome}}</a>
                         </div>
                     </td>
-                    <td>
+                    <!-- <td>
                         <div *ngIf="produto.empresaId">
                             <a [routerLink]="['/empresa', produto.empresaId , 'view' ]" >{{produto.empresaNome}}</a>
                         </div>
-                    </td>
+                    </td> -->
                     <td>
                         <div *ngIf="produto.estadoId">
                             <a [routerLink]="['/fluxo-documento', produto.estadoId , 'view' ]" >{{produto.estadoNome}}</a>
                         </div>
                     </td>
+                    <td> {{ preco | currency: 'AKz' }} </td>
+                    <td> {{ custo | currency: 'AKz' }}  </td>
                     <td class="text-right">
                         <div class="btn-group">
+                            <button type="button"
+                                    [routerLink]="['/estrutura-calculo/new']"
+                                    [queryParams]="{ produtoId: produto.id}"
+                                    class="btn btn-warning btn-sm ml-1">
+                                <fa-icon [icon]="'tags'"></fa-icon>
+                                <span class="d-none d-md-inline">Tabela de preço</span>
+                            </button>
                             <button type="submit"
                                     [routerLink]="['/produto', produto.id, 'view' ]"
-                                    class="btn btn-info btn-sm">
+                                    class="btn btn-info btn-sm ml-1">
                                 <fa-icon [icon]="'eye'"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
                             <button type="submit"
                                     [routerLink]="['/produto', produto.id, 'edit']"
-                                    class="btn btn-primary btn-sm">
+                                    class="btn btn-primary btn-sm ml-1">
                                 <fa-icon [icon]="'pencil-alt'"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
                             <button type="submit" (click)="delete(produto)"
-                                    class="btn btn-danger btn-sm">
+                                    class="btn btn-danger btn-sm ml-1">
                                 <fa-icon [icon]="'times'"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                             </button>

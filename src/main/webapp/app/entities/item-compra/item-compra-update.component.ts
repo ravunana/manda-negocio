@@ -56,7 +56,7 @@ export class ItemCompraUpdateComponent implements OnInit {
     dataEntrega: [],
     descricao: [],
     valor: [],
-    solicitanteId: [],
+    solicitante: [],
     compraId: [0],
     produtoId: [null, Validators.required],
     fornecedorId: [],
@@ -133,7 +133,7 @@ export class ItemCompraUpdateComponent implements OnInit {
       dataEntrega: itemCompra.dataEntrega != null ? itemCompra.dataEntrega.format(DATE_TIME_FORMAT) : null,
       descricao: itemCompra.descricao,
       valor: itemCompra.valor,
-      solicitanteId: itemCompra.solicitante,
+      solicitante: itemCompra.solicitante,
       compraId: itemCompra.compraId,
       produtoId: itemCompra.produtoId,
       fornecedorId: itemCompra.fornecedorId,
@@ -297,13 +297,8 @@ export class ItemCompraUpdateComponent implements OnInit {
   onSelectPessoa(pessoa) {
     this.fornecedorService.query({ 'pessoaId.equals': pessoa.id }).subscribe(fornecedorResult => {
       this.fornecedorId = fornecedorResult.body.shift().id;
+      alert(this.fornecedorId);
       // this.editForm.get('fornecedorId').patchValue(fornecedorId, { emitEvent: false });
-    });
-  }
-
-  searchFornecedor(fornecedor) {
-    this.fornecedorService.query({ 'pessoaNome.contains': fornecedor.query }).subscribe(data => {
-      this.fornecedors = data.body;
     });
   }
 

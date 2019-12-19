@@ -21,6 +21,7 @@ import { ProdutoService } from 'app/entities/produto/produto.service';
 })
 export class EstruturaCalculoUpdateComponent implements OnInit {
   isSaving: boolean;
+  produtoId: 0;
 
   users: IUser[];
 
@@ -36,8 +37,8 @@ export class EstruturaCalculoUpdateComponent implements OnInit {
     margemLucro: [null, [Validators.min(0), Validators.max(100)]],
     precoVenda: [],
     data: [],
-    utilizadorId: [null],
-    produtoId: [null, Validators.required]
+    utilizadorId: [null]
+    // produtoId: [null, Validators.required]
   });
 
   constructor(
@@ -53,6 +54,10 @@ export class EstruturaCalculoUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ estruturaCalculo }) => {
       this.updateForm(estruturaCalculo);
+      this.produtoId = estruturaCalculo.produtoId;
+    });
+    this.activatedRoute.queryParams.subscribe(parmas => {
+      this.produtoId = parmas.produtoId;
     });
     this.userService
       .query()
@@ -106,7 +111,8 @@ export class EstruturaCalculoUpdateComponent implements OnInit {
       data: this.editForm.get(['data']).value != null ? moment(this.editForm.get(['data']).value, DATE_TIME_FORMAT) : undefined,
       utilizadorId: 1,
       // utilizadorId: this.editForm.get(['utilizadorId']).value,
-      produtoId: this.editForm.get(['produtoId']).value
+      // produtoId: this.editForm.get(['produtoId']).value
+      produtoId: this.produtoId
     };
   }
 

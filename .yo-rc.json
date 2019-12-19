@@ -39,6 +39,10 @@
     "languages": ["pt-pt"],
     "blueprints": [],
     "herokuAppName": "manda-negocio",
-    "herokuDeployType": "jar"
+    "herokuDeployType": "jar",
+    "appsFolders": ["manda-negocio"],
+    "directoryPath": "../",
+    "monitoring": "no",
+    "consoleOptions": []
   }
 }
