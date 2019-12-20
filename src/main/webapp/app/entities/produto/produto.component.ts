@@ -62,13 +62,6 @@ export class ProdutoComponent implements OnInit, OnDestroy {
       })
       .subscribe((res: HttpResponse<IProduto[]>) => {
         this.paginateProdutos(res.body, res.headers);
-        res.body.map(p => {
-          this.estruturaCalculoService.query({ produtoId: p.id }).subscribe(estruturaResult => {
-            const estrutura = estruturaResult.body.pop();
-            this.preco = estrutura.precoVenda;
-            this.custo = estrutura.custoAquisicao + estrutura.custoEmbalagem + estrutura.custoMaoObra + estrutura.custoMateriaPrima;
-          });
-        });
       });
   }
 

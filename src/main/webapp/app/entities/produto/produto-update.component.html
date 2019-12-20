@@ -57,7 +57,13 @@
                                     <option *ngIf="!editForm.get('familiaId').value" [ngValue]="null" selected></option>
                                     <option [ngValue]="familiaProdutoOption.id"
                                         *ngFor="let familiaProdutoOption of familiaprodutos; trackBy: trackFamiliaProdutoById">
-                                        {{familiaProdutoOption.nome}}</option>
+                                        <span *ngIf="familiaProdutoOption.hierarquiaId" >
+                                            {{ familiaProdutoOption.hierarquiaNome }} : {{familiaProdutoOption.nome}}
+                                        </span>
+                                        <span *ngIf="!familiaProdutoOption.hierarquiaId" >
+                                            {{familiaProdutoOption.nome}}
+                                        </span>
+                                    </option>
                                 </select>
                                 <div
                                     *ngIf="editForm.get('familiaId').invalid && (editForm.get('familiaId').dirty || editForm.get('familiaId').touched)">

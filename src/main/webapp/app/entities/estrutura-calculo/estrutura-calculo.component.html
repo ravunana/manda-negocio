@@ -1,7 +1,9 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="mandaApp.estruturaCalculo.home.title">Estrutura Calculos</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-estrutura-calculo" [routerLink]="['/estrutura-calculo/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-estrutura-calculo"
+            [routerLink]="['/estrutura-calculo/new']"
+            [queryParams]="{ produtoId: produtoId}">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="mandaApp.estruturaCalculo.home.createLabel">
             Create a new Estrutura Calculo
@@ -19,7 +21,7 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="produtoNome"><span jhiTranslate="mandaApp.estruturaCalculo.produto">Produto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="produtoNome"><span jhiTranslate="mandaApp.estruturaCalculo.produto">Produto</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="custoMateriaPrima"><span jhiTranslate="mandaApp.estruturaCalculo.custoMateriaPrima">Custo Materia Prima</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="custoMaoObra"><span jhiTranslate="mandaApp.estruturaCalculo.custoMaoObra">Custo Mao Obra</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="custoEmbalagem"><span jhiTranslate="mandaApp.estruturaCalculo.custoEmbalagem">Custo Embalagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -35,11 +37,11 @@
             <tbody>
             <tr *ngFor="let estruturaCalculo of estruturaCalculos ;trackBy: trackId">
                 <td><a [routerLink]="['/estrutura-calculo', estruturaCalculo.id, 'view' ]">{{estruturaCalculo.id}}</a></td>
-                <td>
+                <!-- <td>
                     <div *ngIf="estruturaCalculo.produtoId">
                         <a [routerLink]="['/produto', estruturaCalculo.produtoId , 'view' ]" >{{estruturaCalculo.produtoNome}}</a>
                     </div>
-                </td>
+                </td> -->
                 <td>{{estruturaCalculo.custoMateriaPrima | currency : moedaNacional.codigo }}</td>
                 <td>{{estruturaCalculo.custoMaoObra | currency : moedaNacional.codigo}}</td>
                 <td>{{estruturaCalculo.custoEmbalagem | currency : moedaNacional.codigo}}</td>

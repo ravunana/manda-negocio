@@ -27,4 +27,6 @@ public interface ContaRepository extends JpaRepository<Conta, Long>, JpaSpecific
 
     List<Conta> findByContaAgregadora(Conta contaAgregadora);
 
+    Conta findByCodigo(String codigo);
+
 }

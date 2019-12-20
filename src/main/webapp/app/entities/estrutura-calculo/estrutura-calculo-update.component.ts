@@ -89,6 +89,7 @@ export class EstruturaCalculoUpdateComponent implements OnInit {
 
   save() {
     this.isSaving = true;
+    alert(this.produtoId);
     const estruturaCalculo = this.createFromForm();
     if (estruturaCalculo.id !== undefined) {
       this.subscribeToSaveResponse(this.estruturaCalculoService.update(estruturaCalculo));

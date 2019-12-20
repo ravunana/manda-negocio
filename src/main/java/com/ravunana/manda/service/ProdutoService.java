@@ -1,7 +1,12 @@
 package com.ravunana.manda.service;
 
+import com.ravunana.manda.domain.Conta;
+import com.ravunana.manda.domain.EstoqueConfig;
+import com.ravunana.manda.domain.FamiliaProduto;
 import com.ravunana.manda.domain.Produto;
 import com.ravunana.manda.domain.SerieDocumento;
+import com.ravunana.manda.repository.ContaRepository;
+import com.ravunana.manda.repository.FamiliaProdutoRepository;
 import com.ravunana.manda.repository.ProdutoRepository;
 import com.ravunana.manda.service.dto.ProdutoDTO;
 import com.ravunana.manda.service.mapper.ProdutoMapper;
@@ -35,6 +40,18 @@ public class ProdutoService {
     @Autowired
     private SerieDocumentoService serieDocumentoService;
 
+    @Autowired
+    private ContaService contaService;
+
+    @Autowired
+    private ContaRepository contaRepository;
+
+    @Autowired
+    private FamiliaProdutoRepository familiaProdutoRepository;
+
+    @Autowired
+    private EstoqueConfigService estoqueConfigService;
+
     public ProdutoService(ProdutoRepository produtoRepository, ProdutoMapper produtoMapper) {
         this.produtoRepository = produtoRepository;
         this.produtoMapper = produtoMapper;
@@ -51,6 +68,9 @@ public class ProdutoService {
 
         SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
         Produto produto = produtoMapper.toEntity(produtoDTO);
+
+        contaService.addSubConta(getContaAgregadoraId( produtoDTO.getFamiliaId() ), produto.getNome() );
+
         produto.setUtilizador( userService.getCurrentUserLogged() );
         int serie = serieDocumento.getCodigoProduto();
         produto.setNumero( produto.getTipo().substring(0, 1) + " " + serieDocumento.getSerie() + " " + serie ); // <Tipo> <Serie> <Sequencia>
@@ -66,6 +86,9 @@ public class ProdutoService {
         return produtoMapper.toDto(produto);
     }
 
+    private Long getContaAgregadoraId( Long familiaId ) {
+        return familiaProdutoRepository.findById( familiaId ).get().getConta().getId();
+    }
     /**
      * Get all the produtos.
      *

@@ -36,8 +36,8 @@
                 <th scope="col"  jhiSortBy="familiaNome"><span jhiTranslate="mandaApp.produto.familia">Familia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
                 <!-- <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.produto.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
                 <th scope="col"  jhiSortBy="estadoNome"><span jhiTranslate="mandaApp.produto.estado">Estado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-                <th scope="col"> Preço</th>
-                <th scope="col"> Custo </th>
+                <!-- <th scope="col"> Preço</th>
+                <th scope="col"> Custo </th> -->
                 <th scope="col"></th>
                 </tr>
                 </thead>
@@ -84,12 +84,12 @@
                             <a [routerLink]="['/fluxo-documento', produto.estadoId , 'view' ]" >{{produto.estadoNome}}</a>
                         </div>
                     </td>
-                    <td> {{ preco | currency: 'AKz' }} </td>
-                    <td> {{ custo | currency: 'AKz' }}  </td>
+                    <!-- <td> {{ preco | currency: 'AKz' }} </td>
+                    <td> {{ custo | currency: 'AKz' }}  </td> -->
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="button"
-                                    [routerLink]="['/estrutura-calculo/new']"
+                                    [routerLink]="['/estrutura-calculo']"
                                     [queryParams]="{ produtoId: produto.id}"
                                     class="btn btn-warning btn-sm ml-1">
                                 <fa-icon [icon]="'tags'"></fa-icon>
