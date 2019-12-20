@@ -50,21 +50,22 @@ public class FamiliaProdutoService {
         log.debug("Request to save FamiliaProduto : {}", familiaProdutoDTO);
         FamiliaProduto familiaProduto = familiaProdutoMapper.toEntity(familiaProdutoDTO);
 
-        Conta contaCriada = contaService.addSubConta(1112L, familiaProdutoDTO.getNome());
+        Long contaAgregadoraId = getContaFamiliaId( familiaProdutoDTO );
+
+        Conta contaCriada = contaService.addSubConta(contaAgregadoraId, familiaProdutoDTO.getNome());
+
         familiaProduto.setConta(contaCriada);
         familiaProduto = familiaProdutoRepository.save(familiaProduto);
         return familiaProdutoMapper.toDto(familiaProduto);
     }
 
-    private Long getContaFamiliaId( Long heararquiaId ) {
-
-        // preciso do id da conta onde a hearquia é igual a digitada
-
-        FamiliaProduto familiaHearquia = familiaProdutoRepository.findById( heararquiaId ).get();
-
-        Conta conta = contareRepository.findById( familiaHearquia.getId() ).get();
-
-        return conta.getId();
+    private Long getContaFamiliaId( FamiliaProdutoDTO familiaProdutoDTO ) {
+        if ( familiaProdutoDTO.getHierarquiaId() == null ) {
+            return familiaProdutoDTO.getContaId();
+        } else {
+        FamiliaProduto familiaHearquia = familiaProdutoRepository.findById( familiaProdutoDTO.getHierarquiaId() ).get();
+        return familiaHearquia.getConta().getId();
+        }
     }
 
     /**

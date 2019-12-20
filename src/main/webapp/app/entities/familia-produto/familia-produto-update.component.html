@@ -15,7 +15,7 @@
                         <label class="form-control-label" jhiTranslate="mandaApp.familiaProduto.hierarquia" for="field_hierarquia">Hierarquia</label>
                         <select class="form-control" id="field_hierarquia" name="hierarquia" formControlName="hierarquiaId">
                             <option [ngValue]="null"></option>
-                            <option [ngValue]="familiaProdutoOption.id" *ngFor="let familiaProdutoOption of familiaprodutos; trackBy: trackFamiliaProdutoById">{{familiaProdutoOption.nome}}</option>
+                            <option [ngValue]="familiaProdutoOption.id" *ngFor="let familiaProdutoOption of familiaprodutos; trackBy: trackFamiliaProdutoById"> {{ familiaProdutoOption.hierarquiaNome }} - {{familiaProdutoOption.nome}}</option>
                         </select>
                     </div>
                 <div class="form-group">
