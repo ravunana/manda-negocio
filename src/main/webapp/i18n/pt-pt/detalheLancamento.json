@@ -2,34 +2,33 @@
   "mandaApp": {
     "detalheLancamento": {
       "home": {
-        "title": "Detalhe Lancamentos",
-        "createLabel": "Criar novo(a) Detalhe Lancamento",
-        "createOrEditLabel": "Criar ou editar Detalhe Lancamento",
-        "notFound": "Nenhum Detalhe Lancamentos encontrado"
+        "title": "Detalhes do lançamento",
+        "createLabel": "Novo detalhe",
+        "createOrEditLabel": "Detalhe do lançamento",
+        "notFound": "Nenhum Detalhe encontrado"
       },
-      "created": "Um novo Detalhe Lancamento foi criado com o identificador {{ param }}",
-      "updated": "Detalhe Lancamento com identificador {{ param }} foi actualizado",
-      "deleted": "Detalhe Lancamento com identificador {{ param }} foi eliminado",
+      "created": "Um novo Detalhe foi criado com o identificador {{ param }}",
+      "updated": "Detalhe com identificador {{ param }} foi actualizado",
+      "deleted": "Detalhe com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Detalhe Lancamento {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar o Detalhe {{ id }}?"
       },
       "detail": {
-        "title": "Detalhe Lancamento"
+        "title": "Detalhe de lançamento"
       },
       "valor": "Valor",
-      "desconto": "Desconto",
-      "juro": "Juro",
-      "descricao": "Descricao",
+      "desconto": "Desconto (%)",
+      "juro": "Juro (%)",
+      "descricao": "Descrição",
       "data": "Data",
-      "retencaoFonte": "Retencao Fonte",
-      "dataVencimento": "Data Vencimento",
-      "liquidado": "Liquidado",
-      "retencaoFonte": "Retencao Fonte",
+      "dataVencimento": "Data de vencimento",
+      "liquidado": "Liquidado?",
+      "retencaoFonte": "Retenção na fonte?",
       "utilizador": "Utilizador",
-      "lancamentoFinanceiro": "Lancamento Financeiro",
-      "metodoLiquidacao": "Metodo Liquidacao",
+      "lancamentoFinanceiro": "Lancamento financeiro",
+      "metodoLiquidacao": "Metodo de liquidação",
       "moeda": "Moeda",
-      "coordenada": "Coordenada"
+      "coordenada": "Caixa ou Banco"
     }
   }
 }

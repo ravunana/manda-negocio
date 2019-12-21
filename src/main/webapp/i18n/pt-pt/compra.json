@@ -3,26 +3,26 @@
     "compra": {
       "home": {
         "title": "Compras",
-        "createLabel": "Criar novo(a) Compra",
-        "createOrEditLabel": "Criar ou editar Compra",
-        "notFound": "Nenhum Compras encontrado"
+        "createLabel": "Nova compra",
+        "createOrEditLabel": "Compra",
+        "notFound": "Nenhuma compra encontrada"
       },
-      "created": "Um novo Compra foi criado com o identificador {{ param }}",
+      "created": "Uma nova compra foi criada com o identificador {{ param }}",
       "updated": "Compra com identificador {{ param }} foi actualizado",
       "deleted": "Compra com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Compra {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar a Compra {{ id }}?"
       },
       "detail": {
         "title": "Compra"
       },
-      "numero": "Numero",
+      "numero": "Nº factura",
       "data": "Data",
-      "observacaoGeral": "Observacao Geral",
-      "observacaoInterna": "Observacao Interna",
-      "itemCompra": "Item Compra",
+      "observacaoGeral": "Observação geral",
+      "observacaoInterna": "Observação interna",
+      "itemCompra": "Item de compra",
       "utilizador": "Utilizador",
-      "tipoDocumento": "Tipo Documento",
+      "tipoDocumento": "Tipo de cocumento",
       "empresa": "Empresa"
     }
   }

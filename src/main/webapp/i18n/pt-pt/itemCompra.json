@@ -2,31 +2,31 @@
   "mandaApp": {
     "itemCompra": {
       "home": {
-        "title": "Item Compras",
-        "createLabel": "Criar novo(a) Item Compra",
-        "createOrEditLabel": "Criar ou editar Item Compra",
-        "notFound": "Nenhum Item Compras encontrado"
+        "title": "Itens de compra",
+        "createLabel": "Novo item",
+        "createOrEditLabel": "Item de compra",
+        "notFound": "Nenhum item de compra encontrado"
       },
-      "created": "Um novo Item Compra foi criado com o identificador {{ param }}",
-      "updated": "Item Compra com identificador {{ param }} foi actualizado",
-      "deleted": "Item Compra com identificador {{ param }} foi eliminado",
+      "created": "Um novo Item foi criado com o identificador {{ param }}",
+      "updated": "Item com identificador {{ param }} foi actualizado",
+      "deleted": "Item com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Item Compra {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar o Item {{ id }}?"
       },
       "detail": {
-        "title": "Item Compra"
+        "title": "Item de compra"
       },
       "quantidade": "Quantidade",
-      "desconto": "Desconto",
-      "dataSolicitacao": "Data Solicitacao",
-      "dataEntrega": "Data Entrega",
-      "descricao": "Descricao",
+      "desconto": "Desconto (%)",
+      "dataSolicitacao": "Data da solicitação",
+      "dataEntrega": "Data de entrega",
+      "descricao": "Descrição",
       "valor": "Valor",
       "solicitante": "Solicitante",
       "compra": "Compra",
       "produto": "Produto",
       "fornecedor": "Fornecedor",
-      "status": "Status"
+      "status": "Estado"
     }
   }
 }
