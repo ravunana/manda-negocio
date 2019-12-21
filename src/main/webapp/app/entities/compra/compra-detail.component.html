@@ -11,7 +11,7 @@
                 </dd>
                 <dt><span jhiTranslate="mandaApp.compra.data">Data</span></dt>
                 <dd>
-                    <span>{{compra.data}}</span>
+                    <span>{{compra.data | date: 'medium'}}</span>
                 </dd>
                 <dt><span jhiTranslate="mandaApp.compra.observacaoGeral">Observacao Geral</span></dt>
                 <dd>
@@ -88,7 +88,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let pagamento of pagamentos; let i = index">
-                                    <td> {{ i}} </td>
+                                    <td> {{ pagamento.id }} </td>
                                     <td> {{ pagamento.valor | currency : pagamento.moedaCodigo }} </td>
                                     <td> {{ pagamento.coordenadaDescricao }} </td>
                                     <td> {{ pagamento.liquidado }} </td>
