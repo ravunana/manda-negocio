@@ -1,5 +1,7 @@
 package com.ravunana.manda.repository;
 import com.ravunana.manda.domain.LancamentoFinanceiro;
+import com.ravunana.manda.domain.enumeration.EntidadeSistema;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -27,5 +29,7 @@ public interface LancamentoFinanceiroRepository extends JpaRepository<Lancamento
 
     @Query("select lancamentoFinanceiro from LancamentoFinanceiro lancamentoFinanceiro left join fetch lancamentoFinanceiro.impostos where lancamentoFinanceiro.id =:id")
     Optional<LancamentoFinanceiro> findOneWithEagerRelationships(@Param("id") Long id);
+
+    LancamentoFinanceiro findByEntidadeDocumentoAndNumeroDocumento(EntidadeSistema entidadeDocumento, String numeroDocumento);
 
 }

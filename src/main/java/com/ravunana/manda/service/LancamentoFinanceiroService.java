@@ -3,6 +3,7 @@ package com.ravunana.manda.service;
 import com.ravunana.manda.domain.DocumentoComercial;
 import com.ravunana.manda.domain.LancamentoFinanceiro;
 import com.ravunana.manda.domain.SerieDocumento;
+import com.ravunana.manda.domain.enumeration.EntidadeSistema;
 import com.ravunana.manda.repository.DocumentoComercialRepository;
 import com.ravunana.manda.repository.LancamentoFinanceiroRepository;
 import com.ravunana.manda.service.dto.DetalheLancamentoDTO;
@@ -36,8 +37,6 @@ public class LancamentoFinanceiroService {
 
 
     private List<DetalheLancamentoDTO> detalhesLancamento = new ArrayList<>();
-
-    private LancamentoFinanceiroDTO lancamentoFinanceiroDTO;
 
     @Autowired
     private UserService userService;
@@ -167,5 +166,10 @@ public class LancamentoFinanceiroService {
 
     public void clearDetahesLancamento() {
         detalhesLancamento.clear();
+    }
+
+    public LancamentoFinanceiroDTO getLancamentoByEntidadeAndNumero( EntidadeSistema entidade, String numero ) {
+        log.debug("Request to get LancamentoFinanceiro by Entidade and Numero: {} {}", entidade, numero);
+        return lancamentoFinanceiroMapper.toDto(lancamentoFinanceiroRepository.findByEntidadeDocumentoAndNumeroDocumento(entidade, numero));
     }
 }

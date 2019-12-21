@@ -10,6 +10,7 @@ import { ProdutoService } from '../produto/produto.service';
 import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
 import { DetalheLancamentoService } from '../detalhe-lancamento/detalhe-lancamento.service';
 import { LancamentoFinanceiroService } from '../lancamento-financeiro/lancamento-financeiro.service';
+import { EntidadeSistema } from 'app/shared/model/enumerations/entidade-sistema.model';
 
 @Component({
   selector: 'rv-compra-detail',
@@ -17,10 +18,9 @@ import { LancamentoFinanceiroService } from '../lancamento-financeiro/lancamento
 })
 export class CompraDetailComponent implements OnInit {
   compra: ICompra;
-  items: IItemCompra[];
+  items: IItemCompra[] = [];
   moedaNacional;
-  pagamentos: IDetalheLancamento[];
-  private lancamentoFinanceiroId = 0;
+  pagamentos: IDetalheLancamento[] = [];
 
   constructor(
     protected dataUtils: JhiDataUtils,
@@ -44,11 +44,21 @@ export class CompraDetailComponent implements OnInit {
       this.moedaNacional = moedaResult.body.filter(m => m.nacional).shift().codigo;
     });
 
-    // this.lancamentoFinanceiroService.query({'descricao'}).subscribe()
-
-    this.detalheLancamentoService.query().subscribe(data => {
-      this.pagamentos = data.body.filter(d => d.lancamentoFinanceiroId === this.lancamentoFinanceiroId);
+    this.lancamentoFinanceiroService.query().subscribe(data => {
+      const lancamento = data.body.filter(l => l.entidadeDocumento === EntidadeSistema.COMPRA && l.numero === this.compra.numero).shift();
+      this.detalheLancamentoService.query().subscribe(detalheResult => {
+        this.pagamentos = detalheResult.body.filter(d => d.lancamentoFinanceiroId === lancamento.id);
+      });
     });
+
+    // this.lancamentoFinanceiroService.getLancamentoByEntidadeAndNumero(EntidadeSistema.COMPRA, 'FR 2019/2')
+    //     .subscribe( dataResult => {
+    //               alert( 'OOOOOOOO' + dataResult.numero );
+    // })
+
+    // this.detalheLancamentoService.query().subscribe(data => {
+    //   this.pagamentos = data.body.filter(d => d.lancamentoFinanceiroId === dataResult.id);
+    // });
   }
 
   byteSize(field) {

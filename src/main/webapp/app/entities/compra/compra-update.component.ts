@@ -45,12 +45,12 @@ export class CompraUpdateComponent implements OnInit {
   TROCO = 0;
 
   items: IItemCompra[] = [];
-  impostos: IImposto[] = [];
-  formaliquidacaos: IFormaLiquidacao[] = [];
+  impostos: IImposto[];
+  formaliquidacaos: IFormaLiquidacao[];
 
-  documentocomercials: IDocumentoComercial[] = [];
+  documentocomercials: IDocumentoComercial[];
 
-  empresas: IEmpresa[] = [];
+  empresas: IEmpresa[];
   moedaNacional = 'Moeda';
 
   editForm = this.fb.group({
