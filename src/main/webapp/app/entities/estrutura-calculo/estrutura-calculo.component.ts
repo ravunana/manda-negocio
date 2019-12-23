@@ -61,7 +61,7 @@ export class EstruturaCalculoComponent implements OnInit, OnDestroy {
           sort: this.sort()
         })
         .subscribe((res: HttpResponse<IEstruturaCalculo[]>) =>
-          this.paginateEstruturaCalculos(res.body.filter(e => e.produtoId == this.produtoId), res.headers)
+          this.paginateEstruturaCalculos(res.body.filter(e => e.produtoId === this.produtoId), res.headers)
         );
     });
   }
