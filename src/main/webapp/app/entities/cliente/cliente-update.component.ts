@@ -23,6 +23,8 @@ export class ClienteUpdateComponent implements OnInit {
   pessoas: IPessoa[];
 
   contas: IConta[];
+  pessoaId = 0;
+  contaId = 0;
 
   editForm = this.fb.group({
     id: [],
@@ -31,9 +33,9 @@ export class ClienteUpdateComponent implements OnInit {
     satisfacao: [],
     frequencia: [],
     canalUsado: [],
-    numero: [null, [Validators.required]],
+    numero: [null],
     autofacturacao: [],
-    pessoaId: [null, Validators.required],
+    pessoaId: [null],
     contaId: []
   });
 
@@ -51,6 +53,8 @@ export class ClienteUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ cliente }) => {
       this.updateForm(cliente);
+      this.pessoaId = cliente.pessoaId;
+      this.contaId = cliente.contaId;
     });
     this.pessoaService.query({ 'clienteId.specified': 'false' }).subscribe(
       (res: HttpResponse<IPessoa[]>) => {
@@ -143,10 +147,10 @@ export class ClienteUpdateComponent implements OnInit {
       satisfacao: this.editForm.get(['satisfacao']).value,
       frequencia: this.editForm.get(['frequencia']).value,
       canalUsado: this.editForm.get(['canalUsado']).value,
-      numero: this.editForm.get(['numero']).value,
+      numero: '00000',
       autofacturacao: this.editForm.get(['autofacturacao']).value,
-      pessoaId: this.editForm.get(['pessoaId']).value,
-      contaId: this.editForm.get(['contaId']).value
+      pessoaId: this.pessoaId,
+      contaId: this.contaId
     };
   }
 
@@ -172,5 +176,16 @@ export class ClienteUpdateComponent implements OnInit {
 
   trackContaById(index: number, item: IConta) {
     return item.id;
+  }
+
+  onSelectPessoa(pessoa) {
+    this.pessoaId = pessoa.id;
+    // this.editForm.get('pessoaId').patchValue(pessoa.id, { emitEvent: false });
+  }
+
+  searchPessoa(pessoa) {
+    this.pessoaService.query({ 'nome.contains': pessoa.query }).subscribe(data => {
+      this.pessoas = data.body;
+    });
   }
 }

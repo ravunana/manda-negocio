@@ -2,6 +2,7 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="rv-cliente-heading" jhiTranslate="mandaApp.cliente.home.createOrEditLabel">Create or edit a Cliente</h2>
+            <hr>
             <div>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
@@ -9,10 +10,37 @@
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
                 </div>
+
+
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.cliente.ativo" for="field_ativo">Ativo</label>
-                    <input type="checkbox" class="form-control" name="ativo" id="field_ativo"
-                           formControlName="ativo"/>
+                    <label class="form-control-label" jhiTranslate="mandaApp.cliente.pessoa" for="field_pessoa">Pessoa</label>
+                    <p-autoComplete placeholder="Escreva o nome da pessoa" id="field_pessoa" name="cliente" field="nome" [suggestions]="pessoas"
+                    (completeMethod)="searchPessoa($event)" (onSelect)="onSelectPessoa($event)" required>
+                </p-autoComplete>
+                    <!-- <select class="form-control" id="field_pessoa" name="pessoa" formControlName="pessoaId">
+                        <option *ngIf="!editForm.get('pessoaId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="pessoaOption.id" *ngFor="let pessoaOption of pessoas; trackBy: trackPessoaById">{{pessoaOption.nome}}</option>
+                    </select> -->
+                    <div *ngIf="editForm.get('pessoaId').invalid && (editForm.get('pessoaId').dirty || editForm.get('pessoaId').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('pessoaId').errors.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="form-group">
+                <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="ativo">
+                        <label ngbButtonLabel class="btn-primary">
+                            <input ngbButton type="radio" [value]="true"> Activo
+                        </label>
+
+                        <label ngbButtonLabel class="btn-primary">
+                            <input class="bg-danger" ngbButton type="radio" [value]="false"> Inactivo
+                        </label>
+                    </div>
+                    <br>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.cliente.perfilProfissional" for="field_perfilProfissional">Perfil Profissional</label>
@@ -34,7 +62,7 @@
                     <input type="text" class="form-control" name="canalUsado" id="field_canalUsado"
                            formControlName="canalUsado"/>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.cliente.numero" for="field_numero">Numero</label>
                     <input type="text" class="form-control" name="numero" id="field_numero"
                            formControlName="numero"/>
@@ -44,34 +72,35 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.cliente.autofacturacao" for="field_autofacturacao">Autofacturacao</label>
-                    <input type="checkbox" class="form-control" name="autofacturacao" id="field_autofacturacao"
-                           formControlName="autofacturacao"/>
-                </div>
+                    <!-- <input type="checkbox" class="form-control" name="autofacturacao" id="field_autofacturacao"
+                           formControlName="autofacturacao"/> -->
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.cliente.pessoa" for="field_pessoa">Pessoa</label>
-                    <select class="form-control" id="field_pessoa" name="pessoa" formControlName="pessoaId">
-                        <option *ngIf="!editForm.get('pessoaId').value" [ngValue]="null" selected></option>
-                        <option [ngValue]="pessoaOption.id" *ngFor="let pessoaOption of pessoas; trackBy: trackPessoaById">{{pessoaOption.nome}}</option>
-                    </select>
+                    <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="autofacturacao">
+                            <label ngbButtonLabel class="btn-primary">
+                                <input ngbButton type="radio" [value]="true"> Facturação automatica
+                            </label>
+
+                            <label ngbButtonLabel class="btn-primary">
+                                <input class="bg-danger" ngbButton type="radio" [value]="false"> Facturação normal
+                            </label>
+                        </div>
+                        <br>
+                    </div>
                 </div>
-                <div *ngIf="editForm.get('pessoaId').invalid && (editForm.get('pessoaId').dirty || editForm.get('pessoaId').touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('pessoaId').errors.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-                <div class="form-group">
+
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.cliente.conta" for="field_conta">Conta</label>
                     <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
                     </select>
-                </div>
+                </div> -->
             </div>
+            <hr>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

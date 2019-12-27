@@ -3,29 +3,29 @@
     "cliente": {
       "home": {
         "title": "Clientes",
-        "createLabel": "Criar novo(a) Cliente",
-        "createOrEditLabel": "Criar ou editar Cliente",
+        "createLabel": "Novo cliente",
+        "createOrEditLabel": "Cliente",
         "notFound": "Nenhum Clientes encontrado"
       },
       "created": "Um novo Cliente foi criado com o identificador {{ param }}",
       "updated": "Cliente com identificador {{ param }} foi actualizado",
       "deleted": "Cliente com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Cliente {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar o Cliente {{ id }}?"
       },
       "detail": {
         "title": "Cliente"
       },
-      "ativo": "Ativo",
-      "perfilProfissional": "Perfil Profissional",
-      "satisfacao": "Satisfacao",
-      "frequencia": "Frequencia",
-      "canalUsado": "Canal Usado",
-      "numero": "Numero",
-      "autofacturacao": "Autofacturacao",
+      "ativo": "Activo?",
+      "perfilProfissional": "Perfil profissional",
+      "satisfacao": "Nivel de satisfação",
+      "frequencia": "Nivel frequencia de uso",
+      "canalUsado": "Canal usado",
+      "numero": "Número do cliente",
+      "autofacturacao": "Autofacturação?",
       "pessoa": "Pessoa",
       "venda": "Venda",
-      "conta": "Conta"
+      "conta": "Conta contabil"
     }
   }
 }

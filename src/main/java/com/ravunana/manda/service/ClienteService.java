@@ -1,12 +1,16 @@
 package com.ravunana.manda.service;
 
 import com.ravunana.manda.domain.Cliente;
+import com.ravunana.manda.domain.Conta;
+import com.ravunana.manda.domain.Pessoa;
+import com.ravunana.manda.domain.SerieDocumento;
 import com.ravunana.manda.repository.ClienteRepository;
+import com.ravunana.manda.repository.PessoaRepository;
 import com.ravunana.manda.service.dto.ClienteDTO;
 import com.ravunana.manda.service.mapper.ClienteMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +31,15 @@ public class ClienteService {
 
     private final ClienteMapper clienteMapper;
 
+    @Autowired
+    private SerieDocumentoService serieDocumentoService;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private ContaService contaService;
+
     public ClienteService(ClienteRepository clienteRepository, ClienteMapper clienteMapper) {
         this.clienteRepository = clienteRepository;
         this.clienteMapper = clienteMapper;
@@ -41,8 +54,35 @@ public class ClienteService {
     public ClienteDTO save(ClienteDTO clienteDTO) {
         log.debug("Request to save Cliente : {}", clienteDTO);
         Cliente cliente = clienteMapper.toEntity(clienteDTO);
+
+        Pessoa pessoa = pessoaRepository.findById( clienteDTO.getPessoaId() ).get();
+
+        if ( cliente.getId() != null ) {
+            String numeroSalvo = clienteRepository.findById( clienteDTO.getId() ).get().getNumero();
+            cliente.setNumero(numeroSalvo);
+            cliente = clienteRepository.save(cliente);
+        } else {
+
+            Conta conta = contaService.addSubConta(1182L, pessoa.getNome());
+            cliente.setConta(conta);
+            cliente.setNumero( getNumeroCliente(pessoa.getTipoPessoa()));
+            cliente = clienteRepository.save(cliente);
+        }
+
         cliente = clienteRepository.save(cliente);
         return clienteMapper.toDto(cliente);
+    }
+
+    private String getNumeroCliente( String tipoPessoa ) {
+        SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
+
+        int sequencia = serieDocumento.getCodigoCliente();
+        String numero = "P" + tipoPessoa.substring(0, 1) + " " + serieDocumento.getSerie() + "/" + sequencia; // <TIPO_DOCUMENTO> <SEQUENCIA_FORNECEDOR>
+        // atualizar serie do documento
+        serieDocumento.setCodigoCliente( sequencia + 1 );
+        serieDocumentoService.atualizarSerieDocumento(serieDocumento);
+
+        return numero;
     }
 
     /**
