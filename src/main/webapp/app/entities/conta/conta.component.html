@@ -21,14 +21,14 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.conta.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="codigo"><span jhiTranslate="mandaApp.conta.codigo">Codigo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="mandaApp.conta.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="grau"><span jhiTranslate="mandaApp.conta.grau">Grau</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="natureza"><span jhiTranslate="mandaApp.conta.natureza">Natureza</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="grupo"><span jhiTranslate="mandaApp.conta.grupo">Grupo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="conteudo"><span jhiTranslate="mandaApp.conta.conteudo">Conteudo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.conta.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="mandaApp.conta.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <!-- <th scope="col"  jhiSortBy="grau"><span jhiTranslate="mandaApp.conta.grau">Grau</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <!-- <th scope="col"  jhiSortBy="natureza"><span jhiTranslate="mandaApp.conta.natureza">Natureza</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <!-- <th scope="col"  jhiSortBy="grupo"><span jhiTranslate="mandaApp.conta.grupo">Grupo</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
+            <!-- <th scope="col"  jhiSortBy="conteudo"><span jhiTranslate="mandaApp.conta.conteudo">Conteudo</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="contaAgregadoraDescricao"><span jhiTranslate="mandaApp.conta.contaAgregadora">Conta Agregadora</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="classeContaDescricao"><span jhiTranslate="mandaApp.conta.classeConta">Classe Conta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
@@ -36,14 +36,14 @@
             </thead>
             <tbody>
             <tr *ngFor="let conta of (contas | pureFilter:filter:'codigo') ;trackBy: trackId">
-                <td><a [routerLink]="['/conta', conta.id, 'view' ]">{{conta.id}}</a></td>
-                <td>{{conta.descricao}}</td>
+                <!-- <td><a [routerLink]="['/conta', conta.id, 'view' ]">{{conta.id}}</a></td> -->
                 <td>{{conta.codigo}}</td>
-                <td>{{conta.tipo}}</td>
-                <td>{{conta.grau}}</td>
-                <td>{{conta.natureza}}</td>
-                <td>{{conta.grupo}}</td>
-                <td>{{conta.conteudo}}</td>
+                <td>{{conta.descricao}}</td>
+                <!-- <td>{{conta.tipo}}</td> -->
+                <!-- <td>{{conta.grau}}</td> -->
+                <!-- <td>{{conta.natureza}}</td> -->
+                <!-- <td>{{conta.grupo}}</td> -->
+                <!-- <td>{{conta.conteudo}}</td> -->
                 <td>
                     <div *ngIf="conta.contaAgregadoraId">
                         <a [routerLink]="['/conta', conta.contaAgregadoraId , 'view' ]" >{{conta.contaAgregadoraDescricao}}</a>
@@ -56,20 +56,26 @@
                 </td>
                 <td class="text-right">
                     <div class="btn-group">
+                        <!-- <button type="submit"
+                                [routerLink]="['/conta/new']"
+                                class="btn btn-success btn-sm mr-1">
+                            <fa-icon [icon]="'plus'"></fa-icon>
+                            <span class="d-none d-md-inline" >Subconta</span>
+                        </button> -->
                         <button type="submit"
                                 [routerLink]="['/conta', conta.id, 'view' ]"
-                                class="btn btn-info btn-sm">
+                                class="btn btn-info btn-sm mr-1">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/conta', conta.id, 'edit']"
-                                class="btn btn-primary btn-sm">
+                                class="btn btn-primary btn-sm mr-1">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit" (click)="delete(conta)"
-                                class="btn btn-danger btn-sm">
+                                class="btn btn-danger btn-sm mr-1">
                             <fa-icon [icon]="'times'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                         </button>

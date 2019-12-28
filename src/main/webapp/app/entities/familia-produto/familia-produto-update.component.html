@@ -52,7 +52,7 @@
                             name="contaAgregadora" field="descricao" [suggestions]="contas"
                             (completeMethod)="searchConta($event)" (onSelect)="onSelectConta($event)" required>
                             <ng-template let-brand pTemplate="item">
-                                <p> {{ brand.descricao }} - {{ brand.codigo }} </p>
+                                <p> {{ brand.codigo }}  {{ brand.descricao }} </p>
                             </ng-template>
                         </p-autoComplete>
                         <!-- <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
