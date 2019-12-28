@@ -2,7 +2,10 @@ package com.ravunana.manda.service.dto;
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.Lob;
 
 /**
@@ -38,6 +41,27 @@ public class VendaDTO implements Serializable {
     private Long empresaId;
 
     private String empresaNome;
+
+
+    private Set<ImpostoDTO> impostos = new HashSet()<>();
+
+    private Long formaLiquidacaoId;
+
+    public Long getFormaLiquidacaoId() {
+        return formaLiquidacaoId;
+    }
+
+    public void setFormaLiquidacaoId(Long formaLiquidacaoId) {
+        this.formaLiquidacaoId = formaLiquidacaoId;
+    }
+
+    public Set<ImpostoDTO> getImpostos() {
+        return impostos;
+    }
+
+    public void setImpostos(Set<ImpostoDTO> impostos) {
+        this.impostos = impostos;
+    }
 
     public Long getId() {
         return id;

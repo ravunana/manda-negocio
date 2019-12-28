@@ -37,6 +37,7 @@ export class CompraUpdateComponent implements OnInit {
 
   users: IUser[];
   pagamentos: IDetalheLancamento[] = [];
+  items: IItemCompra[] = [];
 
   SUB_TOTAL = 0;
   TOTAL_DESCONTO = 0;
@@ -44,7 +45,6 @@ export class CompraUpdateComponent implements OnInit {
   TOTAL_ENTREGUE = 0;
   TROCO = 0;
 
-  items: IItemCompra[] = [];
   impostos: IImposto[];
   formaliquidacaos: IFormaLiquidacao[];
 

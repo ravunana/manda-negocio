@@ -18,6 +18,12 @@ import { IDocumentoComercial } from 'app/shared/model/documento-comercial.model'
 import { DocumentoComercialService } from 'app/entities/documento-comercial/documento-comercial.service';
 import { IEmpresa } from 'app/shared/model/empresa.model';
 import { EmpresaService } from 'app/entities/empresa/empresa.service';
+import { FormaLiquidacaoService } from '../forma-liquidacao/forma-liquidacao.service';
+import { IFormaLiquidacao } from 'app/shared/model/forma-liquidacao.model';
+import { IImposto } from 'app/shared/model/imposto.model';
+import { ImpostoService } from '../imposto/imposto.service';
+import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
+import { IItemCompra } from 'app/shared/model/item-compra.model';
 
 @Component({
   selector: 'rv-venda-update',
@@ -29,8 +35,18 @@ export class VendaUpdateComponent implements OnInit {
   users: IUser[];
 
   clientes: ICliente[];
+  pagamentos: IDetalheLancamento[] = [];
+  items: IItemCompra[] = [];
+
+  SUB_TOTAL = 0;
+  TOTAL_DESCONTO = 0;
+  TOTAL_PAGAR = 0;
+  TOTAL_ENTREGUE = 0;
+  TROCO = 0;
 
   documentocomercials: IDocumentoComercial[];
+  formaliquidacaos: IFormaLiquidacao[];
+  impostos: IImposto[];
 
   empresas: IEmpresa[];
 
@@ -43,7 +59,9 @@ export class VendaUpdateComponent implements OnInit {
     vendedorId: [],
     clienteId: [null, Validators.required],
     tipoDocumentoId: [null, Validators.required],
-    empresaId: []
+    empresaId: [],
+    impostos: [null, Validators.required],
+    formaLiquidacaoId: [null, Validators.required]
   });
 
   constructor(
@@ -55,7 +73,9 @@ export class VendaUpdateComponent implements OnInit {
     protected documentoComercialService: DocumentoComercialService,
     protected empresaService: EmpresaService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected formaLiquidacaoService: FormaLiquidacaoService,
+    protected impostoService: ImpostoService
   ) {}
 
   ngOnInit() {
@@ -78,6 +98,17 @@ export class VendaUpdateComponent implements OnInit {
     this.empresaService
       .query()
       .subscribe((res: HttpResponse<IEmpresa[]>) => (this.empresas = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+
+    this.impostoService
+      .query()
+      .subscribe((res: HttpResponse<IImposto[]>) => (this.impostos = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+
+    this.formaLiquidacaoService
+      .query()
+      .subscribe(
+        (res: HttpResponse<IFormaLiquidacao[]>) => (this.formaliquidacaos = res.body),
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
   }
 
   updateForm(venda: IVenda) {
@@ -188,7 +219,14 @@ export class VendaUpdateComponent implements OnInit {
     return item.id;
   }
 
-  // initForm() {
-  //   this.editForm
-  // }
+  getSelected(selectedVals: any[], option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
+  }
 }

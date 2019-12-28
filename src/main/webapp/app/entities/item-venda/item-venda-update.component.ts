@@ -36,7 +36,7 @@ export class ItemVendaUpdateComponent implements OnInit {
     valor: [null, [Validators.min(0)]],
     desconto: [null, [Validators.min(0), Validators.max(100)]],
     data: [],
-    vendaId: [null, Validators.required],
+    vendaId: [null],
     produtoId: [],
     statusId: []
   });

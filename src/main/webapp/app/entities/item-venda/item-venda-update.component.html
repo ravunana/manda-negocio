@@ -2,6 +2,7 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="rv-item-venda-heading" jhiTranslate="mandaApp.itemVenda.home.createOrEditLabel">Create or edit a Item Venda</h2>
+            <hr>
             <div>
                 <rv-alert-error></rv-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id').value">
@@ -9,63 +10,97 @@
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.quantidade" for="field_quantidade">Quantidade</label>
-                    <input type="number" class="form-control" name="quantidade" id="field_quantidade"
-                           formControlName="quantidade"/>
-                    <div *ngIf="editForm.get('quantidade').invalid && (editForm.get('quantidade').dirty || editForm.get('quantidade').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('quantidade').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
-                            This field should be at least 1.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('quantidade')?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
+
+                <div class="row">
+
+                    <div class="form-group col">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.produto" for="field_produto">Produto</label>
+                        <select class="form-control" id="field_produto" name="produto" formControlName="produtoId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="produtoOption.id" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.nome}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.valor" for="field_valor">Valor</label>
+                        <input type="number" class="form-control" name="valor" id="field_valor"
+                               formControlName="valor"/>
+                        <div *ngIf="editForm.get('valor').invalid && (editForm.get('valor').dirty || editForm.get('valor').touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('valor').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                                This field should be at least 0.
+                            </small>
+                            <small class="form-text text-danger"
+                                [hidden]="!editForm.get('valor')?.errors?.number" jhiTranslate="entity.validation.number">
+                                This field should be a number.
+                            </small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.quantidade" for="field_quantidade">Quantidade</label>
+                        <input type="number" class="form-control" name="quantidade" id="field_quantidade"
+                               formControlName="quantidade"/>
+                        <div *ngIf="editForm.get('quantidade').invalid && (editForm.get('quantidade').dirty || editForm.get('quantidade').touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('quantidade').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                                This field should be at least 1.
+                            </small>
+                            <small class="form-text text-danger"
+                                [hidden]="!editForm.get('quantidade')?.errors?.number" jhiTranslate="entity.validation.number">
+                                This field should be a number.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.desconto" for="field_desconto">Desconto</label>
+                        <input type="number" class="form-control" name="desconto" id="field_desconto"
+                               formControlName="desconto"/>
+                        <div *ngIf="editForm.get('desconto').invalid && (editForm.get('desconto').dirty || editForm.get('desconto').touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('desconto').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                                This field should be at least 0.
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('desconto').errors.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: 100 }">
+                                This field cannot be more than 100.
+                            </small>
+                            <small class="form-text text-danger"
+                                [hidden]="!editForm.get('desconto')?.errors?.number" jhiTranslate="entity.validation.number">
+                                This field should be a number.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.status" for="field_status">Status</label>
+                        <select class="form-control" id="field_status" name="status" formControlName="statusId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="fluxoDocumentoOption.id" *ngFor="let fluxoDocumentoOption of fluxodocumentos; trackBy: trackFluxoDocumentoById">{{fluxoDocumentoOption.nome}}</option>
+                        </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.valor" for="field_valor">Valor</label>
-                    <input type="number" class="form-control" name="valor" id="field_valor"
-                           formControlName="valor"/>
-                    <div *ngIf="editForm.get('valor').invalid && (editForm.get('valor').dirty || editForm.get('valor').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('valor').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
-                            This field should be at least 0.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('valor')?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
+
+                <div class="row" *ngIf="true" >
+
+                    <div class="ml-3">
+                        <button type="button" class="btn btn-secondary" > Mostrar lista </button>
+                    </div>
+
+                    <div class="ml-3">
+                        <button type="button" class="btn btn-success" > incluir na lista </button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.desconto" for="field_desconto">Desconto</label>
-                    <input type="number" class="form-control" name="desconto" id="field_desconto"
-                           formControlName="desconto"/>
-                    <div *ngIf="editForm.get('desconto').invalid && (editForm.get('desconto').dirty || editForm.get('desconto').touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('desconto').errors.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
-                            This field should be at least 0.
-                        </small>
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('desconto').errors.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: 100 }">
-                            This field cannot be more than 100.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('desconto')?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.data" for="field_data">Data</label>
                     <div class="d-flex">
                         <input id="field_data" type="datetime-local" class="form-control" name="data" formControlName="data" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.venda" for="field_venda">Venda</label>
                     <select class="form-control" id="field_venda" name="venda" formControlName="vendaId">
                         <option *ngIf="!editForm.get('vendaId').value" [ngValue]="null" selected></option>
@@ -77,23 +112,10 @@
                            *ngIf="editForm.get('vendaId').errors.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.produto" for="field_produto">Produto</label>
-                    <select class="form-control" id="field_produto" name="produto" formControlName="produtoId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="produtoOption.id" *ngFor="let produtoOption of produtos; trackBy: trackProdutoById">{{produtoOption.nome}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mandaApp.itemVenda.status" for="field_status">Status</label>
-                    <select class="form-control" id="field_status" name="status" formControlName="statusId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="fluxoDocumentoOption.id" *ngFor="let fluxoDocumentoOption of fluxodocumentos; trackBy: trackFluxoDocumentoById">{{fluxoDocumentoOption.nome}}</option>
-                    </select>
-                </div>
+                </div> -->
             </div>
-            <div>
+            <hr>
+            <div *ngIf="false" >
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
