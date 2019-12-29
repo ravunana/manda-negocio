@@ -30,8 +30,8 @@ export class ContaCreditoUpdateComponent implements OnInit {
     id: [],
     valor: [null, [Validators.required, Validators.min(0)]],
     data: [],
-    contaCreditarId: [null, Validators.required],
-    lancamentoCreditoId: [null, Validators.required]
+    contaCreditarId: [null],
+    lancamentoCreditoId: [null]
   });
 
   constructor(
@@ -40,7 +40,8 @@ export class ContaCreditoUpdateComponent implements OnInit {
     protected contaService: ContaService,
     protected escrituracaoContabilService: EscrituracaoContabilService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected escrituracaoContabil: EscrituracaoContabilService
   ) {}
 
   ngOnInit() {
@@ -88,9 +89,10 @@ export class ContaCreditoUpdateComponent implements OnInit {
       ...new ContaCredito(),
       id: this.editForm.get(['id']).value,
       valor: this.editForm.get(['valor']).value,
-      data: this.editForm.get(['data']).value != null ? moment(this.editForm.get(['data']).value, DATE_TIME_FORMAT) : undefined,
-      contaCreditarId: this.editForm.get(['contaCreditarId']).value,
-      lancamentoCreditoId: this.editForm.get(['lancamentoCreditoId']).value
+      data: moment(new Date()),
+      // data: this.editForm.get(['data']).value != null ? moment(this.editForm.get(['data']).value, DATE_TIME_FORMAT) : undefined,
+      contaCreditarId: this.editForm.get(['contaCreditarId']).value
+      // lancamentoCreditoId: this.editForm.get(['lancamentoCreditoId']).value
     };
   }
 
@@ -116,5 +118,21 @@ export class ContaCreditoUpdateComponent implements OnInit {
 
   trackEscrituracaoContabilById(index: number, item: IEscrituracaoContabil) {
     return item.id;
+  }
+
+  onAddCredito() {
+    this.escrituracaoContabil.addCredito(this.createFromForm()).subscribe(data => {
+      this.previousState();
+    });
+  }
+
+  onSelectConta(conta) {
+    this.editForm.get('contaCreditarId').patchValue(conta.id, { emitEvent: false });
+  }
+
+  searchConta(conta) {
+    this.contaService.query({ 'descricao.contains': conta.query }).subscribe(data => {
+      this.contas = data.body;
+    });
   }
 }

@@ -15,7 +15,7 @@
                 </dd>
                 <dt><span jhiTranslate="mandaApp.escrituracaoContabil.valor">Valor</span></dt>
                 <dd>
-                    <span>{{escrituracaoContabil.valor}}</span>
+                    <span>{{escrituracaoContabil.valor | currency: 'AOA' }}</span>
                 </dd>
                 <dt><span jhiTranslate="mandaApp.escrituracaoContabil.referencia">Referencia</span></dt>
                 <dd>
@@ -31,11 +31,11 @@
                 </dd>
                 <dt><span jhiTranslate="mandaApp.escrituracaoContabil.dataDocumento">Data Documento</span></dt>
                 <dd>
-                    <span>{{escrituracaoContabil.dataDocumento}}</span>
+                    <span>{{escrituracaoContabil.dataDocumento | date: 'medium' }}</span>
                 </dd>
                 <dt><span jhiTranslate="mandaApp.escrituracaoContabil.data">Data</span></dt>
                 <dd>
-                    <span>{{escrituracaoContabil.data}}</span>
+                    <span>{{escrituracaoContabil.data | date: 'medium' }}</span>
                 </dd>
                 <dt><span jhiTranslate="mandaApp.escrituracaoContabil.utilizador">Utilizador</span></dt>
                 <dd>

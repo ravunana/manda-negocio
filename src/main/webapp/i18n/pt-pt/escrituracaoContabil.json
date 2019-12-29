@@ -2,30 +2,30 @@
   "mandaApp": {
     "escrituracaoContabil": {
       "home": {
-        "title": "Escrituracao Contabils",
-        "createLabel": "Criar novo(a) Escrituracao Contabil",
-        "createOrEditLabel": "Criar ou editar Escrituracao Contabil",
-        "notFound": "Nenhum Escrituracao Contabils encontrado"
+        "title": "Escriturações contabeis",
+        "createLabel": "Nova escrituração",
+        "createOrEditLabel": "Escrituração contabil",
+        "notFound": "Nenhum Escrituraão encontrada"
       },
-      "created": "Um novo Escrituracao Contabil foi criado com o identificador {{ param }}",
-      "updated": "Escrituracao Contabil com identificador {{ param }} foi actualizado",
-      "deleted": "Escrituracao Contabil com identificador {{ param }} foi eliminado",
+      "created": "Uma nova Escrituração foi criado com o identificador {{ param }}",
+      "updated": "Escrituraão com identificador {{ param }} foi actualizado",
+      "deleted": "Escrituração com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Escrituracao Contabil {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar a Escrituração {{ id }}?"
       },
       "detail": {
-        "title": "Escrituracao Contabil"
+        "title": "Escrituração contabil"
       },
-      "numero": "Numero",
-      "historico": "Historico",
+      "numero": "Número do movimento",
+      "historico": "Histórico",
       "valor": "Valor",
-      "referencia": "Referencia",
-      "entidadeReferencia": "Entidade Referencia",
+      "referencia": "Número do documento",
+      "entidadeReferencia": "Entidade",
       "tipo": "Tipo",
-      "dataDocumento": "Data Documento",
-      "data": "Data",
-      "contaDebito": "Conta Debito",
-      "contaCredito": "Conta Credito",
+      "dataDocumento": "Data do documento",
+      "data": "Data do movimento",
+      "contaDebito": "Conta debito",
+      "contaCredito": "Conta credito",
       "utilizador": "Utilizador",
       "empresa": "Empresa"
     }

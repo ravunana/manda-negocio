@@ -18,34 +18,34 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.escrituracaoContabil.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="historico"><span jhiTranslate="mandaApp.escrituracaoContabil.historico">Historico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="valor"><span jhiTranslate="mandaApp.escrituracaoContabil.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="referencia"><span jhiTranslate="mandaApp.escrituracaoContabil.referencia">Referencia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="entidadeReferencia"><span jhiTranslate="mandaApp.escrituracaoContabil.entidadeReferencia">Entidade Referencia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="mandaApp.escrituracaoContabil.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="mandaApp.escrituracaoContabil.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="dataDocumento"><span jhiTranslate="mandaApp.escrituracaoContabil.dataDocumento">Data Documento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="data"><span jhiTranslate="mandaApp.escrituracaoContabil.data">Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.escrituracaoContabil.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.escrituracaoContabil.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.escrituracaoContabil.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let escrituracaoContabil of escrituracaoContabils ;trackBy: trackId">
-                <td><a [routerLink]="['/escrituracao-contabil', escrituracaoContabil.id, 'view' ]">{{escrituracaoContabil.id}}</a></td>
+                <!-- <td><a [routerLink]="['/escrituracao-contabil', escrituracaoContabil.id, 'view' ]">{{escrituracaoContabil.id}}</a></td> -->
                 <td>{{escrituracaoContabil.numero}}</td>
                 <td>{{escrituracaoContabil.historico}}</td>
-                <td>{{escrituracaoContabil.valor}}</td>
+                <td>{{escrituracaoContabil.valor | currency: 'AOA' }}</td>
                 <td>{{escrituracaoContabil.referencia}}</td>
                 <td jhiTranslate="{{'mandaApp.EntidadeSistema.' + escrituracaoContabil.entidadeReferencia}}">{{escrituracaoContabil.entidadeReferencia}}</td>
-                <td>{{escrituracaoContabil.tipo}}</td>
+                <!-- <td>{{escrituracaoContabil.tipo}}</td> -->
                 <td>{{escrituracaoContabil.dataDocumento | date:'mediumDate'}}</td>
                 <td>{{escrituracaoContabil.data | date:'medium'}}</td>
-                <td>
+                <!-- <td>
                     {{escrituracaoContabil.utilizadorLogin}}
-                </td>
+                </td> -->
                 <td>
                     <div *ngIf="escrituracaoContabil.empresaId">
                         <a [routerLink]="['/empresa', escrituracaoContabil.empresaId , 'view' ]" >{{escrituracaoContabil.empresaNome}}</a>

@@ -31,7 +31,7 @@ export class ContaDebitoUpdateComponent implements OnInit {
     valor: [null, [Validators.required, Validators.min(0)]],
     data: [],
     contaDebitarId: [null, Validators.required],
-    lancamentoDebitoId: [null, Validators.required]
+    lancamentoDebitoId: [null]
   });
 
   constructor(
@@ -40,7 +40,8 @@ export class ContaDebitoUpdateComponent implements OnInit {
     protected contaService: ContaService,
     protected escrituracaoContabilService: EscrituracaoContabilService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected escrituracaoContabil: EscrituracaoContabilService
   ) {}
 
   ngOnInit() {
@@ -88,9 +89,11 @@ export class ContaDebitoUpdateComponent implements OnInit {
       ...new ContaDebito(),
       id: this.editForm.get(['id']).value,
       valor: this.editForm.get(['valor']).value,
-      data: this.editForm.get(['data']).value != null ? moment(this.editForm.get(['data']).value, DATE_TIME_FORMAT) : undefined,
-      contaDebitarId: this.editForm.get(['contaDebitarId']).value,
-      lancamentoDebitoId: this.editForm.get(['lancamentoDebitoId']).value
+      data: moment(new Date()),
+      lancamentoDebitoId: 0,
+      // data: this.editForm.get(['data']).value != null ? moment(this.editForm.get(['data']).value, DATE_TIME_FORMAT) : undefined,
+      contaDebitarId: this.editForm.get(['contaDebitarId']).value
+      // lancamentoDebitoId: this.editForm.get(['lancamentoDebitoId']).value
     };
   }
 
@@ -116,5 +119,21 @@ export class ContaDebitoUpdateComponent implements OnInit {
 
   trackEscrituracaoContabilById(index: number, item: IEscrituracaoContabil) {
     return item.id;
+  }
+
+  onAddDebito() {
+    this.escrituracaoContabil.addDebito(this.createFromForm()).subscribe(data => {
+      this.previousState();
+    });
+  }
+
+  onSelectConta(conta) {
+    this.editForm.get('contaDebitarId').patchValue(conta.id, { emitEvent: false });
+  }
+
+  searchConta(conta) {
+    this.contaService.query({ 'descricao.contains': conta.query }).subscribe(data => {
+      this.contas = data.body;
+    });
   }
 }

@@ -3,7 +3,10 @@ package com.ravunana.manda.web.rest;
 import com.ravunana.manda.service.EscrituracaoContabilService;
 import com.ravunana.manda.web.rest.errors.BadRequestAlertException;
 import com.ravunana.manda.service.dto.EscrituracaoContabilDTO;
+import com.ravunana.manda.service.dto.ContaCreditoDTO;
+import com.ravunana.manda.service.dto.ContaDebitoDTO;
 import com.ravunana.manda.service.dto.EscrituracaoContabilCriteria;
+import com.ravunana.manda.service.ContaService;
 import com.ravunana.manda.service.EscrituracaoContabilQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -11,6 +14,7 @@ import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +30,8 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
+
 
 /**
  * REST controller for managing {@link com.ravunana.manda.domain.EscrituracaoContabil}.
@@ -44,6 +50,9 @@ public class EscrituracaoContabilResource {
     private final EscrituracaoContabilService escrituracaoContabilService;
 
     private final EscrituracaoContabilQueryService escrituracaoContabilQueryService;
+
+    @Autowired
+    private ContaService contaService;
 
     public EscrituracaoContabilResource(EscrituracaoContabilService escrituracaoContabilService, EscrituracaoContabilQueryService escrituracaoContabilQueryService) {
         this.escrituracaoContabilService = escrituracaoContabilService;
@@ -143,5 +152,53 @@ public class EscrituracaoContabilResource {
         log.debug("REST request to delete EscrituracaoContabil : {}", id);
         escrituracaoContabilService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/escrituracao-contabils?query=:query} : search for the escrituracaoContabil corresponding
+     * to the query.
+     *
+     * @param query the query of the escrituracaoContabil search.
+     * @param pageable the pagination information.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/escrituracao-contabils")
+    public ResponseEntity<List<EscrituracaoContabilDTO>> searchEscrituracaoContabils(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of EscrituracaoContabils for query {}", query);
+        Page<EscrituracaoContabilDTO> page = escrituracaoContabilService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @PostMapping("/escrituracao-contabils/add-credito")
+    public ContaCreditoDTO addCredito(@RequestBody ContaCreditoDTO credito) {
+        credito.setContaCreditarDescricao( contaService.findOne(credito.getContaCreditarId()).get().getDescricao() );
+        return escrituracaoContabilService.addCredito(credito);
+    }
+
+    @DeleteMapping("/escrituracao-contabils/delete-credito/{index}")
+    public ContaCreditoDTO deleteCredito(@PathVariable int index) {
+        return escrituracaoContabilService.deleteCredito(index);
+    }
+
+    @GetMapping("/escrituracao-contabils/listar-creditos")
+    public List<ContaCreditoDTO> listarCredito() {
+        return escrituracaoContabilService.listarCreditos();
+    }
+
+    @PostMapping("/escrituracao-contabils/add-debito")
+    public ContaDebitoDTO addDebito(@RequestBody ContaDebitoDTO debito) {
+        debito.setContaDebitarDescricao( contaService.findOne(debito.getContaDebitarId()).get().getDescricao() );
+        return escrituracaoContabilService.addDebito(debito);
+    }
+
+    @DeleteMapping("/escrituracao-contabils/delete-debito/{index}")
+    public ContaDebitoDTO deleteDebito(@PathVariable int index) {
+        return escrituracaoContabilService.deleteDebito(index);
+    }
+
+    @GetMapping("/escrituracao-contabils/listar-debitos")
+    public List<ContaDebitoDTO> listarDebito() {
+        return escrituracaoContabilService.listarDebitos();
     }
 }
