@@ -9,6 +9,8 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IEscrituracaoContabil } from 'app/shared/model/escrituracao-contabil.model';
+import { IContaDebito } from 'app/shared/model/conta-debito.model';
+import { IContaCredito } from 'app/shared/model/conta-credito.model';
 
 type EntityResponseType = HttpResponse<IEscrituracaoContabil>;
 type EntityArrayResponseType = HttpResponse<IEscrituracaoContabil[]>;
@@ -16,6 +18,7 @@ type EntityArrayResponseType = HttpResponse<IEscrituracaoContabil[]>;
 @Injectable({ providedIn: 'root' })
 export class EscrituracaoContabilService {
   public resourceUrl = SERVER_API_URL + 'api/escrituracao-contabils';
+  public resourceSearchUrl = SERVER_API_URL + 'api/_search/escrituracao-contabils';
 
   constructor(protected http: HttpClient) {}
 
@@ -50,6 +53,13 @@ export class EscrituracaoContabilService {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  search(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IEscrituracaoContabil[]>(this.resourceSearchUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   protected convertDateFromClient(escrituracaoContabil: IEscrituracaoContabil): IEscrituracaoContabil {
     const copy: IEscrituracaoContabil = Object.assign({}, escrituracaoContabil, {
       dataDocumento:
@@ -77,5 +87,29 @@ export class EscrituracaoContabilService {
       });
     }
     return res;
+  }
+
+  addCredito(debito: IContaCredito): Observable<IContaCredito> {
+    return this.http.post<IContaCredito>(this.resourceUrl + '/add-credito', debito);
+  }
+
+  deleteCredito(index: number): Observable<IContaCredito> {
+    return this.http.delete<IContaCredito>(`${this.resourceUrl}/delete-credito/${index}`);
+  }
+
+  getCreditos(): Observable<IContaCredito[]> {
+    return this.http.get<IContaCredito[]>(this.resourceUrl + '/listar-creditos');
+  }
+
+  addDebito(debito: IContaDebito): Observable<IContaDebito> {
+    return this.http.post<IContaDebito>(this.resourceUrl + '/add-debito', debito);
+  }
+
+  deleteDebito(index: number): Observable<IContaDebito> {
+    return this.http.delete<IContaDebito>(`${this.resourceUrl}/delete-debito/${index}`);
+  }
+
+  getDebitos(): Observable<IContaDebito[]> {
+    return this.http.get<IContaDebito[]>(this.resourceUrl + '/listar-debitos');
   }
 }

@@ -23,7 +23,7 @@
                 </dd>
                 <dt><span jhiTranslate="mandaApp.escrituracaoContabil.entidadeReferencia">Entidade Referencia</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'mandaApp.EntidadeSistema.' + escrituracaoContabil.entidadeReferencia}}">{{escrituracaoContabil.entidadeReferencia}}</span>
+                    <span>{{escrituracaoContabil.entidadeReferencia}}</span>
                 </dd>
                 <dt><span jhiTranslate="mandaApp.escrituracaoContabil.tipo">Tipo</span></dt>
                 <dd>
@@ -48,6 +48,73 @@
                     </div>
                 </dd>
             </dl>
+
+            <hr>
+
+
+
+            <div class="row">
+                    <div class="col-md-6">
+
+                            <div class="float-right">
+                                <h6>Debitos</h6>
+                                <table class="table" *ngIf="debitos.length > 0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Descrição da conta</th>
+                                            <th scope="col">Valor</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let debito of debitos; let i = index">
+                                            <th scope="row"> {{ debito.contaDebitarId }} </th>
+                                            <td> {{ debito.contaDebitarDescricao }} </td>
+                                            <td> {{ debito.valor | currency: ' AOA' }} </td>
+                                            <!-- <td>
+                                                <button (click)="onDeleteDebito(i)" type="button" class="btn btn-danger">
+                                                    <fa-icon [icon]="'trash'"></fa-icon>
+                                                </button>
+                                            </td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+
+                                <div class="float-right">
+                                    <h6>Creditos</h6>
+                                    <table class="table" *ngIf="creditos.length > 0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Descrição da conta</th>
+                                                <th scope="col">Valor</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let credito of creditos; let i = index">
+                                                <th scope="row"> {{ credito.contaCreditarId }} </th>
+                                                <td> {{ credito.contaCreditarDescricao }} </td>
+                                                <td> {{ credito.valor | currency: ' AOA' }} </td>
+                                                <!-- <td>
+                                                    <button (click)="onDeleteDebito(i)" type="button" class="btn btn-danger">
+                                                        <fa-icon [icon]="'trash'"></fa-icon>
+                                                    </button>
+                                                </td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr>
+                                </div>
+
+                            </div>
+            </div>
 
             <button type="submit"
                     (click)="previousState()"

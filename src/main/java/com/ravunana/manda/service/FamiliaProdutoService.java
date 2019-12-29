@@ -52,7 +52,7 @@ public class FamiliaProdutoService {
 
         Long contaAgregadoraId = getContaFamiliaId( familiaProdutoDTO );
 
-        Conta contaCriada = contaService.addSubConta(contaAgregadoraId, familiaProdutoDTO.getNome());
+        Conta contaCriada = contaService.addSubConta(contaAgregadoraId, familiaProdutoDTO.getNome(), "");
 
         familiaProduto.setConta(contaCriada);
         familiaProduto = familiaProdutoRepository.save(familiaProduto);

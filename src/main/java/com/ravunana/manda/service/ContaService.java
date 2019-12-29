@@ -40,8 +40,15 @@ public class ContaService {
      */
     public ContaDTO save(ContaDTO contaDTO) {
         log.debug("Request to save Conta : {}", contaDTO);
-        Conta conta = contaMapper.toEntity(contaDTO);
-        conta = contaRepository.save(conta);
+        Conta conta = null;
+
+        if ( contaDTO.getContaAgregadoraId() == null || contaDTO.getContaAgregadoraId().equals(null) ){
+            conta = contaMapper.toEntity(contaDTO);
+            conta = contaRepository.save(conta);
+        } else {
+            conta = addSubConta( contaDTO.getContaAgregadoraId(), contaDTO.getDescricao(), contaDTO.getConteudo() );
+        }
+
         return contaMapper.toDto(conta);
     }
 
@@ -91,7 +98,7 @@ public class ContaService {
         contaRepository.deleteById(id);
     }
 
-    public Conta addSubConta(Long contaAgregadoraId, String descricao) {
+    public Conta addSubConta(Long contaAgregadoraId, String descricao, String conteudo) {
         Conta contaAgregadora = null;
         Conta novaConta = null;
         try{
@@ -108,12 +115,12 @@ public class ContaService {
 
                 novaConta = new Conta();
                 novaConta.setClasseConta( contaAgregadora.getClasseConta() );
-
-                novaConta.setCodigo( contaAgregadora.getCodigo() + "." + (sequenciaCodigoConta + 1) );
+                String codigo = contaAgregadora.getCodigo() + "." + (sequenciaCodigoConta + 1);
+                novaConta.setCodigo( codigo );
                 novaConta.setContaAgregadora( contaAgregadora );
-                novaConta.setConteudo("");
+                novaConta.setConteudo( conteudo );
                 novaConta.setDescricao(descricao);
-                novaConta.setGrau(contaAgregadora.getGrau());
+                novaConta.setGrau(  getGrau(codigo) );
                 novaConta.setGrupo( contaAgregadora.getGrupo() );
                 novaConta.setNatureza( contaAgregadora.getNatureza() );
                 novaConta.setTipo( contaAgregadora.getTipo() );
@@ -126,12 +133,12 @@ public class ContaService {
 
             novaConta = new Conta();
             novaConta.setClasseConta( contaAgregadora.getClasseConta() );
-
-            novaConta.setCodigo( contaAgregadora.getCodigo() + "." + 1 );
+            String codigo = contaAgregadora.getCodigo() + "." + 1;
+            novaConta.setCodigo( codigo );
             novaConta.setContaAgregadora( contaAgregadora );
-            novaConta.setConteudo("");
+            novaConta.setConteudo( conteudo );
             novaConta.setDescricao(descricao);
-            novaConta.setGrau(contaAgregadora.getGrau());
+            novaConta.setGrau(  getGrau(codigo) );
             novaConta.setGrupo( contaAgregadora.getGrupo() );
             novaConta.setNatureza( contaAgregadora.getNatureza() );
             novaConta.setTipo( contaAgregadora.getTipo() );
@@ -141,5 +148,25 @@ public class ContaService {
             return novaConta;
 
         }
-}
+    }
+
+
+    private int getGrau( String codigo ) {
+        return codigo.replace(".", "").length() - 1;
+    }
+
+    // private Conta novaConta(Conta contaAgregadora) {
+    //     Conta novaConta = new Conta();
+    //     novaConta.setClasseConta( contaAgregadora.getClasseConta() );
+    //     novaConta.setCodigo( contaAgregadora.getCodigo() );
+    //     novaConta.setContaAgregadora( contaAgregadora );
+    //     novaConta.setConteudo( contaAgregadora.getConteudo() );
+    //     novaConta.setDescricao(contaAgregadora.getDescricao());
+    //     novaConta.setGrau( contaAgregadora.getGrau() );
+    //     novaConta.setGrupo( contaAgregadora.getGrupo() );
+    //     novaConta.setNatureza( contaAgregadora.getNatureza() );
+    //     novaConta.setTipo( contaAgregadora.getTipo() );
+
+    //     return contaRepository.save(novaConta);
+    // }
 }
