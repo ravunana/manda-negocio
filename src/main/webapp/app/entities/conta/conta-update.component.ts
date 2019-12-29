@@ -14,7 +14,6 @@ import { IClasseConta } from 'app/shared/model/classe-conta.model';
 import { ClasseContaService } from 'app/entities/classe-conta/classe-conta.service';
 import { LookupItemService } from '../lookup-item/lookup-item.service';
 import { ILookupItem } from 'app/shared/model/lookup-item.model';
-import { isNull, isUndefined } from 'util';
 
 @Component({
   selector: 'rv-conta-update',
@@ -33,8 +32,6 @@ export class ContaUpdateComponent implements OnInit {
   gruposConta: ILookupItem[];
 
   classecontas: IClasseConta[];
-  private codigoClasseSelecionada;
-  private idClasseContaSelecionada;
 
   editForm = this.fb.group({
     id: [],
@@ -215,125 +212,6 @@ export class ContaUpdateComponent implements OnInit {
     return option;
   }
 
-  // onEditFormChanche() {
-  //   let codigoProximaConta;
-  //   this.editForm.valueChanges.subscribe((value: IConta) => {
-  //     if (isNull(value.contaAgregadoraId) || isUndefined(value.contaAgregadoraId)) {
-  //       console.log('conta agregador não existe', this.existeContaAgregadora);
-  //       this.existeContaAgregadora = false;
-
-  //       let classeContaId = value.classeContaId;
-
-  //       this.classeContaService.query().subscribe(data => {
-  //         this.codigoClasseSelecionada = data.body.filter(c => c.id === classeContaId).shift().codigo;
-  //         this.idClasseContaSelecionada = data.body.filter(c => c.id === classeContaId).shift().id;
-  //         console.log('Classe da conta ' + classeContaId + ' Codigo da conta ' + this.codigoClasseSelecionada);
-
-  //         this.editForm.patchValue(value, { emitEvent: false });
-  //         let grupo;
-  //         let natureza;
-
-  //         switch (this.codigoClasseSelecionada) {
-  //           case '1':
-  //             console.log(' grupo Activo nao corrente');
-  //             grupo = this.gruposConta.filter(n => n.id === 3015).shift().nome;
-  //             natureza = this.naturezasConta.filter(n => n.id === 3012).shift().nome;
-  //             this.editForm.get('grupo').patchValue(grupo, { emitEvent: false });
-  //             this.editForm.get('natureza').patchValue(natureza, { emitEvent: false });
-  //             console.log('Devedora');
-  //             break;
-  //           case '2':
-  //             console.log('Activo corrente');
-  //             console.log('Devedora');
-  //             break;
-  //           case '3':
-  //             console.log('indefinido');
-  //             console.log('indefinido');
-  //             break;
-  //           case '4':
-  //             console.log('Activo corrente');
-  //             console.log('Devedora');
-  //             break;
-  //           case '5':
-  //             console.log('indefinido');
-  //             console.log('indefinido');
-  //             break;
-  //           case '6':
-  //             console.log('Activo nao corrente');
-  //             console.log('credora');
-  //             break;
-  //           case '7':
-  //             console.log('Passivo nao corrente');
-  //             console.log('Devedora');
-  //             break;
-  //           case '8':
-  //             console.log('indefinido');
-  //             console.log('indefinido');
-  //             break;
-  //         }
-
-  //         console.log('Codigo da proxima conta ' + codigoProximaConta);
-  //         let grau = this.niveisConta.filter(n => n.nome === '2').shift().nome;
-  //         this.editForm.get('grau').patchValue(grau, { emitEvent: false });
-  //         codigoProximaConta = this.codigoClasseSelecionada + 1;
-  //         this.editForm.get('codigo').patchValue(codigoProximaConta, { emitEvent: false });
-
-  //         console.log('ID conta selecionada ' + this.idClasseContaSelecionada);
-
-  //         this.contaService.query({ 'classeContaId.equals': this.idClasseContaSelecionada }).subscribe(data => {
-  //           let ultimoCodigoContaClasseSelecionada = data.body.pop().codigo;
-  //           console.log('Ultimo codigo da conta classe selecionada ' + ultimoCodigoContaClasseSelecionada);
-  //           if (!isUndefined(ultimoCodigoContaClasseSelecionada)) {
-  //             codigoProximaConta = Number(ultimoCodigoContaClasseSelecionada) + 1;
-  //             console.log(Number(ultimoCodigoContaClasseSelecionada) + 1);
-  //             this.editForm.get('codigo').patchValue(codigoProximaConta, { emitEvent: false });
-  //           } else {
-  //             // nao existe ainda nehuma subclass ou conta no grau 2
-  //           }
-  //         });
-  //       });
-  //     } else {
-  //       let proximoCondigoConta;
-
-  //       console.log('Existe conta agregadora', this.existeContaAgregadora);
-  //       this.existeContaAgregadora = true;
-  //       let contaAgregadoraId = this.editForm.get('contaAgregadoraId').value;
-  //       const conta = this.contas.filter(c => c.id === contaAgregadoraId).shift();
-
-  //       // const ultimaContagrau = this.contas.filter( c => c.contaAgregadoraId === contaAgregadoraId ).shift();
-  //       // console.log( 'Ultima conta do grau ' + ultimaContagrau );
-
-  //       this.contaService.query({ 'contaAgregadoraId.equals': contaAgregadoraId }).subscribe(data => {
-  //         const grauAtual = Number(conta.grau);
-  //         const proximograu = Number(conta.grau) + 1;
-
-  //         const ultimaConta = data.body.pop();
-
-  //         let grau = this.niveisConta.filter(n => n.nome === proximograu.toString()).shift().nome;
-  //         this.editForm.get('grau').patchValue(grau, { emitEvent: false });
-
-  //         if (data.body.length === 0) {
-  //           proximoCondigoConta = conta.codigo + '.' + 1;
-  //           console.log(proximoCondigoConta);
-  //         } else {
-  //           console.log(data.body);
-  //           const ultimo = data.body.pop().codigo.substr(3);
-  //           console.log(ultimo);
-
-  //           if (proximograu === 3) {
-  //             proximoCondigoConta = conta.codigo + '.' + (Number(ultimo) + 1);
-  //           } else if (proximograu === 4) {
-  //             proximoCondigoConta = ultimaConta.codigo + '.' + (Number(ultimo) + 1);
-  //           }
-  //         }
-
-  //         this.editForm.get('classeContaId').patchValue(conta.classeContaId, { emitEvent: false });
-  //         this.editForm.get('codigo').patchValue(proximoCondigoConta, { emitEvent: false });
-  //       });
-  //     }
-  //   });
-  // }
-
   onSelectConta(conta) {
     this.editForm.get('contaAgregadoraId').patchValue(conta.id, { emitEvent: false });
   }
@@ -343,13 +221,4 @@ export class ContaUpdateComponent implements OnInit {
       this.contas = data.body;
     });
   }
-
-  // private getCodigoClasseById( id: number ) {
-  //   this.classeContaService.query().subscribe( data => {
-  //     this.codigoClasseSelecionada = data.body.filter( c => c.id === id ).shift().codigo;
-  //     console.log( this.codigoClasseSelecionada );
-  //   })
-  //   console.log( this.codigoClasseSelecionada );
-  //   return this.codigoClasseSelecionada;
-  // }
 }

@@ -6,7 +6,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT, DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IEscrituracaoContabil, EscrituracaoContabil } from 'app/shared/model/escrituracao-contabil.model';
 import { EscrituracaoContabilService } from './escrituracao-contabil.service';
@@ -14,10 +14,8 @@ import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { IEmpresa } from 'app/shared/model/empresa.model';
 import { EmpresaService } from 'app/entities/empresa/empresa.service';
-import { ContaDebito, IContaDebito } from 'app/shared/model/conta-debito.model';
+import { IContaDebito } from 'app/shared/model/conta-debito.model';
 import { IContaCredito } from 'app/shared/model/conta-credito.model';
-import { ContaDebitoService } from '../conta-debito/conta-debito.service';
-import { ContaCreditoService } from '../conta-credito/conta-credito.service';
 import { LookupItemService } from '../lookup-item/lookup-item.service';
 import { ILookupItem } from 'app/shared/model/lookup-item.model';
 import { IMoeda } from 'app/shared/model/moeda.model';
@@ -34,13 +32,14 @@ export class EscrituracaoContabilUpdateComponent implements OnInit {
 
   empresas: IEmpresa[];
   dataDocumentoDp: any;
-  creditos: IContaCredito[];
-  debitos: IContaDebito[];
+  creditos: IContaCredito[] = [];
+  debitos: IContaDebito[] = [];
   tiposLancamento: ILookupItem[];
   tipoLancamentoNormal: ILookupItem;
   TOTAL_DEBITO = 0;
   TOTAL_CREDITO = 0;
   private TOTAL_DOCUMENTO = 0;
+  moedaNacional: IMoeda;
 
   editForm = this.fb.group({
     id: [],
@@ -55,7 +54,6 @@ export class EscrituracaoContabilUpdateComponent implements OnInit {
     utilizadorId: [],
     empresaId: []
   });
-  moedaNacional: IMoeda;
 
   constructor(
     protected dataUtils: JhiDataUtils,
