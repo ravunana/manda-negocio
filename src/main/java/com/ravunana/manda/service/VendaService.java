@@ -83,7 +83,6 @@ public class VendaService {
         venda.setEmpresa( empresaService.getFirstEmpresa() );
         venda.setData(ZonedDateTime.now());
 
-        log.info("Venda ------ {}", venda);
 
         if (vendaDTO.getId() != null ) {
             String numeroVendaSalvo = vendaRepository.findById( venda.getId() ).get().getNumero();
@@ -93,9 +92,13 @@ public class VendaService {
 
             String numeroVenda = getNumeroVenda( vendaDTO.getTipoDocumentoId() );
             venda.setNumero(numeroVenda);
+
+        log.info("Venda ------ {}", venda);
             venda = vendaRepository.save(venda);
 
             salvarItemVenda(venda.getId());
+
+            vendaDTO.setNumero( numeroVenda );
 
             getPagamento(vendaDTO);
 

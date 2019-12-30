@@ -198,7 +198,9 @@ export class VendaUpdateComponent implements OnInit {
       vendedorId: this.editForm.get(['vendedorId']).value,
       clienteId: this.clienteId,
       tipoDocumentoId: this.editForm.get(['tipoDocumentoId']).value,
-      empresaId: this.editForm.get(['empresaId']).value
+      empresaId: this.editForm.get(['empresaId']).value,
+      impostos: this.editForm.get(['impostos']).value,
+      formaLiquidacaoId: this.editForm.get(['formaLiquidacaoId']).value
     };
   }
 
