@@ -43,7 +43,7 @@ public class VendaDTO implements Serializable {
     private String empresaNome;
 
 
-    private Set<ImpostoDTO> impostos = new HashSet()<>();
+    private Set<ImpostoDTO> impostos = new HashSet<>();
 
     private Long formaLiquidacaoId;
 

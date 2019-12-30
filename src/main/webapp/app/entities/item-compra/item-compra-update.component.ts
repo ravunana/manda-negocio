@@ -297,7 +297,6 @@ export class ItemCompraUpdateComponent implements OnInit {
   onSelectPessoa(pessoa) {
     this.fornecedorService.query({ 'pessoaId.equals': pessoa.id }).subscribe(fornecedorResult => {
       this.fornecedorId = fornecedorResult.body.shift().id;
-      alert(this.fornecedorId);
       // this.editForm.get('fornecedorId').patchValue(fornecedorId, { emitEvent: false });
     });
   }

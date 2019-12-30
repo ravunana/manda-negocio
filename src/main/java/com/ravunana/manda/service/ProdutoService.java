@@ -69,7 +69,7 @@ public class ProdutoService {
         SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
         Produto produto = produtoMapper.toEntity(produtoDTO);
 
-        contaService.addSubConta(getContaAgregadoraId( produtoDTO.getFamiliaId() ), produto.getNome() );
+        contaService.addSubConta(getContaAgregadoraId( produtoDTO.getFamiliaId() ), produto.getNome(), "" );
 
         produto.setUtilizador( userService.getCurrentUserLogged() );
         int serie = serieDocumento.getCodigoProduto();

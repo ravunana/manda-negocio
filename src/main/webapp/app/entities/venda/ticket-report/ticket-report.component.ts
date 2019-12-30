@@ -1,8 +1,4 @@
-import { ProdutoService } from './../produto/produto.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { JhiDataUtils } from 'ng-jhipster';
-
 import { IVenda } from 'app/shared/model/venda.model';
 import { IItemVenda } from 'app/shared/model/item-venda.model';
 import { IEmpresa } from 'app/shared/model/empresa.model';
@@ -14,27 +10,31 @@ import { IContactoPessoa } from 'app/shared/model/contacto-pessoa.model';
 import { IMoradaPessoa } from 'app/shared/model/morada-pessoa.model';
 import { ICoordenadaBancaria } from 'app/shared/model/coordenada-bancaria.model';
 import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
-import { ItemVendaService } from '../item-venda/item-venda.service';
-import { EmpresaService } from '../empresa/empresa.service';
-import { PessoaService } from '../pessoa/pessoa.service';
-import { ClienteService } from '../cliente/cliente.service';
-import { ContactoEmpresaService } from '../contacto-empresa/contacto-empresa.service';
-import { LocalizacaoEmpresaService } from '../localizacao-empresa/localizacao-empresa.service';
-import { ContactoPessoaService } from '../contacto-pessoa/contacto-pessoa.service';
-import { MoradaPessoaService } from '../morada-pessoa/morada-pessoa.service';
-import { CoordenadaBancariaService } from '../coordenada-bancaria/coordenada-bancaria.service';
-import { VendaService } from './venda.service';
-import { DetalheLancamentoService } from '../detalhe-lancamento/detalhe-lancamento.service';
-import { LancamentoFinanceiroService } from '../lancamento-financeiro/lancamento-financeiro.service';
+import { JhiDataUtils } from 'ng-jhipster';
+import { ActivatedRoute } from '@angular/router';
+import { ItemVendaService } from 'app/entities/item-venda/item-venda.service';
+import { EmpresaService } from 'app/entities/empresa/empresa.service';
+import { PessoaService } from 'app/entities/pessoa/pessoa.service';
+import { ClienteService } from 'app/entities/cliente/cliente.service';
+import { ContactoEmpresaService } from 'app/entities/contacto-empresa/contacto-empresa.service';
+import { LocalizacaoEmpresaService } from 'app/entities/localizacao-empresa/localizacao-empresa.service';
+import { ContactoPessoaService } from 'app/entities/contacto-pessoa/contacto-pessoa.service';
+import { MoradaPessoaService } from 'app/entities/morada-pessoa/morada-pessoa.service';
+import { CoordenadaBancariaService } from 'app/entities/coordenada-bancaria/coordenada-bancaria.service';
+import { VendaService } from '../venda.service';
+import { DetalheLancamentoService } from 'app/entities/detalhe-lancamento/detalhe-lancamento.service';
+import { LancamentoFinanceiroService } from 'app/entities/lancamento-financeiro/lancamento-financeiro.service';
+import { ProdutoService } from 'app/entities/produto/produto.service';
 import { PdfMakeWrapper, Txt, Columns } from 'pdfmake-wrapper';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 @Component({
-  selector: 'rv-venda-detail',
-  templateUrl: './venda-detail.component.html'
+  selector: 'rv-ticket-report',
+  templateUrl: './ticket-report.component.html',
+  styleUrls: ['./ticket-report.component.scss']
 })
-export class VendaDetailComponent implements OnInit {
+export class TicketReportComponent implements OnInit {
   venda: IVenda;
   items: IItemVenda[];
   empresa: IEmpresa;
@@ -108,17 +108,17 @@ export class VendaDetailComponent implements OnInit {
       this.TOTAL_PAGAR = this.SUB_TOTAL - this.TOTAL_DESCONTO;
     });
 
-    this.clienteService.query().subscribe(data => {
-      this.cliente = data.body.filter(c => c.id === this.venda.clienteId).shift();
+    this.clienteService.query().subscribe(clienteResult => {
+      this.cliente = clienteResult.body.filter(c => c.id === this.venda.clienteId).shift();
 
-      this.pessoaService.query().subscribe(data => {
-        this.pessoa = data.body.filter(p => p.id === this.cliente.pessoaId).shift();
+      this.pessoaService.query().subscribe(pessoaResult => {
+        this.pessoa = pessoaResult.body.filter(p => p.id === this.cliente.pessoaId).shift();
 
-        this.contactoPessoaService.query().subscribe(data => {
-          this.contactoPessoa = data.body.filter(c => c.pessoaId === this.pessoa.id);
+        this.contactoPessoaService.query().subscribe(contactoPessoaResult => {
+          this.contactoPessoa = contactoPessoaResult.body.filter(c => c.pessoaId === this.pessoa.id);
         });
-        this.moradaPessoaService.query().subscribe(data => {
-          this.moradaPessoa = data.body.filter(c => c.pessoaId === this.pessoa.id).shift();
+        this.moradaPessoaService.query().subscribe(moradaPessoaResult => {
+          this.moradaPessoa = moradaPessoaResult.body.filter(c => c.pessoaId === this.pessoa.id).shift();
         });
       });
     });
@@ -127,7 +127,7 @@ export class VendaDetailComponent implements OnInit {
       this.coordenadasBancaria = data.body.filter(c => c.mostrarDocumento === true);
     });
 
-    this.lancamentoFinanceiroService.query({ 'beneficiarioCodigo.equals': this.venda.clienteNumero }).subscribe(data => {
+    this.lancamentoFinanceiroService.query({ 'numeroDocumento.equals': this.venda.numero }).subscribe(data => {
       const lancamento = data.body.shift();
       this.detalheLancamentoService.query().subscribe(data => {
         this.recebimentos = data.body.filter(d => d.lancamentoFinanceiroId === lancamento.id);
@@ -138,17 +138,6 @@ export class VendaDetailComponent implements OnInit {
           });
       });
     });
-  }
-
-  byteSize(field) {
-    return this.dataUtils.byteSize(field);
-  }
-
-  openFile(contentType, field) {
-    return this.dataUtils.openFile(contentType, field);
-  }
-  previousState() {
-    window.history.back();
   }
 
   async ticketReport() {

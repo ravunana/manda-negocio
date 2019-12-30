@@ -7,10 +7,11 @@ import { VendaDetailComponent } from './venda-detail.component';
 import { VendaUpdateComponent } from './venda-update.component';
 import { VendaDeleteDialogComponent } from './venda-delete-dialog.component';
 import { vendaRoute } from './venda.route';
+import { TicketReportComponent } from './ticket-report/ticket-report.component';
 
 @NgModule({
   imports: [MandaSharedModule, RouterModule.forChild(vendaRoute)],
-  declarations: [VendaComponent, VendaDetailComponent, VendaUpdateComponent, VendaDeleteDialogComponent],
+  declarations: [VendaComponent, VendaDetailComponent, VendaUpdateComponent, VendaDeleteDialogComponent, TicketReportComponent],
   entryComponents: [VendaDeleteDialogComponent]
 })
 export class MandaVendaModule {}

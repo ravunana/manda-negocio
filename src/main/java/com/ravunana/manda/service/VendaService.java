@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
@@ -39,6 +40,9 @@ public class VendaService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EmpresaService empresaService;
 
     @Autowired
     private SerieDocumentoService serieDocumentoService;
@@ -76,8 +80,12 @@ public class VendaService {
     public VendaDTO save(VendaDTO vendaDTO) {
         log.debug("Request to save Venda : {}", vendaDTO);
         Venda venda = vendaMapper.toEntity(vendaDTO);
+        venda.setEmpresa( empresaService.getFirstEmpresa() );
+        venda.setData(ZonedDateTime.now());
 
-        if (venda.getId() != null ) {
+        log.info("Venda ------ {}", venda);
+
+        if (vendaDTO.getId() != null ) {
             String numeroVendaSalvo = vendaRepository.findById( venda.getId() ).get().getNumero();
             venda.setNumero( numeroVendaSalvo );
             venda = vendaRepository.save(venda);
@@ -89,13 +97,11 @@ public class VendaService {
 
             salvarItemVenda(venda.getId());
 
-            vendaDTO.setNumero( numeroVenda );
-
-            getRecebimento(vendaDTO);
+            getPagamento(vendaDTO);
 
             itemVendaService.cleanItems();
-            TOTAL_FACTURA = new BigDecimal(0);
         }
+        TOTAL_FACTURA = new BigDecimal(0);
 
         return vendaMapper.toDto(venda);
     }
@@ -142,10 +148,10 @@ public class VendaService {
         DocumentoComercial tipoDocumentoComercial = documentoComercialRepository.findById( tipoDocumentoId ).get();
         SerieDocumento serieDocumento = serieDocumentoService.getSerieDocumentoAnoActual();
 
-        int sequencia = serieDocumento.getCodigoCompra();
+        int sequencia = serieDocumento.getCodigoVenda();
         String numero = tipoDocumentoComercial.getNome() + " " + serieDocumento.getSerie() + "/" + sequencia; // <TIPO_DOCUMENTO> <SEQUENCIA_FORNECEDOR>
         // atualizar serie do documento
-        serieDocumento.setCodigoCompra( sequencia + 1 );
+        serieDocumento.setCodigoVenda( sequencia + 1 );
         serieDocumentoService.atualizarSerieDocumento(serieDocumento);
 
         return numero;
@@ -161,10 +167,10 @@ public class VendaService {
             }
     }
 
-    private LancamentoFinanceiroDTO getRecebimento( VendaDTO venda ) {
+    private LancamentoFinanceiroDTO getPagamento( VendaDTO venda ) {
         FormaLiquidacao formaLiquidacao = formaLiquidacaoRepository.findById( venda.getFormaLiquidacaoId() ).get();
         lancamentoFinanceiroDTO.setExterno( false );
-        lancamentoFinanceiroDTO.setDescricao( "VEnda de mercadoria na modalidade "  + formaLiquidacao.getNome() + " no valor de " + TOTAL_FACTURA + " referente a factura nº " + venda.getNumero() + " data de liquidação " + LocalDate.now().plusDays( formaLiquidacao.getPrazoLiquidacao() ) );
+        lancamentoFinanceiroDTO.setDescricao( "Venda de mercadoria na modalidade "  + formaLiquidacao.getNome() + " no valor de " + TOTAL_FACTURA + " referente a factura nº " + venda.getNumero() + " data de liquidação " + LocalDate.now().plusDays( formaLiquidacao.getPrazoLiquidacao() ) );
         lancamentoFinanceiroDTO.setFormaLiquidacaoId( venda.getFormaLiquidacaoId() );
         lancamentoFinanceiroDTO.setValor( TOTAL_FACTURA );
         lancamentoFinanceiroDTO.setImpostos( venda.getImpostos() );

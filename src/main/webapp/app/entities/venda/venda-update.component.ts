@@ -1,3 +1,8 @@
+import { LancamentoFinanceiroService } from './../lancamento-financeiro/lancamento-financeiro.service';
+import { ItemVendaService } from 'app/entities/item-venda/item-venda.service';
+import { ProdutoService } from './../produto/produto.service';
+import { PessoaService } from './../pessoa/pessoa.service';
+import { IPessoa } from './../../shared/model/pessoa.model';
 import { Component, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -37,6 +42,7 @@ export class VendaUpdateComponent implements OnInit {
   clientes: ICliente[];
   pagamentos: IDetalheLancamento[] = [];
   items: IItemCompra[] = [];
+  pessoas: IPessoa[];
 
   SUB_TOTAL = 0;
   TOTAL_DESCONTO = 0;
@@ -49,6 +55,7 @@ export class VendaUpdateComponent implements OnInit {
   impostos: IImposto[];
 
   empresas: IEmpresa[];
+  clienteId = 0;
 
   editForm = this.fb.group({
     id: [],
@@ -57,7 +64,7 @@ export class VendaUpdateComponent implements OnInit {
     observacaoGeral: [],
     observacaoInterna: [],
     vendedorId: [],
-    clienteId: [null, Validators.required],
+    clienteId: [null],
     tipoDocumentoId: [null, Validators.required],
     empresaId: [],
     impostos: [null, Validators.required],
@@ -75,13 +82,18 @@ export class VendaUpdateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     protected formaLiquidacaoService: FormaLiquidacaoService,
-    protected impostoService: ImpostoService
+    protected impostoService: ImpostoService,
+    protected pessoaService: PessoaService,
+    public produtoService: ProdutoService,
+    protected itemVendaService: ItemVendaService,
+    protected lancamentoFinancerioService: LancamentoFinanceiroService
   ) {}
 
   ngOnInit() {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ venda }) => {
       this.updateForm(venda);
+      this.clienteId = venda.clienteId;
     });
     this.userService
       .query()
@@ -109,6 +121,9 @@ export class VendaUpdateComponent implements OnInit {
         (res: HttpResponse<IFormaLiquidacao[]>) => (this.formaliquidacaos = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+
+    this.getItems();
+    this.getPagamentos();
   }
 
   updateForm(venda: IVenda) {
@@ -181,7 +196,7 @@ export class VendaUpdateComponent implements OnInit {
       observacaoGeral: this.editForm.get(['observacaoGeral']).value,
       observacaoInterna: this.editForm.get(['observacaoInterna']).value,
       vendedorId: this.editForm.get(['vendedorId']).value,
-      clienteId: this.editForm.get(['clienteId']).value,
+      clienteId: this.clienteId,
       tipoDocumentoId: this.editForm.get(['tipoDocumentoId']).value,
       empresaId: this.editForm.get(['empresaId']).value
     };
@@ -228,5 +243,65 @@ export class VendaUpdateComponent implements OnInit {
       }
     }
     return option;
+  }
+
+  getPagamentos() {
+    this.lancamentoFinancerioService.getDetalhes().subscribe(data => {
+      this.pagamentos = data;
+      this.TOTAL_ENTREGUE = this.pagamentos
+        .map(i => i.valor)
+        .reduce(function(total, subTotal) {
+          return total + subTotal;
+        });
+    });
+  }
+
+  getItems() {
+    this.itemVendaService.getItems().subscribe(itemsResult => {
+      this.items = itemsResult;
+
+      // Calcular subTotal sem desconto da factura
+      this.SUB_TOTAL = this.items
+        .map(i => i.quantidade * i.valor)
+        .reduce(function(total, subTotal) {
+          return total + subTotal;
+        });
+      // calcular valor em numerario do desconto da factura
+      const valorDesconto = this.items
+        .map(i => this.produtoService.calcularSubTotalItem(i.quantidade, i.desconto, i.valor))
+        .reduce(function(total, desconto) {
+          return total + desconto;
+        });
+
+      this.TOTAL_DESCONTO = this.SUB_TOTAL - valorDesconto;
+      this.TOTAL_PAGAR = this.SUB_TOTAL - this.TOTAL_DESCONTO;
+    });
+  }
+
+  onDeleteItem(index) {
+    this.itemVendaService.deleteItem(index).subscribe(itemEliminado => {
+      alert(itemEliminado.produtoNome + ' foi removido da lista');
+      this.getItems();
+    });
+  }
+
+  onDeleteValor(index) {
+    this.lancamentoFinancerioService.deleteDetalhe(index).subscribe(valorEliminado => {
+      alert(valorEliminado.valor + ' foi removido');
+      this.getPagamentos();
+    });
+  }
+
+  onSelectPessoa(pessoa) {
+    this.clienteService.query({ 'pessoaId.equals': pessoa.id }).subscribe(clienteResult => {
+      this.clienteId = clienteResult.body.shift().id;
+      // this.editForm.get('fornecedorId').patchValue(fornecedorId, { emitEvent: false });
+    });
+  }
+
+  searchPessoa(pessoa) {
+    this.pessoaService.query({ 'nome.contains': pessoa.query }).subscribe(data => {
+      this.pessoas = data.body;
+    });
   }
 }

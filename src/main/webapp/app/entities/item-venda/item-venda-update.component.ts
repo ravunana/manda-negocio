@@ -1,3 +1,5 @@
+import { ItemCompraService } from './../item-compra/item-compra.service';
+import { EstruturaCalculoService } from './../estrutura-calculo/estrutura-calculo.service';
 import { Component, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -25,6 +27,7 @@ export class ItemVendaUpdateComponent implements OnInit {
   isSaving: boolean;
 
   vendas: IVenda[];
+  opcao;
 
   produtos: IProduto[];
 
@@ -38,7 +41,8 @@ export class ItemVendaUpdateComponent implements OnInit {
     data: [],
     vendaId: [null],
     produtoId: [],
-    statusId: []
+    statusId: [],
+    subTotal: [0]
   });
 
   constructor(
@@ -48,7 +52,9 @@ export class ItemVendaUpdateComponent implements OnInit {
     protected produtoService: ProdutoService,
     protected fluxoDocumentoService: FluxoDocumentoService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected estruturaCalculoService: EstruturaCalculoService,
+    protected itemCompraService: ItemCompraService
   ) {}
 
   ngOnInit() {
@@ -68,6 +74,15 @@ export class ItemVendaUpdateComponent implements OnInit {
         (res: HttpResponse<IFluxoDocumento[]>) => (this.fluxodocumentos = res.body),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+
+    this.onFormChanche();
+    this.activatedRoute.queryParams.subscribe(parmas => {
+      this.opcao = parmas.op;
+    });
+
+    if (this.opcao === 'new') {
+      this.initForm();
+    }
   }
 
   updateForm(itemVenda: IItemVenda) {
@@ -137,5 +152,51 @@ export class ItemVendaUpdateComponent implements OnInit {
 
   trackFluxoDocumentoById(index: number, item: IFluxoDocumento) {
     return item.id;
+  }
+
+  searchProdutos($event) {
+    this.produtoService
+      .query({ 'nome.contains': $event.query })
+      .subscribe((res: HttpResponse<IProduto[]>) => (this.produtos = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  onSelectProduto($event) {
+    this.editForm.get('produtoId').patchValue($event.id, { emitEvent: false });
+    this.estruturaCalculoService.getPrecoAtualizado(this.editForm.get('produtoId').value).subscribe(precoResult => {
+      this.calcularSubTotal(precoResult);
+    });
+  }
+
+  initForm() {
+    this.editForm.patchValue({
+      quantidade: 1,
+      desconto: 0,
+      valor: 0,
+      subTotal: 0
+    });
+  }
+
+  calcularSubTotal(preco?: number) {
+    this.editForm.get('valor').patchValue(preco, { emitEvent: false });
+
+    const qtdeForm = this.editForm.get(['quantidade']).value;
+    const valorForm = this.editForm.get(['valor']).value;
+    const descontoForm = this.editForm.get(['desconto']).value;
+
+    const totalUnitario = this.produtoService.calcularSubTotalItem(qtdeForm, descontoForm, valorForm);
+    this.editForm.get('subTotal').patchValue(totalUnitario, { emitEvent: false });
+  }
+
+  onFormChanche() {
+    this.editForm.valueChanges.subscribe((value: IItemVenda) => {
+      this.editForm.patchValue(value, { emitEvent: false });
+      this.calcularSubTotal(value.valor);
+    });
+  }
+
+  onAddItem() {
+    this.itemVendaService.addItem(this.createFromForm()).subscribe(data => {
+      alert(data.produtoNome + ' incluido na lista de compra');
+    });
   }
 }

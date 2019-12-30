@@ -72,4 +72,20 @@ export class ItemVendaService {
     }
     return res;
   }
+
+  deleteItem(index: number): Observable<IItemVenda> {
+    return this.http.delete<IItemVenda>(`${this.resourceUrl}/delete/${index}`);
+  }
+
+  addItem(item: IItemVenda): Observable<IItemVenda> {
+    return this.http.post<IItemVenda>(this.resourceUrl + '/add', item);
+  }
+
+  getItems(): Observable<IItemVenda[]> {
+    return this.http.get<IItemVenda[]>(this.resourceUrl + '/lista');
+  }
+
+  cleanItems() {
+    return this.http.get(this.resourceUrl + '/lista/clean');
+  }
 }

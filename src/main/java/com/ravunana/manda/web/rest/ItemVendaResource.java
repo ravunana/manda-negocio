@@ -144,4 +144,25 @@ public class ItemVendaResource {
         itemVendaService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+
+    @PostMapping("/item-vendas/add")
+    public ItemVendaDTO addItem(@RequestBody ItemVendaDTO item) {
+        return itemVendaService.addItem(item);
+    }
+
+    @DeleteMapping("/item-vendas/delete/{index}")
+    public ItemVendaDTO deleteItem(@PathVariable int index) {
+        return itemVendaService.deleteItem(index);
+    }
+
+    @GetMapping("/item-vendas/lista")
+    public List<ItemVendaDTO> getItems() {
+        return itemVendaService.getItems();
+    }
+
+    @GetMapping("/item-vendas/lista/clean")
+    public void cleanItem() {
+        itemVendaService.cleanItems();
+    }
 }

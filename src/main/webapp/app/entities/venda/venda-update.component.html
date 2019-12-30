@@ -25,12 +25,15 @@
                         <div class="form-group">
                             <label class="form-control-label" jhiTranslate="mandaApp.venda.cliente"
                                 for="field_cliente">Cliente</label>
-                            <select class="form-control" id="field_cliente" name="cliente" formControlName="clienteId">
+                                <p-autoComplete id="field_cliente" name="cliente" field="nome" [suggestions]="pessoas"
+                                (completeMethod)="searchPessoa($event)" (onSelect)="onSelectPessoa($event)" required>
+                            </p-autoComplete>
+                            <!-- <select class="form-control" id="field_cliente" name="cliente" formControlName="clienteId">
                                 <option *ngIf="!editForm.get('clienteId').value" [ngValue]="null" selected></option>
                                 <option [ngValue]="clienteOption.id"
                                     *ngFor="let clienteOption of clientes; trackBy: trackClienteById">
                                     {{clienteOption.numero}}</option>
-                            </select>
+                            </select> -->
                             <div
                                 *ngIf="editForm.get('clienteId').invalid && (editForm.get('clienteId').dirty || editForm.get('clienteId').touched)">
                                 <small class="form-text text-danger" *ngIf="editForm.get('clienteId').errors.required"
@@ -141,12 +144,12 @@
                                     <td> {{ item.quantidade | number }} </td>
                                     <td> {{ item.desconto/100 | percent }} </td>
                                     <td>
-                                        <!-- {{ produtoService.calcularSubTotalItem(item.quantidade, item.desconto, item.valor)   | currency: moedaNacional}} -->
+                                        {{ produtoService.calcularSubTotalItem(item.quantidade, item.desconto, item.valor)   | currency: 'AOA'}}
                                     </td>
                                     <td>
-                                        <!-- <button (click)="onDeleteItem(i)" type="button" class="btn btn-danger">
+                                        <button (click)="onDeleteItem(i)" type="button" class="btn btn-danger">
                                             <fa-icon [icon]="'trash'"></fa-icon>
-                                        </button> -->
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -155,7 +158,7 @@
                             [queryParams]="{ op: 'new'}"> Adiconar item
                         </button>
                     </p-accordionTab>
-                    <p-accordionTab header="Recebimentos" [selected]="true">
+                    <p-accordionTab header="Pagamentos" [selected]="true">
                         <table class="table" *ngIf="pagamentos.length > 0">
                             <thead>
                                 <tr>
@@ -168,15 +171,15 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let pagamento of pagamentos; let i = index">
-                                    <td> {{ i}} </td>
+                                    <td> {{ i }} </td>
                                     <td> {{ pagamento.valor | currency : pagamento.moedaCodigo }} </td>
                                     <td> {{ pagamento.coordenadaDescricao }} </td>
                                     <td> {{ pagamento.liquidado }} </td>
                                     <td> {{ pagamento.metodoLiquidacaoNome }} </td>
                                     <td>
-                                        <!-- <button type="button" class="btn btn-danger" (click)="onDeleteValor(i)">
+                                        <button type="button" class="btn btn-danger" (click)="onDeleteValor(i)">
                                             <fa-icon [icon]="'trash'"></fa-icon>
-                                        </button> -->
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -205,7 +208,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.venda.empresa"
                         for="field_empresa">Empresa</label>
                     <select class="form-control" id="field_empresa" name="empresa" formControlName="empresaId">
@@ -214,7 +217,7 @@
                             *ngFor="let empresaOption of empresas; trackBy: trackEmpresaById">{{empresaOption.nome}}
                         </option>
                     </select>
-                </div>
+                </div> -->
 
             </div>
             <div>
@@ -227,5 +230,56 @@
                 </button>
             </div>
         </form>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col">
+                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-header font-weight-bold">SUB TOTAL</div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold"> {{ SUB_TOTAL | currency: 'AOA' }} </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-dark bg-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-header font-weight-bold">DESCONTOS</div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{{ TOTAL_DESCONTO  | currency: 'AOA'}}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                    <div class="card-header font-weight-bold">POR PAGAR</div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{{ TOTAL_PAGAR  | currency: 'AOA'}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-header font-weight-bold">ENTREGUE</div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">{{ TOTAL_ENTREGUE  | currency: 'AOA'}}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                    <div class="card-header font-weight-bold">TROCO</div>
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">
+                            {{ (TOTAL_ENTREGUE - TOTAL_PAGAR) | currency: 'AOA' }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

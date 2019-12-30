@@ -54,6 +54,7 @@ export class EstruturaCalculoComponent implements OnInit, OnDestroy {
   loadAll() {
     this.activatedRoute.queryParams.subscribe(parmas => {
       this.produtoId = parmas.produtoId;
+
       this.estruturaCalculoService
         .query({
           page: this.page - 1,
