@@ -1,3 +1,6 @@
+import { IDetalheLancamento } from './../../shared/model/detalhe-lancamento.model';
+import { ILookupItem } from './../../shared/model/lookup-item.model';
+import { LookupItemService } from './../lookup-item/lookup-item.service';
 import { Component, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
@@ -20,6 +23,7 @@ import { IDocumentoComercial } from 'app/shared/model/documento-comercial.model'
 import { DocumentoComercialService } from 'app/entities/documento-comercial/documento-comercial.service';
 import { IConta } from 'app/shared/model/conta.model';
 import { ContaService } from 'app/entities/conta/conta.service';
+import { EntidadeSistema } from 'app/shared/model/enumerations/entidade-sistema.model';
 
 @Component({
   selector: 'rv-lancamento-financeiro-update',
@@ -37,6 +41,9 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
   empresas: IEmpresa[];
 
   documentocomercials: IDocumentoComercial[];
+  tiposLancamento: ILookupItem[];
+  detalhesLancamento: IDetalheLancamento[] = [];
+  TOTAL_ENTREGUE = 0;
 
   contas: IConta[];
 
@@ -68,7 +75,8 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
     protected documentoComercialService: DocumentoComercialService,
     protected contaService: ContaService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected lookupItemService: LookupItemService
   ) {}
 
   ngOnInit() {
@@ -100,6 +108,11 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
     this.contaService
       .query()
       .subscribe((res: HttpResponse<IConta[]>) => (this.contas = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+    this.lookupItemService.query({ 'lookupId.equals': '1404' }).subscribe(data => {
+      this.tiposLancamento = data.body;
+    });
+
+    this.getPagamentos();
   }
 
   updateForm(lancamentoFinanceiro: ILancamentoFinanceiro) {
@@ -175,11 +188,11 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
       tipoLancamento: this.editForm.get(['tipoLancamento']).value,
       valor: this.editForm.get(['valor']).value,
       externo: this.editForm.get(['externo']).value,
-      numero: this.editForm.get(['numero']).value,
+      numero: '00000',
       descricao: this.editForm.get(['descricao']).value,
-      entidadeDocumento: this.editForm.get(['entidadeDocumento']).value,
+      entidadeDocumento: EntidadeSistema.ARQUIVO,
       numeroDocumento: this.editForm.get(['numeroDocumento']).value,
-      utilizadorId: this.editForm.get(['utilizadorId']).value,
+      utilizadorId: 0,
       impostos: this.editForm.get(['impostos']).value,
       formaLiquidacaoId: this.editForm.get(['formaLiquidacaoId']).value,
       empresaId: this.editForm.get(['empresaId']).value,
@@ -237,5 +250,25 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
       }
     }
     return option;
+  }
+
+  getPagamentos() {
+    this.lancamentoFinanceiroService.getDetalhes().subscribe(data => {
+      this.detalhesLancamento = data;
+      this.TOTAL_ENTREGUE = this.detalhesLancamento
+        .filter(d => d.liquidado === true)
+        .map(i => i.valor)
+        .reduce(function(total, subTotal) {
+          let valor = total + subTotal;
+          return valor;
+        });
+    });
+  }
+
+  onDeleteValor(index) {
+    this.lancamentoFinanceiroService.deleteDetalhe(index).subscribe(valorEliminado => {
+      alert(valorEliminado.valor + ' foi removido');
+      this.getPagamentos();
+    });
   }
 }

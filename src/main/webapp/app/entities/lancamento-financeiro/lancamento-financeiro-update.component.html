@@ -11,8 +11,13 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.tipoLancamento" for="field_tipoLancamento">Tipo Lancamento</label>
-                    <input type="text" class="form-control" name="tipoLancamento" id="field_tipoLancamento"
-                           formControlName="tipoLancamento"/>
+                    <br>
+                    <div class="btn-group btn-group-toggle mt-2" ngbRadioGroup formControlName="tipoLancamento">
+                        <label ngbButtonLabel class="btn-primary ml-1" *ngFor="let opcao of tiposLancamento">
+                            <input ngbButton type="radio" [value]="opcao.valor">
+                            {{ opcao.nome }}
+                        </label>
+                    </div>
                     <div *ngIf="editForm.get('tipoLancamento').invalid && (editForm.get('tipoLancamento').dirty || editForm.get('tipoLancamento').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('tipoLancamento').errors.required" jhiTranslate="entity.validation.required">
@@ -22,8 +27,13 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.valor" for="field_valor">Valor</label>
-                    <input type="number" class="form-control" name="valor" id="field_valor"
-                           formControlName="valor"/>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="valor" id="field_valor"
+                            formControlName="valor" />
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">AOA</span>
+                        </div>
+                    </div>
                     <div *ngIf="editForm.get('valor').invalid && (editForm.get('valor').dirty || editForm.get('valor').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('valor').errors.required" jhiTranslate="entity.validation.required">
@@ -55,6 +65,43 @@
                         </small>
                     </div>
                 </div>
+
+                <p-accordion>
+
+                    <p-accordionTab header="Pagamento" [selected]="true">
+                        <table class="table" *ngIf="detalhesLancamento.length > 0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Valor</th>
+                                            <th> Banco | Caixa </th>
+                                            <th> Liquidado? </th>
+                                            <th> Metodo liquidação </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let pagamento of detalhesLancamento; let i = index">
+                                            <td> {{ i}} </td>
+                                            <td> {{ pagamento.valor | currency : pagamento.moedaCodigo }} </td>
+                                            <td> {{ pagamento.coordenadaDescricao }} </td>
+                                            <td> {{ pagamento.liquidado }} </td>
+                                            <td> {{ pagamento.metodoLiquidacaoNome }} </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" (click)="onDeleteValor(i)">
+                                                    <fa-icon [icon]="'trash'"></fa-icon>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        <button class="btn btn-success" type="button" [routerLink]="['/detalhe-lancamento/new']"
+                            [queryParams]="{ op: 'new'}" [queryParams]="{ entidade: 'venda'}"> Novo valor
+                        </button>
+                    </p-accordionTab>
+                </p-accordion>
+
+                <hr>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.descricao" for="field_descricao">Descricao</label>
                     <textarea class="form-control" name="descricao" id="field_descricao"
