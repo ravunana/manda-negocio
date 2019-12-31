@@ -66,7 +66,7 @@ public class FornecedorService {
             fornecedor = fornecedorRepository.save(fornecedor);
         } else {
 
-            Conta conta = contaService.addSubConta(1187L, pessoa.getNome());
+            Conta conta = contaService.addSubConta(1187L, pessoa.getNome(), "");
             fornecedor.setConta(conta);
             fornecedor.setNumero( getNumeroFornecedor(pessoa.getTipoPessoa()));
             fornecedor = fornecedorRepository.save(fornecedor);
