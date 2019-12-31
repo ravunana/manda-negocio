@@ -3,27 +3,27 @@
     "venda": {
       "home": {
         "title": "Vendas",
-        "createLabel": "Criar novo(a) Venda",
-        "createOrEditLabel": "Criar ou editar Venda",
-        "notFound": "Nenhum Vendas encontrado"
+        "createLabel": "Nova venda",
+        "createOrEditLabel": "Venda",
+        "notFound": "Nenhuma Venda encontrada"
       },
-      "created": "Um novo Venda foi criado com o identificador {{ param }}",
+      "created": "Uma nova Venda foi criada com o identificador {{ param }}",
       "updated": "Venda com identificador {{ param }} foi actualizado",
       "deleted": "Venda com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Venda {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar a Venda {{ id }}?"
       },
       "detail": {
         "title": "Venda"
       },
-      "numero": "Numero",
+      "numero": "Número da factura",
       "data": "Data",
-      "observacaoGeral": "Observacao Geral",
-      "observacaoInterna": "Observacao Interna",
-      "itemVenda": "Item Venda",
+      "observacaoGeral": "Observação geral",
+      "observacaoInterna": "Observação interna",
+      "itemVenda": "Item de venda",
       "vendedor": "Vendedor",
       "cliente": "Cliente",
-      "tipoDocumento": "Tipo Documento",
+      "tipoDocumento": "Tipo de documento",
       "empresa": "Empresa"
     }
   }
