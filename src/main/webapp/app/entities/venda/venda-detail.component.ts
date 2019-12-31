@@ -1,3 +1,4 @@
+import { EntidadeSistema } from 'app/shared/model/enumerations/entidade-sistema.model';
 import { ProdutoService } from './../produto/produto.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -127,10 +128,12 @@ export class VendaDetailComponent implements OnInit {
       this.coordenadasBancaria = data.body.filter(c => c.mostrarDocumento === true);
     });
 
-    this.lancamentoFinanceiroService.query({ 'beneficiarioCodigo.equals': this.venda.clienteNumero }).subscribe(data => {
-      const lancamento = data.body.shift();
-      this.detalheLancamentoService.query().subscribe(data => {
-        this.recebimentos = data.body.filter(d => d.lancamentoFinanceiroId === lancamento.id);
+    this.lancamentoFinanceiroService.query().subscribe(data => {
+      const lancamento = data.body
+        .filter(l => l.entidadeDocumento === EntidadeSistema.VENDA && l.numeroDocumento === this.venda.numero)
+        .shift();
+      this.detalheLancamentoService.query().subscribe(detalheResult => {
+        this.recebimentos = detalheResult.body.filter(d => d.lancamentoFinanceiroId === lancamento.id);
         this.TOTAL_ENTREGUE = this.recebimentos
           .map(i => i.valor)
           .reduce(function(total, subTotal) {

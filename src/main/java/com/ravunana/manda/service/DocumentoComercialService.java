@@ -83,6 +83,6 @@ public class DocumentoComercialService {
     }
 
     public DocumentoComercial getDocumentoComercial(String tipo) {
-        return this.documentoComercialRepository.findAll().stream().filter( f -> f.getNome() == tipo ).findFirst().get();
+        return this.documentoComercialRepository.findAll().stream().filter( f -> f.getNome().equals(tipo) ).findFirst().get();
     }
 }
