@@ -63,7 +63,7 @@ public class ClienteService {
             cliente = clienteRepository.save(cliente);
         } else {
 
-            Conta conta = contaService.addSubConta(1182L, pessoa.getNome());
+            Conta conta = contaService.addSubConta(1182L, pessoa.getNome(), "");
             cliente.setConta(conta);
             cliente.setNumero( getNumeroCliente(pessoa.getTipoPessoa()));
             cliente = clienteRepository.save(cliente);

@@ -81,4 +81,8 @@ public class DocumentoComercialService {
         log.debug("Request to delete DocumentoComercial : {}", id);
         documentoComercialRepository.deleteById(id);
     }
+
+    public DocumentoComercial getDocumentoComercial(String tipo) {
+        return this.documentoComercialRepository.findAll().stream().filter( f -> f.getNome() == tipo ).findFirst().get();
+    }
 }

@@ -154,22 +154,6 @@ public class EscrituracaoContabilResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 
-    /**
-     * {@code SEARCH  /_search/escrituracao-contabils?query=:query} : search for the escrituracaoContabil corresponding
-     * to the query.
-     *
-     * @param query the query of the escrituracaoContabil search.
-     * @param pageable the pagination information.
-     * @return the result of the search.
-     */
-    @GetMapping("/_search/escrituracao-contabils")
-    public ResponseEntity<List<EscrituracaoContabilDTO>> searchEscrituracaoContabils(@RequestParam String query, Pageable pageable) {
-        log.debug("REST request to search for a page of EscrituracaoContabils for query {}", query);
-        Page<EscrituracaoContabilDTO> page = escrituracaoContabilService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
     @PostMapping("/escrituracao-contabils/add-credito")
     public ContaCreditoDTO addCredito(@RequestBody ContaCreditoDTO credito) {
         credito.setContaCreditarDescricao( contaService.findOne(credito.getContaCreditarId()).get().getDescricao() );

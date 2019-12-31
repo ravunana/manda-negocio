@@ -62,6 +62,9 @@ public class VendaService {
     @Autowired
     private FormaLiquidacaoRepository formaLiquidacaoRepository;
 
+    @Autowired
+    private DocumentoComercialService documentoComercialService;
+
     private LancamentoFinanceiroDTO lancamentoFinanceiroDTO = new LancamentoFinanceiroDTO();
 
     private BigDecimal TOTAL_FACTURA = new BigDecimal(0);
@@ -179,9 +182,9 @@ public class VendaService {
         lancamentoFinanceiroDTO.setImpostos( venda.getImpostos() );
         lancamentoFinanceiroDTO.setNumeroDocumento( venda.getNumero() );
         lancamentoFinanceiroDTO.setEntidadeDocumento( EntidadeSistema.VENDA );
-
+        DocumentoComercial documentoComercial = documentoComercialService.getDocumentoComercial("R");
         lancamentoFinanceiroDTO.setTipoLancamento( "ENTRADA" );
-        lancamentoFinanceiroDTO.setTipoReciboId( venda.getTipoDocumentoId() );
+        lancamentoFinanceiroDTO.setTipoReciboId( documentoComercial.getId() );
         return lancamentoFinanceiroService.save( lancamentoFinanceiroDTO );
     }
 }
