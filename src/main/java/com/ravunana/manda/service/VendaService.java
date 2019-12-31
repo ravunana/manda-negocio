@@ -173,7 +173,7 @@ public class VendaService {
     private LancamentoFinanceiroDTO getPagamento( VendaDTO venda ) {
         FormaLiquidacao formaLiquidacao = formaLiquidacaoRepository.findById( venda.getFormaLiquidacaoId() ).get();
         lancamentoFinanceiroDTO.setExterno( false );
-        lancamentoFinanceiroDTO.setDescricao( "Venda de mercadoria na modalidade "  + formaLiquidacao.getNome() + " no valor de " + TOTAL_FACTURA + " referente a factura nº " + venda.getNumero() + " data de liquidação " + LocalDate.now().plusDays( formaLiquidacao.getPrazoLiquidacao() ) );
+        lancamentoFinanceiroDTO.setDescricao( "Venda na modalidade "  + formaLiquidacao.getNome() + " no valor de " + TOTAL_FACTURA + " referente a factura nº " + venda.getNumero() + " data de liquidação " + LocalDate.now().plusDays( formaLiquidacao.getPrazoLiquidacao() ) );
         lancamentoFinanceiroDTO.setFormaLiquidacaoId( venda.getFormaLiquidacaoId() );
         lancamentoFinanceiroDTO.setValor( TOTAL_FACTURA );
         lancamentoFinanceiroDTO.setImpostos( venda.getImpostos() );

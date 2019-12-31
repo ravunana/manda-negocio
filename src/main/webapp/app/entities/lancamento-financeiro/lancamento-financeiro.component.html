@@ -18,15 +18,15 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="tipoLancamento"><span jhiTranslate="mandaApp.lancamentoFinanceiro.tipoLancamento">Tipo Lancamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="valor"><span jhiTranslate="mandaApp.lancamentoFinanceiro.valor">Valor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="externo"><span jhiTranslate="mandaApp.lancamentoFinanceiro.externo">Externo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="externo"><span jhiTranslate="mandaApp.lancamentoFinanceiro.externo">Externo</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="numero"><span jhiTranslate="mandaApp.lancamentoFinanceiro.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.lancamentoFinanceiro.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="descricao"><span jhiTranslate="mandaApp.lancamentoFinanceiro.descricao">Descricao</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="entidadeDocumento"><span jhiTranslate="mandaApp.lancamentoFinanceiro.entidadeDocumento">Entidade Documento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="numeroDocumento"><span jhiTranslate="mandaApp.lancamentoFinanceiro.numeroDocumento">Numero Documento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.lancamentoFinanceiro.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <!-- <th scope="col"  jhiSortBy="utilizadorLogin"><span jhiTranslate="mandaApp.lancamentoFinanceiro.utilizador">Utilizador</span> <fa-icon [icon]="'sort'"></fa-icon></th> -->
             <th scope="col"  jhiSortBy="formaLiquidacaoNome"><span jhiTranslate="mandaApp.lancamentoFinanceiro.formaLiquidacao">Forma Liquidacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="empresaNome"><span jhiTranslate="mandaApp.lancamentoFinanceiro.empresa">Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="tipoReciboNome"><span jhiTranslate="mandaApp.lancamentoFinanceiro.tipoRecibo">Tipo Recibo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -36,17 +36,17 @@
             </thead>
             <tbody>
             <tr *ngFor="let lancamentoFinanceiro of lancamentoFinanceiros ;trackBy: trackId">
-                <td><a [routerLink]="['/lancamento-financeiro', lancamentoFinanceiro.id, 'view' ]">{{lancamentoFinanceiro.id}}</a></td>
+                <!-- <td><a [routerLink]="['/lancamento-financeiro', lancamentoFinanceiro.id, 'view' ]">{{lancamentoFinanceiro.id}}</a></td> -->
                 <td>{{lancamentoFinanceiro.tipoLancamento}}</td>
-                <td>{{lancamentoFinanceiro.valor}}</td>
-                <td>{{lancamentoFinanceiro.externo}}</td>
+                <td>{{lancamentoFinanceiro.valor }}</td>
+                <!-- <td>{{lancamentoFinanceiro.externo}}</td> -->
                 <td>{{lancamentoFinanceiro.numero}}</td>
-                <td>{{lancamentoFinanceiro.descricao}}</td>
+                <!-- <td>{{lancamentoFinanceiro.descricao}}</td> -->
                 <td jhiTranslate="{{'mandaApp.EntidadeSistema.' + lancamentoFinanceiro.entidadeDocumento}}">{{lancamentoFinanceiro.entidadeDocumento}}</td>
                 <td>{{lancamentoFinanceiro.numeroDocumento}}</td>
-                <td>
+                <!-- <td>
                     {{lancamentoFinanceiro.utilizadorLogin}}
-                </td>
+                </td> -->
                 <td>
                     <div *ngIf="lancamentoFinanceiro.formaLiquidacaoId">
                         <a [routerLink]="['/forma-liquidacao', lancamentoFinanceiro.formaLiquidacaoId , 'view' ]" >{{lancamentoFinanceiro.formaLiquidacaoNome}}</a>

@@ -67,6 +67,52 @@
                         <a [routerLink]="['/conta', lancamentoFinanceiro.contaId, 'view']">{{lancamentoFinanceiro.contaDescricao}}</a>
                     </div>
                 </dd>
+
+                <hr>
+                <div *ngIf="detalhesLancamento.length > 0">
+                        <h4>Detalhes do lançamento</h4>
+                        <table class="table" >
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> # </th>
+                                        <th scope="col"> Data de liquidação </th>
+                                        <th scope="col">Meio - Caixa</th>
+                                        <th scope="col"> Desconto </th>
+                                        <th scope="col"> Taxa de juro </th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col"> Retenção na fonte? </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let detalhe of detalhesLancamento; let i = index" [ngClass]="{'table-danger':!detalhe.liquidado, 'table-primary':detalhe.liquidado}" >
+                                        <td> {{ detalhe.id }} </td>
+                                        <td> {{ detalhe.data | date }} </td>
+                                        <td> {{ detalhe.metodoLiquidacaoNome }} </td>
+                                        <td> {{ detalhe.desconto/100 | percent }} </td>
+                                        <td> {{ detalhe.juro/100 | percent }} </td>
+                                        <td> {{ detalhe.valor | currency : detalhe.moedaCodigo }} </td>
+                                        <td>
+
+                                                <span *ngIf="detalhe.retencaoFonte" >
+                                                        SIM
+                                                    </span>
+                                                    <span *ngIf="!detalhe.retencaoFonte" >
+                                                        NÃO
+                                                    </span>
+                                        </td>
+                                        <td>
+                                            <!-- <button (click)="onUpdateItem(item)" type="button" class="btn btn-primary" >
+                                                <fa-icon [icon]="'edit'" ></fa-icon>
+                                            </button> -->
+                                            <!-- <button type="button" class="btn btn-danger" (click)="onDeleteDetalhe(i)">
+                                                <fa-icon [icon]="'trash'"></fa-icon>
+                                            </button> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                </div>
+
             </dl>
 
             <button type="submit"
