@@ -2,33 +2,33 @@
   "mandaApp": {
     "lancamentoFinanceiro": {
       "home": {
-        "title": "Lancamento Financeiros",
-        "createLabel": "Criar novo(a) Lancamento Financeiro",
-        "createOrEditLabel": "Criar ou editar Lancamento Financeiro",
-        "notFound": "Nenhum Lancamento Financeiros encontrado"
+        "title": "Lançamento financeiro",
+        "createLabel": "Novo lançamento",
+        "createOrEditLabel": "Lançamento financeiro",
+        "notFound": "Nenhum Lancamento encontrado"
       },
-      "created": "Um novo Lancamento Financeiro foi criado com o identificador {{ param }}",
-      "updated": "Lancamento Financeiro com identificador {{ param }} foi actualizado",
-      "deleted": "Lancamento Financeiro com identificador {{ param }} foi eliminado",
+      "created": "Um novo Lancamento foi criado com o identificador {{ param }}",
+      "updated": "Lancamento com identificador {{ param }} foi actualizado",
+      "deleted": "Lancamento com identificador {{ param }} foi eliminado",
       "delete": {
-        "question": "Tem a certeza que pretende eliminar o(a) Lancamento Financeiro {{ id }}?"
+        "question": "Tem a certeza que pretende eliminar o Lancamento {{ id }}?"
       },
       "detail": {
-        "title": "Lancamento Financeiro"
+        "title": "Lançamento financeiro"
       },
-      "tipoLancamento": "Tipo Lancamento",
+      "tipoLancamento": "Tipo de lançamento",
       "valor": "Valor",
       "externo": "Externo",
-      "numero": "Numero",
-      "descricao": "Descricao",
-      "entidadeDocumento": "Entidade Documento",
-      "numeroDocumento": "Numero Documento",
-      "detalheLancamento": "Detalhe Lancamento",
+      "numero": "Número do recibo",
+      "descricao": "Descrição",
+      "entidadeDocumento": "Entidade do documento",
+      "numeroDocumento": "Numero do documento",
+      "detalheLancamento": "Detalhe do lançamento",
       "utilizador": "Utilizador",
       "imposto": "Imposto",
-      "formaLiquidacao": "Forma Liquidacao",
+      "formaLiquidacao": "Forma de liquidação",
       "empresa": "Empresa",
-      "tipoRecibo": "Tipo Recibo",
+      "tipoRecibo": "Tipo de recibo",
       "conta": "Conta"
     }
   }

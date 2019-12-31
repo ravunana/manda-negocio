@@ -52,9 +52,9 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
     tipoLancamento: [null, [Validators.required]],
     valor: [null, [Validators.required, Validators.min(0)]],
     externo: [],
-    numero: [null, [Validators.required]],
+    numero: [null],
     descricao: [null, [Validators.required]],
-    entidadeDocumento: [null, [Validators.required]],
+    entidadeDocumento: [null],
     numeroDocumento: [null, [Validators.required]],
     utilizadorId: [],
     impostos: [null, Validators.required],
@@ -269,6 +269,16 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
     this.lancamentoFinanceiroService.deleteDetalhe(index).subscribe(valorEliminado => {
       alert(valorEliminado.valor + ' foi removido');
       this.getPagamentos();
+    });
+  }
+
+  onSelectConta(conta) {
+    this.editForm.get('contaId').patchValue(conta.id, { emitEvent: false });
+  }
+
+  searchConta(conta) {
+    this.contaService.query({ 'descricao.contains': conta.query }).subscribe(data => {
+      this.contas = data.body;
     });
   }
 }

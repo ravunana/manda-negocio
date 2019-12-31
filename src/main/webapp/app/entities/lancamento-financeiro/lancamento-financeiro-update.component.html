@@ -49,7 +49,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.externo" for="field_externo">Externo</label>
                     <input type="checkbox" class="form-control" name="externo" id="field_externo"
                            formControlName="externo"/>
@@ -64,7 +64,7 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div> -->
 
                 <p-accordion>
 
@@ -113,7 +113,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.entidadeDocumento" for="field_entidadeDocumento">Entidade Documento</label>
                     <select class="form-control" name="entidadeDocumento" formControlName="entidadeDocumento" id="field_entidadeDocumento">
                         <option value="SOFTWARE">{{'mandaApp.EntidadeSistema.SOFTWARE' | translate}}</option>
@@ -166,7 +166,7 @@
                         This field is required.
                         </small>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.numeroDocumento" for="field_numeroDocumento">Numero Documento</label>
                     <input type="text" class="form-control" name="numeroDocumento" id="field_numeroDocumento"
@@ -179,13 +179,13 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.utilizador" for="field_utilizador">Utilizador</label>
                     <select class="form-control" id="field_utilizador" name="utilizador" formControlName="utilizadorId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
                     </select>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label jhiTranslate="mandaApp.lancamentoFinanceiro.imposto" for="field_impostos">Imposto</label>
                     <select class="form-control" id="field_impostos" multiple name="impostos" formControlName="impostos">
@@ -233,10 +233,17 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mandaApp.lancamentoFinanceiro.conta" for="field_conta">Conta</label>
-                    <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
+                    <p-autoComplete placeholder="Escreva o nome da conta" id="field_contaAgregadora"
+                    name="contaAgregadora" field="descricao" [suggestions]="contas"
+                    (completeMethod)="searchConta($event)" (onSelect)="onSelectConta($event)" required>
+                    <ng-template let-brand pTemplate="item">
+                        <p> {{ brand.codigo }}  {{ brand.descricao }} </p>
+                    </ng-template>
+                </p-autoComplete>
+                    <!-- <select class="form-control" id="field_conta" name="conta" formControlName="contaId">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="contaOption.id" *ngFor="let contaOption of contas; trackBy: trackContaById">{{contaOption.descricao}}</option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
             <div>
