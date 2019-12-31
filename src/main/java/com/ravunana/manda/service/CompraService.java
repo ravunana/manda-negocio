@@ -178,6 +178,8 @@ public class CompraService {
         DocumentoComercial documentoComercial = documentoComercialService.getDocumentoComercial("R");
         lancamentoFinanceiroDTO.setTipoLancamento( "SAIDA" );
         lancamentoFinanceiroDTO.setTipoReciboId( documentoComercial.getId() );
+        // Conta Compra 21
+        lancamentoFinanceiroDTO.setContaId(1107L);
         return lancamentoFinanceiroService.save( lancamentoFinanceiroDTO );
     }
 }

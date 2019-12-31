@@ -185,6 +185,8 @@ public class VendaService {
         DocumentoComercial documentoComercial = documentoComercialService.getDocumentoComercial("R");
         lancamentoFinanceiroDTO.setTipoLancamento( "ENTRADA" );
         lancamentoFinanceiroDTO.setTipoReciboId( documentoComercial.getId() );
+        // Conta Prestacao de Serviço 62
+        lancamentoFinanceiroDTO.setContaId( 1141L );
         return lancamentoFinanceiroService.save( lancamentoFinanceiroDTO );
     }
 }

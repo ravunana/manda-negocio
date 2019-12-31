@@ -6,7 +6,10 @@ import com.ravunana.manda.domain.SerieDocumento;
 import com.ravunana.manda.domain.enumeration.EntidadeSistema;
 import com.ravunana.manda.repository.DocumentoComercialRepository;
 import com.ravunana.manda.repository.LancamentoFinanceiroRepository;
+import com.ravunana.manda.service.dto.ContaCreditoDTO;
+import com.ravunana.manda.service.dto.ContaDebitoDTO;
 import com.ravunana.manda.service.dto.DetalheLancamentoDTO;
+import com.ravunana.manda.service.dto.EscrituracaoContabilDTO;
 import com.ravunana.manda.service.dto.LancamentoFinanceiroDTO;
 import com.ravunana.manda.service.mapper.LancamentoFinanceiroMapper;
 import org.slf4j.Logger;
@@ -17,6 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +58,18 @@ public class LancamentoFinanceiroService {
     @Autowired
     SerieDocumentoService serieDocumentoService;
 
+    @Autowired
+    private EscrituracaoContabilService escrituracaoContabilService;
+
+    @Autowired
+    private ContaDebitoService contaDebitoService;
+
+    @Autowired
+    private ContaCreditoService contaCreditoService;
+
+    @Autowired
+    private CoordenadaBancariaService coordenadaBancariaService;
+
 
     public LancamentoFinanceiroService(LancamentoFinanceiroRepository lancamentoFinanceiroRepository, LancamentoFinanceiroMapper lancamentoFinanceiroMapper) {
         this.lancamentoFinanceiroRepository = lancamentoFinanceiroRepository;
@@ -75,13 +92,18 @@ public class LancamentoFinanceiroService {
         lancamentoFinanceiro.setNumero( getNumeroRecibo(lancamentoFinanceiroDTO.getTipoReciboId()) );
 
         lancamentoFinanceiro = lancamentoFinanceiroRepository.save(lancamentoFinanceiro);
+        DetalheLancamentoDTO detalhe = null;
 
         for ( DetalheLancamentoDTO detalheLancamentoDTO : detalhesLancamento ) {
             detalheLancamentoDTO.setLancamentoFinanceiroId(lancamentoFinanceiro.getId());
             detalheLancamentoDTO.setData( ZonedDateTime.now() );
             detalheLancamentoDTO.setUtilizadorId(userService.getCurrentUserLogged().getId());
-            detalheLancamentoService.save( detalheLancamentoDTO );
+            detalhe = detalheLancamentoService.save( detalheLancamentoDTO );
         }
+
+
+
+        addEscrituracaoContabil(lancamentoFinanceiro.getEntidadeDocumento(), lancamentoFinanceiro.getNumeroDocumento(), lancamentoFinanceiro, detalhe);
 
         clearDetahesLancamento();
         return lancamentoFinanceiroMapper.toDto(lancamentoFinanceiro);
@@ -171,5 +193,30 @@ public class LancamentoFinanceiroService {
     public LancamentoFinanceiroDTO getLancamentoByEntidadeAndNumero( EntidadeSistema entidade, String numero ) {
         log.debug("Request to get LancamentoFinanceiro by Entidade and Numero: {} {}", entidade, numero);
         return lancamentoFinanceiroMapper.toDto(lancamentoFinanceiroRepository.findByEntidadeDocumentoAndNumeroDocumento(entidade, numero));
+    }
+
+    public void addEscrituracaoContabil( EntidadeSistema entidadeSistema, String referenciaEntidade, LancamentoFinanceiro lancamento, DetalheLancamentoDTO detalhe ) {
+        EscrituracaoContabilDTO escrituracaoContabilDTO = new EscrituracaoContabilDTO();
+        escrituracaoContabilDTO.setHistorico(lancamento.getDescricao());
+        escrituracaoContabilDTO.setTipo("N");
+        escrituracaoContabilDTO.setValor( lancamento.getValor() );
+        escrituracaoContabilDTO.setDataDocumento( LocalDate.now() );
+
+        ContaCreditoDTO credito = new ContaCreditoDTO();
+        Long contaCreditarId = coordenadaBancariaService.findOne( detalhe.getCoordenadaId() ).get().getContaId();
+        credito.setContaCreditarId( contaCreditarId ) ;
+        credito.setValor( detalhe.getValor() );
+
+        ContaDebitoDTO debito = new ContaDebitoDTO();
+        Long contaDebitarId =  findOne( lancamento.getId() ).get().getContaId();
+        debito.setContaDebitarId( contaDebitarId );
+        debito.setValor( lancamento.getValor() );
+
+        escrituracaoContabilService.addCredito(credito);
+        escrituracaoContabilService.addDebito(debito);
+
+        escrituracaoContabilService.setEntidadeSistema(entidadeSistema, referenciaEntidade);
+
+        escrituracaoContabilService.save(escrituracaoContabilDTO);
     }
 }
