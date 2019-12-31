@@ -1,10 +1,11 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-10">
         <div *ngIf="venda">
-            <h2><span jhiTranslate="mandaApp.venda.detail.title">Venda</span> {{venda.id}}</h2>
+            <h2 class="font-weight-bold" > {{ venda.numero }} </h2>
+            <!-- <h2><span jhiTranslate="mandaApp.venda.detail.title">Venda</span> {{venda.id}}</h2> -->
             <hr>
             <rv-alert-error></rv-alert-error>
-            <dl class="row-md jh-entity-details">
+            <!-- <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="mandaApp.venda.numero">Numero</span></dt>
                 <dd>
                     <span>{{venda.numero}}</span>
@@ -12,6 +13,10 @@
                 <dt><span jhiTranslate="mandaApp.venda.data">Data</span></dt>
                 <dd>
                     <span>{{venda.data}}</span>
+                </dd>
+                <dt><span jhiTranslate="mandaApp.venda.cae">Cae</span></dt>
+                <dd>
+                    <span>{{venda.cae}}</span>
                 </dd>
                 <dt><span jhiTranslate="mandaApp.venda.observacaoGeral">Observacao Geral</span></dt>
                 <dd>
@@ -43,22 +48,137 @@
                         <a [routerLink]="['/empresa', venda.empresaId, 'view']">{{venda.empresaNome}}</a>
                     </div>
                 </dd>
-            </dl>
+            </dl> -->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <img [src]="'data:' + empresa.logotipoContentType + ';base64,' + empresa.logotipo"
+                        style="max-height: 150px; max-width: 200px;" alt="empresa image" />
+                    <br>
+                    <br>
+                    <h4> {{ empresa.nome }} </h4>
+                    <span> {{ empresa.nif }} </span> <br>
+                    <div *ngIf="contactoEmpresa.length > 0">
+                        <span *ngFor="let c of contactoEmpresa">
+                            {{ c.tipoContacto }} | {{ c.descricao }} | {{ c.contacto }}
+                            <br>
+                        </span>
+                    </div>
+                    <span *ngIf="localizacaoEmpresa.id > 0">
+                        {{ localizacaoEmpresa.municipio }},
+                        {{ localizacaoEmpresa.bairro }}, {{ localizacaoEmpresa.rua }},
+                        {{ localizacaoEmpresa.quarteirao }} - {{ localizacaoEmpresa.numeroPorta }}
+                    </span>
+                    <br>
+                    <hr>
+                    <span> Atendido por: {{ venda.vendedorLogin }} </span> <br>
+                    <span> Data : {{ venda.data.year() + '.' + venda.data.months() + '.' + venda.data.days()}} | Hora:
+                        {{ venda.data.hours() }}:{{ venda.data.minutes() }}:{{ venda.data.seconds() }} </span> <br>
+
+
+                </div>
+                <div class="col-md-6 ">
+                    <div class="float-right">
+                        <h4> {{ pessoa.nome }} </h4>
+                        <span>NIF: {{ pessoa.nif }} </span> <br>
+                        <div *ngIf="contactoPessoa.length > 0">
+                            <span *ngFor="let c of contactoPessoa">
+                                {{ c.tipoContacto }} | {{ c.descricao }} | {{ c.contacto }}
+                                <br>
+                            </span>
+                        </div>
+                        <span *ngIf="moradaPessoa != undefined">
+                            {{ moradaPessoa.municipio }}, {{ moradaPessoa.bairro }},
+                            {{ moradaPessoa.rua }}, {{ moradaPessoa.quarteirao }} -
+                            {{ moradaPessoa.numeroPorta }}
+                        </span>
+                        <br>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col">
+                    <h4 class="font-weight-bold" >Produtos | Serviços</h4>
+                    <table class="table" *ngIf="items.length > 0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Produto | Serviço</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">Desconto</th>
+                                <th scope="col">SubTotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of items; let i = index">
+                                <th scope="row"> {{ item.produtoId }} </th>
+                                <td> {{ item.produtoNome }} </td>
+                                <td> {{ item.valor | currency: 'AOA' }} </td>
+                                <td> {{ item.quantidade | number }} </td>
+                                <td> {{ item.desconto/100 | percent }} </td>
+                                <td> {{ produtoService.calcularSubTotalItem( item.quantidade, item.desconto, item.valor )  | currency: 'AOA'}}
+                                </td>
+                                <button [routerLink]="['/item-venda', item.id, 'edit']" type="button"
+                                    class="btn btn-primary">
+                                    <fa-icon [icon]="'edit'"></fa-icon>
+                                </button>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col">
+                    <h4 class="font-weight-bold">Recebimentos</h4>
+                    <hr>
+
+                    <h6>SUB-TOTAL: {{ SUB_TOTAL | currency: 'AOA' }} </h6>
+                    <h6>TOTAL DESCONTO: {{ TOTAL_DESCONTO | currency: 'AOA' }} </h6>
+                    <h6>TOTAL PAGAR: {{ TOTAL_PAGAR | currency: 'AOA' }} </h6>
+                    <hr>
+                    <h6>Forma de recebimento</h6>
+                    <span *ngFor="let recebimento of recebimentos" >
+                        {{ recebimento.metodoLiquidacaoNome }} | {{ recebimento.valor | currency: recebimento.moedaCodigo }} <br>
+                    </span>
+                    <hr>
+                    <h6>TOTAL ENTREGUE {{ TOTAL_ENTREGUE | currency: 'AOA' }} </h6>
+                    <h6>TROCO: {{ TOTAL_ENTREGUE - TOTAL_PAGAR | currency: 'AOA' }}</h6>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="float-right">
+
+                    <h4 class="font-weight-bold" >Coordenadas bancarias</h4>
+                    <span *ngFor="let c of coordenadasBancaria">
+                        {{ c.descricao }} | {{ c.proprietario }} | {{ c.numeroConta }} | {{ c.iban }} <br>
+
+                    </span>
+                    </div>
+                </div>
+            </div>
 
             <hr>
 
-            <button (click)="ticketReport()" class="btn btn-warning"> Imprimir factura </button>
-
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/venda', venda.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/venda', venda.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+
+            <button class="btn btn-warning" (click)="ticketReport()">
+                Imprimir factura
             </button>
         </div>
     </div>

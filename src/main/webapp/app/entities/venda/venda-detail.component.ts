@@ -201,12 +201,10 @@ export class VendaDetailComponent implements OnInit {
     pdf.add(`NIF: ${this.pessoa.nif} | Nº cliente: ${this.venda.clienteNumero}`);
     pdf.add('-------------------------------------------------------------------------------------------');
 
-    pdf.add(new Columns(['Produto|Serviço', 'Qtde', 'Preço', 'SubTotal']).end);
+    pdf.add(new Columns(['Descrição', 'Qtde', 'Preço', 'SubTotal']).end);
 
     for (let item of this.items) {
-      pdf.add(
-        new Columns([item.produtoNome, item.quantidade + ',00', item.valor + ',00', item.quantidade * item.valor + ',00']).columnGap(5).end
-      );
+      pdf.add(new Columns([item.produtoNome, item.quantidade, item.valor + ',00', item.quantidade * item.valor + ',00']).columnGap(5).end);
     }
 
     pdf.add('-------------------------------------------------------------------------------------------');
