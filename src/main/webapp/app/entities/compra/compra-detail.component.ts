@@ -45,7 +45,9 @@ export class CompraDetailComponent implements OnInit {
     });
 
     this.lancamentoFinanceiroService.query().subscribe(data => {
-      const lancamento = data.body.filter(l => l.entidadeDocumento === EntidadeSistema.COMPRA && l.numero === this.compra.numero).shift();
+      const lancamento = data.body
+        .filter(l => l.entidadeDocumento === EntidadeSistema.COMPRA && l.numeroDocumento === this.compra.numero)
+        .shift();
       this.detalheLancamentoService.query().subscribe(detalheResult => {
         this.pagamentos = detalheResult.body.filter(d => d.lancamentoFinanceiroId === lancamento.id);
       });

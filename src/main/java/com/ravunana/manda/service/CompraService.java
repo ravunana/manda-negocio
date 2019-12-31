@@ -63,6 +63,9 @@ public class CompraService {
     @Autowired
     private ProdutoService produtoService;
 
+    @Autowired
+    private DocumentoComercialService documentoComercialService;
+
     public CompraService(CompraRepository compraRepository, CompraMapper compraMapper) {
         this.compraRepository = compraRepository;
         this.compraMapper = compraMapper;
@@ -166,15 +169,15 @@ public class CompraService {
     private LancamentoFinanceiroDTO getRecebimento( CompraDTO compra ) {
         FormaLiquidacao formaLiquidacao = formaLiquidacaoRepository.findById( compra.getFormaLiquidacaoId() ).get();
         lancamentoFinanceiroDTO.setExterno( false );
-        lancamentoFinanceiroDTO.setDescricao( "Compra de mercadoria na modalidade "  + formaLiquidacao.getNome() + " no valor de " + TOTAL_FACTURA + " referente a factura nº " + compra.getNumero() + " data de liquidação " + LocalDate.now().plusDays( formaLiquidacao.getPrazoLiquidacao() ) );
+        lancamentoFinanceiroDTO.setDescricao( "Compra na modalidade "  + formaLiquidacao.getNome() + " no valor de " + TOTAL_FACTURA + " referente a factura nº " + compra.getNumero() + " data de liquidação " + LocalDate.now().plusDays( formaLiquidacao.getPrazoLiquidacao() ) );
         lancamentoFinanceiroDTO.setFormaLiquidacaoId( compra.getFormaLiquidacaoId() );
         lancamentoFinanceiroDTO.setValor( TOTAL_FACTURA );
         lancamentoFinanceiroDTO.setImpostos( compra.getImpostos() );
         lancamentoFinanceiroDTO.setNumeroDocumento( compra.getNumero() );
         lancamentoFinanceiroDTO.setEntidadeDocumento( EntidadeSistema.COMPRA );
-
+        DocumentoComercial documentoComercial = documentoComercialService.getDocumentoComercial("R");
         lancamentoFinanceiroDTO.setTipoLancamento( "SAIDA" );
-        lancamentoFinanceiroDTO.setTipoReciboId( compra.getTipoDocumentoId() );
+        lancamentoFinanceiroDTO.setTipoReciboId( documentoComercial.getId() );
         return lancamentoFinanceiroService.save( lancamentoFinanceiroDTO );
     }
 }
