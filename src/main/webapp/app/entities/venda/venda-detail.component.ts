@@ -69,7 +69,7 @@ export class VendaDetailComponent implements OnInit {
     protected vendaService: VendaService,
     protected detalheLancamentoService: DetalheLancamentoService,
     protected lancamentoFinanceiroService: LancamentoFinanceiroService,
-    protected produtoService: ProdutoService
+    public produtoService: ProdutoService
   ) {}
 
   ngOnInit() {
@@ -98,7 +98,7 @@ export class VendaDetailComponent implements OnInit {
         });
 
       // valor, quantidade, desconto
-      let ValorDesconto = this.items
+      const ValorDesconto = this.items
         .map(i => this.produtoService.calcularSubTotalItem(i.quantidade, i.desconto, i.valor))
         .reduce(function(total, desconto) {
           return total + desconto;
@@ -109,17 +109,17 @@ export class VendaDetailComponent implements OnInit {
       this.TOTAL_PAGAR = this.SUB_TOTAL - this.TOTAL_DESCONTO;
     });
 
-    this.clienteService.query().subscribe(data => {
-      this.cliente = data.body.filter(c => c.id === this.venda.clienteId).shift();
+    this.clienteService.query().subscribe(clienteResult => {
+      this.cliente = clienteResult.body.filter(c => c.id === this.venda.clienteId).shift();
 
-      this.pessoaService.query().subscribe(data => {
-        this.pessoa = data.body.filter(p => p.id === this.cliente.pessoaId).shift();
+      this.pessoaService.query().subscribe(pessoaResult => {
+        this.pessoa = pessoaResult.body.filter(p => p.id === this.cliente.pessoaId).shift();
 
-        this.contactoPessoaService.query().subscribe(data => {
-          this.contactoPessoa = data.body.filter(c => c.pessoaId === this.pessoa.id);
+        this.contactoPessoaService.query().subscribe(contactoResult => {
+          this.contactoPessoa = contactoResult.body.filter(c => c.pessoaId === this.pessoa.id);
         });
-        this.moradaPessoaService.query().subscribe(data => {
-          this.moradaPessoa = data.body.filter(c => c.pessoaId === this.pessoa.id).shift();
+        this.moradaPessoaService.query().subscribe(moradaResult => {
+          this.moradaPessoa = moradaResult.body.filter(c => c.pessoaId === this.pessoa.id).shift();
         });
       });
     });
@@ -128,8 +128,8 @@ export class VendaDetailComponent implements OnInit {
       this.coordenadasBancaria = data.body.filter(c => c.mostrarDocumento === true);
     });
 
-    this.lancamentoFinanceiroService.query().subscribe(data => {
-      const lancamento = data.body
+    this.lancamentoFinanceiroService.query().subscribe(lancamentoResult => {
+      const lancamento = lancamentoResult.body
         .filter(l => l.entidadeDocumento === EntidadeSistema.VENDA && l.numeroDocumento === this.venda.numero)
         .shift();
       this.detalheLancamentoService.query().subscribe(detalheResult => {
@@ -154,7 +154,7 @@ export class VendaDetailComponent implements OnInit {
     window.history.back();
   }
 
-  async ticketReport() {
+  ticketReport() {
     PdfMakeWrapper.setFonts(pdfFonts);
 
     const pdf = new PdfMakeWrapper();
@@ -188,7 +188,7 @@ export class VendaDetailComponent implements OnInit {
     );
     pdf.add(new Txt('NIF: ' + this.empresa.nif).alignment('center').bold().end);
 
-    for (let contacto of this.contactoEmpresa) {
+    for (const contacto of this.contactoEmpresa) {
       pdf.add(new Txt(`${contacto.tipoContacto} : ${contacto.contacto}`).alignment('center').bold().end);
     }
 
@@ -203,7 +203,7 @@ export class VendaDetailComponent implements OnInit {
 
     pdf.add(new Columns(['Descrição', 'Qtde', 'Preço', 'SubTotal']).end);
 
-    for (let item of this.items) {
+    for (const item of this.items) {
       pdf.add(new Columns([item.produtoNome, item.quantidade, item.valor + ',00', item.quantidade * item.valor + ',00']).columnGap(5).end);
     }
 
@@ -214,7 +214,7 @@ export class VendaDetailComponent implements OnInit {
     pdf.add('------------------');
     pdf.add('Modo de recebimento');
 
-    for (let metodo of this.recebimentos) {
+    for (const metodo of this.recebimentos) {
       pdf.add(` ${metodo.metodoLiquidacaoNome} : ${metodo.valor},00 ${metodo.moedaCodigo}`);
     }
 
