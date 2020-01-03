@@ -31,7 +31,7 @@ export class EstruturaCalculoComponent implements OnInit, OnDestroy {
   previousPage: any;
   reverse: any;
   moedaNacional: IMoeda;
-  produtoId = 0;
+  produtoId = '0';
 
   constructor(
     protected estruturaCalculoService: EstruturaCalculoService,
@@ -54,17 +54,22 @@ export class EstruturaCalculoComponent implements OnInit, OnDestroy {
   loadAll() {
     this.activatedRoute.queryParams.subscribe(parmas => {
       this.produtoId = parmas.produtoId;
-
-      this.estruturaCalculoService
-        .query({
-          page: this.page - 1,
-          size: this.itemsPerPage,
-          sort: this.sort()
-        })
-        .subscribe((res: HttpResponse<IEstruturaCalculo[]>) =>
-          this.paginateEstruturaCalculos(res.body.filter(e => e.produtoId === this.produtoId), res.headers)
-        );
     });
+
+    // this.estruturaCalculoService.query().subscribe( preco => {
+    //   this.estruturaCalculos = preco.body.filter( p => p.produtoId.toString() === this.produtoId );
+    //   alert( 'Estrutura de caluco do produto ' + this.produtoId );
+    // } )
+
+    this.estruturaCalculoService
+      .query({
+        page: this.page - 1,
+        size: this.itemsPerPage,
+        sort: this.sort()
+      })
+      .subscribe((res: HttpResponse<IEstruturaCalculo[]>) =>
+        this.paginateEstruturaCalculos(res.body.filter(e => e.produtoId.toFixed() === this.produtoId), res.headers)
+      );
   }
 
   loadPage(page: number) {
