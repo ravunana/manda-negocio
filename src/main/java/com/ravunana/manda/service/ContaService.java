@@ -111,19 +111,13 @@ public class ContaService {
                 .stream()
                 .reduce( (a,b) -> b ).get().getCodigo();
 
-                log.info( "Codigo da ultima conta {} ", codigoUltimaConta );
                 int inicioSubConta = codigoUltimaConta.lastIndexOf(".");
-                log.info("Posicao ultimo ponto {} ", inicioSubConta);
-                String codigoUltimaSubCOnta = codigoUltimaConta.substring( inicioSubConta + 1 );
-                log.info("Codigo ultima suconta {} ", codigoUltimaSubCOnta);
 
                 int sequenciaCodigoConta = Integer.parseInt( codigoUltimaConta.substring( inicioSubConta + 1 ) );
-                log.info( "Sequencia codigo da conta {} ", sequenciaCodigoConta );
 
                 novaConta = new Conta();
                 novaConta.setClasseConta( contaAgregadora.getClasseConta() );
                 String codigo = contaAgregadora.getCodigo() + "." + (sequenciaCodigoConta + 1);
-                log.info( "Codigo nova conta {} ", codigo );
                 novaConta.setCodigo( codigo );
                 novaConta.setContaAgregadora( contaAgregadora );
                 novaConta.setConteudo( conteudo );
