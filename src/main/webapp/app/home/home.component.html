@@ -6,6 +6,15 @@
           <div *ngSwitchCase="true">
             <h1>DASHBOARD</h1>
             <hr>
+            <google-chart #chart
+               [title]="title"
+               [type]="type"
+               [data]="data"
+               [columnNames]="columnNames"
+               [options]="options"
+               [width]="width"
+               [height]="height">
+            </google-chart>
           </div>
         <!-- autenticado -->
 

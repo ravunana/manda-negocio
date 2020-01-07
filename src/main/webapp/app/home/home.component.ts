@@ -1,3 +1,6 @@
+import { Data } from '@angular/router';
+import { ILancamentoFinanceiro } from './../shared/model/lancamento-financeiro.model';
+import { LancamentoFinanceiroService } from './../entities/lancamento-financeiro/lancamento-financeiro.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +21,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   account: Account;
   authSubscription: Subscription;
   modalRef: NgbModalRef;
+  lancamentos: ILancamentoFinanceiro[] = [];
+
+  title = 'Browser market shares at a specific website, 2014';
+  type = 'PieChart';
+  data = [
+    // ['Opera', 12.4]
+  ];
+  columnNames = ['ENTRADA', 'VALOR'];
+  options = {};
+  width = 650;
+  height = 450;
 
   // config: ExportAsConfig = {
   //   type: 'pdf',
@@ -33,15 +47,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private accountService: AccountService,
     private loginModalService: LoginModalService,
-    private eventManager: JhiEventManager
-  ) // private exportAsService: ExportAsService
-  {}
+    private eventManager: JhiEventManager,
+    protected lancamentoFinanceiroService: LancamentoFinanceiroService // private exportAsService: ExportAsService
+  ) {}
 
   ngOnInit() {
     this.accountService.identity().subscribe((account: Account) => {
       this.account = account;
     });
+
+    // this.data.push(['RV', 87]);
+
     this.registerAuthenticationSuccess();
+    this.lancamentoFinanceiroService.query().subscribe(lancamentos => {
+      this.lancamentos = lancamentos.body;
+      this.lancamentos.map((m: ILancamentoFinanceiro) => {
+        this.data.push([m.contaDescricao, m.valor]);
+      });
+    });
   }
 
   registerAuthenticationSuccess() {

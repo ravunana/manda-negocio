@@ -10,6 +10,7 @@ import { PrimengModule } from 'app/primeng/primeng.module';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   imports: [MandaSharedLibsModule],
@@ -26,7 +27,8 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     PrimengModule,
     LoadingBarHttpClientModule,
     LoadingBarModule,
-    LoadingBarRouterModule
+    LoadingBarRouterModule,
+    GoogleChartsModule
     // MoedaNacionalDirective
   ],
   providers: []
