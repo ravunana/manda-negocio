@@ -202,15 +202,31 @@ public class LancamentoFinanceiroService {
         escrituracaoContabilDTO.setValor( lancamento.getValor() );
         escrituracaoContabilDTO.setDataDocumento( LocalDate.now() );
 
-        ContaCreditoDTO credito = new ContaCreditoDTO();
-        Long contaCreditarId = coordenadaBancariaService.findOne( detalhe.getCoordenadaId() ).get().getContaId();
-        credito.setContaCreditarId( contaCreditarId ) ;
-        credito.setValor( detalhe.getValor() );
+        ContaCreditoDTO credito = null;
+        ContaDebitoDTO debito = null;
 
-        ContaDebitoDTO debito = new ContaDebitoDTO();
-        Long contaDebitarId =  findOne( lancamento.getId() ).get().getContaId();
-        debito.setContaDebitarId( contaDebitarId );
-        debito.setValor( lancamento.getValor() );
+        if ( lancamento.getTipoLancamento() == "ENTRADA" ) {
+
+            credito = new ContaCreditoDTO();
+            Long contaDebitarId = coordenadaBancariaService.findOne( detalhe.getCoordenadaId() ).get().getContaId();
+            credito.setContaCreditarId( contaDebitarId ) ;
+            credito.setValor( detalhe.getValor() );
+
+            debito = new ContaDebitoDTO();
+            Long contaCreditarId =  findOne( lancamento.getId() ).get().getContaId();
+            debito.setContaDebitarId( contaCreditarId );
+            debito.setValor( lancamento.getValor() );
+        } else if ( lancamento.getTipoLancamento() == "SAIDA" ) {
+            credito = new ContaCreditoDTO();
+            Long contaCreditarId = coordenadaBancariaService.findOne( detalhe.getCoordenadaId() ).get().getContaId();
+            credito.setContaCreditarId( contaCreditarId ) ;
+            credito.setValor( detalhe.getValor() );
+
+            debito = new ContaDebitoDTO();
+            Long contaDebitarId =  findOne( lancamento.getId() ).get().getContaId();
+            debito.setContaDebitarId( contaDebitarId );
+            debito.setValor( lancamento.getValor() );
+        }
 
         escrituracaoContabilService.addCredito(credito);
         escrituracaoContabilService.addDebito(debito);
