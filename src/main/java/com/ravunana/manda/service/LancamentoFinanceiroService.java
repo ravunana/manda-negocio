@@ -205,7 +205,7 @@ public class LancamentoFinanceiroService {
         ContaCreditoDTO credito = null;
         ContaDebitoDTO debito = null;
 
-        if ( lancamento.getTipoLancamento() == "ENTRADA" ) {
+        if ( lancamento.getTipoLancamento().equals("ENTRADA") ) {
 
             credito = new ContaCreditoDTO();
             Long contaDebitarId = coordenadaBancariaService.findOne( detalhe.getCoordenadaId() ).get().getContaId();
@@ -216,7 +216,7 @@ public class LancamentoFinanceiroService {
             Long contaCreditarId =  findOne( lancamento.getId() ).get().getContaId();
             debito.setContaDebitarId( contaCreditarId );
             debito.setValor( lancamento.getValor() );
-        } else if ( lancamento.getTipoLancamento() == "SAIDA" ) {
+        } else if ( lancamento.getTipoLancamento().equals("SAIDA") ) {
             credito = new ContaCreditoDTO();
             Long contaCreditarId = coordenadaBancariaService.findOne( detalhe.getCoordenadaId() ).get().getContaId();
             credito.setContaCreditarId( contaCreditarId ) ;
