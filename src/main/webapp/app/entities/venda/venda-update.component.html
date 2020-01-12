@@ -27,7 +27,7 @@
                                 for="field_cliente">Cliente</label>
                                 <p-autoComplete id="field_cliente" name="cliente" field="nome" [suggestions]="pessoas"
                                 (completeMethod)="searchPessoa($event)" (onSelect)="onSelectPessoa($event)" required>
-                            </p-autoComplete>
+                                </p-autoComplete>
                             <!-- <select class="form-control" id="field_cliente" name="cliente" formControlName="clienteId">
                                 <option *ngIf="!editForm.get('clienteId').value" [ngValue]="null" selected></option>
                                 <option [ngValue]="clienteOption.id"
