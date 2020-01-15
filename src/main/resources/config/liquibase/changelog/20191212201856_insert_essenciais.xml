@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity AuditoriaVenda.
+    -->
+        <changeSet id="20191212201856-2" author="Ramiro Cardoso">
+    <sql>
+        INSERT INTO public.core_fluxo_documento (id,nome,aumenta_estoque,aumenta_valor_caixa,cor,padrao,descricao,entidade) VALUES 
+(1301,'NORMAL',true,true,NULL,true,NULL,'PRODUTO')
+;
+
+INSERT INTO public.core_serie_documento (id,serie,codigo_lancamento_financeiro,codigo_escrituracao_contabil,codigo_venda,codigo_compra,codigo_cliente,codigo_fornecedor,codigo_devolucao_venda,codigo_devolucao_compra,codigo_produto,"data",empresa_id) VALUES 
+(1351,'2020',1,1,1,1,1,1,1,1,1,'2020-01-15',NULL)
+;
+
+INSERT INTO public.fnc_forma_liquidacao (id,nome,juro,prazo_liquidacao,quantidade,icon) VALUES 
+(1151,'PRONTO',0,1,1,NULL)
+;
+
+INSERT INTO public.fnc_meio_liquidacao (id,nome,sigla,icon,mostrar_ponto_venda) VALUES 
+(1201,'NUMERARIO','NU',NULL,true)
+,(1202,'TRANSFERÊNCIA','TRAN',NULL,true)
+,(1203,'TPA','TPA',NULL,true)
+,(1204,'DEPÓSITO','DEP',NULL,true)
+;
+
+INSERT INTO public.fnc_moeda (id,nome,codigo,pais,nacional,icon) VALUES 
+(1051,'Kwanza','AKz','AO',true,NULL)
+;
+
+INSERT INTO public.tbr_imposto (id,tipo_imposto,codigo_imposto,porcentagem,valor,descricao,pais,vigencia,conta_id) VALUES 
+(1101,'IS','NA',true,0.00,NULL,'AO',NULL,NULL)
+;
+    </sql>
+     </changeSet>
+</databaseChangeLog>

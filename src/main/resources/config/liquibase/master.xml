@@ -114,4 +114,5 @@
     <include file="config/liquibase/changelog/20191212193709_insert_lookup _item.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191212201750_insert_classe_conta.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191212201856_insert_contas.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191212201856_insert_essenciais.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
