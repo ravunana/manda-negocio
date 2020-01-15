@@ -11,6 +11,7 @@
     <rv-alert-error></rv-alert-error>
     <rv-alert></rv-alert>
     <br/>
+    <input class="form-control input-sm" id="inputsm1" type="search" [(ngModel)]="filter">
     <div class="alert alert-warning" *ngIf="vendas?.length === 0">
         <span jhiTranslate="mandaApp.venda.home.notFound">No vendas found</span>
     </div>
@@ -31,7 +32,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let venda of vendas ;trackBy: trackId">
+            <tr *ngFor="let venda of (vendas | pureFilter:filter:'data') ;trackBy: trackId">
                 <td><a [routerLink]="['/venda', venda.id, 'view' ]">{{venda.id}}</a></td>
                 <td>{{venda.numero}}</td>
                 <td>{{venda.data | date:'medium'}}</td>

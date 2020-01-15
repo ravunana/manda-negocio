@@ -28,6 +28,7 @@ export class LancamentoFinanceiroComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  filter;
 
   constructor(
     protected lancamentoFinanceiroService: LancamentoFinanceiroService,

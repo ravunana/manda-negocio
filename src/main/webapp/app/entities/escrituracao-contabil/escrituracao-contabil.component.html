@@ -11,6 +11,7 @@
     <rv-alert-error></rv-alert-error>
     <rv-alert></rv-alert>
     <br/>
+    <input class="form-control input-sm" id="inputsm1" type="search" [(ngModel)]="filter">
     <div class="alert alert-warning" *ngIf="escrituracaoContabils?.length === 0">
         <span jhiTranslate="mandaApp.escrituracaoContabil.home.notFound">No escrituracaoContabils found</span>
     </div>
@@ -33,7 +34,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let escrituracaoContabil of escrituracaoContabils ;trackBy: trackId">
+            <tr *ngFor="let escrituracaoContabil of (escrituracaoContabils | pureFilter:filter:'historico') ;trackBy: trackId">
                 <!-- <td><a [routerLink]="['/escrituracao-contabil', escrituracaoContabil.id, 'view' ]">{{escrituracaoContabil.id}}</a></td> -->
                 <td>{{escrituracaoContabil.numero}}</td>
                 <td>{{escrituracaoContabil.historico}}</td>

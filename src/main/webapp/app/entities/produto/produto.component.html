@@ -11,6 +11,8 @@
         <rv-alert-error></rv-alert-error>
         <rv-alert></rv-alert>
         <br/>
+
+    <input class="form-control input-sm" id="inputsm1" type="search" [(ngModel)]="filter">
         <div class="alert alert-warning" *ngIf="produtos?.length === 0">
             <span jhiTranslate="mandaApp.produto.home.notFound">No produtos found</span>
         </div>
@@ -42,7 +44,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let produto of produtos ;trackBy: trackId">
+                <tr *ngFor="let produto of (produto | pureFilter:filter:'nome') ;trackBy: trackId">
                     <!-- <td><a [routerLink]="['/produto', produto.id, 'view' ]">{{produto.id}}</a></td> -->
                     <td>
                         <a *ngIf="produto.imagem" (click)="openFile(produto.imagemContentType, produto.imagem)">

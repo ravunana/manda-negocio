@@ -28,6 +28,7 @@ export class EscrituracaoContabilComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  filter;
 
   constructor(
     protected escrituracaoContabilService: EscrituracaoContabilService,

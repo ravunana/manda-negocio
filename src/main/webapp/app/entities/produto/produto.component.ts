@@ -33,6 +33,7 @@ export class ProdutoComponent implements OnInit, OnDestroy {
   custo = 0;
   preco = 0;
   produtoId = 0;
+  filter;
 
   constructor(
     protected produtoService: ProdutoService,

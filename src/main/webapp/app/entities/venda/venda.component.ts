@@ -28,6 +28,7 @@ export class VendaComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  filter;
 
   constructor(
     protected vendaService: VendaService,

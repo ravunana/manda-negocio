@@ -28,6 +28,7 @@ export class CompraComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  filter;
 
   constructor(
     protected compraService: CompraService,
