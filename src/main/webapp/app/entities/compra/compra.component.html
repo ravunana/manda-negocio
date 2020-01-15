@@ -11,7 +11,7 @@
     <rv-alert-error></rv-alert-error>
     <rv-alert></rv-alert>
     <br/>
-    <input class="form-control input-sm" id="inputsm1" type="search" [(ngModel)]="filter">
+    <input class="form-control input-sm" id="inputsm1" type="search" placeholder="Pesquisar pela data de compra" [(ngModel)]="filter">
     <div class="alert alert-warning" *ngIf="compras?.length === 0">
         <span jhiTranslate="mandaApp.compra.home.notFound">No compras found</span>
     </div>

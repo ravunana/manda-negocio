@@ -12,7 +12,7 @@
         <rv-alert></rv-alert>
         <br/>
 
-    <input class="form-control input-sm" id="inputsm1" type="search" [(ngModel)]="filter">
+    <input class="form-control input-sm" id="inputsm1" type="search" placeholder="Pesquisar pelo nome do produto ou serviço" [(ngModel)]="filter">
         <div class="alert alert-warning" *ngIf="produtos?.length === 0">
             <span jhiTranslate="mandaApp.produto.home.notFound">No produtos found</span>
         </div>

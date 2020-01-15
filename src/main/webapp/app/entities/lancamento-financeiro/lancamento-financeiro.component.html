@@ -11,7 +11,7 @@
     <rv-alert-error></rv-alert-error>
     <rv-alert></rv-alert>
     <br/>
-    <input class="form-control input-sm" id="inputsm1" type="search" [(ngModel)]="filter">
+    <input class="form-control input-sm" id="inputsm1" type="search" placeholder="Pesquisar pelo nome da conta. Ex.: Compra, Venda" [(ngModel)]="filter">
     <div class="alert alert-warning" *ngIf="lancamentoFinanceiros?.length === 0">
         <span jhiTranslate="mandaApp.lancamentoFinanceiro.home.notFound">No lancamentoFinanceiros found</span>
     </div>

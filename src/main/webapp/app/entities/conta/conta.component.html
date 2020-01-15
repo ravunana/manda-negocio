@@ -12,7 +12,7 @@
     <rv-alert></rv-alert>
     <br/>
 
-    <input class="form-control input-sm" id="inputsm1" type="search" [(ngModel)]="filter"> 
+    <input class="form-control input-sm" id="inputsm1" type="search" placeholder="Pesquisar pelo código da conta" [(ngModel)]="filter"> 
 
     <div class="alert alert-warning" *ngIf="contas?.length === 0">
         <span jhiTranslate="mandaApp.conta.home.notFound">No contas found</span>

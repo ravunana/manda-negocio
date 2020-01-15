@@ -11,7 +11,7 @@
     <rv-alert-error></rv-alert-error>
     <rv-alert></rv-alert>
     <br/>
-    <input class="form-control input-sm" id="inputsm1" type="search" [(ngModel)]="filter">
+    <input class="form-control input-sm" id="inputsm1" type="search" placeholder="Pesquisar pelo historico" [(ngModel)]="filter">
     <div class="alert alert-warning" *ngIf="escrituracaoContabils?.length === 0">
         <span jhiTranslate="mandaApp.escrituracaoContabil.home.notFound">No escrituracaoContabils found</span>
     </div>
