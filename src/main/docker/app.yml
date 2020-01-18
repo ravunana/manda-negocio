@@ -10,6 +10,7 @@ services:
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     ports:
       - 8080:8080
+    restart: always
   manda-postgresql:
     extends:
       file: postgresql.yml

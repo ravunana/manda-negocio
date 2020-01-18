@@ -1,7 +1,7 @@
 version: '2'
 services:
   manda-app:
-    image: manda
+    image: 'ravunana/manda:clinica_homem'
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - 'SPRING_PROFILES_ACTIVE=prod,swagger'
@@ -10,8 +10,10 @@ services:
       - JHIPSTER_SLEEP=30
     ports:
       - '8080:8080'
+    restart: always
   manda-postgresql:
     image: 'postgres:11.5'
     environment:
       - POSTGRES_USER=manda
       - POSTGRES_PASSWORD=
+    restart: always

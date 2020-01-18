@@ -44,7 +44,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let produto of (produto | pureFilter:filter:'nome') ;trackBy: trackId">
+                <tr *ngFor="let produto of (produtos | pureFilter:filter:'nome') ;trackBy: trackId">
                     <!-- <td><a [routerLink]="['/produto', produto.id, 'view' ]">{{produto.id}}</a></td> -->
                     <td>
                         <a *ngIf="produto.imagem" (click)="openFile(produto.imagemContentType, produto.imagem)">
