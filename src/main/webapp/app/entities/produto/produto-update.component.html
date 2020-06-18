@@ -217,7 +217,7 @@
                                         <select class="form-control" id="field_impostos" multiple name="impostos"
                                             formControlName="impostos">
                                             <option [ngValue]="getSelected(editForm.get('impostos').value, impostoOption)"
-                                                *ngFor="let impostoOption of impostos; trackBy: trackImpostoById">{{impostoOption.nome}}
+                                                *ngFor="let impostoOption of impostos; trackBy: trackImpostoById">{{impostoOption.codigoImposto}}
                                             </option>
                                         </select>
                                     </div>
@@ -262,7 +262,7 @@
                                         formControlName="fornecedors">
                                         <option [ngValue]="getSelected(editForm.get('fornecedors').value, fornecedorOption)"
                                             *ngFor="let fornecedorOption of fornecedors; trackBy: trackFornecedorById">
-                                            {{fornecedorOption.nome}}</option>
+                                            {{fornecedorOption.pessoaNome}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

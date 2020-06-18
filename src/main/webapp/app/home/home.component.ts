@@ -1,4 +1,3 @@
-import { Data } from '@angular/router';
 import { ILancamentoFinanceiro } from './../shared/model/lancamento-financeiro.model';
 import { LancamentoFinanceiroService } from './../entities/lancamento-financeiro/lancamento-financeiro.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';

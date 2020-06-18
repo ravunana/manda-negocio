@@ -259,7 +259,7 @@ export class LancamentoFinanceiroUpdateComponent implements OnInit {
         .filter(d => d.liquidado === true)
         .map(i => i.valor)
         .reduce(function(total, subTotal) {
-          let valor = total + subTotal;
+          const valor = total + subTotal;
           return valor;
         });
     });

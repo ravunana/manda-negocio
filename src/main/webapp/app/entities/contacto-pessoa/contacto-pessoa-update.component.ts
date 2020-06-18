@@ -119,7 +119,7 @@ export class ContactoPessoaUpdateComponent implements OnInit {
   }
 
   onAddContacto() {
-    this.contactoPessoaService.addContacto(this.createFromForm()).subscribe(contactoResult => {
+    this.contactoPessoaService.addContacto(this.createFromForm()).subscribe(() => {
       this.previousState();
     });
   }

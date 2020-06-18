@@ -79,12 +79,12 @@ export class TicketReportComponent implements OnInit {
     this.empresaService.query().subscribe(data => {
       this.empresa = data.body.shift();
 
-      this.contactoEmpresaService.query().subscribe(data => {
-        this.contactoEmpresa = data.body.filter(c => c.empresaId === this.empresa.id);
+      this.contactoEmpresaService.query().subscribe(data_ => {
+        this.contactoEmpresa = data_.body.filter(c => c.empresaId === this.empresa.id);
       });
 
-      this.localizacaoEmpresaService.query().subscribe(data => {
-        this.localizacaoEmpresa = data.body.filter(c => c.empresaId === this.empresa.id).shift();
+      this.localizacaoEmpresaService.query().subscribe(data_ => {
+        this.localizacaoEmpresa = data_.body.filter(c => c.empresaId === this.empresa.id).shift();
       });
     });
 
@@ -97,7 +97,7 @@ export class TicketReportComponent implements OnInit {
         });
 
       // valor, quantidade, desconto
-      let ValorDesconto = this.items
+      const ValorDesconto = this.items
         .map(i => this.produtoService.calcularSubTotalItem(i.quantidade, i.desconto, i.valor))
         .reduce(function(total, desconto) {
           return total + desconto;
@@ -129,8 +129,8 @@ export class TicketReportComponent implements OnInit {
 
     this.lancamentoFinanceiroService.query({ 'numeroDocumento.equals': this.venda.numero }).subscribe(data => {
       const lancamento = data.body.shift();
-      this.detalheLancamentoService.query().subscribe(data => {
-        this.recebimentos = data.body.filter(d => d.lancamentoFinanceiroId === lancamento.id);
+      this.detalheLancamentoService.query().subscribe(data_ => {
+        this.recebimentos = data_.body.filter(d => d.lancamentoFinanceiroId === lancamento.id);
         this.TOTAL_ENTREGUE = this.recebimentos
           .map(i => i.valor)
           .reduce(function(total, subTotal) {
@@ -140,7 +140,7 @@ export class TicketReportComponent implements OnInit {
     });
   }
 
-  async ticketReport() {
+  ticketReport() {
     PdfMakeWrapper.setFonts(pdfFonts);
 
     const pdf = new PdfMakeWrapper();
@@ -174,7 +174,7 @@ export class TicketReportComponent implements OnInit {
     );
     pdf.add(new Txt('NIF: ' + this.empresa.nif).alignment('center').bold().end);
 
-    for (let contacto of this.contactoEmpresa) {
+    for (const contacto of this.contactoEmpresa) {
       pdf.add(new Txt(`${contacto.tipoContacto} : ${contacto.contacto}`).alignment('center').bold().end);
     }
 
@@ -189,7 +189,7 @@ export class TicketReportComponent implements OnInit {
 
     pdf.add(new Columns(['Produto|Serviço', 'Qtde', 'Preço', 'SubTotal']).end);
 
-    for (let item of this.items) {
+    for (const item of this.items) {
       pdf.add(
         new Columns([item.produtoNome, item.quantidade + ',00', item.valor + ',00', item.quantidade * item.valor + ',00']).columnGap(5).end
       );
@@ -202,7 +202,7 @@ export class TicketReportComponent implements OnInit {
     pdf.add('------------------');
     pdf.add('Modo de recebimento');
 
-    for (let metodo of this.recebimentos) {
+    for (const metodo of this.recebimentos) {
       pdf.add(` ${metodo.metodoLiquidacaoNome} : ${metodo.valor},00 ${metodo.moedaCodigo}`);
     }
 

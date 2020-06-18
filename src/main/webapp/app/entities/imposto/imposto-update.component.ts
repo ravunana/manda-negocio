@@ -5,7 +5,6 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IImposto, Imposto } from 'app/shared/model/imposto.model';
 import { ImpostoService } from './imposto.service';

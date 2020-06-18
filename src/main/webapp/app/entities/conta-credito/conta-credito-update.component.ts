@@ -121,7 +121,7 @@ export class ContaCreditoUpdateComponent implements OnInit {
   }
 
   onAddCredito() {
-    this.escrituracaoContabil.addCredito(this.createFromForm()).subscribe(data => {
+    this.escrituracaoContabil.addCredito(this.createFromForm()).subscribe(() => {
       this.previousState();
     });
   }

@@ -24,7 +24,6 @@ import { EstruturaCalculoService } from '../estrutura-calculo/estrutura-calculo.
 import { MoedaService } from '../moeda/moeda.service';
 import { PessoaService } from '../pessoa/pessoa.service';
 import { IPessoa } from 'app/shared/model/pessoa.model';
-import { isUndefined } from 'util';
 
 @Component({
   selector: 'rv-item-compra-update',

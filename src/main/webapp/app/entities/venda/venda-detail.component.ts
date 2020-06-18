@@ -80,12 +80,12 @@ export class VendaDetailComponent implements OnInit {
     this.empresaService.query().subscribe(data => {
       this.empresa = data.body.shift();
 
-      this.contactoEmpresaService.query().subscribe(data => {
-        this.contactoEmpresa = data.body.filter(c => c.empresaId === this.empresa.id);
+      this.contactoEmpresaService.query().subscribe(data_ => {
+        this.contactoEmpresa = data_.body.filter(c => c.empresaId === this.empresa.id);
       });
 
-      this.localizacaoEmpresaService.query().subscribe(data => {
-        this.localizacaoEmpresa = data.body.filter(c => c.empresaId === this.empresa.id).shift();
+      this.localizacaoEmpresaService.query().subscribe(data_ => {
+        this.localizacaoEmpresa = data_.body.filter(c => c.empresaId === this.empresa.id).shift();
       });
     });
 

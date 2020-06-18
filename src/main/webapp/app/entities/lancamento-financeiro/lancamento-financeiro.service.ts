@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { ILancamentoFinanceiro, LancamentoFinanceiro } from 'app/shared/model/lancamento-financeiro.model';
+import { ILancamentoFinanceiro } from 'app/shared/model/lancamento-financeiro.model';
 import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
 import { EntidadeSistema } from 'app/shared/model/enumerations/entidade-sistema.model';
 

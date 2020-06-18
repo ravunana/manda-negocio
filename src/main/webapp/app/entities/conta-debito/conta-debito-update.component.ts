@@ -122,7 +122,7 @@ export class ContaDebitoUpdateComponent implements OnInit {
   }
 
   onAddDebito() {
-    this.escrituracaoContabil.addDebito(this.createFromForm()).subscribe(data => {
+    this.escrituracaoContabil.addDebito(this.createFromForm()).subscribe(() => {
       this.previousState();
     });
   }

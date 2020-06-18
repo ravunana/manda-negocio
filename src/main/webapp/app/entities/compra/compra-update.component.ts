@@ -25,7 +25,6 @@ import { FormaLiquidacaoService } from '../forma-liquidacao/forma-liquidacao.ser
 import { IImposto } from 'app/shared/model/imposto.model';
 import { IFormaLiquidacao } from 'app/shared/model/forma-liquidacao.model';
 import { IDetalheLancamento } from 'app/shared/model/detalhe-lancamento.model';
-import { DetalheLancamentoService } from '../detalhe-lancamento/detalhe-lancamento.service';
 import { LancamentoFinanceiroService } from '../lancamento-financeiro/lancamento-financeiro.service';
 
 @Component({

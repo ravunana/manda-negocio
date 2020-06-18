@@ -5,7 +5,6 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 import { JhiAlertService } from 'ng-jhipster';
 import { ISerieDocumento, SerieDocumento } from 'app/shared/model/serie-documento.model';
 import { SerieDocumentoService } from './serie-documento.service';

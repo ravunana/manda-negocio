@@ -11,7 +11,6 @@ import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ProdutoService } from './produto.service';
 import { ProdutoDeleteDialogComponent } from './produto-delete-dialog.component';
 import { EstruturaCalculoService } from '../estrutura-calculo/estrutura-calculo.service';
-import { FunctionCall } from '@angular/compiler';
 
 @Component({
   selector: 'rv-produto',
