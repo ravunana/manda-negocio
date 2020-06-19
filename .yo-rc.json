@@ -29,18 +29,26 @@
     "clientFramework": "angularX",
     "clientTheme": "yeti",
     "clientThemeVariant": "dark",
-    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "testFrameworks": [
+      "gatling",
+      "cucumber",
+      "protractor"
+    ],
     "jhiPrefix": "rv",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": true,
     "nativeLanguage": "pt-pt",
-    "languages": ["pt-pt"],
+    "languages": [
+      "pt-pt"
+    ],
     "blueprints": [],
     "herokuAppName": "manda-negocio",
     "herokuDeployType": "jar",
-    "appsFolders": ["manda-negocio"],
+    "appsFolders": [
+      "manda-negocio"
+    ],
     "directoryPath": "../",
     "monitoring": "no",
     "consoleOptions": []
